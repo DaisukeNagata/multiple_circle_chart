@@ -4,6 +4,7 @@ import 'circle_data_item.dart';
 import 'dart:math' as math;
 import 'dart:math';
 
+/// InnermostCircle is a complementary function class.
 class InnermostCircle extends CustomPainter {
   final AnimationController _controller;
   final Animation<double> _animation;
@@ -26,22 +27,26 @@ class InnermostCircle extends CustomPainter {
 
     double time = double.parse(_baseAnimationValue.toString());
 
+    /// to match the last element.
     int baseAnimationValueIndex =
         _baseAnimationValue.floor() == _data.circleColorList.length
             ? _baseAnimationValue.floor() - 1
             : _baseAnimationValue.floor();
 
+    /// to match the last element.
     int circleLabelValue =
         _data.circleLabelValue.floor() == _data.circleColorList.length
             ? _data.circleLabelSpeedValue.floor() - 1
             : _data.circleLabelSpeedValue.floor();
 
+    /// Defined in the direction of color setting.
     double circleValue = _data.circleForwardFlg
         ? _data.circleCounterValue - _data.circleCounterValue.floor()
         : _data.circleLabelSpeedValue - _data.circleLabelSpeedValue.floor();
 
     Offset center = Offset(sizeSet, sizeSet);
 
+    /// Correspondence in the opposite direction, it will stop in the animation state.
     if (_controller.status == AnimationStatus.dismissed ||
         _controller.status == AnimationStatus.completed ||
         time != 0.0 && time <= _data.circleLabelValue) {
@@ -51,6 +56,7 @@ class InnermostCircle extends CustomPainter {
 
     canvas.translate(-size.width, 0);
 
+    /// Defined in the direction of color setting.
     _data.circleForwardFlg
         ? shaderColor = _data.circleColorList[baseAnimationValueIndex]
         : shaderColor = _data.circleColorList[_controller.isAnimating
