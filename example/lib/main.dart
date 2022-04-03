@@ -40,6 +40,10 @@ class _MyHomePageState extends State<MyHomePage> {
   double _circleLabelValue = 0.0;
   bool _circleColorFlg = true;
   bool _circleShaderFlg = true;
+  GlobalKey globalKey = GlobalKey();
+  GlobalKey globalKey2 = GlobalKey();
+  GlobalKey _circleColorKey = GlobalKey();
+  GlobalKey _circleShaderFlgKey = GlobalKey();
 
   late CircleDataItem c = CircleDataItem(
     /// circleForwardFlg is forward or reverse.
@@ -94,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setColor,
   );
   late MultipleCircleSetProgress? circleSetProgress;
-  double paddingValue = 20;
+  final double paddingValue = 20;
   final CircleProgressController controller = CircleProgressController();
   final ScrollController _scrollController = ScrollController();
 
@@ -118,28 +122,12 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
 
-    /// Show animation values.
-    controller.counterStream.listen((event) {
-      setState(() {
-        var e = 0.0;
-        if (event != 0.0) {
-          e = (event as double);
-        }
-        _circleLabelValue = (e * 100);
-      });
-    });
+    counterStream();
   }
 
   @override
   Widget build(BuildContext context) {
-    int index = setColor.length;
-    double count = index * 1.0;
-
-    /// Determine the size of the circle.
-    _circleSize = _circleSize == 0.0
-        ? MediaQuery.of(context).size.width / 2
-        : _circleSize;
-    circleSetProgress = MultipleCircleSetProgress(circle: c);
+    circleSet();
 
     return Scaffold(
       appBar: AppBar(
@@ -156,130 +144,149 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(padding: EdgeInsets.only(top: paddingValue)),
-              Stack(
-                alignment: Alignment.center,
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      _circleLabelValue.toStringAsFixed(1),
-                      style: const TextStyle(
-                          fontSize: 18,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Padding(padding: EdgeInsets.only(top: paddingValue)),
-                  SizedBox(
-                    width: c.circleSizeValue,
-                    height: c.circleSizeValue,
-                    child: RotationTransition(
-                      turns: const AlwaysStoppedAnimation(360 / 360),
-                      child: circleSetProgress,
-                    ),
-                  ),
-                ],
-              ),
+              stack(),
               Padding(padding: EdgeInsets.only(top: paddingValue)),
               Text("end$_forwardValue"),
               Text("start$_reverseValue"),
               Text("speed${c.circleDuration}"),
               Text("size${c.circleSizeValue}"),
+              sliderSet(_forwardValue, setColor.length.toDouble(),
+                  keyValue: globalKey),
+              sliderSet(_reverseValue, setColor.length.toDouble(),
+                  keyValue: globalKey2),
+              sliderSet(_speedValue, 20000.0),
+              sliderSet(c.circleSizeValue, MediaQuery.of(context).size.width),
               Padding(padding: EdgeInsets.only(top: paddingValue)),
-              Slider(
-                value: _forwardValue,
-                min: 0,
-                max: count,
-                divisions: 1000,
-                onChanged: (double value) {
-                  setState(() {
-                    _forwardValue = value;
-                  });
-                },
-              ),
-              Slider(
-                value: _reverseValue,
-                min: 0,
-                max: count,
-                divisions: 1000,
-                onChanged: (double value) {
-                  setState(() {
-                    _reverseValue = value;
-                  });
-                },
-              ),
-              Slider(
-                value: _speedValue,
-                min: 0,
-                max: 20000,
-                divisions: 1000,
-                onChangeEnd: (double value) {
-                  setState(() {
-                    c.circleDuration = _speedValue.toInt();
-                  });
-                },
-                onChanged: (double value) {
-                  setState(() {
-                    _speedValue = value.roundToDouble();
-                  });
-                },
-              ),
-              Slider(
-                value: c.circleSizeValue,
-                min: 0,
-                max: MediaQuery.of(context).size.width,
-                divisions: 1000,
-                onChanged: (double value) {
-                  setState(() {
-                    c.circleSizeValue = value;
-                  });
-                },
-              ),
-              Padding(padding: EdgeInsets.only(top: paddingValue)),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  setButton(true, _forwardValue, c.circleLabelValue),
-                  CupertinoSwitch(
-                    value: _circleColorFlg,
-                    onChanged: (flg) {
-                      /// Determine the type of knob
-                      c.circleShader = c.circleShader == CircleShader.circleNone
-                          ? CircleShader.butt
-                          : CircleShader.circleNone;
-                      _circleColorFlg = flg;
-
-                      /// Determine the knob color
-                      c.circleColor = c.circleColor == Colors.green
-                          ? Colors.green.withOpacity(0)
-                          : Colors.green;
-
-                      /// Determine the knob shadow color
-                      c.circleShadowColor = c.circleShadowColor == Colors.black
-                          ? Colors.black.withOpacity(0)
-                          : Colors.black;
-                    },
-                  ),
-                  CupertinoSwitch(
-                    value: _circleShaderFlg,
-                    onChanged: (flg) {
-                      /// Pie chart animation direction.
-                      _circleShaderFlg = flg;
-
-                      /// Determine the type of knob
-                      c.circleShader = c.circleShader == CircleShader.circleNone
-                          ? CircleShader.round
-                          : CircleShader.circleNone;
-                    },
-                  ),
-                  setButton(false, c.circleCounterValue,
-                      c.circleCounterValue == 0 ? 0 : _reverseValue),
-                ],
-              ),
+              setRow(),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  counterStream() {
+    /// Show animation values.
+    controller.counterStream.listen((event) {
+      setState(() {
+        var e = 0.0;
+        if (event != 0.0) {
+          e = (event as double);
+        }
+        _circleLabelValue = (e * 100);
+      });
+    });
+  }
+
+  circleSet() {
+    /// Determine the size of the circle.
+    _circleSize = _circleSize == 0.0
+        ? MediaQuery.of(context).size.width / 2
+        : _circleSize;
+    circleSetProgress = MultipleCircleSetProgress(circle: c);
+  }
+
+  Row setRow() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        setButton(true, _forwardValue, c.circleLabelValue),
+        switchSet(_circleColorKey),
+        switchSet(_circleShaderFlgKey),
+        setButton(false, c.circleCounterValue,
+            c.circleCounterValue == 0 ? 0 : _reverseValue),
+      ],
+    );
+  }
+
+  Stack stack() {
+    return Stack(
+      alignment: Alignment.center,
+      children: <Widget>[
+        Align(
+          alignment: Alignment.center,
+          child: Text(
+            _circleLabelValue.toStringAsFixed(1),
+            style: const TextStyle(
+                fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold),
+          ),
+        ),
+        Padding(padding: EdgeInsets.only(top: paddingValue)),
+        SizedBox(
+          width: c.circleSizeValue,
+          height: c.circleSizeValue,
+          child: RotationTransition(
+            turns: const AlwaysStoppedAnimation(360 / 360),
+            child: circleSetProgress,
+          ),
+        ),
+      ],
+    );
+  }
+
+  CupertinoSwitch switchSet(Key keyValue) {
+    if (keyValue == _circleColorKey) {
+      return CupertinoSwitch(
+        key: _circleColorKey,
+        value: _circleColorFlg,
+        onChanged: (flg) {
+          _circleColorFlg = flg;
+
+          /// Determine the type of knob
+          c.circleShader = c.circleShader == CircleShader.circleNone
+              ? CircleShader.butt
+              : CircleShader.circleNone;
+
+          /// Determine the knob color
+          c.circleColor = c.circleColor == Colors.green
+              ? Colors.green.withOpacity(0)
+              : Colors.green;
+
+          /// Determine the knob shadow color
+          c.circleShadowColor = c.circleShadowColor == Colors.black
+              ? Colors.black.withOpacity(0)
+              : Colors.black;
+        },
+      );
+    } else {
+      return CupertinoSwitch(
+        key: _circleShaderFlgKey,
+        value: _circleShaderFlg,
+        onChanged: (flg) {
+          /// Pie chart animation direction.
+          _circleShaderFlg = flg;
+
+          /// Determine the type of knob
+          c.circleShader = c.circleShader == CircleShader.circleNone
+              ? CircleShader.round
+              : CircleShader.circleNone;
+        },
+      );
+    }
+  }
+
+  Slider sliderSet(double value, max, {Key? keyValue}) {
+    Padding(padding: EdgeInsets.only(top: paddingValue));
+    return Slider(
+      key: keyValue,
+      value: value,
+      min: 0,
+      max: max,
+      divisions: 1000,
+      onChanged: (double value) {
+        setState(() {
+          if (keyValue == globalKey) {
+            _forwardValue = value;
+          } else if (keyValue == globalKey2) {
+            _reverseValue = value;
+          } else if (max == MediaQuery.of(context).size.width) {
+            c.circleSizeValue = value;
+          } else if (max == 20000) {
+            _speedValue = value;
+            c.circleDuration = _speedValue.toInt();
+          }
+        });
+      },
     );
   }
 
