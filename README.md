@@ -11,9 +11,11 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
+
 ## Features
 
-https://user-images.githubusercontent.com/16457165/161421737-3592daaa-61e3-4029-8f73-685b13daaff4.mov
+<img width="400" src="https://user-images.githubusercontent.com/16457165/161422225-22c642e0-8eea-4a47-9d52-c98ba45a8a68.gif">
+
 
 ## Memory usage
 
@@ -101,7 +103,7 @@ late CircleDataItem c = CircleDataItem(
   ];
 ```
 
-####　Think the set value to the controller of CircleProgressControllerClass.
+#### Think the set value to the controller of CircleProgressControllerClass.
 ```
 
 final CircleProgressController controller = CircleProgressController();
