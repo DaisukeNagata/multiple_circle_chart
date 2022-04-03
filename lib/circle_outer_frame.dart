@@ -2,6 +2,7 @@ import 'dart:math';
 import 'circle_data_item.dart';
 import 'package:flutter/material.dart';
 
+/// CircleOuterFrame is a class that sets the first week of a pie chart.
 class CircleOuterFrame extends CustomPainter {
   final AnimationController _controller;
   final double _baseAnimationValue;
@@ -19,25 +20,33 @@ class CircleOuterFrame extends CustomPainter {
 
     double time = double.parse(_baseAnimationValue.toString());
 
+    /// Treat as an element of the color array.
     int baseAnimationValueIndex = _baseAnimationValue.floor() - 1;
 
+    /// Element calculation during teleportation in reverse order.
     int circleLabelValue =
         _data.circleLabelValue.floor() == _data.circleColorList.length
             ? _data.circleLabelValue.floor() - 1
             : _data.circleLabelValue.floor();
 
+    /// Size when drawing an arc.
     double sizeSet = size.width / 2;
 
+    /// Animation calculated value
     double progressSet = pi * 2 * time;
 
+    /// Calculation that circle needs to rotate.
     double translate = -size.width;
 
     List<Color> colorSet;
 
+    /// Circle rotation calculation.
     canvas.rotate(degToRad(_rotate));
 
+    ///　Move calculation
     canvas.translate(translate, 0);
 
+    /// Stop value in animated state and notify value.
     if (_controller.status == AnimationStatus.dismissed ||
         time != 0.0 && time <= _data.circleLabelValue) {
       _controller.stop();
@@ -51,9 +60,11 @@ class CircleOuterFrame extends CustomPainter {
 
     canvas.restore();
 
+    ///　Calculation of shaderColor.
     colorSet = _data.circleColorList[
         baseAnimationValueIndex <= 0 ? 0 : baseAnimationValueIndex];
 
+    /// Element calculation during teleportation in reverse order.
     if (!_controller.isAnimating && !_data.circleForwardFlg) {
       colorSet = _data.circleColorList[circleLabelValue >= 1
           ? _data.circleLabelValue.floor() == _data.circleColorList.length
@@ -69,6 +80,7 @@ class CircleOuterFrame extends CustomPainter {
       ..shader = SweepGradient(colors: colorSet).createShader(Rect.fromCircle(
           center: size.center(Offset.zero), radius: size.width / 2));
 
+    /// Answer substitution and animation amount are set by animation speed.
     canvas.drawArc(
         Rect.fromCircle(center: size.center(Offset.zero), radius: sizeSet),
         _startAngle,
