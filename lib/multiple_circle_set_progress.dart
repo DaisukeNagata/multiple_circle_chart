@@ -5,6 +5,7 @@ import 'circle_inner_frame.dart';
 import 'circle_innermost_frame.dart';
 import 'circle_outer_frame.dart';
 
+/// It is a class that overlaps the initialization of the speed setting controller and the circle.
 class MultipleCircleSetProgress extends StatefulWidget {
   /// Returns [value] plus 1.
   int addOne(int value) => value + 1;
@@ -30,16 +31,9 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
   void initState() {
     super.initState();
 
+    /// When issuing a stream, select the direction of the speed setting and play it.
     widget.circle.circleController.stream.listen((event) async {
       List<double> eventSet = event;
-      if (_innerController.isAnimating &&
-          widget.circle.circleCounterValue != 0 &&
-          widget.circle.circleLabelSpeedValue != eventSet.last) {
-        widget.circle.circleSpeedCounterValue = 0;
-        widget.circle.circleCounterValue = 0;
-        widget.circle.circleLabelSpeedValue = 0;
-        widget.circle.circleLabelValue = 0;
-      }
       switch (widget.circle.circleForwardFlg) {
         case true:
           if (_innerController.isAnimating &&
