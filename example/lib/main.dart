@@ -241,13 +241,16 @@ class _MyHomePageState extends State<MyHomePage> {
                   CupertinoSwitch(
                     value: _circleColorFlg,
                     onChanged: (flg) {
+                      /// Determine the type of knob
                       c.circleShader = c.circleShader == CircleShader.circleNone
                           ? CircleShader.butt
                           : CircleShader.circleNone;
                       _circleColorFlg = flg;
+                      /// Determine the knob color
                       c.circleColor = c.circleColor == Colors.green
                           ? Colors.green.withOpacity(0)
                           : Colors.green;
+                      /// Determine the knob shadow color
                       c.circleShadowColor = c.circleShadowColor == Colors.black
                           ? Colors.black.withOpacity(0)
                           : Colors.black;
