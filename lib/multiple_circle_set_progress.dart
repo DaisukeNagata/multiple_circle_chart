@@ -35,7 +35,11 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
     widget.circle.circleController.stream.listen((event) async {
       List<double> eventSet = event;
       switch (widget.circle.circleForwardFlg) {
+
+        /// Positive direction.
         case true:
+
+          /// Judging the change in speed.
           if (_innerController.isAnimating &&
               widget.circle.circleSpeedCounterValue == eventSet.first &&
               widget.circle.circleLabelSpeedValue == eventSet.last) {
@@ -65,6 +69,8 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
             _controller.forward(from: a);
           }
           break;
+
+        /// Reverse direction
         case false:
           _innerController.duration =
               Duration(milliseconds: widget.circle.circleDuration);
@@ -133,6 +139,7 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
     });
   }
 
+  /// Initialization registration as a method
   void durationAnimation(
       int duration1, double begin, double end, double begin2, double end2) {
     _innerController = AnimationController(
