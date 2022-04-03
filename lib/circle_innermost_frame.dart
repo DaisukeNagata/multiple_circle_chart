@@ -119,10 +119,10 @@ class InnermostCircle extends CustomPainter {
       sizeSet * math.sin(piCircle + _data.circleShadowValue) + center.dy,
     );
 
-    _data.circleShader == CircleShader.circleNone
-        ? canvas.drawCircle(
-            shadowOffset, _data.circlePointerValue, shadowPainter)
-        : null;
+    if (_data.circleShader == CircleShader.circleNone) {
+      canvas.drawCircle(shadowOffset, _data.circlePointerValue, shadowPainter);
+    }
+
     // Minimum size when using round
     canvas.drawCircle(circleOffset, _data.circlePointerValue, circlePainter);
 
