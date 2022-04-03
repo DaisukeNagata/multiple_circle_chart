@@ -1,5 +1,3 @@
-library multiple_circle_chart;
-
 import 'dart:async';
 
 class CircleProgressController {

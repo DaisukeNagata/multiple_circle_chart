@@ -1,5 +1,3 @@
-library multiple_circle_chart;
-
 import 'dart:math';
 import 'circle_data_item.dart';
 import 'package:flutter/material.dart';

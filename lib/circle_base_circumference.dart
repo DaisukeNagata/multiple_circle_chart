@@ -1,5 +1,3 @@
-library multiple_circle_chart;
-
 import 'package:flutter/material.dart';
 
 class CircleBaseCircumference extends CustomPainter {
