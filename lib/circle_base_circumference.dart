@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Build a base circle design.
 class CircleBaseCircumference extends CustomPainter {
   final List<Color> colors;
   final double strokeWidth;

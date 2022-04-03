@@ -65,6 +65,7 @@ class InnermostCircle extends CustomPainter {
       ..color = _data.circleColor
       ..strokeCap = StrokeCap.round;
 
+    /// Tune the circle circle overlap at the top angle
     if (_data.circleShader == CircleShader.round) {
       if (_data.circleDuration == 0 || !_controller.isAnimating) {
         circlePainter.shader = SweepGradient(
@@ -103,25 +104,29 @@ class InnermostCircle extends CustomPainter {
 
     double piCircle = 0.0;
 
+    /// Select the knob calculation value in the speed state.
     piCircle = time <= _data.circleLabelValue
         ? (pi * 2) * _data.circleLabelValue
         : piCircle = (pi * 2) * _animation.value;
 
+    /// Calculate the circumference of the knob
     Offset circleOffset = Offset(
       sizeSet * math.cos(piCircle) + center.dx,
       sizeSet * math.sin(piCircle) + center.dy,
     );
 
+    /// Calculate the circumference of the knob
     Offset shadowOffset = Offset(
       sizeSet * math.cos(piCircle + _data.circleShadowValue) + center.dx,
       sizeSet * math.sin(piCircle + _data.circleShadowValue) + center.dy,
     );
 
+    /// The presence or absence of shadows in the knob type.
     if (_data.circleShader == CircleShader.circleNone) {
       canvas.drawCircle(shadowOffset, _data.circlePointerValue, shadowPainter);
     }
 
-    // Minimum size when using round
+    /// Minimum size when using round
     canvas.drawCircle(circleOffset, _data.circlePointerValue, circlePainter);
 
     canvas.save();

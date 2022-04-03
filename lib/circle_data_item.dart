@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'circle_progress_controller.dart';
 
+/// Define pie chart Type.
 enum CircleShader { butt, round, circleNone }
 
+/// Pie chart Moedel class.
 class CircleDataItem {
   bool circleForwardFlg;
   CircleShader circleShader;

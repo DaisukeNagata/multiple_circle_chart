@@ -117,6 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+
     /// Show animation values.
     controller.counterStream.listen((event) {
       setState(() {
@@ -133,6 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     int index = setColor.length;
     double count = index * 1.0;
+
     /// Determine the size of the circle.
     _circleSize = _circleSize == 0.0
         ? MediaQuery.of(context).size.width / 2
@@ -246,10 +248,12 @@ class _MyHomePageState extends State<MyHomePage> {
                           ? CircleShader.butt
                           : CircleShader.circleNone;
                       _circleColorFlg = flg;
+
                       /// Determine the knob color
                       c.circleColor = c.circleColor == Colors.green
                           ? Colors.green.withOpacity(0)
                           : Colors.green;
+
                       /// Determine the knob shadow color
                       c.circleShadowColor = c.circleShadowColor == Colors.black
                           ? Colors.black.withOpacity(0)
@@ -261,6 +265,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     onChanged: (flg) {
                       /// Pie chart animation direction.
                       _circleShaderFlg = flg;
+
                       /// Determine the type of knob
                       c.circleShader = c.circleShader == CircleShader.circleNone
                           ? CircleShader.round

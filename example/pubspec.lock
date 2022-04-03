@@ -105,10 +105,10 @@ packages:
   multiple_circle_chart:
     dependency: "direct main"
     description:
-      name: multiple_circle_chart
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.2"
+      path: "/Users/nagatadaisuke/multiple_circle_chart/"
+      relative: false
+    source: path
+    version: "0.0.7"
   path:
     dependency: transitive
     description:

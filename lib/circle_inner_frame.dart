@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'circle_data_item.dart';
 import 'dart:math';
 
+/// Build more than the first week of a pie chart.
 class InnerCircle extends CustomPainter {
   final AnimationController _controller;
   Animation<double> _animation;
@@ -20,19 +21,28 @@ class InnerCircle extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     List<Color> colorSet;
     double time = double.parse(_baseAnimationValue.toString());
+
+    /// Value setting in normal order
     double value =
         (_data.circleCounterValue - _data.circleCounterValue.floor());
+
+    /// Value setting in reverse order
     double reverseValue =
         (_data.circleLabelSpeedValue - _data.circleLabelSpeedValue.floor());
+
+    /// to match the last element.
     int baseAnimationValueIndex =
         _baseAnimationValue.floor() == _data.circleColorList.length
             ? _baseAnimationValue.floor() - 1
             : _baseAnimationValue.floor();
+
+    /// to match the last element.
     int circleLabelValue =
         _data.circleLabelValue.floor() == _data.circleColorList.length
             ? _data.circleLabelValue.floor() - 1
             : _data.circleLabelValue.floor();
 
+    /// Redefined to change animation speed.
     _animation = Tween(
             begin: -_baseAnimationValue.floor().toDouble(),
             end: _data.circleCounterValue - _baseAnimationValue.floor())
@@ -44,6 +54,7 @@ class InnerCircle extends CustomPainter {
 
     canvas.restore();
 
+    /// Defined in the direction of color setting.
     _data.circleForwardFlg
         ? colorSet = _data.circleColorList[baseAnimationValueIndex]
         : colorSet = _data.circleColorList[_controller.isAnimating
@@ -59,6 +70,7 @@ class InnerCircle extends CustomPainter {
     canvas.rotate(degToRad(_rotate));
     canvas.translate(-size.width, 0);
 
+    /// Set the answer value and the value in the animation in the animated state.
     if (_controller.status == AnimationStatus.completed) {
       canvas.drawArc(
           Rect.fromCircle(
