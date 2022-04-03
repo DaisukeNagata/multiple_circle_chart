@@ -117,6 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+    /// Show animation values.
     controller.counterStream.listen((event) {
       setState(() {
         var e = 0.0;
@@ -132,6 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     int index = setColor.length;
     double count = index * 1.0;
+    /// Determine the size of the circle.
     _circleSize = _circleSize == 0.0
         ? MediaQuery.of(context).size.width / 2
         : _circleSize;
@@ -151,7 +153,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const Padding(padding: EdgeInsets.only(top: 20)),
+              Padding(padding: EdgeInsets.only(top: paddingValue)),
               Stack(
                 alignment: Alignment.center,
                 children: <Widget>[
@@ -165,7 +167,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           fontWeight: FontWeight.bold),
                     ),
                   ),
-                  const Padding(padding: EdgeInsets.only(top: 20)),
+                  Padding(padding: EdgeInsets.only(top: paddingValue)),
                   SizedBox(
                     width: c.circleSizeValue,
                     height: c.circleSizeValue,
@@ -176,12 +178,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ],
               ),
-              const Padding(padding: EdgeInsets.only(top: 20)),
+              Padding(padding: EdgeInsets.only(top: paddingValue)),
               Text("end$_forwardValue"),
               Text("start$_reverseValue"),
               Text("speed${c.circleDuration}"),
               Text("size${c.circleSizeValue}"),
-              const Padding(padding: EdgeInsets.only(top: 10)),
+              Padding(padding: EdgeInsets.only(top: paddingValue)),
               Slider(
                 value: _forwardValue,
                 min: 0,
@@ -231,7 +233,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   });
                 },
               ),
-              const Padding(padding: EdgeInsets.only(top: 10)),
+              Padding(padding: EdgeInsets.only(top: paddingValue)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -254,7 +256,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   CupertinoSwitch(
                     value: _circleShaderFlg,
                     onChanged: (flg) {
+                      /// Pie chart animation direction.
                       _circleShaderFlg = flg;
+                      /// Determine the type of knob
                       c.circleShader = c.circleShader == CircleShader.circleNone
                           ? CircleShader.round
                           : CircleShader.circleNone;
@@ -271,6 +275,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  /// Set the animation value, speed, forward direction, and reverse direction in the library.
   FloatingActionButton setButton(
       circleForwardFlg, circleCounterValue, circleLabelValue) {
     return FloatingActionButton(
