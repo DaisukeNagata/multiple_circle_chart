@@ -7,22 +7,23 @@ import 'overlapping_info_dialog.dart';
 import 'overlapping_painter.dart';
 
 class OverlappingProgressIndicator<T> extends OverlappingIndicator {
-  OverlappingProgressIndicator({
-    Key? key,
-    RadData radData = RadData.horizontal,
-    Offset? radDataRadDataVertical,
-    Offset? radDataRadDataHorizontal,
-    Size? dataVerticalSize,
-    Size? dataHorizontalSize,
-    GlobalKey? globalKey,
-    String? textValue,
-    TextSpan? textSpan,
-    double? value,
-    this.minHeight,
-    Size? contextSize,
-    CustomPaint? setPaint,
-    required BuildContext con,
-  })  : assert(minHeight == null || minHeight > 0),
+  OverlappingProgressIndicator(
+      {Key? key,
+      RadData radData = RadData.horizontal,
+      Offset? radDataRadDataVertical,
+      Offset? radDataRadDataHorizontal,
+      Size? dataVerticalSize,
+      Size? dataHorizontalSize,
+      GlobalKey? globalKey,
+      String? textValue,
+      TextSpan? textSpan,
+      double? value,
+      this.minHeight,
+      Size? contextSize,
+      CustomPaint? setPaint,
+      required BuildContext con,
+      required StreamController stream})
+      : assert(minHeight == null || minHeight > 0),
         super(
             key: key,
             radData: radData,
@@ -35,9 +36,8 @@ class OverlappingProgressIndicator<T> extends OverlappingIndicator {
             value: value,
             contextSize: contextSize,
             setPaint: setPaint,
-            con: con);
-
-  final StreamController _streamController = StreamController();
+            con: con,
+            stream: stream);
 
   OverlappingPainter? setPainter(String textValue, count, scale, colorList,
       {CircleData circleData = CircleData.none,
@@ -66,7 +66,7 @@ class OverlappingProgressIndicator<T> extends OverlappingIndicator {
           value: ((value ?? 0.0)) - (count * 0.1 * scale),
           contextSize:
               Size((w * count * 0.1) * scale, contextSize?.height ?? 0.0),
-          controller: _streamController);
+          controller: stream);
     } else {
       return OverlappingPainter(
           circleData: circleData,
@@ -76,16 +76,16 @@ class OverlappingProgressIndicator<T> extends OverlappingIndicator {
           textSpan: textSpan,
           value: null,
           contextSize: const Size(0, 0),
-          controller: _streamController);
+          controller: stream);
     }
   }
 
   controllerStream() {
-    _streamController.stream.listen((event) {
+    stream.stream.listen((event) {
       var stData = event as List<T>;
       var stDataFirst = stData.first as Offset;
       var stDataLast = stData.last as OverlappingPainter;
-      _streamController.onCancel;
+      stream.onCancel;
       showMyDialog(con, stDataFirst, stDataLast);
     });
   }

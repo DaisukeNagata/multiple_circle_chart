@@ -152,6 +152,7 @@ class _OverLappingBarState extends State<OverLappingPahe>
         globalKey: key,
         contextSize: Size(w, 15),
         con: context,
+        stream: StreamController(),
         setPaint: setPaint,
         value: _animationController?.value);
   }
