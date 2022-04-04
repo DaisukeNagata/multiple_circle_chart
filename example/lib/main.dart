@@ -137,12 +137,9 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) {
-                    return OverLappingBar();
-                  })
-              );
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return OverLappingBar();
+              }));
             },
             icon: Icon(Icons.arrow_forward_ios),
           )
@@ -206,11 +203,11 @@ class _MyHomePageState extends State<MyHomePage> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Column(
-         children: [
-           switchSet(_circleColorKey),
-           Padding(padding: EdgeInsets.only(top: paddingValue)),
-           setButton(true, _forwardValue, c.circleLabelValue),
-         ],
+          children: [
+            switchSet(_circleColorKey),
+            Padding(padding: EdgeInsets.only(top: paddingValue)),
+            setButton(true, _forwardValue, c.circleLabelValue),
+          ],
         ),
         Column(
           children: [
