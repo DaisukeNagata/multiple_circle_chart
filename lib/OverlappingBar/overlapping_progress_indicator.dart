@@ -6,20 +6,21 @@ import 'overlapping_indicator.dart';
 import 'overlapping_info_dialog.dart';
 import 'overlapping_painter.dart';
 
+///　OverlappingProgressIndicator is a class that calculates UI other than graphs.
 class OverlappingProgressIndicator<T> extends OverlappingIndicator {
-  OverlappingProgressIndicator(
+  const OverlappingProgressIndicator(
       {Key? key,
       RadData radData = RadData.horizontal,
       Offset? radDataRadDataVertical,
       Offset? radDataRadDataHorizontal,
       Size? dataVerticalSize,
       Size? dataHorizontalSize,
+      Size? contextSize,
+      this.minHeight,
       GlobalKey? globalKey,
       String? textValue,
+      double? animationValue,
       TextSpan? textSpan,
-      double? value,
-      this.minHeight,
-      Size? contextSize,
       CustomPaint? setPaint,
       required BuildContext con,
       required StreamController stream})
@@ -32,16 +33,18 @@ class OverlappingProgressIndicator<T> extends OverlappingIndicator {
             dataHorizontalOffset: radDataRadDataHorizontal,
             dataVerticalSize: dataVerticalSize,
             dataHorizontalSize: dataHorizontalSize,
+            animationValue: animationValue,
             textSpan: textSpan,
-            value: value,
             contextSize: contextSize,
             setPaint: setPaint,
             con: con,
             stream: stream);
 
+  /// Calculations for painting TextSpan.
   OverlappingPainter? setPainter(String textValue, count, scale, colorList,
       {CircleData circleData = CircleData.none,
       Color? textColor = Colors.white}) {
+    ///　Coordinates to display text
     Offset rV = dataVerticalOffset ?? const Offset(0, 0);
     Offset rH = dataHorizontalOffset ?? const Offset(0, 0);
     Offset offset = radData == RadData.vertical
@@ -57,13 +60,14 @@ class OverlappingProgressIndicator<T> extends OverlappingIndicator {
     ]);
 
     if (count >= 0) {
+      /// Calling overlapping graphs.
       return OverlappingPainter(
           circleData: circleData,
           radData: radData,
           backgroundColor: colorList[count],
           offsetValue: offset,
           textSpan: textSpan,
-          value: ((value ?? 0.0)) - (count * 0.1 * scale),
+          value: ((animationValue ?? 0.0)) - (count * 0.1 * scale),
           contextSize:
               Size((w * count * 0.1) * scale, contextSize?.height ?? 0.0),
           controller: stream);
@@ -80,6 +84,7 @@ class OverlappingProgressIndicator<T> extends OverlappingIndicator {
     }
   }
 
+  /// bind the tap location.
   controllerStream() {
     stream.stream.listen((event) {
       var stData = event as List<T>;
@@ -89,6 +94,7 @@ class OverlappingProgressIndicator<T> extends OverlappingIndicator {
     });
   }
 
+  /// Method to calculate alert.
   Future<void> showMyDialog(BuildContext context, Offset dataPosition,
       OverlappingPainter painter) async {
     RenderBox box = globalKey?.currentContext?.findRenderObject() as RenderBox;
@@ -96,7 +102,8 @@ class OverlappingProgressIndicator<T> extends OverlappingIndicator {
     double dx = dataPosition.dx;
     Size hSize = dataHorizontalSize ?? const Size(0, 0);
     Offset offset = box.localToGlobal(Offset.zero);
-    Offset size2 = box.localToGlobal(dataVerticalOffset ?? Offset(0, 0));
+    Offset horizontalOffset =
+        box.localToGlobal(dataVerticalOffset ?? const Offset(0, 0));
 
     return showDialog<void>(
       barrierColor: painter.backgroundColor.withOpacity(0),
@@ -107,7 +114,8 @@ class OverlappingProgressIndicator<T> extends OverlappingIndicator {
           elevation: 0,
           rect: RadData.horizontal == radData
               ? Rect.fromLTWH(offset.dx, offset.dy, box.size.width, value)
-              : Rect.fromLTWH(offset.dx, size2.dy - dx, value, hSize.height),
+              : Rect.fromLTWH(
+                  offset.dx, horizontalOffset.dy - dx, value, hSize.height),
           content: SingleChildScrollView(
               child: Column(
             children: [
@@ -132,8 +140,8 @@ class OverlappingProgressIndicator<T> extends OverlappingIndicator {
     required Widget child,
   }) {
     String? expandedSemanticsValue = semanticsValue;
-    if (value != null) {
-      expandedSemanticsValue ??= '${(value! * 100).round()}%';
+    if (animationValue != null) {
+      expandedSemanticsValue ??= '${(animationValue! * 100).round()}%';
     }
     controllerStream();
     return Semantics(
@@ -145,10 +153,10 @@ class OverlappingProgressIndicator<T> extends OverlappingIndicator {
 
   @override
   State<OverlappingProgressIndicator> createState() =>
-      _LinearProgressIndicatorState2();
+      _OverlappingProgressState();
 }
 
-class _LinearProgressIndicatorState2 extends State<OverlappingProgressIndicator>
+class _OverlappingProgressState extends State<OverlappingProgressIndicator>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
@@ -159,7 +167,7 @@ class _LinearProgressIndicatorState2 extends State<OverlappingProgressIndicator>
       duration: const Duration(milliseconds: 0),
       vsync: this,
     );
-    if (widget.value == null) {
+    if (widget.animationValue == null) {
       _controller.repeat();
     }
   }
@@ -192,7 +200,7 @@ class _LinearProgressIndicatorState2 extends State<OverlappingProgressIndicator>
   Widget build(BuildContext context) {
     final TextDirection textDirection = Directionality.of(context);
 
-    if (widget.value != null) {
+    if (widget.animationValue != null) {
       return _buildIndicator(context, _controller.value, textDirection);
     }
 

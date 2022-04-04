@@ -18,7 +18,7 @@ abstract class OverlappingIndicator extends StatefulWidget {
     this.semanticsValue,
     this.contextSize,
     this.circleData,
-    this.value,
+    this.animationValue,
     this.radData,
     this.setPaint,
     required this.textSpan,
@@ -33,7 +33,7 @@ abstract class OverlappingIndicator extends StatefulWidget {
   final String? semanticsLabel;
   final String? semanticsValue;
   final Size? contextSize;
-  final double? value;
+  final double? animationValue;
   final CircleData? circleData;
   final RadData? radData;
   final CustomPaint? setPaint;
@@ -44,7 +44,7 @@ abstract class OverlappingIndicator extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(PercentProperty('value', value,
+    properties.add(PercentProperty('value', animationValue,
         showName: false, ifNull: '<indeterminate>'));
   }
 }

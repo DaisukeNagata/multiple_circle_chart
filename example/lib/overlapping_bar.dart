@@ -154,7 +154,7 @@ class _OverLappingBarState extends State<OverLappingPahe>
         con: context,
         stream: StreamController(),
         setPaint: setPaint,
-        value: _animationController?.value);
+        animationValue: _animationController?.value);
   }
 
   Row indicatorRowSet(
