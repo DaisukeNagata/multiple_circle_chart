@@ -4,6 +4,8 @@ import 'package:multiple_circle_chart/circle_data_item.dart';
 import 'package:multiple_circle_chart/circle_progress_controller.dart';
 import 'package:multiple_circle_chart/multiple_circle_set_progress.dart';
 
+import 'overlapping_bar.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -132,6 +134,19 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return OverLappingBar();
+                  })
+              );
+            },
+            icon: Icon(Icons.arrow_forward_ios),
+          )
+        ],
       ),
       body: GestureDetector(
         onTap: () {
@@ -190,11 +205,21 @@ class _MyHomePageState extends State<MyHomePage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        setButton(true, _forwardValue, c.circleLabelValue),
-        switchSet(_circleColorKey),
-        switchSet(_circleShaderFlgKey),
-        setButton(false, c.circleCounterValue,
-            c.circleCounterValue == 0 ? 0 : _reverseValue),
+        Column(
+         children: [
+           switchSet(_circleColorKey),
+           Padding(padding: EdgeInsets.only(top: paddingValue)),
+           setButton(true, _forwardValue, c.circleLabelValue),
+         ],
+        ),
+        Column(
+          children: [
+            switchSet(_circleShaderFlgKey),
+            Padding(padding: EdgeInsets.only(top: paddingValue)),
+            setButton(false, c.circleCounterValue,
+                c.circleCounterValue == 0 ? 0 : _reverseValue),
+          ],
+        ),
       ],
     );
   }
@@ -291,9 +316,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   /// Set the animation value, speed, forward direction, and reverse direction in the library.
-  FloatingActionButton setButton(
+  OutlinedButton setButton(
       circleForwardFlg, circleCounterValue, circleLabelValue) {
-    return FloatingActionButton(
+    return OutlinedButton(
       onPressed: () {
         _scrollController.jumpTo(0.0);
         c.circleForwardFlg = circleForwardFlg;
