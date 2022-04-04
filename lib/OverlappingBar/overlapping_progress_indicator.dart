@@ -92,15 +92,13 @@ class OverlappingProgressIndicator<T> extends OverlappingIndicator {
 
   Future<void> showMyDialog(BuildContext context, Offset dataPosition,
       OverlappingPainter painter) async {
-    var dx = dataPosition.dx;
-    var box = globalKey?.currentContext?.findRenderObject() as RenderBox;
-    double vHeight = dataVerticalSize?.height ?? 0;
+    RenderBox box = globalKey?.currentContext?.findRenderObject() as RenderBox;
+    double value = dataVerticalSize?.height ?? 0;
+    double dx = dataPosition.dx;
     Size hSize = dataHorizontalSize ?? const Size(0, 0);
-    var size = box.localToGlobal(Offset.zero);
-    var dX = MediaQuery.of(context).size.height -
-        dataPosition.dx -
-        box.size.width +
-        vHeight / 2;
+    Offset offset = box.localToGlobal(Offset.zero);
+    Offset size2 = box.localToGlobal(dataVerticalOffset ?? Offset(0, 0));
+
     return showDialog<void>(
       barrierColor: painter.backgroundColor.withOpacity(0),
       context: context,
@@ -109,8 +107,8 @@ class OverlappingProgressIndicator<T> extends OverlappingIndicator {
         return OverlappingInfoDialog(
           elevation: 0,
           rect: RadData.horizontal == radData
-              ? Rect.fromLTWH(size.dx, size.dy, box.size.width, vHeight)
-              : Rect.fromLTWH(size.dx, dX, hSize.width, hSize.height),
+              ? Rect.fromLTWH(offset.dx, offset.dy, box.size.width, value)
+              : Rect.fromLTWH(offset.dx, size2.dy - dx, value, hSize.height),
           content: SingleChildScrollView(
               child: Column(
             children: [

@@ -145,7 +145,7 @@ class _OverLappingBarState extends State<OverLappingPahe>
       GlobalKey key, double w, CustomPaint setPaint) {
     return OverlappingProgressIndicator(
         radData: _radData,
-        radDataRadDataVertical: Offset(20, -20),
+        radDataRadDataVertical: Offset(20, 20),
         radDataRadDataHorizontal: Offset(1, 20),
         dataVerticalSize: Size(120, 120),
         dataHorizontalSize: Size(150, 120),
