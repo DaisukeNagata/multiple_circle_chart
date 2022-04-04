@@ -85,7 +85,6 @@ class OverlappingProgressIndicator<T> extends OverlappingIndicator {
       var stData = event as List<T>;
       var stDataFirst = stData.first as Offset;
       var stDataLast = stData.last as OverlappingPainter;
-      stream.onCancel;
       showMyDialog(con, stDataFirst, stDataLast);
     });
   }
