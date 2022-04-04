@@ -16,6 +16,9 @@ and the Flutter guide for
 
 <img width="400" src="https://user-images.githubusercontent.com/16457165/161422225-22c642e0-8eea-4a47-9d52-c98ba45a8a68.gif">
 
+<img width="800" src="https://user-images.githubusercontent.com/16457165/161572895-26321ef3-f66b-4a5a-a78d-eda4bb26e044.gif">
+
+
 
 ## Memory usage
 
