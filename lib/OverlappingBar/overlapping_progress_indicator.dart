@@ -37,7 +37,7 @@ class OverlappingProgressIndicator<T> extends OverlappingIndicator {
             setPaint: setPaint,
             con: con);
 
-  final StreamController _controller = StreamController();
+  final StreamController _streamController = StreamController();
 
   OverlappingPainter? setPainter(String textValue, count, scale, colorList,
       {CircleData circleData = CircleData.none,
@@ -66,7 +66,7 @@ class OverlappingProgressIndicator<T> extends OverlappingIndicator {
           value: ((value ?? 0.0)) - (count * 0.1 * scale),
           contextSize:
               Size((w * count * 0.1) * scale, contextSize?.height ?? 0.0),
-          controller: _controller);
+          controller: _streamController);
     } else {
       return OverlappingPainter(
           circleData: circleData,
@@ -76,16 +76,16 @@ class OverlappingProgressIndicator<T> extends OverlappingIndicator {
           textSpan: textSpan,
           value: null,
           contextSize: const Size(0, 0),
-          controller: _controller);
+          controller: _streamController);
     }
   }
 
   controllerStream() {
-    _controller.stream.listen((event) {
+    _streamController.stream.listen((event) {
       var stData = event as List<T>;
       var stDataFirst = stData.first as Offset;
       var stDataLast = stData.last as OverlappingPainter;
-      _controller.onCancel;
+      _streamController.onCancel;
       showMyDialog(con, stDataFirst, stDataLast);
     });
   }
