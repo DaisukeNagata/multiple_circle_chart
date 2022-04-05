@@ -114,6 +114,7 @@ class OverlappingProgressIndicator<T> extends OverlappingIndicator {
         return OverlappingInfoDialog(
           /// Make the background transparent.
           elevation: 0,
+
           /// The orientation determines the dialog coordinates.
           rect: RadData.horizontal == radData
               ? Rect.fromLTWH(offset.dx, offset.dy, box.size.width, value)
@@ -123,6 +124,7 @@ class OverlappingProgressIndicator<T> extends OverlappingIndicator {
               child: Column(
             children: [
               const Padding(padding: EdgeInsets.only(top: 20)),
+
               /// Characters to be changed
               Text("size:${dx.toStringAsFixed(1)}"),
               OutlinedButton(

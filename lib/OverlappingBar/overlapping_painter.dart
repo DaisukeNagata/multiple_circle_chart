@@ -41,6 +41,7 @@ class OverlappingPainter extends CustomPainter {
   }
 
   var count = -1;
+
   /// Class to publish when tapped.
   @override
   bool hitTest(Offset position) {

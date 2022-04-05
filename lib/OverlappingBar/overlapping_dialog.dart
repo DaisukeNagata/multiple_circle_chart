@@ -36,6 +36,7 @@ class OverlappingDialog extends StatelessWidget {
       padding: EdgeInsets.zero,
       duration: insetAnimationDuration,
       curve: insetAnimationCurve,
+
       /// Removes the specified view inset, however, from the specified context.
       child: MediaQuery.removeViewInsets(
         removeLeft: true,
@@ -50,6 +51,7 @@ class OverlappingDialog extends StatelessWidget {
               left: rect?.left ?? 0.0,
               width: rect?.width ?? 0.0,
               height: rect?.height ?? 0.0,
+
               /// Class Material extends StatefulWidget Create a material.
               child: Material(
                 color: backgroundColor ??
