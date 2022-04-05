@@ -1,6 +1,6 @@
 name: multiple_circle_chart
 description: It is a graph that can change the speed and overlap the graph 100% or more.
-version: 0.2.0
+version: 0.2.1
 homepage: https://github.com/daisukenagata/multiple_circle_chart
 
 environment:

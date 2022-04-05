@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'overlapping_data.dart';
 
+/// The OverlappingPainter class is a class that sets overlapping graphs.
 class OverlappingPainter extends CustomPainter {
   OverlappingPainter({
     required this.value,
@@ -40,7 +41,7 @@ class OverlappingPainter extends CustomPainter {
   }
 
   var count = -1;
-
+  /// Class to publish when tapped.
   @override
   bool hitTest(Offset position) {
     switch (count) {
@@ -56,6 +57,7 @@ class OverlappingPainter extends CustomPainter {
     return true;
   }
 
+  /// Method to set roundness
   @override
   void paint(Canvas canvas, Size size) {
     canvas.translate(contextSize.width, 0.0);
@@ -125,6 +127,7 @@ class OverlappingPainter extends CustomPainter {
       paintBar(size, canvas, textSpan, offsetValue);
     }
 
+    /// 0.0 ~ 1.0 * size.width　Range specification.
     if (value != null) {
       drawBar(0.0, (value?.clamp(0.0, 1.0) ?? 0.0) * size.width);
     } else {
@@ -132,6 +135,7 @@ class OverlappingPainter extends CustomPainter {
     }
   }
 
+  /// Update the value as the color changes
   @override
   bool shouldRepaint(OverlappingPainter oldDelegate) {
     return oldDelegate.backgroundColor != backgroundColor ||

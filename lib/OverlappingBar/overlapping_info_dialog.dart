@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'overlapping_dialog.dart';
 
+/// Build an alert UI for Dialog.
 class OverlappingInfoDialog extends StatelessWidget {
   const OverlappingInfoDialog({
     Key? key,
@@ -49,6 +50,7 @@ class OverlappingInfoDialog extends StatelessWidget {
   final Rect? rect;
   final bool scrollable;
 
+  ///
   @override
   Widget build(BuildContext context) {
     assert(debugCheckHasMaterialLocalizations(context));
@@ -73,6 +75,8 @@ class OverlappingInfoDialog extends StatelessWidget {
     Widget? titleWidget;
     Widget? contentWidget;
     Widget? actionsWidget;
+
+    /// Roundness calculation.
     if (titleWidget != null) {
       final EdgeInsets defaultTitlePadding =
           EdgeInsets.fromLTRB(24.0, 24.0, 24.0, content == null ? 20.0 : 0.0);
@@ -98,6 +102,7 @@ class OverlappingInfoDialog extends StatelessWidget {
       );
     }
 
+    /// Roundness calculation.
     if (content != null) {
       final EdgeInsets effectiveContentPadding =
           contentPadding?.resolve(textDirection) ?? EdgeInsets.zero;
@@ -163,6 +168,7 @@ class OverlappingInfoDialog extends StatelessWidget {
       ];
     }
 
+    /// Creates a widget that sizes its child to the child's intrinsic width.
     Widget dialogChild = IntrinsicWidth(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -171,6 +177,7 @@ class OverlappingInfoDialog extends StatelessWidget {
       ),
     );
 
+    /// Use the semantics to execute a child's unique widget.
     if (label != null) {
       dialogChild = Semantics(
         scopesRoute: true,
@@ -181,6 +188,7 @@ class OverlappingInfoDialog extends StatelessWidget {
       );
     }
 
+    /// Alert function to display on the graph.
     return OverlappingDialog(
       backgroundColor: backgroundColor,
       elevation: elevation,
