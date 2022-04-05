@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'circle_base_circumference.dart';
 import 'circle_data_item.dart';
 import 'circle_inner_frame.dart';
@@ -32,7 +33,7 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
     super.initState();
 
     /// When issuing a stream, select the direction of the speed setting and play it.
-    widget.circle.circleController.stream.listen(( event) async {
+    widget.circle.circleController.stream.listen((event) async {
       List<double> eventSet = event;
       switch (widget.circle.circleForwardFlg) {
 
