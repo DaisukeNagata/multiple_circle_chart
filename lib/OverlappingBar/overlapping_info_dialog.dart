@@ -132,6 +132,7 @@ class OverlappingInfoDialog extends StatelessWidget {
       final double spacing = (buttonPadding?.horizontal ?? 16) / 2;
       actionsWidget = Padding(
         padding: actionsPadding.add(EdgeInsets.all(spacing)),
+
         /// "overflow" the available horizontal space, in which case it lays
         child: OverflowBar(
           alignment: actionsAlignment ?? MainAxisAlignment.end,
