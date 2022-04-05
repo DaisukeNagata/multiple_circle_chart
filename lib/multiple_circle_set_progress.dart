@@ -96,6 +96,7 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
           builder: (BuildContext ctx, Widget? child) {
             return Stack(
               children: [
+                /// Base circle.
                 RepaintBoundary(
                   child: CustomPaint(
                     size: constraintsSize,
@@ -103,24 +104,32 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
                       widget.circle.circleRoundColor,
                       widget.circle.circleRoundColor
                     ], widget.circle.circleStrokeWidth),
+
+                    /// 1st week yen.
                     child: RepaintBoundary(
                       child: CustomPaint(
                         size: constraintsSize,
                         painter: CircleOuterFrame(_innerController,
                             _baseAnimation.value, widget.circle),
+
+                        /// Yen after the first week
                         child: RepaintBoundary(
                           child: CustomPaint(
                             size: constraintsSize,
-                            painter: InnerCircle(_innerController, _animation,
-                                _baseAnimation.value, widget.circle),
+                            painter: CircleInnerFrame(
+                                _innerController,
+                                _animation,
+                                _baseAnimation.value,
+                                widget.circle),
                             child: widget.circle.circleShader ==
                                         CircleShader.round ||
                                     widget.circle.circleShader ==
                                         CircleShader.circleNone
                                 ? RepaintBoundary(
+                                    ///　The purpose of complementing the top price.
                                     child: CustomPaint(
                                         size: constraintsSize,
-                                        painter: InnermostCircle(
+                                        painter: CircleInnermostFrame(
                                             _controller,
                                             _animation,
                                             _baseAnimation.value,

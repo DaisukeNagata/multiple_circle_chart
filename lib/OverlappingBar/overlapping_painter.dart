@@ -25,6 +25,7 @@ class OverlappingPainter extends CustomPainter {
   final TextSpan? textSpan;
   final StreamController controller;
 
+  /// Character arrangement according to height and width.
   void paintBar(size, canvas, TextSpan? span, Offset offsetValue) {
     double degToRad(double deg) => deg * (pi / 180.0);
     final textSpan = span;

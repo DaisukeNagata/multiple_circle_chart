@@ -52,6 +52,8 @@ class OverlappingInfoDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    /// Used by many material design widgets to make sure that they are only used in contexts
+    /// where they have access to localizations.
     assert(debugCheckHasMaterialLocalizations(context));
     final ThemeData theme = Theme.of(context);
     final DialogTheme dialogTheme = DialogTheme.of(context);
@@ -130,6 +132,7 @@ class OverlappingInfoDialog extends StatelessWidget {
       final double spacing = (buttonPadding?.horizontal ?? 16) / 2;
       actionsWidget = Padding(
         padding: actionsPadding.add(EdgeInsets.all(spacing)),
+        /// "overflow" the available horizontal space, in which case it lays
         child: OverflowBar(
           alignment: actionsAlignment ?? MainAxisAlignment.end,
           spacing: spacing,

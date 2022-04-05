@@ -5,14 +5,14 @@ import 'dart:math' as math;
 import 'dart:math';
 
 /// InnermostCircle is a complementary function class.
-class InnermostCircle extends CustomPainter {
+class CircleInnermostFrame extends CustomPainter {
   final AnimationController _controller;
   final Animation<double> _animation;
   final double _baseAnimationValue;
   final CircleDataItem _data;
   final double _rotate = 270;
 
-  InnermostCircle(
+  CircleInnermostFrame(
       this._controller, this._animation, this._baseAnimationValue, this._data);
 
   double degToRad(double deg) => deg * (pi / 180.0);
