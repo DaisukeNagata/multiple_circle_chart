@@ -4,7 +4,7 @@ import 'circle_progress_controller.dart';
 /// Define pie chart Type.
 enum CircleShader { butt, round, circleNone }
 
-/// Pie chart Moedel class.
+/// Pie chart Model class.
 class CircleDataItem {
   bool circleForwardFlg;
   CircleShader circleShader;

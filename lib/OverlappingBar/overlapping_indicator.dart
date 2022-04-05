@@ -39,7 +39,7 @@ abstract class OverlappingIndicator extends StatefulWidget {
   final CustomPaint? setPaint;
   final TextSpan? textSpan;
   final BuildContext con;
-  final StreamController stream;
+  final StreamController<Offset> stream;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

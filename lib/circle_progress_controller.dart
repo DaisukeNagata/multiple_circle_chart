@@ -1,12 +1,12 @@
 import 'dart:async';
 
 class CircleProgressController {
-  StreamController controller = StreamController();
-  StreamController counter = StreamController();
+  StreamController<List<double>> controller = StreamController<List<double>>();
+  StreamController<double> counter = StreamController<double>();
 
-  Stream get stream => controller.stream;
+  Stream<List<double>> get stream => controller.stream;
 
-  Stream get counterStream => counter.stream;
+  Stream<double> get counterStream => counter.stream;
 
   void setProgress(List<double> progress) {
     controller.sink.add(progress);

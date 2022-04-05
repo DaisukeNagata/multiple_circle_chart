@@ -7,7 +7,7 @@ import 'overlapping_info_dialog.dart';
 import 'overlapping_painter.dart';
 
 ///　OverlappingProgressIndicator is a class that calculates UI other than graphs.
-class OverlappingProgressIndicator<T> extends OverlappingIndicator {
+class OverlappingProgressIndicator extends OverlappingIndicator {
   const OverlappingProgressIndicator(
       {Key? key,
       RadData radData = RadData.horizontal,
@@ -23,7 +23,7 @@ class OverlappingProgressIndicator<T> extends OverlappingIndicator {
       TextSpan? textSpan,
       CustomPaint? setPaint,
       required BuildContext con,
-      required StreamController stream})
+      required StreamController<Offset> stream})
       : assert(minHeight == null || minHeight > 0),
         super(
             key: key,
@@ -41,7 +41,8 @@ class OverlappingProgressIndicator<T> extends OverlappingIndicator {
             stream: stream);
 
   /// Calculations for painting TextSpan.
-  OverlappingPainter? setPainter(String textValue, count, scale, colorList,
+  OverlappingPainter? setPainter(
+      String textValue, double value, double scale, List<Color> colorList,
       {CircleData circleData = CircleData.none,
       Color? textColor = Colors.white}) {
     ///　Coordinates to display text
@@ -60,17 +61,17 @@ class OverlappingProgressIndicator<T> extends OverlappingIndicator {
           style: TextStyle(color: textColor)),
     ]);
 
-    if (count >= 0) {
+    if (value >= 0) {
       /// Calling overlapping graphs.
       return OverlappingPainter(
           circleData: circleData,
           radData: radData,
-          backgroundColor: colorList[count],
+          backgroundColor: colorList[value.toInt()],
           offsetValue: offset,
           textSpan: textSpan,
-          value: ((animationValue ?? 0.0)) - (count * 0.1 * scale),
+          value: ((animationValue ?? 0.0)) - (value * 0.1 * scale),
           contextSize:
-              Size((w * count * 0.1) * scale, contextSize?.height ?? 0.0),
+              Size((w * value * 0.1) * scale, contextSize?.height ?? 0.0),
           controller: stream);
     } else {
       return OverlappingPainter(
@@ -88,16 +89,14 @@ class OverlappingProgressIndicator<T> extends OverlappingIndicator {
   /// bind the tap location.
   controllerStream() {
     stream.stream.listen((event) {
-      var stData = event as List<T>;
-      var stDataFirst = stData.first as Offset;
-      var stDataLast = stData.last as OverlappingPainter;
-      showMyDialog(con, stDataFirst, stDataLast);
+      Offset offsetData = event;
+      Offset stDataFirst = offsetData;
+      showMyDialog(con, stDataFirst);
     });
   }
 
   /// Method to calculate alert.
-  Future<void> showMyDialog(BuildContext context, Offset dataPosition,
-      OverlappingPainter painter) async {
+  Future<void> showMyDialog(BuildContext context, Offset dataPosition) async {
     RenderBox box = globalKey?.currentContext?.findRenderObject() as RenderBox;
     double value = dataVerticalSize?.height ?? 0;
     double dx = dataPosition.dx;
@@ -107,7 +106,7 @@ class OverlappingProgressIndicator<T> extends OverlappingIndicator {
         box.localToGlobal(dataVerticalOffset ?? const Offset(0, 0));
 
     return showDialog<void>(
-      barrierColor: painter.backgroundColor.withOpacity(0),
+      barrierColor: Colors.white.withOpacity(0),
       context: context,
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
