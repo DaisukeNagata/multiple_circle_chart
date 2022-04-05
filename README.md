@@ -18,10 +18,11 @@ Pie charts can be animated for 100% or more.
 The bar graph is a graph that overlaps at the specified position.
 ```
 
-
 ## Features
 
-<img width="400" src="https://user-images.githubusercontent.com/16457165/161422225-22c642e0-8eea-4a47-9d52-c98ba45a8a68.gif">
+<img width="800" src="https://user-images.githubusercontent.com/16457165/161848973-8c81e05c-a0e0-4551-90f9-452ee149579c.gif">
+
+
 
 <img width="800" src="https://user-images.githubusercontent.com/16457165/161572895-26321ef3-f66b-4a5a-a78d-eda4bb26e044.gif">
 
@@ -141,4 +142,7 @@ FloatingActionButton setButton(
 https://twitter.com/dbank0208
 
 dbank0208@gmail.com
+
+
+
 
