@@ -4,7 +4,7 @@ import 'circle_data_item.dart';
 import 'dart:math';
 
 /// Build more than the first week of a pie chart.
-class InnerCircle extends CustomPainter {
+class CircleInnerFrame extends CustomPainter {
   final AnimationController _controller;
   Animation<double> _animation;
   final double _baseAnimationValue;
@@ -12,7 +12,7 @@ class InnerCircle extends CustomPainter {
   final double _startAngle = 0;
   final double _rotate = 270;
 
-  InnerCircle(
+  CircleInnerFrame(
       this._controller, this._animation, this._baseAnimationValue, this._data);
 
   double degToRad(double deg) => deg * (pi / 180.0);

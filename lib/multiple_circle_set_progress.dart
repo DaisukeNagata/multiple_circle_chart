@@ -46,6 +46,7 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
             _innerController.forward();
             _controller.forward();
           } else {
+            /// Redefining speed.
             widget.circle.circleSpeedCounterValue = eventSet.first;
             _baseAnimation = Tween(begin: 0.0, end: eventSet.first)
                 .animate(_innerController);
@@ -61,12 +62,13 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
 
             widget.circle.circleLabelValue = 0;
 
-            var a = widget.circle.circleLabelSpeedValue /
+            ///　Calculation of starting point
+            double speed = widget.circle.circleLabelSpeedValue /
                 widget.circle.circleCounterValue;
 
-            _innerController.forward(from: a);
+            _innerController.forward(from: speed);
 
-            _controller.forward(from: a);
+            _controller.forward(from: speed);
           }
           break;
 
