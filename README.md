@@ -10,6 +10,13 @@ For general information about developing packages, see the Dart guide for
 and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
+## Introduction
+
+```
+Pie charts can be animated for 100% or more.
+
+The bar graph is a graph that overlaps at the specified position.
+```
 
 
 ## Features
