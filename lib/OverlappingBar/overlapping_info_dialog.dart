@@ -50,7 +50,6 @@ class OverlappingInfoDialog extends StatelessWidget {
   final Rect? rect;
   final bool scrollable;
 
-  ///
   @override
   Widget build(BuildContext context) {
     assert(debugCheckHasMaterialLocalizations(context));

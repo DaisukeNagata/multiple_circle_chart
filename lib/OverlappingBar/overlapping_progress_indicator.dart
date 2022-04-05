@@ -53,6 +53,7 @@ class OverlappingProgressIndicator<T> extends OverlappingIndicator {
 
     double w = contextSize?.width.roundToDouble() ?? 0.0;
 
+    /// Show graph values
     final textSpan = TextSpan(children: <TextSpan>[
       TextSpan(
           text: textValue.substring(0, textValue.length),
@@ -111,7 +112,9 @@ class OverlappingProgressIndicator<T> extends OverlappingIndicator {
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
         return OverlappingInfoDialog(
+          /// Make the background transparent.
           elevation: 0,
+          /// The orientation determines the dialog coordinates.
           rect: RadData.horizontal == radData
               ? Rect.fromLTWH(offset.dx, offset.dy, box.size.width, value)
               : Rect.fromLTWH(
@@ -120,6 +123,7 @@ class OverlappingProgressIndicator<T> extends OverlappingIndicator {
               child: Column(
             children: [
               const Padding(padding: EdgeInsets.only(top: 20)),
+              /// Characters to be changed
               Text("size:${dx.toStringAsFixed(1)}"),
               OutlinedButton(
                   onPressed: () {
