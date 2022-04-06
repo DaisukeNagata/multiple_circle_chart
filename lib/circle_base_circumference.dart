@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 /// Build a base circle design.
@@ -6,6 +8,8 @@ class CircleBaseCircumference extends CustomPainter {
   final double strokeWidth;
 
   CircleBaseCircumference(this.colors, this.strokeWidth);
+
+  double degToRad(double deg) => deg * (pi / 180.0);
 
   @override
   void paint(Canvas canvas, Size size) {

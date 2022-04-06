@@ -42,63 +42,66 @@ class _MyHomePageState extends State<MyHomePage> {
   double _circleLabelValue = 0.0;
   bool _circleColorFlg = true;
   bool _circleShaderFlg = true;
+  bool _circleCombineFlg = true;
   GlobalKey globalKey = GlobalKey();
   GlobalKey globalKey2 = GlobalKey();
   GlobalKey _circleColorKey = GlobalKey();
   GlobalKey _circleShaderFlgKey = GlobalKey();
+  GlobalKey _circleCombinedKey = GlobalKey();
 
   late CircleDataItem c = CircleDataItem(
-    /// circleForwardFlg is forward or reverse.
-    true,
 
-    /// CircleShader is an end type circle None has no knob.
-    CircleShader.circleNone,
+      /// circleForwardFlg is forward or reverse.
+      circleForwardFlg: true,
 
-    /// ComplementCircle is the tuning when the circle is changed to large or small.
-    0.05,
+      /// CircleShader is an end type circle None has no knob.
+      circleShader: CircleShader.circleNone,
 
-    /// circleSizeValue.
-    _circleSize,
+      /// ComplementCircle is the tuning when the circle is changed to large or small.
+      complementCircle: 0.05,
 
-    /// CircleLabelValue is reverse.
-    0.0,
+      /// circleSizeValue.
+      circleSizeValue: _circleSize,
 
-    /// circleLabelSpeedValue is speed.
-    0.0,
+      /// CircleLabelValue is reverse.
+      circleLabelValue: 0.0,
 
-    /// circleCounterValue is forward.
-    0.0,
+      /// circleLabelSpeedValue is speed.
+      circleLabelSpeedValue: 0.0,
 
-    /// circleSpeedCounterValue is speed.
-    0.0,
+      /// circleCounterValue is forward.
+      circleCounterValue: 0.0,
 
-    /// circleStrokeWidth is the thickness of the circle.
-    30.0,
+      /// circleSpeedCounterValue is speed.
+      circleSpeedCounterValue: 0.0,
 
-    /// circleShadowValue is The shadow range value
-    0.01,
+      /// circleStrokeWidth is the thickness of the circle.
+      circleStrokeWidth: 30.0,
 
-    /// circlePointerValue is The size of the knob.
-    15,
+      /// circleShadowValue is The shadow range value
+      circleShadowValue: 0.01,
 
-    /// circleDuration is circle animation speed
-    _speedValue.toInt(),
+      /// circlePointerValue is The size of the knob.
+      circlePointerValue: 15,
 
-    /// circleColor is the color of the knob.
-    Colors.green,
+      /// circleDuration is circle animation speed
+      circleDuration: _speedValue.toInt(),
 
-    /// circleColor is the shadow color of the knob.
-    Colors.black,
+      /// circleColor is the color of the knob.
+      circleColor: Colors.green,
 
-    /// circleRoundColor is The base color of circleRoundColor.
-    Colors.grey,
+      /// circleColor is the shadow color of the knob.
+      circleShadowColor: Colors.black,
 
-    /// circleController is CircleProgressController.
-    controller,
+      /// circleRoundColor is The base color of circleRoundColor.
+      circleRoundColor: Colors.grey,
 
-    /// circleColorList is Determines the gradient color.
-    setColor,
-  );
+      /// circleController is CircleProgressController.
+      circleController: controller,
+
+      /// circleColorList is Determines the gradient color.
+      circleColorList: setColor);
+
   late MultipleCircleSetProgress? circleSetProgress;
   final double paddingValue = 20;
   final CircleProgressController controller = CircleProgressController();
@@ -204,17 +207,32 @@ class _MyHomePageState extends State<MyHomePage> {
       children: [
         Column(
           children: [
-            switchSet(_circleColorKey),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Padding(padding: EdgeInsets.only(top: paddingValue)),
+                setButton(true, _forwardValue, c.circleLabelValue),
+                Padding(padding: EdgeInsets.only(top: paddingValue)),
+                setButton(false, c.circleCounterValue,
+                    c.circleCounterValue == 0 ? 0 : _reverseValue),
+              ],
+            ),
             Padding(padding: EdgeInsets.only(top: paddingValue)),
-            setButton(true, _forwardValue, c.circleLabelValue),
-          ],
-        ),
-        Column(
-          children: [
-            switchSet(_circleShaderFlgKey),
             Padding(padding: EdgeInsets.only(top: paddingValue)),
-            setButton(false, c.circleCounterValue,
-                c.circleCounterValue == 0 ? 0 : _reverseValue),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                switchSet(_circleColorKey),
+                Padding(
+                    padding: EdgeInsets.only(
+                        left: paddingValue, right: paddingValue)),
+                switchSet(_circleShaderFlgKey),
+                Padding(
+                    padding: EdgeInsets.only(
+                        left: paddingValue, right: paddingValue)),
+                switchSet(_circleCombinedKey),
+              ],
+            ),
           ],
         ),
       ],
@@ -270,7 +288,7 @@ class _MyHomePageState extends State<MyHomePage> {
               : Colors.black;
         },
       );
-    } else {
+    } else if (keyValue == _circleShaderFlgKey) {
       return CupertinoSwitch(
         key: _circleShaderFlgKey,
         value: _circleShaderFlg,
@@ -282,6 +300,32 @@ class _MyHomePageState extends State<MyHomePage> {
           c.circleShader = c.circleShader == CircleShader.circleNone
               ? CircleShader.round
               : CircleShader.circleNone;
+        },
+      );
+    } else {
+      return CupertinoSwitch(
+        key: _circleCombinedKey,
+        value: _circleCombineFlg,
+        onChanged: (flg) {
+          setState(() {
+            /// Pie chart animation direction.
+            _circleCombineFlg = flg;
+            c.startValue = [0, 0.25, 0.5, 0.75];
+            c.endValue = [0.25, 0.25, 0.25, 0.25];
+            c.circleCombinedColorList = [
+              Colors.blue,
+              Colors.yellow,
+              Colors.green,
+              Colors.purple
+            ];
+            if (flg) {
+              print(_circleCombineFlg);
+              c.startValue = [];
+              c.endValue = [];
+              c.startValue = [];
+              c.circleCombinedColorList = [];
+            }
+          });
         },
       );
     }
@@ -313,8 +357,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   /// Set the animation value, speed, forward direction, and reverse direction in the library.
-  OutlinedButton setButton(
-      circleForwardFlg, circleCounterValue, circleLabelValue) {
+  OutlinedButton setButton(bool circleForwardFlg, double circleCounterValue,
+      double circleLabelValue) {
     return OutlinedButton(
       onPressed: () {
         _scrollController.jumpTo(0.0);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'circle_base_circumference.dart';
+import 'circle_combined_piechart.dart';
 import 'circle_data_item.dart';
 import 'circle_inner_frame.dart';
 import 'circle_innermost_frame.dart';
@@ -112,8 +113,10 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
                     child: RepaintBoundary(
                       child: CustomPaint(
                         size: constraintsSize,
-                        painter: CircleOuterFrame(_innerController,
-                            _baseAnimation.value, widget.circle),
+                        painter: (widget.circle.startValue?.length ?? 0) > 0
+                            ? CircleCombinedPieChart(widget.circle)
+                            : CircleOuterFrame(_innerController,
+                                _baseAnimation.value, widget.circle),
 
                         /// Yen after the first week
                         child: RepaintBoundary(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'circle_progress_controller.dart';
 
 /// Define pie chart Type.
@@ -6,6 +7,29 @@ enum CircleShader { butt, round, circleNone }
 
 /// Pie chart Model class.
 class CircleDataItem {
+  CircleDataItem({
+    required this.circleForwardFlg,
+    required this.circleShader,
+    required this.complementCircle,
+    required this.circleSizeValue,
+    required this.circleLabelValue,
+    required this.circleLabelSpeedValue,
+    required this.circleCounterValue,
+    required this.circleSpeedCounterValue,
+    required this.circleStrokeWidth,
+    required this.circleShadowValue,
+    required this.circlePointerValue,
+    required this.circleDuration,
+    required this.circleColor,
+    required this.circleShadowColor,
+    required this.circleRoundColor,
+    required this.circleController,
+    required this.circleColorList,
+    List<Color>? circleCombinedColorList,
+    List<double>? startValue,
+    List<double>? endValue,
+  });
+
   bool circleForwardFlg;
   CircleShader circleShader;
   double complementCircle;
@@ -21,29 +45,11 @@ class CircleDataItem {
   Color circleColor;
   Color circleShadowColor;
   Color circleRoundColor;
-
   List<List<Color>> circleColorList = [
     [],
   ];
-
   CircleProgressController circleController = CircleProgressController();
-
-  CircleDataItem(
-      this.circleForwardFlg,
-      this.circleShader,
-      this.complementCircle,
-      this.circleSizeValue,
-      this.circleLabelValue,
-      this.circleLabelSpeedValue,
-      this.circleCounterValue,
-      this.circleSpeedCounterValue,
-      this.circleStrokeWidth,
-      this.circleShadowValue,
-      this.circlePointerValue,
-      this.circleDuration,
-      this.circleColor,
-      this.circleShadowColor,
-      this.circleRoundColor,
-      this.circleController,
-      this.circleColorList);
+  List<Color>? circleCombinedColorList = [];
+  List<double>? startValue = [];
+  List<double>? endValue = [];
 }
