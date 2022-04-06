@@ -1,3 +1,3 @@
-## 0.3.1
+## 0.3.2
 
 * It is a graph that can change the speed and overlap the graph 100% or more.

@@ -308,10 +308,13 @@ class _MyHomePageState extends State<MyHomePage> {
         value: _circleCombineFlg,
         onChanged: (flg) {
           setState(() {
-            /// Pie chart animation direction.
             _circleCombineFlg = flg;
-            c.startValue = [0, 0.25, 0.5, 0.75];
-            c.endValue = [0.25, 0.25, 0.25, 0.25];
+
+            /// Pie chart animation direction.
+            c.startValue = [0, 0.1, 0.24, 0.5];
+            c.endValue = [0.1, 0.24, 0.5, 0.5];
+
+            /// Select your favorite element
             c.circleCombinedColorList = [
               Colors.blue,
               Colors.yellow,
@@ -319,13 +322,17 @@ class _MyHomePageState extends State<MyHomePage> {
               Colors.purple
             ];
             if (flg) {
-              print(_circleCombineFlg);
               c.startValue = [];
               c.endValue = [];
               c.startValue = [];
               c.circleCombinedColorList = [];
             }
           });
+
+          /// Determine the type of knob
+          c.circleShader = c.circleShader == CircleShader.circleNone
+              ? CircleShader.round
+              : CircleShader.circleNone;
         },
       );
     }
