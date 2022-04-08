@@ -25,11 +25,11 @@ class CircleDataItem {
     required this.circleRoundColor,
     required this.circleController,
     required this.circleColorList,
-    Color? this.circleCombinedColor,
+    Color? circleCombinedColor,
     List<Color>? circleCombinedColorList,
     List<double>? startValue,
     List<double>? endValue,
-    List<String>? cicleListText,
+    List<String>? circleListText,
   });
 
   bool circleForwardFlg;
@@ -55,5 +55,5 @@ class CircleDataItem {
   List<Color>? circleCombinedColorList = [];
   List<double>? startValue = [];
   List<double>? endValue = [];
-  List<String>? cicleListText = [];
+  List<String>? circleListText = [];
 }
