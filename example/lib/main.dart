@@ -63,18 +63,6 @@ class _MyHomePageState extends State<MyHomePage> {
       /// circleSizeValue.
       circleSizeValue: _circleSize,
 
-      /// CircleLabelValue is reverse.
-      circleLabelValue: 0.0,
-
-      /// circleLabelSpeedValue is speed.
-      circleLabelSpeedValue: 0.0,
-
-      /// circleCounterValue is forward.
-      circleCounterValue: 0.0,
-
-      /// circleSpeedCounterValue is speed.
-      circleSpeedCounterValue: 0.0,
-
       /// circleStrokeWidth is the thickness of the circle.
       circleStrokeWidth: 30.0,
 
@@ -211,9 +199,9 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Padding(padding: EdgeInsets.only(top: paddingValue)),
-                setButton(true, _forwardValue, c.circleLabelValue),
+                setButton(true, _forwardValue, c.circleLabelValue ?? 0),
                 Padding(padding: EdgeInsets.only(top: paddingValue)),
-                setButton(false, c.circleCounterValue,
+                setButton(false, c.circleCounterValue ?? 0,
                     c.circleCounterValue == 0 ? 0 : _reverseValue),
               ],
             ),
@@ -399,7 +387,8 @@ class _MyHomePageState extends State<MyHomePage> {
         c.circleCounterValue = circleCounterValue;
         c.circleLabelSpeedValue = circleLabelValue;
         c.circleLabelValue = circleLabelValue;
-        controller.setProgress([c.circleCounterValue, c.circleLabelValue]);
+        controller
+            .setProgress([c.circleCounterValue ?? 0, c.circleLabelValue ?? 0]);
       },
       child: const Icon(Icons.play_circle),
     );

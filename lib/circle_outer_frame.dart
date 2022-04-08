@@ -27,9 +27,9 @@ class CircleOuterFrame extends CustomPainter {
 
     /// Element calculation during teleportation in reverse order.
     int circleLabelValue =
-        _data.circleLabelValue.floor() == _data.circleColorList.length
-            ? _data.circleLabelValue.floor() - 1
-            : _data.circleLabelValue.floor();
+        _data.circleLabelValue?.floor() == _data.circleColorList.length
+            ? _data.circleLabelValue?.floor() ?? 0 - 1
+            : _data.circleLabelValue?.floor() ?? 0;
 
     /// Size when drawing an arc.
     double sizeSet = size.width / 2;
@@ -50,13 +50,13 @@ class CircleOuterFrame extends CustomPainter {
 
     /// Stop value in animated state and notify value.
     if (_controller.status == AnimationStatus.dismissed ||
-        time != 0.0 && time <= _data.circleLabelValue) {
+        time != 0.0 && time <= (_data.circleLabelValue ?? 0)) {
       _controller.stop();
 
-      _data.circleController.setCounter(_data.circleLabelValue);
+      _data.circleController.setCounter(_data.circleLabelValue ?? 0);
     } else {
       _baseAnimationValue == 0
-          ? _data.circleController.setCounter(_data.circleLabelValue)
+          ? _data.circleController.setCounter(_data.circleLabelValue ?? 0)
           : _data.circleController.setCounter(_baseAnimationValue);
     }
 
@@ -69,7 +69,7 @@ class CircleOuterFrame extends CustomPainter {
     /// Element calculation during teleportation in reverse order.
     if (!_controller.isAnimating && !_data.circleForwardFlg) {
       colorSet = _data.circleColorList[circleLabelValue >= 1
-          ? _data.circleLabelValue.floor() == _data.circleColorList.length
+          ? _data.circleLabelValue?.floor() == _data.circleColorList.length
               ? circleLabelValue
               : circleLabelValue - 1
           : circleLabelValue];
@@ -86,10 +86,10 @@ class CircleOuterFrame extends CustomPainter {
     canvas.drawArc(
         Rect.fromCircle(center: size.center(Offset.zero), radius: sizeSet),
         _startAngle,
-        time <= _data.circleLabelValue
+        time <= (_data.circleLabelValue ?? 0)
             ? _data.circleLabelValue == 0
                 ? 0
-                : (pi * 2 * _data.circleLabelValue)
+                : (pi * 2 * (_data.circleLabelValue ?? 0))
             : progressSet,
         false,
         paint);

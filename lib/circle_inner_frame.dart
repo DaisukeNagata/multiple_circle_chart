@@ -25,12 +25,12 @@ class CircleInnerFrame extends CustomPainter {
     double time = double.parse(_baseAnimationValue.toString());
 
     /// Value setting in normal order
-    double value =
-        (_data.circleCounterValue - _data.circleCounterValue.floor());
+    double value = (_data.circleCounterValue ?? 0) -
+        (_data.circleCounterValue?.floor() ?? 0);
 
     /// Value setting in reverse order
-    double reverseValue =
-        (_data.circleLabelSpeedValue - _data.circleLabelSpeedValue.floor());
+    double reverseValue = ((_data.circleLabelSpeedValue ?? 0) -
+        (_data.circleLabelSpeedValue?.floor() ?? 0));
 
     /// to match the last element.
     int baseAnimationValueIndex =
@@ -40,17 +40,17 @@ class CircleInnerFrame extends CustomPainter {
 
     /// to match the last element.
     int circleLabelValue =
-        _data.circleLabelValue.floor() == _data.circleColorList.length
-            ? _data.circleLabelValue.floor() - 1
-            : _data.circleLabelValue.floor();
+        _data.circleLabelValue?.floor() == _data.circleColorList.length
+            ? _data.circleLabelValue?.floor() ?? 0 - 1
+            : _data.circleLabelValue?.floor() ?? 0;
 
     /// Redefined to change animation speed.
     _animation = Tween(
             begin: -_baseAnimationValue.floor().toDouble(),
-            end: _data.circleCounterValue - _baseAnimationValue.floor())
+            end: (_data.circleCounterValue ?? 0) - _baseAnimationValue.floor())
         .animate(_controller);
     if (_controller.status == AnimationStatus.dismissed ||
-        time != 0.0 && time <= _data.circleLabelValue) {
+        time != 0.0 && time <= (_data.circleLabelValue ?? 0)) {
       _controller.stop();
     }
 

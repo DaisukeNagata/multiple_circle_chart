@@ -37,21 +37,23 @@ class CircleInnermostFrame extends CustomPainter {
 
     /// to match the last element.
     int circleLabelValue =
-        _data.circleLabelValue.floor() == _data.circleColorList.length
-            ? _data.circleLabelSpeedValue.floor() - 1
-            : _data.circleLabelSpeedValue.floor();
+        _data.circleLabelValue?.floor() == _data.circleColorList.length
+            ? (_data.circleLabelSpeedValue?.floor() ?? 0) - 1
+            : (_data.circleLabelSpeedValue?.floor() ?? 0);
 
     /// Defined in the direction of color setting.
     double circleValue = _data.circleForwardFlg
-        ? _data.circleCounterValue - _data.circleCounterValue.floor()
-        : _data.circleLabelSpeedValue - _data.circleLabelSpeedValue.floor();
+        ? (_data.circleCounterValue ?? 0) -
+            (_data.circleCounterValue?.floor() ?? 0)
+        : (_data.circleLabelSpeedValue ?? 0) -
+            (_data.circleLabelSpeedValue?.floor() ?? 0);
 
     Offset center = Offset(sizeSet, sizeSet);
 
     /// Correspondence in the opposite direction, it will stop in the animation state.
     if (_controller.status == AnimationStatus.dismissed ||
         _controller.status == AnimationStatus.completed ||
-        time != 0.0 && time <= _data.circleLabelValue) {
+        time != 0.0 && time <= (_data.circleLabelValue ?? 0)) {
       _controller.stop();
     }
     canvas.rotate(degToRad(_rotate));
@@ -113,8 +115,8 @@ class CircleInnermostFrame extends CustomPainter {
     double piCircle = 0.0;
 
     /// Select the knob calculation value in the speed state.
-    piCircle = time <= _data.circleLabelValue
-        ? (pi * 2) * _data.circleLabelValue
+    piCircle = time <= (_data.circleLabelValue ?? 0)
+        ? (pi * 2) * (_data.circleLabelValue ?? 0)
         : piCircle = (pi * 2) * _animation.value;
 
     /// Calculate the circumference of the knob

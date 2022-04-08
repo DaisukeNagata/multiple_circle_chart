@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:multiple_circle_chart/circle_text_painter.dart';
 
 import 'circle_base_circumference.dart';
-import 'circle_combined_piechart.dart';
+import 'circle_combined_chart.dart';
 import 'circle_data_item.dart';
 import 'circle_inner_frame.dart';
 import 'circle_innermost_frame.dart';
@@ -66,8 +66,8 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
             widget.circle.circleLabelValue = 0;
 
             ///　Calculation of starting point
-            double speed = widget.circle.circleLabelSpeedValue /
-                widget.circle.circleCounterValue;
+            double speed = (widget.circle.circleLabelSpeedValue ?? 0) /
+                (widget.circle.circleCounterValue ?? 0);
 
             _innerController.forward(from: speed);
 
@@ -115,7 +115,7 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
                       child: CustomPaint(
                         size: constraintsSize,
                         painter: (widget.circle.startValue?.length ?? 0) > 0
-                            ? CircleCombinedPieChart(widget.circle)
+                            ? CircleCombinedChart(widget.circle)
                             : CircleOuterFrame(_innerController,
                                 _baseAnimation.value, widget.circle),
 

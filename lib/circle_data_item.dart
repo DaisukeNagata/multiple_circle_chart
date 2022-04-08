@@ -12,10 +12,6 @@ class CircleDataItem {
     required this.circleShader,
     required this.complementCircle,
     required this.circleSizeValue,
-    required this.circleLabelValue,
-    required this.circleLabelSpeedValue,
-    required this.circleCounterValue,
-    required this.circleSpeedCounterValue,
     required this.circleStrokeWidth,
     required this.circleShadowValue,
     required this.circlePointerValue,
@@ -25,6 +21,10 @@ class CircleDataItem {
     required this.circleRoundColor,
     required this.circleController,
     required this.circleColorList,
+    double? circleCounterValue,
+    double? circleLabelValue,
+    double? circleLabelSpeedValue,
+    double? circleSpeedCounterValue,
     double? circleCombinedTextSize,
     List<Color>? circleCombinedColor,
     List<Color>? circleCombinedColorList,
@@ -37,10 +37,10 @@ class CircleDataItem {
   CircleShader circleShader;
   double complementCircle;
   double circleSizeValue;
-  double circleLabelValue;
-  double circleLabelSpeedValue;
-  double circleCounterValue;
-  double circleSpeedCounterValue;
+  double? circleLabelValue;
+  double? circleLabelSpeedValue;
+  double? circleCounterValue;
+  double? circleSpeedCounterValue;
   double circleStrokeWidth;
   double circleShadowValue;
   double circlePointerValue;
