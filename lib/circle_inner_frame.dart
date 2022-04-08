@@ -1,7 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'circle_data_item.dart';
-import 'dart:math';
 
 /// Build more than the first week of a pie chart.
 class CircleInnerFrame extends CustomPainter {

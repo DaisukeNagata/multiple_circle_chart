@@ -1,8 +1,10 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'circle_data_item.dart';
 import 'dart:math' as math;
 import 'dart:math';
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+import 'circle_data_item.dart';
 
 /// InnermostCircle is a complementary function class.
 class CircleInnermostFrame extends CustomPainter {

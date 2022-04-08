@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:multiple_circle_chart/circle_text_painter.dart';
 
 import 'circle_base_circumference.dart';
 import 'circle_combined_piechart.dart';
@@ -134,12 +135,20 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
                                 ? RepaintBoundary(
                                     ///　The purpose of complementing the top price.
                                     child: CustomPaint(
-                                        size: constraintsSize,
-                                        painter: CircleInnermostFrame(
-                                            _controller,
-                                            _animation,
-                                            _baseAnimation.value,
-                                            widget.circle)),
+                                      size: constraintsSize,
+                                      painter: CircleInnermostFrame(
+                                          _controller,
+                                          _animation,
+                                          _baseAnimation.value,
+                                          widget.circle),
+                                      child: RepaintBoundary(
+                                        child: CustomPaint(
+                                          size: constraintsSize,
+                                          painter:
+                                              CircleTextPainter(widget.circle),
+                                        ),
+                                      ),
+                                    ),
                                   )
                                 : null,
                           ),

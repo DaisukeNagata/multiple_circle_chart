@@ -19,21 +19,20 @@ class CircleCombinedPieChart extends CustomPainter {
 
     /// Size when drawing an arc.
     int len = _data.startValue?.length ?? 0;
-
-    Paint paint2 = Paint()
+    Paint paint = Paint()
       ..strokeWidth = _data.circleStrokeWidth
       ..style = PaintingStyle.stroke;
     canvas.rotate(degToRad(_rotate));
     canvas.translate(-size.width, 0);
     for (var i = 0; i < len; i++) {
-      paint2.color = _data.circleCombinedColorList?[i] ?? Colors.white;
+      paint.color = _data.circleCombinedColorList?[i] ?? Colors.white;
       canvas.drawArc(
           Rect.fromCircle(
               center: size.center(Offset.zero), radius: size.width / 2),
           (pi * 2 * (_data.startValue?[i] ?? 0.0)),
           (pi * 2 * (_data.endValue?[i] ?? 0.0)),
           false,
-          paint2);
+          paint);
     }
     canvas.save();
   }

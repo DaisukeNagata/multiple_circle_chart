@@ -311,15 +311,21 @@ class _MyHomePageState extends State<MyHomePage> {
             _circleCombineFlg = flg;
 
             /// Pie chart animation direction.
-            c.startValue = [0, 0.1, 0.24, 0.5];
-            c.endValue = [0.1, 0.24, 0.5, 0.5];
+            // c.startValue = [0, 0.25, 0.45, 0.55, 0.7];
+            // c.endValue = [0.25, 0.2, 0.1, 0.15, 0.3];
+            // c.cicleListText = ["0", "0.25", "0.45", "0.55", "0.7"];
+            c.startValue = [0, 0.25, 0.35, 0.75, 0.8];
+            c.endValue = [0.25, 0.1, 0.4, 0.05, 0.2];
+            c.cicleListText = ["0", "0.25", "0.35", "0.75", "0.8"];
+            c.circleCombinedColor = Colors.white;
 
             /// Select your favorite element
             c.circleCombinedColorList = [
               Colors.blue,
-              Colors.yellow,
+              Colors.black,
               Colors.green,
-              Colors.purple
+              Colors.purple,
+              Colors.black
             ];
             if (flg) {
               c.startValue = [];
