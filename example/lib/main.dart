@@ -316,8 +316,21 @@ class _MyHomePageState extends State<MyHomePage> {
             // c.cicleListText = ["0", "0.25", "0.45", "0.55", "0.7"];
             c.startValue = [0, 0.25, 0.35, 0.75, 0.8];
             c.endValue = [0.25, 0.1, 0.4, 0.05, 0.2];
-            c.cicleListText = ["0", "0.25", "0.35", "0.75", "0.8"];
-            c.circleCombinedColor = Colors.white;
+            c.circleCombinedTextSize = 11;
+            c.circleListText = [
+              "0\nABCD\nTestA",
+              "0.25\nABCD\nTestB",
+              "0.35\nABCD\nTestC",
+              "0.75\nABCD\nTestD",
+              "0.8\nABCD\nTestE"
+            ];
+            c.circleCombinedColor = [
+              Colors.black,
+              Colors.grey,
+              Colors.red,
+              Colors.yellow,
+              Colors.blue
+            ];
 
             /// Select your favorite element
             c.circleCombinedColorList = [

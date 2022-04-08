@@ -25,11 +25,13 @@ class CircleTextPainter extends CustomPainter {
       final textSpan = TextSpan(children: <TextSpan>[
         TextSpan(
             text: _data.circleListText?[i],
-            style: TextStyle(color: _data.circleCombinedColor)),
+            style: TextStyle(
+                color: _data.circleCombinedColor?[i],
+                fontSize: _data.circleCombinedTextSize)),
       ]);
       final textPainter = TextPainter(
         text: textSpan,
-        textDirection: TextDirection.rtl,
+        textDirection: TextDirection.ltr,
       );
       textPainter.layout(
         minWidth: 0,
@@ -53,7 +55,7 @@ class CircleTextPainter extends CustomPainter {
       );
       textPainter.paint(
           canvas,
-          Offset(circleOffset.dx - _data.circlePointerValue,
+          Offset(circleOffset.dx - _data.circlePointerValue / 2,
               circleOffset.dy - _data.circlePointerValue / 2));
     }
     canvas.save();

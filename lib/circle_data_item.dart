@@ -25,7 +25,8 @@ class CircleDataItem {
     required this.circleRoundColor,
     required this.circleController,
     required this.circleColorList,
-    Color? circleCombinedColor,
+    double? circleCombinedTextSize,
+    List<Color>? circleCombinedColor,
     List<Color>? circleCombinedColorList,
     List<double>? startValue,
     List<double>? endValue,
@@ -51,7 +52,8 @@ class CircleDataItem {
     [],
   ];
   CircleProgressController circleController = CircleProgressController();
-  Color? circleCombinedColor;
+  double? circleCombinedTextSize;
+  List<Color>? circleCombinedColor;
   List<Color>? circleCombinedColorList = [];
   List<double>? startValue = [];
   List<double>? endValue = [];
