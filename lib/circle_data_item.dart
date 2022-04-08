@@ -57,5 +57,5 @@ class CircleDataItem {
   List<Color>? circleCombinedColorList = [];
   List<double>? startValue = [];
   List<double>? endValue = [];
-  List<String>? circleListText = [];
+  List<String>? circleTextList = [];
 }

@@ -43,11 +43,11 @@ class _MyHomePageState extends State<MyHomePage> {
   bool _circleColorFlg = true;
   bool _circleShaderFlg = true;
   bool _circleCombineFlg = true;
-  GlobalKey globalKey = GlobalKey();
-  GlobalKey globalKey2 = GlobalKey();
-  GlobalKey _circleColorKey = GlobalKey();
-  GlobalKey _circleShaderFlgKey = GlobalKey();
-  GlobalKey _circleCombinedKey = GlobalKey();
+  final GlobalKey globalKey = GlobalKey();
+  final GlobalKey globalKey2 = GlobalKey();
+  final GlobalKey _circleColorKey = GlobalKey();
+  final GlobalKey _circleShaderFlgKey = GlobalKey();
+  final GlobalKey _circleCombinedKey = GlobalKey();
 
   late CircleDataItem c = CircleDataItem(
 
@@ -103,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
       circleColorList: setColor);
 
   late MultipleCircleSetProgress? circleSetProgress;
-  final double paddingValue = 20;
+  final double paddingValue = 30;
   final CircleProgressController controller = CircleProgressController();
   final ScrollController _scrollController = ScrollController();
 
@@ -141,10 +141,10 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return OverLappingBar();
+                return const OverLappingBar();
               }));
             },
-            icon: Icon(Icons.arrow_forward_ios),
+            icon: const Icon(Icons.arrow_forward_ios),
           )
         ],
       ),
@@ -186,7 +186,7 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         var e = 0.0;
         if (event != 0.0) {
-          e = (event as double);
+          e = event;
         }
         _circleLabelValue = (e * 100);
       });
@@ -313,11 +313,13 @@ class _MyHomePageState extends State<MyHomePage> {
             /// Pie chart animation direction.
             // c.startValue = [0, 0.25, 0.45, 0.55, 0.7];
             // c.endValue = [0.25, 0.2, 0.1, 0.15, 0.3];
-            // c.cicleListText = ["0", "0.25", "0.45", "0.55", "0.7"];
+            // c.circleListText = ["0", "0.25", "0.45", "0.55", "0.7"];
+            c.circleStrokeWidth = 60;
+            c.circlePointerValue = 30;
             c.startValue = [0, 0.25, 0.35, 0.75, 0.8];
             c.endValue = [0.25, 0.1, 0.4, 0.05, 0.2];
             c.circleCombinedTextSize = 11;
-            c.circleListText = [
+            c.circleTextList = [
               "0\nABCD\nTestA",
               "0.25\nABCD\nTestB",
               "0.35\nABCD\nTestC",
@@ -341,6 +343,8 @@ class _MyHomePageState extends State<MyHomePage> {
               Colors.black
             ];
             if (flg) {
+              c.circleStrokeWidth = 30;
+              c.circlePointerValue = 15;
               c.startValue = [];
               c.endValue = [];
               c.startValue = [];
@@ -387,6 +391,9 @@ class _MyHomePageState extends State<MyHomePage> {
       double circleLabelValue) {
     return OutlinedButton(
       onPressed: () {
+        _circleCombineFlg = true;
+        c.circleStrokeWidth = 30;
+        c.circlePointerValue = 15;
         _scrollController.jumpTo(0.0);
         c.circleForwardFlg = circleForwardFlg;
         c.circleCounterValue = circleCounterValue;

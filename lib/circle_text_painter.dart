@@ -24,7 +24,7 @@ class CircleTextPainter extends CustomPainter {
       /// Show graph values
       final textSpan = TextSpan(children: <TextSpan>[
         TextSpan(
-            text: _data.circleListText?[i],
+            text: _data.circleTextList?[i],
             style: TextStyle(
                 color: _data.circleCombinedColor?[i],
                 fontSize: _data.circleCombinedTextSize)),
