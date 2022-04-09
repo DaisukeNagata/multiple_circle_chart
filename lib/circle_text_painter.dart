@@ -38,11 +38,37 @@ class CircleTextPainter extends CustomPainter {
         maxWidth: size.width,
       );
 
-      if (size.height * (_data.endValue?[i] ?? 0) * math.pi <
-          textPainter.height + 2) {
+      double graphHeight =
+          (size.height * math.pi) * (_data.startValue?[i] ?? 0);
+      double marginHeight =
+          graphHeight - (size.height * math.pi) * (_data.endValue?[i] ?? 0) / 2;
+
+      if ((graphHeight < textPainter.height + marginHeight ||
+          _data.circleStrokeWidth <
+              textPainter.height + (_data.circlePointerValue ?? 0) / 2)) {
+        var matchedIndex = i;
+        var checkIndex = 0;
+        List<String> tex = _data.circleTextList?[i].split('\n') ?? [];
+        double arrayIndex = textPainter.height / tex.length;
+        String ansTex = "";
+
+        for (var i = 1; i <= tex.length; i++) {
+          if (arrayIndex * i + (_data.circlePointerValue ?? 0) / 2 <
+                  size.height *
+                      (_data.endValue?[matchedIndex] ?? 0) *
+                      math.pi &&
+              arrayIndex * i + (_data.circlePointerValue ?? 0) / 2 <
+                  _data.circleStrokeWidth) {
+            ansTex += '${tex[i - 1]} \n';
+            checkIndex = i - 1;
+          } else {
+            ansTex = ansTex.replaceFirst(tex[checkIndex],
+                '${(tex[checkIndex]).substring(0, 2)}${'...'}');
+          }
+        }
         textSpan = TextSpan(children: <TextSpan>[
           TextSpan(
-              text: '...',
+              text: ansTex,
               style: TextStyle(
                   color: _data.circleCombinedColor?[i],
                   fontSize: _data.circleCombinedTextSize)),

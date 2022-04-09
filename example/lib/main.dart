@@ -320,15 +320,21 @@ class _MyHomePageState extends State<MyHomePage> {
             // c.startValue = [0, 0.25, 0.35, 0.75, 0.811];
             // c.endValue = [0.25, 0.1, 0.4, 0.061, 0.189];
 
-            c.startValue = [0, 0.25, 0.35, 0.75, 0.810];
-            c.endValue = [0.25, 0.1, 0.4, 0.060, 0.19];
+            // c.startValue = [0, 0.25, 0.35, 0.78, 0.811];
+            // c.endValue = [0.25, 0.1, 0.43, 0.031, 0.189];
+
+            // c.startValue = [0, 0.25, 0.55, 0.65, 0.75];
+            // c.endValue = [0.25, 0.3, 0.1, 0.1, 0.25];
+
+            c.startValue = [0, 0.25, 0.35, 0.45, 0.75];
+            c.endValue = [0.25, 0.1, 0.1, 0.3, 0.25];
             c.circleCombinedTextSize = 11;
             c.circleTextList = [
-              "0\nExample\nTestA",
-              "0.25\nExample\nTestB",
-              "0.35\nExample\nTestC",
-              "0.75\nExample\nTestD",
-              "0.825\nExample\nTestE"
+              "0\nExample\n2222\n3333\n4444\n5555",
+              "0.25\nExample\n2222\n3333\n4444\n5555",
+              "0.35\nExample\n2222\n3333\n4444\n5555",
+              "0.75\nExample\n2222\n3333\n4444\n5555",
+              "0.825\nExample\n2222\n3333\n4444\n5555"
             ];
             c.circleCombinedColor = [
               Colors.black,
