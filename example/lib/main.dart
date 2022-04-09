@@ -69,9 +69,6 @@ class _MyHomePageState extends State<MyHomePage> {
       /// circleShadowValue is The shadow range value
       circleShadowValue: 0.01,
 
-      /// circlePointerValue is The size of the knob.
-      circlePointerValue: 15,
-
       /// circleDuration is circle animation speed
       circleDuration: _speedValue.toInt(),
 
@@ -121,7 +118,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     circleSet();
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -148,18 +144,8 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               Padding(padding: EdgeInsets.only(top: paddingValue)),
               stack(),
-              Padding(padding: EdgeInsets.only(top: paddingValue)),
-              Text("end$_forwardValue"),
-              Text("start$_reverseValue"),
-              Text("speed${c.circleDuration}"),
-              Text("size${c.circleSizeValue}"),
-              sliderSet(_forwardValue, setColor.length.toDouble(),
-                  keyValue: globalKey),
-              sliderSet(_reverseValue, setColor.length.toDouble(),
-                  keyValue: globalKey2),
-              sliderSet(_speedValue, 20000.0),
-              sliderSet(c.circleSizeValue, MediaQuery.of(context).size.width),
-              Padding(padding: EdgeInsets.only(top: paddingValue)),
+              textSets(),
+              sliderSets(),
               setRow(),
             ],
           ),
@@ -187,6 +173,32 @@ class _MyHomePageState extends State<MyHomePage> {
         ? MediaQuery.of(context).size.width / 2
         : _circleSize;
     circleSetProgress = MultipleCircleSetProgress(circle: c);
+  }
+
+  Column textSets() {
+    return Column(
+      children: [
+        Padding(padding: EdgeInsets.only(top: paddingValue)),
+        Text("end$_forwardValue"),
+        Text("start$_reverseValue"),
+        Text("speed${c.circleDuration}"),
+        Text("size${c.circleSizeValue}"),
+      ],
+    );
+  }
+
+  Column sliderSets() {
+    return Column(
+      children: [
+        sliderSet(_forwardValue, setColor.length.toDouble(),
+            keyValue: globalKey),
+        sliderSet(_reverseValue, setColor.length.toDouble(),
+            keyValue: globalKey2),
+        sliderSet(_speedValue, 20000.0),
+        sliderSet(c.circleSizeValue, MediaQuery.of(context).size.width),
+        Padding(padding: EdgeInsets.only(top: paddingValue))
+      ],
+    );
   }
 
   Row setRow() {
@@ -297,22 +309,26 @@ class _MyHomePageState extends State<MyHomePage> {
         onChanged: (flg) {
           setState(() {
             _circleCombineFlg = flg;
+            c.circleStrokeWidth = 60;
+            c.circlePointerValue = c.circleStrokeWidth / 2;
 
             /// Pie chart animation direction.
+
             // c.startValue = [0, 0.25, 0.45, 0.55, 0.7];
             // c.endValue = [0.25, 0.2, 0.1, 0.15, 0.3];
-            // c.circleListText = ["0", "0.25", "0.45", "0.55", "0.7"];
-            c.circleStrokeWidth = 60;
-            c.circlePointerValue = 30;
-            c.startValue = [0, 0.25, 0.35, 0.75, 0.8];
-            c.endValue = [0.25, 0.1, 0.4, 0.05, 0.2];
+
+            // c.startValue = [0, 0.25, 0.35, 0.75, 0.811];
+            // c.endValue = [0.25, 0.1, 0.4, 0.061, 0.189];
+
+            c.startValue = [0, 0.25, 0.35, 0.75, 0.810];
+            c.endValue = [0.25, 0.1, 0.4, 0.060, 0.19];
             c.circleCombinedTextSize = 11;
             c.circleTextList = [
-              "0\nABCD\nTestA",
-              "0.25\nABCD\nTestB",
-              "0.35\nABCD\nTestC",
-              "0.75\nABCD\nTestD",
-              "0.8\nABCD\nTestE"
+              "0\nExample\nTestA",
+              "0.25\nExample\nTestB",
+              "0.35\nExample\nTestC",
+              "0.75\nExample\nTestD",
+              "0.825\nExample\nTestE"
             ];
             c.circleCombinedColor = [
               Colors.black,
@@ -332,7 +348,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ];
             if (flg) {
               c.circleStrokeWidth = 30;
-              c.circlePointerValue = 15;
+              c.circlePointerValue = c.circleStrokeWidth / 2;
               c.startValue = [];
               c.endValue = [];
               c.startValue = [];
@@ -381,7 +397,6 @@ class _MyHomePageState extends State<MyHomePage> {
       onPressed: () {
         _circleCombineFlg = true;
         c.circleStrokeWidth = 30;
-        c.circlePointerValue = 15;
         _scrollController.jumpTo(0.0);
         c.circleForwardFlg = circleForwardFlg;
         c.circleCounterValue = circleCounterValue;

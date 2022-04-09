@@ -22,17 +22,37 @@ class CircleTextPainter extends CustomPainter {
     int len = _data.startValue?.length ?? 0;
     for (var i = 0; i < len; i++) {
       /// Show graph values
-      final textSpan = TextSpan(children: <TextSpan>[
+      TextSpan textSpan = TextSpan(children: <TextSpan>[
         TextSpan(
             text: _data.circleTextList?[i],
             style: TextStyle(
                 color: _data.circleCombinedColor?[i],
                 fontSize: _data.circleCombinedTextSize)),
       ]);
-      final textPainter = TextPainter(
+      TextPainter textPainter = TextPainter(
         text: textSpan,
         textDirection: TextDirection.ltr,
       );
+      textPainter.layout(
+        minWidth: 0,
+        maxWidth: size.width,
+      );
+
+      if (size.height * (_data.endValue?[i] ?? 0) * math.pi <
+          textPainter.height + 2) {
+        textSpan = TextSpan(children: <TextSpan>[
+          TextSpan(
+              text: '...',
+              style: TextStyle(
+                  color: _data.circleCombinedColor?[i],
+                  fontSize: _data.circleCombinedTextSize)),
+        ]);
+        textPainter = TextPainter(
+          text: textSpan,
+          textDirection: TextDirection.ltr,
+        );
+      }
+
       textPainter.layout(
         minWidth: 0,
         maxWidth: size.width,
@@ -53,10 +73,11 @@ class CircleTextPainter extends CustomPainter {
                     (pi * 2 * _correctionValue)) +
             center.dy,
       );
+
       textPainter.paint(
           canvas,
-          Offset(circleOffset.dx - _data.circlePointerValue / 2,
-              circleOffset.dy - _data.circlePointerValue / 2));
+          Offset(circleOffset.dx - (_data.circlePointerValue ?? 0) / 2,
+              circleOffset.dy - (_data.circlePointerValue ?? 0) / 2));
     }
     canvas.save();
   }

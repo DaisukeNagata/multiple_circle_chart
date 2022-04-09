@@ -14,7 +14,6 @@ class CircleDataItem {
     required this.circleSizeValue,
     required this.circleStrokeWidth,
     required this.circleShadowValue,
-    required this.circlePointerValue,
     required this.circleDuration,
     required this.circleColor,
     required this.circleShadowColor,
@@ -22,6 +21,7 @@ class CircleDataItem {
     required this.circleController,
     required this.circleColorList,
     double? circleCounterValue,
+    double? circlePointerValue,
     double? circleLabelValue,
     double? circleLabelSpeedValue,
     double? circleSpeedCounterValue,
@@ -43,7 +43,7 @@ class CircleDataItem {
   double? circleSpeedCounterValue;
   double circleStrokeWidth;
   double circleShadowValue;
-  double circlePointerValue;
+  double? circlePointerValue;
   int circleDuration;
   Color circleColor;
   Color circleShadowColor;

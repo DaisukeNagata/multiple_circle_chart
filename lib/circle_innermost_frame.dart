@@ -133,11 +133,13 @@ class CircleInnermostFrame extends CustomPainter {
 
     /// The presence or absence of shadows in the knob type.
     if (_data.circleShader == CircleShader.circleNone) {
-      canvas.drawCircle(shadowOffset, _data.circlePointerValue, shadowPainter);
+      canvas.drawCircle(
+          shadowOffset, _data.circlePointerValue ?? 0, shadowPainter);
     }
 
     /// Minimum size when using round
-    canvas.drawCircle(circleOffset, _data.circlePointerValue, circlePainter);
+    canvas.drawCircle(
+        circleOffset, _data.circlePointerValue ?? 0, circlePainter);
 
     canvas.save();
   }

@@ -166,6 +166,7 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
   /// Initialization registration as a method
   void durationAnimation(
       int duration1, double begin, double end, double begin2, double end2) {
+    widget.circle.circlePointerValue = widget.circle.circleStrokeWidth / 2;
     _innerController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: duration1),
