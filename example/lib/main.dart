@@ -311,6 +311,7 @@ class _MyHomePageState extends State<MyHomePage> {
             _circleCombineFlg = flg;
             c.circleStrokeWidth = 60;
             c.circlePointerValue = c.circleStrokeWidth / 2;
+            c.graphTextSize = const Size(20, 20);
 
             /// Pie chart animation direction.
 

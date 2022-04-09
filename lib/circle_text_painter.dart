@@ -100,10 +100,11 @@ class CircleTextPainter extends CustomPainter {
             center.dy,
       );
 
+      Size graphTextSize = _data.graphTextSize ?? Size.zero;
       textPainter.paint(
           canvas,
-          Offset(circleOffset.dx - (_data.circlePointerValue ?? 0) / 2,
-              circleOffset.dy - (_data.circlePointerValue ?? 0) / 2));
+          Offset(circleOffset.dx - graphTextSize.width,
+              circleOffset.dy - graphTextSize.height));
     }
     canvas.save();
   }
