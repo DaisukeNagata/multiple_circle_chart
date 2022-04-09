@@ -11,8 +11,8 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
-
-
+[![Pub Version](https://img.shields.io/pub/v/animation_scroller?color=emerald)](https://pub.dev/packages/animation_scroller/versions/)
+ [![GitHub Stars Count](https://img.shields.io/github/stars/daisukenagata/multiple_circle_chart?logo=github)](https://github.com/daisukenagata/multiple_circle_chart 'Star me on GitHub!')![Profile Views Counter](https://komarev.com/ghpvc/?username=daisukenagata)
 
 
 ## Environment
