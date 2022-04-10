@@ -11,12 +11,13 @@ class CircleTextPainter extends CustomPainter {
 
   CircleTextPainter(this._data);
 
-  final double _correctionValue = 0.25;
+  final double _correctionValue = -0.25;
 
   @override
   void paint(Canvas canvas, Size size) {
     canvas.restore();
     double sizeSet = size.width / 2;
+    Size graphTextSize = _data.graphTextSize ?? Size.zero;
 
     /// Size when drawing an arc.
     int len = _data.startValue?.length ?? 0;
@@ -27,7 +28,8 @@ class CircleTextPainter extends CustomPainter {
             text: _data.circleTextList?[i],
             style: TextStyle(
                 color: _data.circleCombinedColor?[i],
-                fontSize: _data.circleCombinedTextSize)),
+                fontSize: _data.circleCombinedTextSize,
+                fontWeight: FontWeight.bold)),
       ]);
       TextPainter textPainter = TextPainter(
         text: textSpan,
@@ -38,46 +40,31 @@ class CircleTextPainter extends CustomPainter {
         maxWidth: size.width,
       );
 
-      double graphHeight =
-          (size.height * math.pi) * (_data.startValue?[i] ?? 0);
-      double marginHeight =
-          graphHeight - (size.height * math.pi) * (_data.endValue?[i] ?? 0) / 2;
+      List<String> circleTextList = _data.circleTextList?[i].split('\n') ?? [];
+      double graphHeight = textPainter.height / circleTextList.length - 1;
+      String ansTex = "";
 
-      if ((graphHeight < textPainter.height + marginHeight ||
-          _data.circleStrokeWidth <
-              textPainter.height + (_data.circlePointerValue ?? 0) / 2)) {
-        var matchedIndex = i;
-        var checkIndex = 0;
-        List<String> tex = _data.circleTextList?[i].split('\n') ?? [];
-        double arrayIndex = textPainter.height / tex.length;
-        String ansTex = "";
-
-        for (var i = 1; i <= tex.length; i++) {
-          if (arrayIndex * i + (_data.circlePointerValue ?? 0) / 2 <
-                  size.height *
-                      (_data.endValue?[matchedIndex] ?? 0) *
-                      math.pi &&
-              arrayIndex * i + (_data.circlePointerValue ?? 0) / 2 <
-                  _data.circleStrokeWidth) {
-            ansTex += '${tex[i - 1]} \n';
-            checkIndex = i - 1;
-          } else {
-            ansTex = ansTex.replaceFirst(tex[checkIndex],
-                '${(tex[checkIndex]).substring(0, 2)}${'...'}');
-          }
+      double circleLength = (size.height * math.pi) * (_data.endValue?[i] ?? 0);
+      for (var i = 1; i <= circleTextList.length; i++) {
+        double checkOffset = graphHeight * i;
+        if (checkOffset + graphTextSize.height < circleLength) {
+          ansTex += '${circleTextList[i - 1]} \n';
+        } else {
+          ansTex = ansTex.replaceFirst(circleTextList[i - (i - 1)],
+              '${(circleTextList[i - (i - 1)]).substring(0, 2)}${'...'}');
         }
-        textSpan = TextSpan(children: <TextSpan>[
-          TextSpan(
-              text: ansTex,
-              style: TextStyle(
-                  color: _data.circleCombinedColor?[i],
-                  fontSize: _data.circleCombinedTextSize)),
-        ]);
-        textPainter = TextPainter(
-          text: textSpan,
-          textDirection: TextDirection.ltr,
-        );
       }
+      textSpan = TextSpan(children: <TextSpan>[
+        TextSpan(
+            text: ansTex,
+            style: TextStyle(
+                color: _data.circleCombinedColor?[i],
+                fontSize: _data.circleCombinedTextSize)),
+      ]);
+      textPainter = TextPainter(
+        text: textSpan,
+        textDirection: TextDirection.ltr,
+      );
 
       textPainter.layout(
         minWidth: 0,
@@ -89,18 +76,21 @@ class CircleTextPainter extends CustomPainter {
       /// Calculate the circumference of the knob
       Offset circleOffset = Offset(
         sizeSet *
-                math.cos(pi * 2 * (_data.startValue?[i] ?? 0) +
-                    pi * 2 * (_data.endValue?[i] ?? 0) / 2 -
-                    (pi * 2 * _correctionValue)) +
+                math.cos(pi *
+                    2 *
+                    (_correctionValue +
+                        (_data.startValue?[i] ?? 0) +
+                        (_data.endValue?[i] ?? 0) / 2)) +
             center.dx,
         sizeSet *
-                math.sin(pi * 2 * (_data.startValue?[i] ?? 0) +
-                    pi * 2 * (_data.endValue?[i] ?? 0) / 2 -
-                    (pi * 2 * _correctionValue)) +
+                math.sin(pi *
+                    2 *
+                    (_correctionValue +
+                        (_data.startValue?[i] ?? 0) +
+                        (_data.endValue?[i] ?? 0) / 2)) +
             center.dy,
       );
 
-      Size graphTextSize = _data.graphTextSize ?? Size.zero;
       textPainter.paint(
           canvas,
           Offset(circleOffset.dx - graphTextSize.width,

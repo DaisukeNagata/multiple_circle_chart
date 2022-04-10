@@ -36,6 +36,7 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
 
     /// When issuing a stream, select the direction of the speed setting and play it.
     widget.circle.circleController.stream.listen((event) async {
+      widget.circle.circlePointerValue = widget.circle.circleStrokeWidth / 2;
       List<double> eventSet = event;
       switch (widget.circle.circleForwardFlg) {
 

@@ -88,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
       circleColorList: setColor);
 
   late MultipleCircleSetProgress? circleSetProgress;
-  final double paddingValue = 30;
+  double paddingValue = 30;
   final CircleProgressController controller = CircleProgressController();
   final ScrollController _scrollController = ScrollController();
 
@@ -310,39 +310,40 @@ class _MyHomePageState extends State<MyHomePage> {
           setState(() {
             _circleCombineFlg = flg;
             c.circleStrokeWidth = 60;
-            c.circlePointerValue = c.circleStrokeWidth / 2;
-            c.graphTextSize = const Size(20, 20);
+            paddingValue = c.circleStrokeWidth / 2;
+            c.graphTextSize = const Size(15, 15);
 
             /// Pie chart animation direction.
 
-            // c.startValue = [0, 0.25, 0.45, 0.55, 0.7];
-            // c.endValue = [0.25, 0.2, 0.1, 0.15, 0.3];
+            c.startValue = [0, 0.25, 0.45, 0.5, 0.7];
+            c.endValue = [0.25, 0.2, 0.05, 0.2, 0.3];
 
             // c.startValue = [0, 0.25, 0.35, 0.75, 0.811];
             // c.endValue = [0.25, 0.1, 0.4, 0.061, 0.189];
 
-            // c.startValue = [0, 0.25, 0.35, 0.78, 0.811];
-            // c.endValue = [0.25, 0.1, 0.43, 0.031, 0.189];
+            // c.startValue = [0, 0.25, 0.35, 0.8, 0.95];
+            // c.endValue = [0.25, 0.1, 0.45, 0.15, 0.05];
 
             // c.startValue = [0, 0.25, 0.55, 0.65, 0.75];
             // c.endValue = [0.25, 0.3, 0.1, 0.1, 0.25];
 
-            c.startValue = [0, 0.25, 0.35, 0.45, 0.75];
-            c.endValue = [0.25, 0.1, 0.1, 0.3, 0.25];
-            c.circleCombinedTextSize = 11;
+            // c.startValue = [0, 0.25, 0.35, 0.45, 0.75];
+            // c.endValue = [0.25, 0.1, 0.1, 0.3, 0.25];
+            c.circleCombinedTextSize = 12;
+
             c.circleTextList = [
-              "0\nExample\n2222\n3333\n4444\n5555",
-              "0.25\nExample\n2222\n3333\n4444\n5555",
-              "0.35\nExample\n2222\n3333\n4444\n5555",
-              "0.75\nExample\n2222\n3333\n4444\n5555",
-              "0.825\nExample\n2222\n3333\n4444\n5555"
+              "${c.startValue?[0] ?? ""}\n${c.endValue?[0] ?? ""}\nExample",
+              "${c.startValue?[1] ?? ""}\n${c.endValue?[1] ?? ""}\nExample",
+              "${c.startValue?[2] ?? ""}\n${c.endValue?[2] ?? ""}\nExample",
+              "${c.startValue?[3] ?? ""}\n${c.endValue?[3] ?? ""}\nExample",
+              "${c.startValue?[4] ?? ""}\n${c.endValue?[4] ?? ""}\nExample"
             ];
             c.circleCombinedColor = [
               Colors.black,
               Colors.grey,
-              Colors.red,
-              Colors.yellow,
-              Colors.blue
+              Colors.black,
+              Colors.black,
+              Colors.grey
             ];
 
             /// Select your favorite element
@@ -350,12 +351,11 @@ class _MyHomePageState extends State<MyHomePage> {
               Colors.blue,
               Colors.black,
               Colors.green,
-              Colors.purple,
-              Colors.black
+              Colors.grey,
+              Colors.orange
             ];
             if (flg) {
               c.circleStrokeWidth = 30;
-              c.circlePointerValue = c.circleStrokeWidth / 2;
               c.startValue = [];
               c.endValue = [];
               c.startValue = [];
