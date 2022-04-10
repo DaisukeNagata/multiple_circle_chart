@@ -34,7 +34,6 @@ The bar graph is a graph that overlaps at the specified position.
 <img width="800" src="https://user-images.githubusercontent.com/16457165/161848973-8c81e05c-a0e0-4551-90f9-452ee149579c.gif">
 
 
-
 <img width="800" src="https://user-images.githubusercontent.com/16457165/161572895-26321ef3-f66b-4a5a-a78d-eda4bb26e044.gif">
 
 
@@ -55,10 +54,8 @@ The bar graph is a graph that overlaps at the specified position.
 
 #### Set the value in Dataclass.
 ```
-circleSetProgress = MultipleCircleSetProgress(circle: c);
+  circleSetProgress = MultipleCircleSetProgress(circle: c);
 
-
-late CircleDataItem c = CircleDataItem(
   late CircleDataItem c = CircleDataItem(
 
       /// circleForwardFlg is forward or reverse.
@@ -122,16 +119,18 @@ late CircleDataItem c = CircleDataItem(
 final CircleProgressController controller = CircleProgressController();
 
 
-FloatingActionButton setButton(
-      circleForwardFlg, circleCounterValue, circleLabelValue) {
-    return FloatingActionButton(
+  /// Set the animation value, speed, forward direction, and reverse direction in the library.
+  OutlinedButton setButton(
+      bool forwardFlg, double counterValue, double circleLabelValue) {
+    return OutlinedButton(
       onPressed: () {
         _scrollController.jumpTo(0.0);
-        c.circleForwardFlg = circleForwardFlg;
-        c.circleCounterValue = circleCounterValue;
+        c.circleForwardFlg = forwardFlg;
+        c.circleCounterValue = counterValue;
         c.circleLabelSpeedValue = circleLabelValue;
         c.circleLabelValue = circleLabelValue;
-        controller.setProgress([c.circleCounterValue, c.circleLabelValue]);
+        controller
+            .setProgress([c.circleCounterValue ?? 0, c.circleLabelValue ?? 0]);
       },
       child: const Icon(Icons.play_circle),
     );

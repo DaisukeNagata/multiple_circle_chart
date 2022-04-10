@@ -426,13 +426,13 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   /// Set the animation value, speed, forward direction, and reverse direction in the library.
-  OutlinedButton setButton(bool circleForwardFlg, double circleCounterValue,
-      double circleLabelValue) {
+  OutlinedButton setButton(
+      bool forwardFlg, double counterValue, double circleLabelValue) {
     return OutlinedButton(
       onPressed: () {
         _scrollController.jumpTo(0.0);
-        c.circleForwardFlg = circleForwardFlg;
-        c.circleCounterValue = circleCounterValue;
+        c.circleForwardFlg = forwardFlg;
+        c.circleCounterValue = counterValue;
         c.circleLabelSpeedValue = circleLabelValue;
         c.circleLabelValue = circleLabelValue;
         controller
