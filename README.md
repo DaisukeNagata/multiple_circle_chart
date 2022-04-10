@@ -39,11 +39,16 @@ The bar graph is a graph that overlaps at the specified position.
 <img width="800" src="https://user-images.githubusercontent.com/16457165/161572895-26321ef3-f66b-4a5a-a78d-eda4bb26e044.gif">
 
 
+<img width="800" src="https://user-images.githubusercontent.com/16457165/162620263-1ad5cb6d-64fb-4eea-aada-14b231bcaeda.png">
+
+
 
 ## Memory usage
 
 
 <img width="600" alt="exam ong" src="https://user-images.githubusercontent.com/16457165/161421822-d0f6a0dd-8a29-412d-ad21-2a6ca25c622d.png">
+
+
 
 
 
@@ -55,57 +60,43 @@ circleSetProgress = MultipleCircleSetProgress(circle: c);
 
 
 late CircleDataItem c = CircleDataItem(
-    /// circleForwardFlg is forward or reverse.
-    true,
+  late CircleDataItem c = CircleDataItem(
 
-    /// CircleShader is an end type circle None has no knob.
-    CircleShader.circleNone,
+      /// circleForwardFlg is forward or reverse.
+      circleForwardFlg: true,
 
-    /// ComplementCircle is the tuning when the circle is changed to large or small.
-    0.05,
+      /// CircleShader is an end type circle None has no knob.
+      circleShader: CircleShader.circleNone,
 
-    /// circleSizeValue.
-    _circleSize,
+      /// ComplementCircle is the tuning when the circle is changed to large or small.
+      complementCircle: 0.05,
 
-    /// CircleLabelValue is reverse.
-    0.0,
+      /// circleSizeValue.
+      circleSizeValue: _circleSize,
 
-    /// circleLabelSpeedValue is speed.
-    0.0,
+      /// circleStrokeWidth is the thickness of the circle.
+      circleStrokeWidth: 30.0,
 
-    /// circleCounterValue is forward.
-    0.0,
+      /// circleShadowValue is The shadow range value
+      circleShadowValue: 0.01,
 
-    /// circleSpeedCounterValue is speed.
-    0.0,
+      /// circleDuration is circle animation speed
+      circleDuration: _speedValue.toInt(),
 
-    /// circleStrokeWidth is the thickness of the circle.
-    30.0,
+      /// circleColor is the color of the knob.
+      circleColor: Colors.green,
 
-    /// circleShadowValue is The shadow range value
-    0.01,
+      /// circleColor is the shadow color of the knob.
+      circleShadowColor: Colors.black,
 
-    /// circlePointerValue is The size of the knob.
-    15,
+      /// circleRoundColor is The base color of circleRoundColor.
+      circleRoundColor: Colors.grey,
 
-    /// circleDuration is circle animation speed
-    _speedValue.toInt(),
+      /// circleController is CircleProgressController.
+      circleController: controller,
 
-    /// circleColor is the color of the knob.
-    Colors.green,
-
-    /// circleColor is the shadow color of the knob.
-    Colors.black,
-
-    /// circleRoundColor is The base color of circleRoundColor.
-    Colors.grey,
-
-    /// circleController is CircleProgressController.
-    controller,
-
-    /// circleColorList is Determines the gradient color.
-    setColor,
-  );
+      /// circleColorList is Determines the gradient color.
+      circleColorList: setColor);
 ```
 
 #### In the double array, the last element and the next element first have the same color and become a gradation.
