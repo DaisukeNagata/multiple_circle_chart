@@ -311,6 +311,7 @@ class _MyHomePageState extends State<MyHomePage> {
         value: _circleCombineFlg,
         onChanged: (flg) {
           setState(() {
+            _circleColorFlg = flg;
             _circleCombineFlg = flg;
             c.circleStrokeWidth = 120;
             paddingValueTopAndBottom = 100;
