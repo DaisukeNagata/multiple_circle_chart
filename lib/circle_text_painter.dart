@@ -87,13 +87,22 @@ class CircleTextPainter extends CustomPainter {
         );
 
         if (startOffset < 0.25) {
-          ansTex = setText(innerTextPainter, graphTextSize, ansTex, tex, true);
+          ansTex = setText(
+              innerTextPainter, graphTextSize, circleLength, ansTex, tex, true);
         } else if (startOffset > 0.25 && startOffset < 0.5) {
-          ansTex = setText(innerTextPainter, graphTextSize, ansTex, tex, false);
+          ansTex = setText(innerTextPainter, graphTextSize, circleLength,
+              ansTex, tex, false);
         } else if (startOffset > 0.5 && startOffset < 0.75) {
-          ansTex = setText(innerTextPainter, graphTextSize, ansTex, tex, true);
+          if (textPainter.height + graphTextSize.height * 2 > circleLength) {
+            ansTex = setText(innerTextPainter, graphTextSize, circleLength,
+                ansTex, tex, false);
+          } else {
+            ansTex = setText(innerTextPainter, graphTextSize, circleLength,
+                ansTex, tex, true);
+          }
         } else if (startOffset > 0.75) {
-          ansTex = setText(innerTextPainter, graphTextSize, ansTex, tex, false);
+          ansTex = setText(innerTextPainter, graphTextSize, circleLength,
+              ansTex, tex, false);
         }
       }
 
@@ -125,15 +134,16 @@ class CircleTextPainter extends CustomPainter {
     return true;
   }
 
-  String setText(TextPainter textPainter, Size graphTextSize, String ansTex,
-      String tex, bool flg) {
+  String setText(TextPainter textPainter, Size graphTextSize,
+      double circleLength, String ansTex, String tex, bool flg) {
     if (flg) {
       if (textPainter.width >= _data.circleStrokeWidth) {
         ansTex = ansTex.replaceFirst(tex, '${(tex).substring(0, 2)}${'...'}');
       }
       return ansTex;
     } else {
-      if (textPainter.width + graphTextSize.width >= _data.circleStrokeWidth) {
+      if (textPainter.height + textPainter.width + graphTextSize.width >=
+          _data.circleStrokeWidth) {
         ansTex = ansTex.replaceFirst(tex, '${(tex).substring(0, 2)}${'...'}');
       }
       return ansTex;
