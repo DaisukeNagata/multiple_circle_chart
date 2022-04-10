@@ -62,9 +62,6 @@ class CircleTextPainter extends CustomPainter {
         }
       }
 
-      if (textPainter.width > _data.circleStrokeWidth) {
-        ansTex = '...';
-      }
       textSpan = TextSpan(children: <TextSpan>[
         TextSpan(
             text: ansTex,
