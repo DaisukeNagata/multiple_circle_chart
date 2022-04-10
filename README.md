@@ -12,8 +12,7 @@ and the Flutter guide for
 -->
 
 [![Pub Version](https://img.shields.io/pub/v/multiple_circle_chart?color=emerald)](https://pub.dev/packages/multiple_circle_chart/versions/)
- [![GitHub Stars Count](https://img.shields.io/github/stars/daisukenagata/multiple_circle_chart?logo=github)](https://github.com/daisukenagata/multiple_circle_chart 'Star me on GitHub!')![Profile Views Counter](https://komarev.com/ghpvc/?username=daisukenagata)
-
+[![GitHub Stars Count](https://img.shields.io/github/stars/daisukenagata/multiple_circle_chart?logo=github)](https://github.com/daisukenagata/multiple_circle_chart 'Star me on GitHub!')![Profile Views Counter](https://komarev.com/ghpvc/?username=daisukenagata)
 
 ## Environment
 
