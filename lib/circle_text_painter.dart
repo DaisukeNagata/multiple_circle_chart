@@ -22,6 +22,8 @@ class CircleTextPainter extends CustomPainter {
     /// Size when drawing an arc.
     int len = _data.startValue?.length ?? 0;
     for (var i = 0; i < len; i++) {
+      int index = i;
+
       /// Show graph values
       TextSpan textSpan = TextSpan(children: <TextSpan>[
         TextSpan(
@@ -54,6 +56,10 @@ class CircleTextPainter extends CustomPainter {
           ansTex = ansTex.replaceFirst(circleTextList[i - 1],
               '${(circleTextList[i - 1]).substring(0, 2)}${'...'}');
         }
+      }
+
+      if (textPainter.width > _data.circleStrokeWidth) {
+        ansTex = '...';
       }
       textSpan = TextSpan(children: <TextSpan>[
         TextSpan(
