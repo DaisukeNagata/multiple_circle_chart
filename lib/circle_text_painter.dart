@@ -22,15 +22,19 @@ class CircleTextPainter extends CustomPainter {
     /// Size when drawing an arc.
     int len = _data.startValue?.length ?? 0;
     for (var i = 0; i < len; i++) {
-      int index = i;
+      Color? combinedColor = _data.circleCombinedColor?[i];
+      double? textSize = _data.circleCombinedTextSize;
+      String? tex = _data.circleTextList?[i];
+      double start = (_data.startValue?[i] ?? 0);
+      double end = (_data.endValue?[i] ?? 0) / 2;
 
       /// Show graph values
       TextSpan textSpan = TextSpan(children: <TextSpan>[
         TextSpan(
-            text: _data.circleTextList?[i],
+            text: tex,
             style: TextStyle(
-                color: _data.circleCombinedColor?[i],
-                fontSize: _data.circleCombinedTextSize,
+                color: combinedColor,
+                fontSize: textSize,
                 fontWeight: FontWeight.bold)),
       ]);
       TextPainter textPainter = TextPainter(
@@ -43,9 +47,9 @@ class CircleTextPainter extends CustomPainter {
       );
 
       List<String> circleTextList = _data.circleTextList?[i].split('\n') ?? [];
-      double graphHeight = textPainter.height / circleTextList.length - 1;
       String ansTex = "";
-
+      double graphHeight = textPainter.height / circleTextList.length - 1;
+      double offsetValue = (_correctionValue + start + end);
       double circleLength = (size.height * math.pi) * (_data.endValue?[i] ?? 0);
       for (var i = 1; i <= circleTextList.length; i++) {
         double checkOffset = graphHeight * i;
@@ -64,9 +68,7 @@ class CircleTextPainter extends CustomPainter {
       textSpan = TextSpan(children: <TextSpan>[
         TextSpan(
             text: ansTex,
-            style: TextStyle(
-                color: _data.circleCombinedColor?[i],
-                fontSize: _data.circleCombinedTextSize)),
+            style: TextStyle(color: combinedColor, fontSize: textSize)),
       ]);
       textPainter = TextPainter(
         text: textSpan,
@@ -82,20 +84,8 @@ class CircleTextPainter extends CustomPainter {
 
       /// Calculate the circumference of the knob
       Offset circleOffset = Offset(
-        sizeSet *
-                math.cos(pi *
-                    2 *
-                    (_correctionValue +
-                        (_data.startValue?[i] ?? 0) +
-                        (_data.endValue?[i] ?? 0) / 2)) +
-            center.dx,
-        sizeSet *
-                math.sin(pi *
-                    2 *
-                    (_correctionValue +
-                        (_data.startValue?[i] ?? 0) +
-                        (_data.endValue?[i] ?? 0) / 2)) +
-            center.dy,
+        sizeSet * math.cos(pi * 2 * offsetValue) + center.dx,
+        sizeSet * math.sin(pi * 2 * offsetValue) + center.dy,
       );
 
       textPainter.paint(
