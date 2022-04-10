@@ -89,6 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   late MultipleCircleSetProgress? circleSetProgress;
   double paddingValue = 30;
+  double paddingValueTopAndBottom = 30;
   final CircleProgressController controller = CircleProgressController();
   final ScrollController _scrollController = ScrollController();
 
@@ -179,7 +180,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Column textSets() {
     return Column(
       children: [
-        Padding(padding: EdgeInsets.only(top: paddingValue)),
+        Padding(padding: EdgeInsets.only(top: paddingValueTopAndBottom)),
         Text("end$_forwardValue"),
         Text("start$_reverseValue"),
         Text("speed${c.circleDuration}"),
@@ -211,7 +212,8 @@ class _MyHomePageState extends State<MyHomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Padding(padding: EdgeInsets.only(top: paddingValue)),
+                Padding(
+                    padding: EdgeInsets.only(top: paddingValueTopAndBottom)),
                 setButton(true, _forwardValue, c.circleLabelValue ?? 0),
                 Padding(padding: EdgeInsets.only(top: paddingValue)),
                 setButton(false, c.circleCounterValue ?? 0,
@@ -310,7 +312,8 @@ class _MyHomePageState extends State<MyHomePage> {
         onChanged: (flg) {
           setState(() {
             _circleCombineFlg = flg;
-            c.circleStrokeWidth = 60;
+            c.circleStrokeWidth = 120;
+            paddingValueTopAndBottom = 100;
             paddingValue = c.circleStrokeWidth / 2;
             c.graphTextSize = const Size(15, 15);
 
@@ -337,7 +340,7 @@ class _MyHomePageState extends State<MyHomePage> {
               "${c.startValue?[1] ?? ""}\nExample\nExample",
               "${c.startValue?[2] ?? ""}\n${c.endValue?[2] ?? ""}\nExample",
               "${c.startValue?[3] ?? ""}\n${c.endValue?[3] ?? ""}\nExample",
-              "${c.startValue?[4] ?? ""}\n${c.endValue?[4] ?? ""}\nExample\nExample\nExample"
+              "${c.startValue?[4] ?? ""}\n${c.endValue?[4] ?? ""}\nExamplen"
             ];
             c.circleCombinedColor = [
               Colors.white,
@@ -357,7 +360,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ];
             if (flg) {
               c.circleStrokeWidth = 30;
-              c.circlePointerValue = c.circleStrokeWidth / 2;
+              paddingValue = 20;
               c.startValue = [];
               c.endValue = [];
               c.startValue = [];
@@ -390,6 +393,7 @@ class _MyHomePageState extends State<MyHomePage> {
             _reverseValue = value;
           } else if (max == MediaQuery.of(context).size.width) {
             c.circleSizeValue = value;
+            c.circleStrokeWidth = value / 2;
           } else if (max == 20000) {
             _speedValue = value;
             c.circleDuration = _speedValue.toInt();
@@ -406,6 +410,7 @@ class _MyHomePageState extends State<MyHomePage> {
       onPressed: () {
         _circleCombineFlg = true;
         c.circleStrokeWidth = 30;
+        paddingValue = 20;
         _scrollController.jumpTo(0.0);
         c.circleForwardFlg = circleForwardFlg;
         c.circleCounterValue = circleCounterValue;

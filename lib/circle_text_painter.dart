@@ -91,13 +91,7 @@ class CircleTextPainter extends CustomPainter {
         } else if (startOffset > 0.25 && startOffset < 0.5) {
           ansTex = setText(innerTextPainter, graphTextSize, ansTex, tex, false);
         } else if (startOffset > 0.5 && startOffset < 0.75) {
-          if (textPainter.height + graphTextSize.height * 2 > circleLength) {
-            ansTex =
-                setText(innerTextPainter, graphTextSize, ansTex, tex, false);
-          } else {
-            ansTex =
-                setText(innerTextPainter, graphTextSize, ansTex, tex, true);
-          }
+          ansTex = setText(innerTextPainter, graphTextSize, ansTex, tex, true);
         } else if (startOffset > 0.75) {
           ansTex = setText(innerTextPainter, graphTextSize, ansTex, tex, false);
         }
