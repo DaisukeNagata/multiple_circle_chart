@@ -334,9 +334,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
             c.circleTextList = [
               "${c.startValue?[0] ?? ""}\n${c.endValue?[0] ?? ""}\nExample",
-              "${c.startValue?[1] ?? ""}\n${c.endValue?[1] ?? ""}\nExample",
-              "${c.startValue?[2] ?? ""}\n${c.endValue?[2] ?? ""}\nExampleExample",
-              "${c.startValue?[3] ?? ""}\n${c.endValue?[3] ?? ""}\nExample\nExample\nExample",
+              "${c.startValue?[1] ?? ""}\nExample\nExample",
+              "${c.startValue?[2] ?? ""}\n${c.endValue?[2] ?? ""}\nExample",
+              "${c.startValue?[3] ?? ""}\n${c.endValue?[3] ?? ""}\nExample",
               "${c.startValue?[4] ?? ""}\n${c.endValue?[4] ?? ""}\nExample\nExample\nExample"
             ];
             c.circleCombinedColor = [
@@ -357,6 +357,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ];
             if (flg) {
               c.circleStrokeWidth = 30;
+              c.circlePointerValue = c.circleStrokeWidth / 2;
               c.startValue = [];
               c.endValue = [];
               c.startValue = [];

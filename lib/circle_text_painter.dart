@@ -27,6 +27,7 @@ class CircleTextPainter extends CustomPainter {
       String? tex = _data.circleTextList?[i];
       double start = (_data.startValue?[i] ?? 0);
       double end = (_data.endValue?[i] ?? 0) / 2;
+      double startOffset = start + end;
 
       /// Show graph values
       TextSpan textSpan = TextSpan(children: <TextSpan>[
@@ -51,14 +52,54 @@ class CircleTextPainter extends CustomPainter {
       double graphHeight = textPainter.height / circleTextList.length - 1;
       double offsetValue = (_correctionValue + start + end);
       double circleLength = (size.height * math.pi) * (_data.endValue?[i] ?? 0);
+
+      Offset center = Offset(sizeSet, sizeSet);
+
+      /// Calculate the circumference of the knob
+      Offset circleOffset = Offset(
+        sizeSet * math.cos(pi * 2 * offsetValue) + center.dx,
+        sizeSet * math.sin(pi * 2 * offsetValue) + center.dy,
+      );
+
       for (var i = 1; i <= circleTextList.length; i++) {
         double checkOffset = graphHeight * i;
         if (checkOffset + graphTextSize.height < circleLength &&
             checkOffset + graphTextSize.height < _data.circleStrokeWidth) {
           ansTex += '${circleTextList[i - 1]} \n';
-        } else {
-          ansTex = ansTex.replaceFirst(circleTextList[i - 1],
-              '${(circleTextList[i - 1]).substring(0, 2)}${'...'}');
+        }
+      }
+      for (var tex in circleTextList) {
+        TextSpan textSpan = TextSpan(children: <TextSpan>[
+          TextSpan(
+              text: tex,
+              style: TextStyle(
+                  color: combinedColor,
+                  fontSize: textSize,
+                  fontWeight: FontWeight.bold)),
+        ]);
+        TextPainter innerTextPainter = TextPainter(
+          text: textSpan,
+          textDirection: TextDirection.ltr,
+        );
+        innerTextPainter.layout(
+          minWidth: 0,
+          maxWidth: size.width,
+        );
+
+        if (startOffset < 0.25) {
+          ansTex = setText(innerTextPainter, graphTextSize, ansTex, tex, true);
+        } else if (startOffset > 0.25 && startOffset < 0.5) {
+          ansTex = setText(innerTextPainter, graphTextSize, ansTex, tex, false);
+        } else if (startOffset > 0.5 && startOffset < 0.75) {
+          if (textPainter.height + graphTextSize.height * 2 > circleLength) {
+            ansTex =
+                setText(innerTextPainter, graphTextSize, ansTex, tex, false);
+          } else {
+            ansTex =
+                setText(innerTextPainter, graphTextSize, ansTex, tex, true);
+          }
+        } else if (startOffset > 0.75) {
+          ansTex = setText(innerTextPainter, graphTextSize, ansTex, tex, false);
         }
       }
 
@@ -77,14 +118,6 @@ class CircleTextPainter extends CustomPainter {
         maxWidth: size.width,
       );
 
-      Offset center = Offset(sizeSet, sizeSet);
-
-      /// Calculate the circumference of the knob
-      Offset circleOffset = Offset(
-        sizeSet * math.cos(pi * 2 * offsetValue) + center.dx,
-        sizeSet * math.sin(pi * 2 * offsetValue) + center.dy,
-      );
-
       textPainter.paint(
           canvas,
           Offset(circleOffset.dx - graphTextSize.width,
@@ -96,5 +129,20 @@ class CircleTextPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return true;
+  }
+
+  String setText(TextPainter textPainter, Size graphTextSize, String ansTex,
+      String tex, bool flg) {
+    if (flg) {
+      if (textPainter.width >= _data.circleStrokeWidth) {
+        ansTex = ansTex.replaceFirst(tex, '${(tex).substring(0, 2)}${'...'}');
+      }
+      return ansTex;
+    } else {
+      if (textPainter.width + graphTextSize.width >= _data.circleStrokeWidth) {
+        ansTex = ansTex.replaceFirst(tex, '${(tex).substring(0, 2)}${'...'}');
+      }
+      return ansTex;
+    }
   }
 }
