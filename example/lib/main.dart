@@ -312,7 +312,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onChanged: (flg) {
           setState(() {
             _circleCombineFlg = flg;
-            c.circleStrokeWidth = 100;
+            c.circleStrokeWidth = 120;
             paddingValueTopAndBottom = 100;
             c.graphTextSize = const Size(15, 15);
 
@@ -321,8 +321,8 @@ class _MyHomePageState extends State<MyHomePage> {
             c.startValue = [0, 0.25, 0.45, 0.5, 0.7];
             c.endValue = [0.25, 0.2, 0.05, 0.2, 0.3];
 
-            // c.startValue = [0, 0.25, 0.35, 0.75, 0.811];
-            // c.endValue = [0.25, 0.1, 0.4, 0.061, 0.189];
+            c.startValue = [0, 0.25, 0.35, 0.75, 0.811];
+            c.endValue = [0.25, 0.1, 0.4, 0.061, 0.189];
 
             // c.startValue = [0, 0.25, 0.35, 0.8, 0.95];
             // c.endValue = [0.25, 0.1, 0.45, 0.15, 0.05];
@@ -339,7 +339,7 @@ class _MyHomePageState extends State<MyHomePage> {
               "${c.startValue?[1] ?? ""}\nExample\nExample",
               "${c.startValue?[2] ?? ""}\n${c.endValue?[2] ?? ""}\nExample",
               "${c.startValue?[3] ?? ""}\n${c.endValue?[3] ?? ""}\nExample",
-              "${c.startValue?[4] ?? ""}\n${c.endValue?[4] ?? ""}\nExample"
+              "${c.startValue?[4] ?? ""}\n${c.endValue?[4] ?? ""}\nExample\nExample\nExample"
             ];
             c.circleCombinedColor = [
               Colors.white,
@@ -359,7 +359,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ];
             if (flg) {
               c.circleStrokeWidth = 30;
-              paddingValue = 20;
+              c.circlePointerValue = c.circleStrokeWidth / 2;
+              paddingValueTopAndBottom = 30;
+              paddingValue = 30;
               c.startValue = [];
               c.endValue = [];
               c.startValue = [];
@@ -409,6 +411,8 @@ class _MyHomePageState extends State<MyHomePage> {
       onPressed: () {
         _circleCombineFlg = true;
         c.circleStrokeWidth = 30;
+        c.circlePointerValue = c.circleStrokeWidth / 2;
+        paddingValueTopAndBottom = 30;
         paddingValue = 20;
         _scrollController.jumpTo(0.0);
         c.circleForwardFlg = circleForwardFlg;
