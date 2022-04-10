@@ -47,11 +47,12 @@ class CircleTextPainter extends CustomPainter {
       double circleLength = (size.height * math.pi) * (_data.endValue?[i] ?? 0);
       for (var i = 1; i <= circleTextList.length; i++) {
         double checkOffset = graphHeight * i;
-        if (checkOffset + graphTextSize.height < circleLength) {
+        if (checkOffset + graphTextSize.height < circleLength &&
+            checkOffset + graphTextSize.height < _data.circleStrokeWidth) {
           ansTex += '${circleTextList[i - 1]} \n';
         } else {
-          ansTex = ansTex.replaceFirst(circleTextList[i - (i - 1)],
-              '${(circleTextList[i - (i - 1)]).substring(0, 2)}${'...'}');
+          ansTex = ansTex.replaceFirst(circleTextList[i - 1],
+              '${(circleTextList[i - 1]).substring(0, 2)}${'...'}');
         }
       }
       textSpan = TextSpan(children: <TextSpan>[
