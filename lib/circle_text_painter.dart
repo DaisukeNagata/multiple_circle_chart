@@ -93,7 +93,8 @@ class CircleTextPainter extends CustomPainter {
           ansTex = setText(innerTextPainter, graphTextSize, circleLength,
               ansTex, tex, false);
         } else if (startOffset > 0.5 && startOffset < 0.75) {
-          if (textPainter.height + graphTextSize.height * 2 > circleLength) {
+          if (textPainter.height + textPainter.width + graphTextSize.width >
+              circleLength) {
             ansTex = setText(innerTextPainter, graphTextSize, circleLength,
                 ansTex, tex, false);
           } else {

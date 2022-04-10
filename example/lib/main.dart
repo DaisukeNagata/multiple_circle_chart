@@ -149,6 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
               textSets(),
               sliderSets(),
               setRow(),
+              Padding(padding: EdgeInsets.only(top: paddingValueTopAndBottom)),
             ],
           ),
         ),
@@ -313,7 +314,7 @@ class _MyHomePageState extends State<MyHomePage> {
           setState(() {
             _circleColorFlg = flg;
             _circleCombineFlg = flg;
-            c.circleStrokeWidth = 120;
+            c.circleStrokeWidth = 60;
             paddingValueTopAndBottom = 100;
             c.graphTextSize = const Size(15, 15);
 
@@ -322,11 +323,11 @@ class _MyHomePageState extends State<MyHomePage> {
             c.startValue = [0, 0.25, 0.45, 0.5, 0.7];
             c.endValue = [0.25, 0.2, 0.05, 0.2, 0.3];
 
-            c.startValue = [0, 0.25, 0.35, 0.75, 0.811];
-            c.endValue = [0.25, 0.1, 0.4, 0.061, 0.189];
-
-            c.startValue = [0, 0.25, 0.35, 0.8, 0.95];
-            c.endValue = [0.25, 0.1, 0.45, 0.15, 0.05];
+            // c.startValue = [0, 0.25, 0.35, 0.75, 0.811];
+            // c.endValue = [0.25, 0.1, 0.4, 0.061, 0.189];
+            //
+            // c.startValue = [0, 0.25, 0.35, 0.8, 0.95];
+            // c.endValue = [0.25, 0.1, 0.45, 0.15, 0.05];
 
             // c.startValue = [0, 0.25, 0.55, 0.65, 0.75];
             // c.endValue = [0.25, 0.3, 0.1, 0.1, 0.25];
@@ -337,7 +338,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
             c.circleTextList = [
               "${c.startValue?[0] ?? ""}\n${c.endValue?[0] ?? ""}\nExample",
-              "${c.startValue?[1] ?? ""}\nExample\nExample",
+              "${c.startValue?[1] ?? ""}\n${c.endValue?[1] ?? ""}\nExample",
               "${c.startValue?[2] ?? ""}\n${c.endValue?[2] ?? ""}\nExample",
               "${c.startValue?[3] ?? ""}\n${c.endValue?[3] ?? ""}\nExample",
               "${c.startValue?[4] ?? ""}\n${c.endValue?[4] ?? ""}\nExample"
@@ -360,15 +361,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ];
             if (flg) {
               setState(() {
-                c.circleStrokeWidth = 30;
-                c.circlePointerValue = c.circleStrokeWidth / 2;
-                c.circleSizeValue = _circleSize;
-                paddingValueTopAndBottom = 30;
-                paddingValue = 30;
                 c.startValue = [];
                 c.endValue = [];
                 c.startValue = [];
                 c.circleCombinedColorList = [];
+                _resetCircle();
               });
             }
           });
@@ -380,6 +377,24 @@ class _MyHomePageState extends State<MyHomePage> {
         },
       );
     }
+  }
+
+  _resetCircle() {
+    setState(() {
+      paddingValue = 30;
+      c.circleStrokeWidth = 30;
+      paddingValueTopAndBottom = 30;
+      c.circlePointerValue = c.circleStrokeWidth / 2;
+
+      /// Determine the type of knob
+      c.circleShader = CircleShader.butt;
+
+      /// Determine the knob color
+      c.circleColor = Colors.green;
+
+      /// Determine the knob shadow color
+      c.circleShadowColor = Colors.black;
+    });
   }
 
   Slider sliderSet(double value, max, {Key? keyValue}) {
@@ -415,11 +430,6 @@ class _MyHomePageState extends State<MyHomePage> {
       double circleLabelValue) {
     return OutlinedButton(
       onPressed: () {
-        _circleCombineFlg = true;
-        c.circleStrokeWidth = 30;
-        c.circlePointerValue = c.circleStrokeWidth / 2;
-        paddingValueTopAndBottom = 30;
-        paddingValue = 20;
         _scrollController.jumpTo(0.0);
         c.circleForwardFlg = circleForwardFlg;
         c.circleCounterValue = circleCounterValue;
