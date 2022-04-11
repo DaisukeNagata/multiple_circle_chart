@@ -323,11 +323,11 @@ class _MyHomePageState extends State<MyHomePage> {
             c.startValue = [0, 0.25, 0.45, 0.5, 0.7];
             c.endValue = [0.25, 0.2, 0.05, 0.2, 0.3];
 
-            // c.startValue = [0, 0.25, 0.35, 0.75, 0.811];
-            // c.endValue = [0.25, 0.1, 0.4, 0.061, 0.189];
-            //
-            // c.startValue = [0, 0.25, 0.35, 0.8, 0.95];
-            // c.endValue = [0.25, 0.1, 0.45, 0.15, 0.05];
+            c.startValue = [0, 0.25, 0.35, 0.75, 0.811];
+            c.endValue = [0.25, 0.1, 0.4, 0.061, 0.189];
+
+            c.startValue = [0, 0.25, 0.35, 0.8, 0.95];
+            c.endValue = [0.25, 0.1, 0.45, 0.15, 0.05];
 
             // c.startValue = [0, 0.25, 0.55, 0.65, 0.75];
             // c.endValue = [0.25, 0.3, 0.1, 0.1, 0.25];
@@ -339,9 +339,9 @@ class _MyHomePageState extends State<MyHomePage> {
             c.circleTextList = [
               "${c.startValue?[0] ?? ""}\n${c.endValue?[0] ?? ""}\nExample",
               "${c.startValue?[1] ?? ""}\n${c.endValue?[1] ?? ""}\nExample",
-              "${c.startValue?[2] ?? ""}\n${c.endValue?[2] ?? ""}\nExample",
+              "${c.startValue?[2] ?? ""}\n${c.endValue?[2] ?? ""}\nExample\nExample\nExample\nExample\nExample\nExample",
               "${c.startValue?[3] ?? ""}\n${c.endValue?[3] ?? ""}\nExample",
-              "${c.startValue?[4] ?? ""}\n${c.endValue?[4] ?? ""}\nExample"
+              "${c.startValue?[4] ?? ""}\n${c.endValue?[4] ?? ""}\nExample\nExample\nExample\nExample\nExample\nExample",
             ];
             c.circleCombinedColor = [
               Colors.white,
