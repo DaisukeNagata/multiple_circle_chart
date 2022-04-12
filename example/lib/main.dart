@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:multiple_circle_chart/circle_data_item.dart';
@@ -149,7 +151,7 @@ class _MyHomePageState extends State<MyHomePage> {
               textSets(),
               sliderSets(),
               setRow(),
-              Padding(padding: EdgeInsets.only(top: paddingValueTopAndBottom)),
+              Padding(padding: EdgeInsets.only(top: paddingValue)),
             ],
           ),
         ),
@@ -181,7 +183,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Column textSets() {
     return Column(
       children: [
-        Padding(padding: EdgeInsets.only(top: paddingValueTopAndBottom)),
+        Padding(padding: EdgeInsets.only(top: paddingValue * 2)),
         Text("end$_forwardValue"),
         Text("start$_reverseValue"),
         Text("speed${c.circleDuration}"),
@@ -213,8 +215,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Padding(
-                    padding: EdgeInsets.only(top: paddingValueTopAndBottom)),
+                Padding(padding: EdgeInsets.only(top: paddingValue)),
                 setButton(true, _forwardValue, c.circleLabelValue ?? 0),
                 Padding(padding: EdgeInsets.only(top: paddingValue)),
                 setButton(false, c.circleCounterValue ?? 0,
@@ -315,50 +316,12 @@ class _MyHomePageState extends State<MyHomePage> {
             _circleColorFlg = flg;
             _circleCombineFlg = flg;
             c.circleStrokeWidth = c.circleSizeValue / 3;
-            paddingValueTopAndBottom = 120;
+            paddingValueTopAndBottom = 100;
             c.graphTextSize = const Size(15, 15);
 
-            /// Pie chart animation direction.
-
-            // c.startValue = [0, 0.25, 0.45, 0.5, 0.7];
-            // c.endValue = [0.25, 0.2, 0.05, 0.2, 0.3];
-
-            // c.startValue = [0, 0.25, 0.35, 0.75, 0.811];
-            // c.endValue = [0.25, 0.1, 0.4, 0.061, 0.189];
-
-            // c.startValue = [0, 0.25, 0.35, 0.8, 0.95];
-            // c.endValue = [0.25, 0.1, 0.45, 0.15, 0.05];
-
-            // c.startValue = [0, 0.25, 0.55, 0.65, 0.75];
-            // c.endValue = [0.25, 0.3, 0.1, 0.1, 0.25];
-
-            c.startValue = [0, 0.25, 0.35, 0.45, 0.75];
-            c.endValue = [0.25, 0.1, 0.1, 0.3, 0.25];
             c.circleCombinedTextSize = 12;
+            _randomCircleList(Random().nextInt(7));
 
-            c.circleTextList = [
-              "${c.startValue?[0] ?? ""}\n${c.endValue?[0] ?? ""}\nExample",
-              "${c.startValue?[1] ?? ""}\n${c.endValue?[1] ?? ""}\nExample",
-              "${c.startValue?[2] ?? ""}\n${c.endValue?[2] ?? ""}\nExample\nExample\nExample\nExample\nExample\nExample",
-              "${c.startValue?[3] ?? ""}\n${c.endValue?[3] ?? ""}\nExample",
-              "${c.startValue?[4] ?? ""}\n${c.endValue?[4] ?? ""}\nExample\nExample\nExample\nExample\nExample\nExample",
-            ];
-            c.circleCombinedColor = [
-              Colors.white,
-              Colors.white,
-              Colors.white,
-              Colors.white,
-              Colors.white
-            ];
-
-            /// Select your favorite element
-            c.circleCombinedColorList = [
-              Colors.blue,
-              Colors.black,
-              Colors.green,
-              Colors.grey,
-              Colors.orange
-            ];
             if (flg) {
               setState(() {
                 c.startValue = [];
@@ -381,11 +344,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _resetCircle() {
     setState(() {
-      paddingValue = 30;
-      c.circleStrokeWidth = 30;
-      paddingValueTopAndBottom = 30;
-      c.circlePointerValue = c.circleStrokeWidth / 2;
-
       /// Determine the type of knob
       c.circleShader = CircleShader.butt;
 
@@ -394,7 +352,71 @@ class _MyHomePageState extends State<MyHomePage> {
 
       /// Determine the knob shadow color
       c.circleShadowColor = Colors.black;
+
+      paddingValue = 30;
+      c.circleStrokeWidth = 30;
+      paddingValueTopAndBottom = 30;
+      c.circlePointerValue = c.circleStrokeWidth / 2;
+      c.circleSizeValue = MediaQuery.of(context).size.width / 2;
     });
+  }
+
+  _randomCircleList(int index) {
+    /// Pie chart animation direction.
+    switch (index) {
+      case 0:
+        c.startValue = [0, 0.25, 0.45, 0.5, 0.7];
+        c.endValue = [0.25, 0.2, 0.05, 0.2, 0.3];
+        break;
+      case 1:
+        c.startValue = [0, 0.25, 0.32, 0.75, 0.811];
+        c.endValue = [0.25, 0.1, 0.43, 0.061, 0.189];
+        break;
+      case 2:
+        c.startValue = [0, 0.15, 0.57, 0.7, 0.83];
+        c.endValue = [0.15, 0.42, 0.13, 0.13, 0.17];
+        break;
+      case 3:
+        c.startValue = [0, 0.25, 0.43, 0.65, 0.75];
+        c.endValue = [0.25, 0.3, 0.22, 0.1, 0.25];
+        break;
+      case 4:
+        c.startValue = [0, 0.25, 0.35, 0.45, 0.84];
+        c.endValue = [0.25, 0.1, 0.1, 0.39, 0.16];
+        break;
+      case 5:
+        c.startValue = [0, 0.15, 0.55, 0.65, 0.85];
+        c.endValue = [0.15, 0.4, 0.1, 0.2, 0.15];
+        break;
+      case 6:
+        c.startValue = [0, 0.5, 0.7, 0.9, 0.95];
+        c.endValue = [0.5, 0.2, 0.2, 0.05, 0.05];
+        break;
+    }
+
+    c.circleTextList = [
+      "${c.startValue?[0] ?? ""}${"%"}\n${c.endValue?[0] ?? ""}${"%"}\nExample",
+      "${c.startValue?[1] ?? ""}${"%"}\n${c.endValue?[1] ?? ""}${"%"}\nExample",
+      "${c.startValue?[2] ?? ""}${"%"}\n${c.endValue?[2] ?? ""}${"%"}\nExample\nExample\nExample\nExample\nExample\nExample",
+      "${c.startValue?[3] ?? ""}${"%"}\n${c.endValue?[3] ?? ""}${"%"}\nExample",
+      "${c.startValue?[4] ?? ""}${"%"}\n${c.endValue?[4] ?? ""}${"%"}\nExample\nExample\nExample\nExample\nExample\nExample",
+    ];
+    c.circleCombinedColor = [
+      Colors.white,
+      Colors.white,
+      Colors.white,
+      Colors.white,
+      Colors.white
+    ];
+
+    /// Select your favorite element
+    c.circleCombinedColorList = [
+      Colors.blue,
+      Colors.black,
+      Colors.green,
+      Colors.grey,
+      Colors.orange
+    ];
   }
 
   Slider sliderSet(double value, max, {Key? keyValue}) {
