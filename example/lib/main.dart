@@ -87,7 +87,8 @@ class _MyHomePageState extends State<MyHomePage> {
       circleController: controller,
 
       /// circleColorList is Determines the gradient color.
-      circleColorList: setColor);
+      circleColorList: setColor,
+      graphTextSizeList: []);
 
   late MultipleCircleSetProgress? circleSetProgress;
   double paddingValue = 30;
@@ -317,7 +318,6 @@ class _MyHomePageState extends State<MyHomePage> {
             _circleCombineFlg = flg;
             c.circleStrokeWidth = c.circleSizeValue / 3;
             paddingValueTopAndBottom = 100;
-            c.graphTextSize = const Size(15, 15);
 
             c.circleCombinedTextSize = 12;
             _randomCircleList(Random().nextInt(7));
@@ -369,16 +369,16 @@ class _MyHomePageState extends State<MyHomePage> {
         c.endValue = [0.25, 0.2, 0.05, 0.2, 0.3];
         break;
       case 1:
-        c.startValue = [0, 0.25, 0.32, 0.75, 0.811];
-        c.endValue = [0.25, 0.1, 0.43, 0.061, 0.189];
+        c.startValue = [0, 0.25, 0.35, 0.78, 0.841];
+        c.endValue = [0.25, 0.1, 0.43, 0.061, 0.159];
         break;
       case 2:
         c.startValue = [0, 0.15, 0.57, 0.7, 0.83];
         c.endValue = [0.15, 0.42, 0.13, 0.13, 0.17];
         break;
       case 3:
-        c.startValue = [0, 0.25, 0.43, 0.65, 0.75];
-        c.endValue = [0.25, 0.3, 0.22, 0.1, 0.25];
+        c.startValue = [0, 0.25, 0.53, 0.73, 0.83];
+        c.endValue = [0.25, 0.3, 0.22, 0.1, 0.17];
         break;
       case 4:
         c.startValue = [0, 0.25, 0.35, 0.45, 0.84];
@@ -392,6 +392,10 @@ class _MyHomePageState extends State<MyHomePage> {
         c.startValue = [0, 0.5, 0.7, 0.9, 0.95];
         c.endValue = [0.5, 0.2, 0.2, 0.05, 0.05];
         break;
+    }
+
+    for (var i = 0; i <= (c.startValue?.length ?? 0); i++) {
+      c.graphTextSizeList.insert(i, const Size(15, 15));
     }
 
     c.circleTextList = [

@@ -27,6 +27,7 @@ class CircleDataItem {
     double? circleSpeedCounterValue,
     double? circleCombinedTextSize,
     Size? graphTextSize,
+    required List<Size> this.graphTextSizeList,
     List<Color>? circleCombinedColor,
     List<Color>? circleCombinedColorList,
     List<double>? startValue,
@@ -54,7 +55,7 @@ class CircleDataItem {
   ];
   CircleProgressController circleController = CircleProgressController();
   double? circleCombinedTextSize;
-  Size? graphTextSize;
+  List<Size> graphTextSizeList;
   List<Color>? circleCombinedColor;
   List<Color>? circleCombinedColorList = [];
   List<double>? startValue = [];

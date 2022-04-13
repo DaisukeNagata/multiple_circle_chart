@@ -5,9 +5,6 @@ import 'package:multiple_circle_chart/circle_progress_controller.dart';
 import 'package:multiple_circle_chart/multiple_circle_set_progress.dart';
 
 void main() {
-  List<List<Color>> circleColorList = [
-    [],
-  ];
   late CircleDataItem c = CircleDataItem(
 
       /// circleForwardFlg is forward or reverse.
@@ -59,7 +56,8 @@ void main() {
       circleController: CircleProgressController(),
 
       /// circleColorList is Determines the gradient color.
-      circleColorList: [[]]);
+      circleColorList: [[]],
+      graphTextSizeList: []);
   test('adds one to input values', () {
     final circleSetProgress = MultipleCircleSetProgress(circle: c);
     expect(circleSetProgress.addOne(2), 3);
