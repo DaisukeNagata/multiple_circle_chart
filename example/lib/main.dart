@@ -394,17 +394,16 @@ class _MyHomePageState extends State<MyHomePage> {
         break;
     }
 
+    /// unwrap compatible
     c.graphTextSizeList = c.graphTextSizeList ?? [const Size(15, 15)];
 
     for (var i = 0; i <= (c.startValue?.length ?? 0); i++) {
       if (i == 0) {
-        c.graphTextSizeList!.insert(i, const Size(15, 15));
+        c.graphTextSizeList!.insert(i, const Size(0, 0));
       } else {
         c.graphTextSizeList!.insert(i, const Size(15, 15));
       }
     }
-
-    print(c.graphTextSizeList);
 
     c.circleTextList = [
       "${c.startValue?[0] ?? ""}${"%"}\n${c.endValue?[0] ?? ""}${"%"}\nExample",

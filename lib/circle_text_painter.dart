@@ -28,6 +28,7 @@ class CircleTextPainter extends CustomPainter {
       String? tex = _data.circleTextList?[i];
       double start = (_data.startValue?[i] ?? 0);
       double end = (_data.endValue?[i] ?? 0) / 2;
+      int lenIndex = i;
 
       /// Show graph values
       TextSpan textSpan = TextSpan(children: <TextSpan>[
@@ -61,7 +62,8 @@ class CircleTextPainter extends CustomPainter {
 
       for (var i = 1; i <= circleTextList.length; i++) {
         double checkOffset = graphHeight * i;
-        if (checkOffset < _data.circleStrokeWidth) {
+        if (checkOffset + (_data.graphTextSizeList?[lenIndex].height ?? 0) <
+            _data.circleStrokeWidth) {
           ansTex += '${circleTextList[i - 1]} \n';
         }
       }
