@@ -86,7 +86,8 @@ class CircleTextPainter extends CustomPainter {
           maxWidth: _data.circleStrokeWidth,
         );
 
-        if (innerTextPainter.width >= _data.circleStrokeWidth) {
+        if (innerTextPainter.width >=
+            ((size.width * math.pi)) * ((_data.endValue?[i] ?? 0))) {
           ansTex = ansTex.replaceFirst(tex, '${(tex).substring(0, 2)}${'...'}');
         }
       }
