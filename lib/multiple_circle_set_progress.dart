@@ -4,6 +4,7 @@ import 'package:multiple_circle_chart/circle_text_painter.dart';
 import 'circle_base_circumference.dart';
 import 'circle_combined_chart.dart';
 import 'circle_data_item.dart';
+import 'circle_get_tapsize.dart';
 import 'circle_inner_frame.dart';
 import 'circle_innermost_frame.dart';
 import 'circle_outer_frame.dart';
@@ -147,6 +148,11 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
                                           size: constraintsSize,
                                           painter:
                                               CircleTextPainter(widget.circle),
+                                          child: CustomPaint(
+                                            size: constraintsSize,
+                                            painter:
+                                                CircleGetTapSize(widget.circle),
+                                          ),
                                         ),
                                       ),
                                     ),

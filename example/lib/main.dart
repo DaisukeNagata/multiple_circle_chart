@@ -37,8 +37,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  double _forwardValue = 0.0;
-  double _reverseValue = 0.0;
+  double _fValue = 0.0;
+  double _rValue = 0.0;
   double _speedValue = 0.0;
   double _circleSize = 0.0;
   double _circleLabelValue = 0.0;
@@ -88,7 +88,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
       /// circleColorList is Determines the gradient color.
       circleColorList: setColor,
-      graphTextSizeList: []);
+
+      /// circleTextSizeList is get character coordinates.
+      circleTextSizeList: []);
 
   late MultipleCircleSetProgress? circleSetProgress;
   double paddingValue = 30;
@@ -185,8 +187,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return Column(
       children: [
         Padding(padding: EdgeInsets.only(top: paddingValue * 2)),
-        Text("end$_forwardValue"),
-        Text("start$_reverseValue"),
+        Text("end$_fValue"),
+        Text("start$_rValue"),
         Text("speed${c.circleDuration}"),
         Text("size${c.circleSizeValue}"),
       ],
@@ -196,10 +198,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Column sliderSets() {
     return Column(
       children: [
-        sliderSet(_forwardValue, setColor.length.toDouble(),
-            keyValue: globalKey),
-        sliderSet(_reverseValue, setColor.length.toDouble(),
-            keyValue: globalKey2),
+        sliderSet(_fValue, setColor.length.toDouble(), keyValue: globalKey),
+        sliderSet(_rValue, setColor.length.toDouble(), keyValue: globalKey2),
         sliderSet(_speedValue, 20000.0),
         sliderSet(c.circleSizeValue, MediaQuery.of(context).size.width),
         Padding(padding: EdgeInsets.only(top: paddingValue))
@@ -216,11 +216,9 @@ class _MyHomePageState extends State<MyHomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Padding(padding: EdgeInsets.only(top: paddingValue)),
-                setButton(true, _forwardValue, c.circleLabelValue ?? 0),
-                Padding(padding: EdgeInsets.only(top: paddingValue)),
+                setButton(true, _fValue, c.circleLabelValue ?? 0),
                 setButton(false, c.circleCounterValue ?? 0,
-                    c.circleCounterValue == 0 ? 0 : _reverseValue),
+                    c.circleCounterValue == 0 ? 0 : _rValue),
               ],
             ),
             Padding(padding: EdgeInsets.only(top: paddingValue)),
@@ -229,13 +227,7 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 switchSet(_circleColorKey),
-                Padding(
-                    padding: EdgeInsets.only(
-                        left: paddingValue, right: paddingValue)),
                 switchSet(_circleShaderFlgKey),
-                Padding(
-                    padding: EdgeInsets.only(
-                        left: paddingValue, right: paddingValue)),
                 switchSet(_circleCombinedKey),
               ],
             ),
@@ -271,6 +263,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   CupertinoSwitch switchSet(Key keyValue) {
+    Padding(padding: EdgeInsets.only(left: paddingValue, right: paddingValue));
     if (keyValue == _circleColorKey) {
       return CupertinoSwitch(
         key: _circleColorKey,
@@ -318,6 +311,7 @@ class _MyHomePageState extends State<MyHomePage> {
             _circleCombineFlg = flg;
             c.circleStrokeWidth = c.circleSizeValue / 3;
             paddingValueTopAndBottom = 100;
+            c.graphTextSizeList = [const Size(15, 15)];
 
             c.circleCombinedTextSize = 12;
             _randomCircleList(Random().nextInt(7));
@@ -396,13 +390,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     /// unwrap compatible
     c.graphTextSizeList = c.graphTextSizeList ?? [const Size(15, 15)];
-
     for (var i = 0; i <= (c.startValue?.length ?? 0); i++) {
-      if (i == 0) {
-        c.graphTextSizeList!.insert(i, const Size(0, 0));
-      } else {
-        c.graphTextSizeList!.insert(i, const Size(15, 15));
-      }
+      c.graphTextSizeList!.insert(i, const Size(15, 15));
     }
 
     c.circleTextList = [
@@ -441,9 +430,9 @@ class _MyHomePageState extends State<MyHomePage> {
       onChanged: (double value) {
         setState(() {
           if (keyValue == globalKey) {
-            _forwardValue = value;
+            _fValue = value;
           } else if (keyValue == globalKey2) {
-            _reverseValue = value;
+            _rValue = value;
           } else if (max == MediaQuery.of(context).size.width) {
             c.circleSizeValue = value;
             if (!_circleCombineFlg) {
@@ -461,6 +450,7 @@ class _MyHomePageState extends State<MyHomePage> {
   /// Set the animation value, speed, forward direction, and reverse direction in the library.
   OutlinedButton setButton(
       bool forwardFlg, double counterValue, double circleLabelValue) {
+    Padding(padding: EdgeInsets.only(top: paddingValue));
     return OutlinedButton(
       onPressed: () {
         _scrollController.jumpTo(0.0);

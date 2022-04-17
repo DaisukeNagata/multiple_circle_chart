@@ -27,7 +27,7 @@ class CircleDataItem {
     double? circleSpeedCounterValue,
     double? circleCombinedTextSize,
     Size? graphTextSize,
-    List<Size>? graphTextSizeList,
+    List<Size>? circleTextSizeList,
     List<Color>? circleCombinedColor,
     List<Color>? circleCombinedColorList,
     List<double>? startValue,
