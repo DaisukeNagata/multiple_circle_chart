@@ -95,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   late MultipleCircleSetProgress? circleSetProgress;
   double paddingValue = 30;
-  double paddingValueTopAndBottom = 30;
+  double paddingValueTopAndBottom = 60;
   final CircleProgressController controller = CircleProgressController();
   final ScrollController _scrollController = ScrollController();
 
@@ -142,7 +142,13 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: GestureDetector(
         onTap: () {
-          _scrollController.jumpTo(0.0);
+          _scrollController.animateTo(
+            _scrollController.offset == 0
+                ? _scrollController.position.maxScrollExtent
+                : 0,
+            duration: Duration(milliseconds: 100),
+            curve: Curves.linear,
+          );
           FocusScope.of(context).unfocus();
         },
         child: SingleChildScrollView(
@@ -313,7 +319,6 @@ class _MyHomePageState extends State<MyHomePage> {
             _circleColorFlg = flg;
             _circleCombineFlg = flg;
             c.circleStrokeWidth = c.circleSizeValue / 3;
-            paddingValueTopAndBottom = 100;
             c.circleTextMarginList = [const Size(15, 15)];
 
             c.circleCombinedTextSize = 12;
@@ -352,9 +357,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
       paddingValue = 30;
       c.circleStrokeWidth = 30;
-      paddingValueTopAndBottom = 30;
       c.circlePointerValue = c.circleStrokeWidth / 2;
       c.circleSizeValue = MediaQuery.of(context).size.width / 2;
+      _scrollController.animateTo(
+        0,
+        duration: Duration(milliseconds: 100),
+        curve: Curves.linear,
+      );
     });
   }
 
@@ -456,7 +465,11 @@ class _MyHomePageState extends State<MyHomePage> {
     Padding(padding: EdgeInsets.only(top: paddingValue));
     return OutlinedButton(
       onPressed: () {
-        _scrollController.jumpTo(0.0);
+        _scrollController.animateTo(
+          0,
+          duration: Duration(milliseconds: 100),
+          curve: Curves.linear,
+        );
         c.circleForwardFlg = forwardFlg;
         c.circleCounterValue = counterValue;
         c.circleLabelSpeedValue = circleLabelValue;
