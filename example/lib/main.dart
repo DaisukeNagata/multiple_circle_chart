@@ -230,7 +230,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
             Padding(padding: EdgeInsets.only(top: paddingValue)),
-            Padding(padding: EdgeInsets.only(top: paddingValue)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -324,6 +323,15 @@ class _MyHomePageState extends State<MyHomePage> {
             c.circleCombinedTextSize = 12;
             _randomCircleList(Random().nextInt(7));
 
+            /// Determine the type of knob
+            c.circleShader = CircleShader.butt;
+
+            /// Determine the knob color
+            c.circleColor = Colors.green.withOpacity(0);
+
+            /// Determine the knob shadow color
+            c.circleShadowColor = Colors.black.withOpacity(0);
+
             if (flg) {
               setState(() {
                 c.startValue = [];
@@ -358,12 +366,8 @@ class _MyHomePageState extends State<MyHomePage> {
       paddingValue = 30;
       c.circleStrokeWidth = 30;
       c.circlePointerValue = c.circleStrokeWidth / 2;
+      c.circleSizeValue = 0;
       c.circleSizeValue = MediaQuery.of(context).size.width / 2;
-      _scrollController.animateTo(
-        0,
-        duration: Duration(milliseconds: 100),
-        curve: Curves.linear,
-      );
     });
   }
 
@@ -465,11 +469,6 @@ class _MyHomePageState extends State<MyHomePage> {
     Padding(padding: EdgeInsets.only(top: paddingValue));
     return OutlinedButton(
       onPressed: () {
-        _scrollController.animateTo(
-          0,
-          duration: Duration(milliseconds: 100),
-          curve: Curves.linear,
-        );
         c.circleForwardFlg = forwardFlg;
         c.circleCounterValue = counterValue;
         c.circleLabelSpeedValue = circleLabelValue;
