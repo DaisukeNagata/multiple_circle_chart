@@ -50,27 +50,18 @@ class CircleGetData extends CustomPainter {
     }
   }
 
-  var count = -1;
+  var hitTestFlg = true;
 
   /// It reacts twice.
   @override
   bool hitTest(Offset position) {
-    switch (count) {
-      case -1:
-        angel(
-            Size.zero,
-            Size(position.dx - _data.circleSizeValue / 2,
-                position.dy - _data.circleSizeValue / 2));
-        break;
-      case 2:
-        count = 0;
-        angel(
-            Size.zero,
-            Size(position.dx - _data.circleSizeValue / 2,
-                position.dy - _data.circleSizeValue / 2));
-        break;
+    if (hitTestFlg) {
+      double value = _data.circleSizeValue / 2;
+      angel(Size.zero, Size(value, value));
+      hitTestFlg = false;
+    } else {
+      hitTestFlg = true;
     }
-    count += 1;
     return true;
   }
 

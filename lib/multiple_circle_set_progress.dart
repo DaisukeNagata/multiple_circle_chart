@@ -198,11 +198,15 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
 
   /// Method to calculate alert.
   Future<void> showMyDialog(BuildContext context, String text) async {
+    double regulationsSize = 100;
     RenderBox box =
         widget.circleKey.currentContext?.findRenderObject() as RenderBox;
     Offset offset = box.localToGlobal(Offset.zero);
     int index = widget.circle.circleTextIndex ?? 0;
     double height = widget.circle.circleTextSizeList?[index].height ?? 0;
+    double regulationsHeight = height + (height / 2) + regulationsSize;
+    double regulationsDx =
+        offset.dx - ((regulationsSize - widget.circle.circleSizeValue) / 2);
 
     return showDialog<void>(
       barrierColor: Colors.white.withOpacity(0),
@@ -214,8 +218,15 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
           elevation: 0,
 
           /// The orientation determines the dialog coordinates.
-          rect: Rect.fromLTWH(offset.dx, offset.dy,
-              widget.circle.circleSizeValue, height + (height / 2) + 100),
+          rect: Rect.fromLTWH(
+              widget.circle.circleSizeValue <= regulationsSize
+                  ? regulationsDx
+                  : offset.dx,
+              offset.dy,
+              widget.circle.circleSizeValue <= regulationsSize
+                  ? regulationsSize
+                  : widget.circle.circleSizeValue,
+              regulationsHeight),
           content: SingleChildScrollView(
               child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
