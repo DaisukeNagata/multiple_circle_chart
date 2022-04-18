@@ -1,9 +1,10 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 
+import '../multiple_info_dialog.dart';
 import 'overlapping_data.dart';
 import 'overlapping_indicator.dart';
-import 'overlapping_info_dialog.dart';
 import 'overlapping_painter.dart';
 
 ///　OverlappingProgressIndicator is a class that calculates UI other than graphs.
@@ -38,7 +39,7 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
             contextSize: contextSize,
             setPaint: setPaint,
             con: con,
-            stream: stream);
+            streamController: stream);
 
   /// Calculations for painting TextSpan.
   OverlappingPainter? setPainter(
@@ -72,7 +73,7 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
           value: ((animationValue ?? 0.0)) - (value * 0.1 * scale),
           contextSize:
               Size((w * value * 0.1) * scale, contextSize?.height ?? 0.0),
-          controller: stream);
+          controller: streamController);
     } else {
       return OverlappingPainter(
           circleData: circleData,
@@ -82,13 +83,13 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
           textSpan: textSpan,
           value: null,
           contextSize: const Size(0, 0),
-          controller: stream);
+          controller: streamController);
     }
   }
 
   /// bind the tap location.
   controllerStream() {
-    stream.stream.listen((event) {
+    streamController.stream.listen((event) {
       Offset offsetData = event;
       Offset stDataFirst = offsetData;
       showMyDialog(con, stDataFirst);
@@ -110,7 +111,7 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
       context: context,
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
-        return OverlappingInfoDialog(
+        return MultipleInfoDialog(
           /// Make the background transparent.
           elevation: 0,
 

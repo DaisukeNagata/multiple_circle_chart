@@ -59,7 +59,8 @@ void main() {
       circleColorList: [[]],
       circleTextSizeList: []);
   test('adds one to input values', () {
-    final circleSetProgress = MultipleCircleSetProgress(circle: c);
+    final circleSetProgress =
+        MultipleCircleSetProgress(circleKey: GlobalKey(), circle: c);
     expect(circleSetProgress.addOne(2), 3);
     expect(circleSetProgress.addOne(-7), -6);
     expect(circleSetProgress.addOne(0), 1);

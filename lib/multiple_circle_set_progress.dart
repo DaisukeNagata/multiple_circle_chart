@@ -4,19 +4,22 @@ import 'package:multiple_circle_chart/circle_text_painter.dart';
 import 'circle_base_circumference.dart';
 import 'circle_combined_chart.dart';
 import 'circle_data_item.dart';
-import 'circle_get_tapsize.dart';
+import 'circle_get_data.dart';
 import 'circle_inner_frame.dart';
 import 'circle_innermost_frame.dart';
 import 'circle_outer_frame.dart';
+import 'multiple_info_dialog.dart';
 
 /// It is a class that overlaps the initialization of the speed setting controller and the circle.
 class MultipleCircleSetProgress extends StatefulWidget {
   /// Returns [value] plus 1.
   int addOne(int value) => value + 1;
 
-  const MultipleCircleSetProgress({Key? key, required this.circle})
+  const MultipleCircleSetProgress(
+      {Key? key, required this.circleKey, required this.circle})
       : super(key: key);
 
+  final GlobalKey circleKey;
   final CircleDataItem circle;
 
   @override
@@ -91,6 +94,10 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
       }
     });
 
+    widget.circle.circleController.circleIndex.stream.listen((event) {
+      showMyDialog(context, event);
+    });
+
     durationAnimation(0, 0.0, 0.0, 0.0, 0.0);
   }
 
@@ -151,7 +158,7 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
                                           child: CustomPaint(
                                             size: constraintsSize,
                                             painter:
-                                                CircleGetTapSize(widget.circle),
+                                                CircleGetData(widget.circle),
                                           ),
                                         ),
                                       ),
@@ -187,5 +194,46 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
     _baseAnimation = Tween(begin: begin, end: end).animate(_innerController);
 
     _animation = Tween(begin: begin2, end: end2).animate(_innerController);
+  }
+
+  /// Method to calculate alert.
+  Future<void> showMyDialog(BuildContext context, String text) async {
+    RenderBox box =
+        widget.circleKey.currentContext?.findRenderObject() as RenderBox;
+    Offset offset = box.localToGlobal(Offset.zero);
+    int index = widget.circle.circleTextIndex ?? 0;
+    double height = widget.circle.circleTextSizeList?[index].height ?? 0;
+
+    return showDialog<void>(
+      barrierColor: Colors.white.withOpacity(0),
+      context: context,
+      barrierDismissible: true, // user must tap button!
+      builder: (BuildContext context) {
+        return MultipleInfoDialog(
+          /// Make the background transparent.
+          elevation: 0,
+
+          /// The orientation determines the dialog coordinates.
+          rect: Rect.fromLTWH(offset.dx, offset.dy,
+              widget.circle.circleSizeValue, height + (height / 2) + 100),
+          content: SingleChildScrollView(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              const Padding(padding: EdgeInsets.only(top: 20)),
+
+              /// Characters to be changed
+              Text(text),
+              const Padding(padding: EdgeInsets.only(top: 20)),
+              OutlinedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('OK')),
+            ],
+          )),
+        );
+      },
+    );
   }
 }

@@ -23,7 +23,7 @@ abstract class OverlappingIndicator extends StatefulWidget {
     this.setPaint,
     required this.textSpan,
     required this.con,
-    required this.stream,
+    required this.streamController,
   }) : super(key: key);
   final GlobalKey? globalKey;
   final Offset? dataVerticalOffset;
@@ -39,7 +39,7 @@ abstract class OverlappingIndicator extends StatefulWidget {
   final CustomPaint? setPaint;
   final TextSpan? textSpan;
   final BuildContext con;
-  final StreamController<Offset> stream;
+  final StreamController<Offset> streamController;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

@@ -20,6 +20,7 @@ class CircleTextPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     canvas.restore();
     double sizeSet = size.width / 2;
+    _data.circleTextSizeList = _data.circleTextSizeList ?? [];
 
     /// Size when drawing an arc.
     int len = _data.startValue?.length ?? 0;
@@ -49,6 +50,8 @@ class CircleTextPainter extends CustomPainter {
         maxWidth: _data.circleStrokeWidth,
       );
 
+      _data.circleTextSizeList?.add(textPainter.size);
+
       List<String> circleTextList = _data.circleTextList?[i].split('\n') ?? [];
       String ansTex = "";
       double graphHeight = textPainter.height / circleTextList.length - 1;
@@ -63,7 +66,7 @@ class CircleTextPainter extends CustomPainter {
 
       for (var i = 1; i <= circleTextList.length; i++) {
         double checkOffset = graphHeight * i;
-        if (checkOffset + (_data.graphTextSizeList?[lenIndex].height ?? 0) <
+        if (checkOffset + (_data.circleTextMarginList?[lenIndex].height ?? 0) <
             _data.circleStrokeWidth) {
           ansTex += '${circleTextList[i - 1]} \n';
         }
@@ -110,8 +113,8 @@ class CircleTextPainter extends CustomPainter {
 
       textPainter.paint(
           canvas,
-          Offset(circleOffset.dx - (_data.graphTextSizeList?[i].width ?? 0),
-              circleOffset.dy - (_data.graphTextSizeList?[i].height ?? 0)));
+          Offset(circleOffset.dx - (_data.circleTextMarginList?[i].width ?? 0),
+              circleOffset.dy - (_data.circleTextMarginList?[i].height ?? 0)));
     }
     canvas.save();
   }

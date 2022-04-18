@@ -45,6 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
   bool _circleColorFlg = true;
   bool _circleShaderFlg = true;
   bool _circleCombineFlg = true;
+  final GlobalKey circleKey = GlobalKey();
   final GlobalKey globalKey = GlobalKey();
   final GlobalKey globalKey2 = GlobalKey();
   final GlobalKey _circleColorKey = GlobalKey();
@@ -180,7 +181,8 @@ class _MyHomePageState extends State<MyHomePage> {
     _circleSize = _circleSize == 0.0
         ? MediaQuery.of(context).size.width / 2
         : _circleSize;
-    circleSetProgress = MultipleCircleSetProgress(circle: c);
+    circleSetProgress =
+        MultipleCircleSetProgress(circleKey: circleKey, circle: c);
   }
 
   Column textSets() {
@@ -256,6 +258,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: RotationTransition(
             turns: const AlwaysStoppedAnimation(360 / 360),
             child: circleSetProgress,
+            key: circleKey,
           ),
         ),
       ],
@@ -311,7 +314,7 @@ class _MyHomePageState extends State<MyHomePage> {
             _circleCombineFlg = flg;
             c.circleStrokeWidth = c.circleSizeValue / 3;
             paddingValueTopAndBottom = 100;
-            c.graphTextSizeList = [const Size(15, 15)];
+            c.circleTextMarginList = [const Size(15, 15)];
 
             c.circleCombinedTextSize = 12;
             _randomCircleList(Random().nextInt(7));
@@ -389,9 +392,9 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     /// unwrap compatible
-    c.graphTextSizeList = c.graphTextSizeList ?? [const Size(15, 15)];
+    c.circleTextMarginList = c.circleTextMarginList ?? [const Size(15, 15)];
     for (var i = 0; i <= (c.startValue?.length ?? 0); i++) {
-      c.graphTextSizeList!.insert(i, const Size(15, 15));
+      c.circleTextMarginList!.insert(i, const Size(15, 15));
     }
 
     c.circleTextList = [
