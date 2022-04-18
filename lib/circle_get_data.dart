@@ -15,9 +15,7 @@ class CircleGetData extends CustomPainter {
   CircleGetData(this._data);
 
   @override
-  void paint(Canvas canvas, Size size) {
-    _data.circleTextIndex = 0;
-  }
+  void paint(Canvas canvas, Size size) {}
 
   angel(Size a, Size b) {
     var r = math.atan2(b.height - a.height, b.width - a.width);
@@ -31,9 +29,8 @@ class CircleGetData extends CustomPainter {
       for (var i = 0; i < (_data.startValue?.length ?? 0); i++) {
         if ((_data.startValue?[i] ?? 0) < value &&
             (_data.startValue?[i] ?? 0) + (_data.endValue?[i] ?? 0) > value) {
-          _data.circleTextIndex = i;
           _data.circleController.circleIndex.sink
-              .add(_data.circleTextList?[i] ?? "");
+              .add([_data.circleTextList?[i] ?? "", i]);
         }
       }
     } else {
@@ -42,9 +39,8 @@ class CircleGetData extends CustomPainter {
       for (var i = 0; i < (_data.startValue?.length ?? 0); i++) {
         if ((_data.startValue?[i] ?? 0) < value &&
             (_data.startValue?[i] ?? 0) + (_data.endValue?[i] ?? 0) > value) {
-          _data.circleTextIndex = i;
           _data.circleController.circleIndex.sink
-              .add(_data.circleTextList?[i] ?? "");
+              .add([_data.circleTextList?[i] ?? "", i]);
         }
       }
     }
@@ -57,7 +53,7 @@ class CircleGetData extends CustomPainter {
   bool hitTest(Offset position) {
     if (hitTestFlg) {
       double value = _data.circleSizeValue / 2;
-      angel(Size.zero, Size(value, value));
+      angel(Size.zero, Size(position.dx - value, position.dy - value));
       hitTestFlg = false;
     } else {
       hitTestFlg = true;

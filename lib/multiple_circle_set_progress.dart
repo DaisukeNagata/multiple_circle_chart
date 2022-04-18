@@ -95,7 +95,10 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
     });
 
     widget.circle.circleController.circleIndex.stream.listen((event) {
-      showMyDialog(context, event);
+      var e = event as List;
+      var eFirst = e.first as String;
+      var eLast = e.last as int;
+      showMyDialog(context, eFirst, eLast);
     });
 
     durationAnimation(0, 0.0, 0.0, 0.0, 0.0);
@@ -197,12 +200,12 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
   }
 
   /// Method to calculate alert.
-  Future<void> showMyDialog(BuildContext context, String text) async {
+  Future<void> showMyDialog(
+      BuildContext context, String text, int index) async {
     double regulationsSize = 100;
     RenderBox box =
         widget.circleKey.currentContext?.findRenderObject() as RenderBox;
     Offset offset = box.localToGlobal(Offset.zero);
-    int index = widget.circle.circleTextIndex ?? 0;
     double height = widget.circle.circleTextSizeList?[index].height ?? 0;
     double regulationsHeight = height + (height / 2) + regulationsSize;
     double regulationsDx =

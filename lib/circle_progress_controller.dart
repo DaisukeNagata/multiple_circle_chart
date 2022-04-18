@@ -3,13 +3,14 @@ import 'dart:async';
 class CircleProgressController {
   StreamController<List<double>> controller = StreamController<List<double>>();
   StreamController<double> counter = StreamController<double>();
-  StreamController<String> circleIndex = StreamController<String>();
+  StreamController<List<dynamic>> circleIndex =
+      StreamController<List<dynamic>>();
 
   Stream<List<double>> get stream => controller.stream;
 
   Stream<double> get counterStream => counter.stream;
 
-  Stream<String> get circleIndexStream => circleIndex.stream;
+  Stream<List<dynamic>> get circleIndexStream => circleIndex.stream;
 
   void setProgress(List<double> progress) {
     controller.sink.add(progress);
@@ -27,7 +28,7 @@ class CircleProgressController {
     counter.close();
   }
 
-  void setIndex(String index) {
+  void setIndex(List<dynamic> index) {
     circleIndex.sink.add(index);
   }
 
