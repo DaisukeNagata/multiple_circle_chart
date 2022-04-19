@@ -146,7 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
             _scrollController.offset == 0
                 ? _scrollController.position.maxScrollExtent
                 : 0,
-            duration: Duration(milliseconds: 100),
+            duration: const Duration(milliseconds: 100),
             curve: Curves.linear,
           );
           FocusScope.of(context).unfocus();
@@ -206,8 +206,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Column sliderSets() {
     return Column(
       children: [
-        sliderSet(_fValue, setColor.length.toDouble(), keyValue: globalKey),
-        sliderSet(_rValue, setColor.length.toDouble(), keyValue: globalKey2),
+        wSlider(RangeValues(_rValue, _fValue), setColor.length.toDouble(),
+            keyValue: globalKey),
         sliderSet(_speedValue, 20000.0),
         sliderSet(c.circleSizeValue, MediaQuery.of(context).size.width),
         Padding(padding: EdgeInsets.only(top: paddingValue))
@@ -435,6 +435,28 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
   }
 
+  RangeSlider wSlider(RangeValues values, max, {Key? keyValue}) {
+    return RangeSlider(
+      key: keyValue,
+      values: values,
+      max: max,
+      divisions: 1000,
+      labels: RangeLabels(
+        values.start.round().toString(),
+        values.end.round().toString(),
+      ),
+      onChanged: (RangeValues values) {
+        setState(() {
+          if (_rValue != values.start) {
+            _rValue = values.start;
+          } else if (_fValue != values.end) {
+            _fValue = values.end;
+          }
+        });
+      },
+    );
+  }
+
   Slider sliderSet(double value, max, {Key? keyValue}) {
     Padding(padding: EdgeInsets.only(top: paddingValue));
     return Slider(
@@ -445,11 +467,7 @@ class _MyHomePageState extends State<MyHomePage> {
       divisions: 1000,
       onChanged: (double value) {
         setState(() {
-          if (keyValue == globalKey) {
-            _fValue = value;
-          } else if (keyValue == globalKey2) {
-            _rValue = value;
-          } else if (max == MediaQuery.of(context).size.width) {
+          if (max == MediaQuery.of(context).size.width) {
             c.circleSizeValue = value;
             if (!_circleCombineFlg) {
               c.circleStrokeWidth = value / 3;
