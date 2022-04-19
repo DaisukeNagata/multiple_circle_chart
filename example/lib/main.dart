@@ -317,6 +317,7 @@ class _MyHomePageState extends State<MyHomePage> {
           setState(() {
             _circleColorFlg = flg;
             _circleCombineFlg = flg;
+            _circleShaderFlg = flg;
             c.circleStrokeWidth = c.circleSizeValue / 3;
             c.circleTextMarginList = [const Size(15, 15)];
 
