@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:math';
+
+import 'package:flutter/material.dart';
 import 'package:multiple_circle_chart/OverlappingBar/overlapping_data.dart';
 import 'package:multiple_circle_chart/OverlappingBar/overlapping_progress_indicator.dart';
 
@@ -14,28 +14,28 @@ class OverLappingBar extends StatelessWidget {
       home: Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
-          title: Text('EveryDaySoft_Example'),
+          title: const Text('EveryDaySoft_Example'),
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(Icons.arrow_back_ios),
+            icon: const Icon(Icons.arrow_back_ios),
           ),
         ),
-        body: const OverLappingPahe(),
+        body: const OverLappingWidget(),
       ),
     );
   }
 }
 
-class OverLappingPahe extends StatefulWidget {
-  const OverLappingPahe({Key? key}) : super(key: key);
+class OverLappingWidget extends StatefulWidget {
+  const OverLappingWidget({Key? key}) : super(key: key);
 
   @override
   _OverLappingBarState createState() => _OverLappingBarState();
 }
 
-class _OverLappingBarState extends State<OverLappingPahe>
+class _OverLappingBarState extends State<OverLappingWidget>
     with TickerProviderStateMixin {
   List<Color> colorList = [
     Colors.green.shade50,
@@ -145,10 +145,10 @@ class _OverLappingBarState extends State<OverLappingPahe>
       GlobalKey key, double w, CustomPaint setPaint) {
     return OverlappingProgressIndicator(
         radData: _radData,
-        radDataRadDataVertical: Offset(20, 20),
-        radDataRadDataHorizontal: Offset(1, 20),
-        dataVerticalSize: Size(120, 120),
-        dataHorizontalSize: Size(150, 120),
+        radDataRadDataVertical: const Offset(20, 20),
+        radDataRadDataHorizontal: const Offset(1, 20),
+        dataVerticalSize: const Size(120, 120),
+        dataHorizontalSize: const Size(150, 120),
         globalKey: key,
         contextSize: Size(w, 15),
         con: context,
