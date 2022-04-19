@@ -56,7 +56,7 @@ class MainViewModel {
             mainCircleDataModel.setColorModel.setColor.length.toDouble(),
             keyValue: mainCircleDataModel.globalKey),
         sliderSet(m, con, mainCircleDataModel.speedValue, 20000.0),
-        sliderSet(m, con, mainCircleDataModel.circleSize,
+        sliderSet(m, con, mainCircleDataModel.circleData.circleSizeValue,
             MediaQuery.of(con).size.width),
         Padding(padding: EdgeInsets.only(top: mainCircleDataModel.paddingValue))
       ],
@@ -144,6 +144,7 @@ class MainViewModel {
       value: value,
       min: 0,
       max: max,
+      label: value.toString(),
       divisions: 1000,
       onChanged: (double value) {
         m.sliderSet(max, value, mainCircleDataModel.circleCombineFlg);
@@ -201,39 +202,6 @@ class MainViewModel {
     }
   }
 
-  _circleColorMethod(BuildContext context, bool flg) {
-    mainCircleDataModel.circleColorFlg = flg;
-
-    /// Determine the type of knob
-    mainCircleDataModel.circleData.circleShader =
-        mainCircleDataModel.circleData.circleShader == CircleShader.circleNone
-            ? CircleShader.butt
-            : CircleShader.circleNone;
-
-    /// Determine the knob color
-    mainCircleDataModel.circleData.circleColor =
-        mainCircleDataModel.circleData.circleColor == Colors.green
-            ? Colors.green.withOpacity(0)
-            : Colors.green;
-
-    /// Determine the knob shadow color
-    mainCircleDataModel.circleData.circleShadowColor =
-        mainCircleDataModel.circleData.circleShadowColor == Colors.black
-            ? Colors.black.withOpacity(0)
-            : Colors.black;
-  }
-
-  _circleShaderFlgMethod(BuildContext context, bool flg) {
-    /// Pie chart animation direction.
-    mainCircleDataModel.circleShaderFlg = flg;
-
-    /// Determine the type of knob
-    mainCircleDataModel.circleData.circleShader =
-        mainCircleDataModel.circleData.circleShader == CircleShader.circleNone
-            ? CircleShader.round
-            : CircleShader.circleNone;
-  }
-
   circleCombinedMethod(BuildContext context, bool flg) {
     mainCircleDataModel.circleColorFlg = flg;
     mainCircleDataModel.circleCombineFlg = flg;
@@ -263,6 +231,39 @@ class MainViewModel {
     } else {
       _randomCircleList(Random().nextInt(7));
     }
+
+    /// Determine the type of knob
+    mainCircleDataModel.circleData.circleShader =
+        mainCircleDataModel.circleData.circleShader == CircleShader.circleNone
+            ? CircleShader.round
+            : CircleShader.circleNone;
+  }
+
+  _circleColorMethod(BuildContext context, bool flg) {
+    mainCircleDataModel.circleColorFlg = flg;
+
+    /// Determine the type of knob
+    mainCircleDataModel.circleData.circleShader =
+        mainCircleDataModel.circleData.circleShader == CircleShader.circleNone
+            ? CircleShader.butt
+            : CircleShader.circleNone;
+
+    /// Determine the knob color
+    mainCircleDataModel.circleData.circleColor =
+        mainCircleDataModel.circleData.circleColor == Colors.green
+            ? Colors.green.withOpacity(0)
+            : Colors.green;
+
+    /// Determine the knob shadow color
+    mainCircleDataModel.circleData.circleShadowColor =
+        mainCircleDataModel.circleData.circleShadowColor == Colors.black
+            ? Colors.black.withOpacity(0)
+            : Colors.black;
+  }
+
+  _circleShaderFlgMethod(BuildContext context, bool flg) {
+    /// Pie chart animation direction.
+    mainCircleDataModel.circleShaderFlg = flg;
 
     /// Determine the type of knob
     mainCircleDataModel.circleData.circleShader =
