@@ -8,7 +8,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   const MyApp({Key? key}) : super(key: key);
 
   @override
@@ -49,8 +48,6 @@ class MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     mModel.circleSet(context);
-    double paddingValue = mModel.mainCircleDataModel.paddingValue;
-    double topAndBottom = mModel.mainCircleDataModel.paddingValueTopAndBottom;
     return Scaffold(
       backgroundColor: Colors.greenAccent,
       appBar: AppBar(
@@ -69,20 +66,18 @@ class MyHomePageState extends State<MyHomePage> {
       body: GestureDetector(
         onTap: () {
           mModel.scrollAnimation();
-          FocusScope.of(context).unfocus();
         },
         child: SingleChildScrollView(
-          controller: mModel.mainCircleDataModel.scrollController,
+          controller: mModel.dataViewModel.scrollController,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Padding(padding: EdgeInsets.only(top: topAndBottom)),
+              Padding(
+                  padding:
+                      EdgeInsets.only(top: mModel.dataViewModel.padTopBottom)),
               mModel.stack(),
-              mModel.textSets(),
               mModel.sliderSets(this, context),
               mModel.setRow(),
               mModel.switchSetRow(this, context),
-              Padding(padding: EdgeInsets.only(top: paddingValue)),
             ],
           ),
         ),
@@ -107,13 +102,9 @@ class MyHomePageState extends State<MyHomePage> {
 
   counterStream() {
     /// Show animation values.
-    mModel.mainCircleDataModel.controller.counterStream.listen((event) {
+    mModel.dataViewModel.controller.counterStream.listen((event) {
       setState(() {
-        var e = 0.0;
-        if (event != 0.0) {
-          e = event;
-        }
-        mModel.mainCircleDataModel.circleLabelValue = (e * 100);
+        mModel.dataViewModel.circleLabelValue = (event * 100);
       });
     });
   }

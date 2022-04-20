@@ -11,8 +11,8 @@ class MainCircleDataModel {
   double fValue = 0.0;
   double rValue = 0.0;
   double circleLabelValue = 0.0;
-  double paddingValue = 30;
-  final double paddingValueTopAndBottom = 60;
+  double padValue = 30;
+  final double padTopBottom = 60;
   final ScrollController scrollController = ScrollController();
   bool circleColorFlg = true;
   bool circleShaderFlg = true;
