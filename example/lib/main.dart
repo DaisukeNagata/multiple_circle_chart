@@ -48,6 +48,7 @@ class MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     mModel.circleSet(context);
+    mModel.dataViewModel.circleData.circleDefalutTapValue = 1.2;
     return Scaffold(
       backgroundColor: Colors.greenAccent,
       appBar: AppBar(
@@ -101,7 +102,6 @@ class MyHomePageState extends State<MyHomePage> {
       });
 
   counterStream() {
-    /// Show animation values.
     mModel.dataViewModel.controller.counterStream.listen((event) {
       setState(() {
         mModel.dataViewModel.circleLabelValue = (event * 100);

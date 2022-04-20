@@ -25,6 +25,9 @@ class CircleCombinedChart extends CustomPainter {
     canvas.rotate(degToRad(_rotate));
     canvas.translate(-size.width, 0);
     for (var i = 0; i < len; i++) {
+      paint.strokeWidth = i == _data.circleTapIndex
+          ? _data.circleStrokeWidth * (_data.circleTapValue ?? 1)
+          : _data.circleStrokeWidth;
       paint.color = _data.circleCombinedColorList?[i] ?? Colors.white;
       canvas.drawArc(
           Rect.fromCircle(

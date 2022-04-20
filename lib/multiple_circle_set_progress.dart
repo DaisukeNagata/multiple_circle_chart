@@ -95,6 +95,9 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
     });
 
     widget.circle.circleController.circleIndex.stream.listen((event) {
+      setState(() {
+        widget.circle.circleStrokeWidth = widget.circle.circleStrokeWidth;
+      });
       var eFirst = event.first as String;
       var eLast = event.last as int;
       showMyDialog(context, eFirst, eLast);

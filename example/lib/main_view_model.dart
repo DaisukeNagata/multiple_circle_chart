@@ -316,7 +316,7 @@ class MainViewModel {
         dataViewModel.circleData.endValue = [0.15, 0.42, 0.13, 0.13, 0.17];
         break;
       case 3:
-        dataViewModel.circleData.startValue = [0, 0.25, 0.53, 0.73, 0.83];
+        dataViewModel.circleData.startValue = [0, 0.25, 0.55, 0.77, 0.87];
         dataViewModel.circleData.endValue = [0.25, 0.3, 0.22, 0.1, 0.17];
         break;
       case 4:
