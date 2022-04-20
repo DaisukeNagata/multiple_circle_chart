@@ -29,10 +29,7 @@ class CircleGetData extends CustomPainter {
       for (var i = 0; i < (_data.startValue?.length ?? 0); i++) {
         if ((_data.startValue?[i] ?? 0) < value &&
             (_data.startValue?[i] ?? 0) + (_data.endValue?[i] ?? 0) > value) {
-          _data.circleTapValue =
-              _data.circleTapValue != _data.circleDefalutTapValue
-                  ? _data.circleDefalutTapValue
-                  : 1.0;
+          _data.circleTapValue = _data.circleDefalutTapValue;
           _data.circleTapIndex = i;
           _data.circleController.circleIndex.sink
               .add([_data.circleTextList?[i] ?? "", i]);
@@ -44,10 +41,7 @@ class CircleGetData extends CustomPainter {
       for (var i = 0; i < (_data.startValue?.length ?? 0); i++) {
         if ((_data.startValue?[i] ?? 0) < value &&
             (_data.startValue?[i] ?? 0) + (_data.endValue?[i] ?? 0) > value) {
-          _data.circleTapValue =
-              _data.circleTapValue != _data.circleDefalutTapValue
-                  ? _data.circleDefalutTapValue
-                  : 1.0;
+          _data.circleTapValue = _data.circleDefalutTapValue;
           _data.circleTapIndex = i;
           _data.circleController.circleIndex.sink
               .add([_data.circleTextList?[i] ?? "", i]);
