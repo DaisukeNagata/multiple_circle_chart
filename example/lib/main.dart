@@ -49,6 +49,8 @@ class MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     mModel.circleSet(context);
+    double paddingValue = mModel.mainCircleDataModel.paddingValue;
+    double topAndBottom = mModel.mainCircleDataModel.paddingValueTopAndBottom;
     return Scaffold(
       backgroundColor: Colors.greenAccent,
       appBar: AppBar(
@@ -66,14 +68,7 @@ class MyHomePageState extends State<MyHomePage> {
       ),
       body: GestureDetector(
         onTap: () {
-          mModel.mainCircleDataModel.scrollController.animateTo(
-            mModel.mainCircleDataModel.scrollController.offset == 0
-                ? mModel.mainCircleDataModel.scrollController.position
-                    .maxScrollExtent
-                : 0,
-            duration: const Duration(milliseconds: 100),
-            curve: Curves.linear,
-          );
+          mModel.scrollAnimation();
           FocusScope.of(context).unfocus();
         },
         child: SingleChildScrollView(
@@ -81,18 +76,13 @@ class MyHomePageState extends State<MyHomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Padding(
-                  padding: EdgeInsets.only(
-                      top:
-                          mModel.mainCircleDataModel.paddingValueTopAndBottom)),
+              Padding(padding: EdgeInsets.only(top: topAndBottom)),
               mModel.stack(),
               mModel.textSets(),
               mModel.sliderSets(this, context),
               mModel.setRow(),
               mModel.switchSetRow(this, context),
-              Padding(
-                  padding: EdgeInsets.only(
-                      top: mModel.mainCircleDataModel.paddingValue)),
+              Padding(padding: EdgeInsets.only(top: paddingValue)),
             ],
           ),
         ),
@@ -102,25 +92,12 @@ class MyHomePageState extends State<MyHomePage> {
 
   /// setState
   wSlider(values) => setState(() {
-        if (mModel.mainCircleDataModel.rValue != values.start) {
-          mModel.mainCircleDataModel.rValue = values.start;
-        } else if (mModel.mainCircleDataModel.fValue != values.end) {
-          mModel.mainCircleDataModel.fValue = values.end;
-        }
+        mModel.wSLiderState(values);
       });
 
   /// setState
-  sliderSet(max, value, circleCombineFlg) => setState(() {
-        if (max == MediaQuery.of(context).size.width) {
-          mModel.mainCircleDataModel.circleData.circleSizeValue = value;
-          if (!circleCombineFlg) {
-            mModel.mainCircleDataModel.circleData.circleStrokeWidth = value / 3;
-          }
-        } else if (max == 20000) {
-          mModel.mainCircleDataModel.speedValue = value;
-          mModel.mainCircleDataModel.circleData.circleDuration =
-              mModel.mainCircleDataModel.speedValue.toInt();
-        }
+  sliderSet(max, value) => setState(() {
+        mModel.combineState(context, max, value);
       });
 
   /// setState

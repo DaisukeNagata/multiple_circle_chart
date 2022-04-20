@@ -11,6 +11,37 @@ import 'main_circle_data_model.dart';
 class MainViewModel {
   late final MainCircleDataModel mainCircleDataModel = MainCircleDataModel();
 
+  wSLiderState(RangeValues values) {
+    if (mainCircleDataModel.rValue != values.start) {
+      mainCircleDataModel.rValue = values.start;
+    } else if (mainCircleDataModel.fValue != values.end) {
+      mainCircleDataModel.fValue = values.end;
+    }
+  }
+
+  combineState(BuildContext context, double max, double value) {
+    if (max == MediaQuery.of(context).size.width) {
+      mainCircleDataModel.circleData.circleSizeValue = value;
+      if (!mainCircleDataModel.circleCombineFlg) {
+        mainCircleDataModel.circleData.circleStrokeWidth = value / 3;
+      }
+    } else if (max == 20000) {
+      mainCircleDataModel.speedValue = value;
+      mainCircleDataModel.circleData.circleDuration =
+          mainCircleDataModel.speedValue.toInt();
+    }
+  }
+
+  scrollAnimation() {
+    mainCircleDataModel.scrollController.animateTo(
+      mainCircleDataModel.scrollController.offset == 0
+          ? mainCircleDataModel.scrollController.position.maxScrollExtent
+          : 0,
+      duration: const Duration(milliseconds: 100),
+      curve: Curves.linear,
+    );
+  }
+
   circleSet(BuildContext context) {
     /// Determine the size of the circle.
     mainCircleDataModel.circleSize = mainCircleDataModel.circleSize == 0.0
@@ -147,7 +178,7 @@ class MainViewModel {
       label: value.toString(),
       divisions: 1000,
       onChanged: (double value) {
-        m.sliderSet(max, value, mainCircleDataModel.circleCombineFlg);
+        m.sliderSet(max, value);
       },
     );
   }
