@@ -51,7 +51,7 @@ class MainViewModel {
         circleKey: dataViewModel.circleKey, circle: dataViewModel.circleData);
   }
 
-  Widget switchSetRow(MyHomePageState m, BuildContext context) {
+  switchSetRow(MyHomePageState m, BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
@@ -216,6 +216,8 @@ class MainViewModel {
     dataViewModel.circleColorFlg = flg;
     dataViewModel.circleCombineFlg = flg;
     dataViewModel.circleShaderFlg = flg;
+    circleSet(context);
+    dataViewModel.circleData.circleTapValue = 1.0;
     dataViewModel.circleData.circleStrokeWidth =
         dataViewModel.circleData.circleSizeValue / 3;
     dataViewModel.circleData.circleTextMarginList = [const Size(15, 15)];

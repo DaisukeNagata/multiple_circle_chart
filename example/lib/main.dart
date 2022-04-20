@@ -47,7 +47,6 @@ class MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    mModel.circleSet(context);
     mModel.dataViewModel.circleData.circleDefalutTapValue = 1.2;
     return Scaffold(
       backgroundColor: Colors.greenAccent,
