@@ -26,26 +26,28 @@ class CircleGetData extends CustomPainter {
     if ((r * circlePI / (2 * math.pi)) < circleCheckData) {
       var value = ((r * circlePI / (2 * math.pi)).floor() + circleComplement) /
           circlePI;
-      for (var i = 0; i < (_data.startValue?.length ?? 0); i++) {
-        if ((_data.startValue?[i] ?? 0) < value &&
-            (_data.startValue?[i] ?? 0) + (_data.endValue?[i] ?? 0) > value) {
-          _data.circleTapValue = _data.circleDefalutTapValue;
-          _data.circleTapIndex = i;
-          _data.circleController.circleIndex.sink
-              .add([_data.circleTextList?[i] ?? "", i]);
-        }
-      }
+      circleTapLogic(value);
     } else {
       var value =
           ((r * circlePI / (2 * math.pi)).floor() - circleCheckData) / circlePI;
-      for (var i = 0; i < (_data.startValue?.length ?? 0); i++) {
-        if ((_data.startValue?[i] ?? 0) < value &&
-            (_data.startValue?[i] ?? 0) + (_data.endValue?[i] ?? 0) > value) {
+      circleTapLogic(value);
+    }
+  }
+
+  // circle expansion logic when tapping
+  circleTapLogic(double value) {
+    for (var i = 0; i < (_data.startValue?.length ?? 0); i++) {
+      if ((_data.startValue?[i] ?? 0) < value &&
+          (_data.startValue?[i] ?? 0) + (_data.endValue?[i] ?? 0) > value) {
+        if (_data.circleTapIndex == i) {
+          _data.circleTapValue =
+              _data.circleTapValue == 1.0 ? _data.circleDefalutTapValue : 1.0;
+        } else {
           _data.circleTapValue = _data.circleDefalutTapValue;
-          _data.circleTapIndex = i;
-          _data.circleController.circleIndex.sink
-              .add([_data.circleTextList?[i] ?? "", i]);
         }
+        _data.circleTapIndex = i;
+        _data.circleController.circleIndex.sink
+            .add([_data.circleTextList?[i] ?? "", i]);
       }
     }
   }

@@ -96,6 +96,16 @@ class MyHomePageState extends State<MyHomePage> {
       });
 
   /// setState
+  circlecircleColorState(flg) => setState(() {
+        mModel.circleColorMethod(context, flg);
+      });
+
+  /// setState
+  circleShaderFlgState(flg) => setState(() {
+        mModel.circleShaderFlgMethod(context, flg);
+      });
+
+  /// setState
   combinedState(flg) => setState(() {
         mModel.circleCombinedMethod(context, flg);
       });

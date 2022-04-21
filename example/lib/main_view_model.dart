@@ -190,7 +190,7 @@ class MainViewModel {
         key: dataViewModel.circleColorKey,
         value: dataViewModel.circleColorFlg,
         onChanged: (flg) {
-          _circleColorMethod(con, flg);
+          m.circlecircleColorState(flg);
         },
       );
     } else if (keyValue == dataViewModel.circleShaderFlgKey) {
@@ -198,7 +198,7 @@ class MainViewModel {
         key: dataViewModel.circleShaderFlgKey,
         value: dataViewModel.circleShaderFlg,
         onChanged: (flg) {
-          _circleShaderFlgMethod(con, flg);
+          m.circleShaderFlgState(flg);
         },
       );
     } else {
@@ -250,7 +250,8 @@ class MainViewModel {
             : CircleShader.circleNone;
   }
 
-  _circleColorMethod(BuildContext context, bool flg) {
+  circleColorMethod(BuildContext context, bool flg) {
+    circleSet(context);
     dataViewModel.circleColorFlg = flg;
 
     /// Determine the type of knob
@@ -272,7 +273,9 @@ class MainViewModel {
             : Colors.black;
   }
 
-  _circleShaderFlgMethod(BuildContext context, bool flg) {
+  circleShaderFlgMethod(BuildContext context, bool flg) {
+    circleSet(context);
+
     /// Pie chart animation direction.
     dataViewModel.circleShaderFlg = flg;
 
@@ -319,7 +322,7 @@ class MainViewModel {
         break;
       case 3:
         dataViewModel.circleData.startValue = [0, 0.25, 0.55, 0.77, 0.87];
-        dataViewModel.circleData.endValue = [0.25, 0.3, 0.22, 0.1, 0.17];
+        dataViewModel.circleData.endValue = [0.25, 0.3, 0.22, 0.1, 0.13];
         break;
       case 4:
         dataViewModel.circleData.startValue = [0, 0.25, 0.35, 0.45, 0.84];
