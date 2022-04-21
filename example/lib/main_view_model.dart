@@ -190,7 +190,9 @@ class MainViewModel {
         key: dataViewModel.circleColorKey,
         value: dataViewModel.circleColorFlg,
         onChanged: (flg) {
-          m.circleColorState(flg);
+          if (dataViewModel.circleCombineFlg) {
+            m.circleColorState(flg);
+          }
         },
       );
     } else if (keyValue == dataViewModel.circleShaderFlgKey) {
@@ -198,7 +200,9 @@ class MainViewModel {
         key: dataViewModel.circleShaderFlgKey,
         value: dataViewModel.circleShaderFlg,
         onChanged: (flg) {
-          m.circleShaderFlgState(flg);
+          if (dataViewModel.circleCombineFlg) {
+            m.circleShaderFlgState(flg);
+          }
         },
       );
     } else {
@@ -212,6 +216,7 @@ class MainViewModel {
     }
   }
 
+  /// Switch Button Logic
   circleCombinedMethod(BuildContext context, bool flg) {
     dataViewModel.circleColorFlg = flg;
     dataViewModel.circleCombineFlg = flg;
@@ -250,6 +255,7 @@ class MainViewModel {
             : CircleShader.circleNone;
   }
 
+  /// Switch Button Logic
   circleColorMethod(BuildContext context, bool flg) {
     circleSet(context);
     dataViewModel.circleColorFlg = flg;
@@ -273,6 +279,7 @@ class MainViewModel {
             : Colors.black;
   }
 
+  /// Switch Button Logic
   circleShaderFlgMethod(BuildContext context, bool flg) {
     circleSet(context);
 

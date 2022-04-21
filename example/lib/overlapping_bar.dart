@@ -95,7 +95,7 @@ class _OverLappingBarState extends State<OverLappingWidget>
     );
   }
 
-  void animation() {
+  _animationControllerInit() {
     var rand = Random();
     rand.nextInt(1);
     _animationController = AnimationController(
@@ -132,8 +132,8 @@ class _OverLappingBarState extends State<OverLappingWidget>
                 180,
             child: Column(
               children: [
-                indicatorRowSet(indicator, globalKey),
-                indicatorRowSet(indicator2, globalKey2),
+                indicatorRowSet(indicator),
+                indicatorRowSet(indicator2),
               ],
             )),
         buttonSet(),
@@ -157,13 +157,11 @@ class _OverLappingBarState extends State<OverLappingWidget>
         animationValue: _animationController?.value);
   }
 
-  Row indicatorRowSet(
-      OverlappingProgressIndicator? indicator, GlobalKey globalKey) {
+  Row indicatorRowSet(OverlappingProgressIndicator? indicator) {
     return Row(
       children: [
         const Padding(padding: EdgeInsets.only(top: 100, left: 30)),
         SizedBox(
-            key: globalKey,
             height: 15,
             width: MediaQuery.of(context).size.width / 1.2,
             child: indicator),
@@ -178,7 +176,7 @@ class _OverLappingBarState extends State<OverLappingWidget>
           _radData = _radData == RadData.vertical
               ? RadData.horizontal
               : RadData.vertical;
-          animation();
+          _animationControllerInit();
         });
       },
       child: const Text('click here'),
