@@ -190,7 +190,7 @@ class MainViewModel {
         key: dataViewModel.circleColorKey,
         value: dataViewModel.circleColorFlg,
         onChanged: (flg) {
-          m.circlecircleColorState(flg);
+          m.circleColorState(flg);
         },
       );
     } else if (keyValue == dataViewModel.circleShaderFlgKey) {

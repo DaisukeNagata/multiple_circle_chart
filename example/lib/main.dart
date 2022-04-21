@@ -96,7 +96,7 @@ class MyHomePageState extends State<MyHomePage> {
       });
 
   /// setState
-  circlecircleColorState(flg) => setState(() {
+  circleColorState(flg) => setState(() {
         mModel.circleColorMethod(context, flg);
       });
 
