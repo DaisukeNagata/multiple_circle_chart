@@ -43,11 +43,11 @@ class MyHomePageState extends State<MyHomePage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     mModel.circleSet(MediaQuery.of(context).size.width);
+    mModel.viewModel.circleData.circleDefalutTapValue = 1.2;
   }
 
   @override
   Widget build(BuildContext context) {
-    mModel.dataViewModel.circleData.circleDefalutTapValue = 1.2;
     return Scaffold(
       backgroundColor: Colors.greenAccent,
       appBar: AppBar(
@@ -68,12 +68,11 @@ class MyHomePageState extends State<MyHomePage> {
           mModel.scrollAnimation();
         },
         child: SingleChildScrollView(
-          controller: mModel.dataViewModel.scrollController,
+          controller: mModel.viewModel.scrollController,
           child: Column(
             children: [
               Padding(
-                  padding:
-                      EdgeInsets.only(top: mModel.dataViewModel.padTopBottom)),
+                  padding: EdgeInsets.only(top: mModel.viewModel.padTopBottom)),
               mModel.stack(),
               mModel.sliderSets(this, MediaQuery.of(context).size.width),
               mModel.setRow(),
@@ -86,34 +85,33 @@ class MyHomePageState extends State<MyHomePage> {
   }
 
   /// setState
-  wSlider(values) => setState(() {
-        mModel.wSLiderState(values);
-      });
-
-  /// setState
-  sliderSet(max, value) => setState(() {
-        mModel.combineState(MediaQuery.of(context).size.width, max, value);
-      });
-
-  /// setState
-  circleColorState(flg) => setState(() {
-        mModel.circleColorMethod(MediaQuery.of(context).size.width, flg);
-      });
-
-  /// setState
-  circleShaderFlgState(flg) => setState(() {
-        mModel.circleShaderFlgMethod(MediaQuery.of(context).size.width, flg);
-      });
-
-  /// setState
-  combinedState(flg) => setState(() {
-        mModel.circleCombinedMethod(MediaQuery.of(context).size.width, flg);
+  mModelState(DesignType type,
+          {double? max, double? value, RangeValues? values, bool? flg}) =>
+      setState(() {
+        double width = MediaQuery.of(context).size.width;
+        switch (type) {
+          case DesignType.wSliderState:
+            mModel.wSliderState(values);
+            break;
+          case DesignType.combineState:
+            mModel.combineState(width, max, value);
+            break;
+          case DesignType.knobState:
+            mModel.knobState(width, flg);
+            break;
+          case DesignType.knobRoundState:
+            mModel.knobRoundState(width, flg);
+            break;
+          case DesignType.circleDesignState:
+            mModel.circleDesignState(width, flg ?? false);
+            break;
+        }
       });
 
   counterStream() {
-    mModel.dataViewModel.controller.counterStream.listen((event) {
+    mModel.viewModel.controller.counterStream.listen((event) {
       setState(() {
-        mModel.dataViewModel.circleLabelValue = (event * 100);
+        mModel.viewModel.circleLabelValue = (event * 100);
       });
     });
   }
