@@ -42,7 +42,7 @@ class MyHomePageState extends State<MyHomePage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    mModel.circleSet(context);
+    mModel.circleSet(MediaQuery.of(context).size.width);
   }
 
   @override
@@ -75,9 +75,9 @@ class MyHomePageState extends State<MyHomePage> {
                   padding:
                       EdgeInsets.only(top: mModel.dataViewModel.padTopBottom)),
               mModel.stack(),
-              mModel.sliderSets(this, context),
+              mModel.sliderSets(this, MediaQuery.of(context).size.width),
               mModel.setRow(),
-              mModel.switchSetRow(this, context),
+              mModel.switchSetRow(this),
             ],
           ),
         ),
@@ -92,22 +92,22 @@ class MyHomePageState extends State<MyHomePage> {
 
   /// setState
   sliderSet(max, value) => setState(() {
-        mModel.combineState(context, max, value);
+        mModel.combineState(MediaQuery.of(context).size.width, max, value);
       });
 
   /// setState
   circleColorState(flg) => setState(() {
-        mModel.circleColorMethod(context, flg);
+        mModel.circleColorMethod(MediaQuery.of(context).size.width, flg);
       });
 
   /// setState
   circleShaderFlgState(flg) => setState(() {
-        mModel.circleShaderFlgMethod(context, flg);
+        mModel.circleShaderFlgMethod(MediaQuery.of(context).size.width, flg);
       });
 
   /// setState
   combinedState(flg) => setState(() {
-        mModel.circleCombinedMethod(context, flg);
+        mModel.circleCombinedMethod(MediaQuery.of(context).size.width, flg);
       });
 
   counterStream() {

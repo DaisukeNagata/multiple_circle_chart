@@ -100,7 +100,9 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
       });
       var eFirst = event.first as String;
       var eLast = event.last as int;
-      showMyDialog(context, eFirst, eLast);
+      if (widget.circle.circleTapValue == widget.circle.circleDefalutTapValue) {
+        showMyDialog(context, eFirst, eLast);
+      }
     });
 
     durationAnimation(0, 0.0, 0.0, 0.0, 0.0);

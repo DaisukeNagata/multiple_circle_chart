@@ -19,8 +19,8 @@ class MainViewModel {
     }
   }
 
-  combineState(BuildContext context, double max, double value) {
-    if (max == MediaQuery.of(context).size.width) {
+  combineState(double deviceWidth, double max, double value) {
+    if (max == deviceWidth) {
       dataViewModel.circleData.circleSizeValue = value;
       if (!dataViewModel.circleCombineFlg) {
         dataViewModel.circleData.circleStrokeWidth = value / 3;
@@ -42,36 +42,35 @@ class MainViewModel {
     );
   }
 
-  circleSet(BuildContext context) {
+  circleSet(double deviceWidth) {
     /// Determine the size of the circle.
     dataViewModel.circleSize = dataViewModel.circleSize == 0.0
-        ? MediaQuery.of(context).size.width / 2
+        ? deviceWidth / 2
         : dataViewModel.circleSize;
     dataViewModel.circleSetProgress = MultipleCircleSetProgress(
         circleKey: dataViewModel.circleKey, circle: dataViewModel.circleData);
   }
 
-  switchSetRow(MyHomePageState m, BuildContext context) {
+  switchSetRow(MyHomePageState m) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        switchSet(m, context, dataViewModel.circleColorKey),
-        switchSet(m, context, dataViewModel.circleShaderFlgKey),
-        switchSet(m, context, dataViewModel.circleCombinedKey),
+        switchSet(m, dataViewModel.circleColorKey),
+        switchSet(m, dataViewModel.circleShaderFlgKey),
+        switchSet(m, dataViewModel.circleCombinedKey),
       ],
     );
   }
 
-  Column sliderSets(MyHomePageState m, BuildContext con) {
+  Column sliderSets(MyHomePageState m, double deviceWidth) {
     return Column(
       children: [
         Padding(padding: EdgeInsets.only(top: dataViewModel.padTopBottom)),
-        wSlider(m, con, RangeValues(dataViewModel.rValue, dataViewModel.fValue),
+        wSlider(m, RangeValues(dataViewModel.rValue, dataViewModel.fValue),
             dataViewModel.setColorModel.setColor.length.toDouble(),
             keyValue: dataViewModel.globalKey),
-        sliderSet(m, con, dataViewModel.speedValue, 20000.0),
-        sliderSet(m, con, dataViewModel.circleData.circleSizeValue,
-            MediaQuery.of(con).size.width),
+        sliderSet(m, dataViewModel.speedValue, 20000.0),
+        sliderSet(m, dataViewModel.circleData.circleSizeValue, deviceWidth),
         Padding(padding: EdgeInsets.only(top: dataViewModel.padValue))
       ],
     );
@@ -129,8 +128,7 @@ class MainViewModel {
     );
   }
 
-  RangeSlider wSlider(
-      MyHomePageState m, BuildContext con, RangeValues values, max,
+  RangeSlider wSlider(MyHomePageState m, RangeValues values, max,
       {Key? keyValue}) {
     return RangeSlider(
       key: keyValue,
@@ -147,8 +145,7 @@ class MainViewModel {
     );
   }
 
-  Slider sliderSet(MyHomePageState m, BuildContext con, double value, max,
-      {Key? keyValue}) {
+  Slider sliderSet(MyHomePageState m, double value, max, {Key? keyValue}) {
     Padding(padding: EdgeInsets.only(top: dataViewModel.padValue));
     return Slider(
       key: keyValue,
@@ -181,7 +178,7 @@ class MainViewModel {
     );
   }
 
-  CupertinoSwitch switchSet(MyHomePageState m, BuildContext con, Key keyValue) {
+  CupertinoSwitch switchSet(MyHomePageState m, Key keyValue) {
     Padding(
         padding: EdgeInsets.only(
             left: dataViewModel.padValue, right: dataViewModel.padValue));
@@ -217,11 +214,11 @@ class MainViewModel {
   }
 
   /// Switch Button Logic
-  circleCombinedMethod(BuildContext context, bool flg) {
+  circleCombinedMethod(double deviceWidth, bool flg) {
     dataViewModel.circleColorFlg = flg;
     dataViewModel.circleCombineFlg = flg;
     dataViewModel.circleShaderFlg = flg;
-    circleSet(context);
+    circleSet(deviceWidth);
     dataViewModel.circleData.circleTapValue = 1.0;
     dataViewModel.circleData.circleStrokeWidth =
         dataViewModel.circleData.circleSizeValue / 3;
@@ -243,7 +240,7 @@ class MainViewModel {
       dataViewModel.circleData.endValue = [];
       dataViewModel.circleData.startValue = [];
       dataViewModel.circleData.circleCombinedColorList = [];
-      _resetCircle(context);
+      _resetCircle(deviceWidth);
     } else {
       _randomCircleList(Random().nextInt(7));
     }
@@ -256,8 +253,8 @@ class MainViewModel {
   }
 
   /// Switch Button Logic
-  circleColorMethod(BuildContext context, bool flg) {
-    circleSet(context);
+  circleColorMethod(double deviceWidth, bool flg) {
+    circleSet(deviceWidth);
     dataViewModel.circleColorFlg = flg;
 
     /// Determine the type of knob
@@ -280,8 +277,8 @@ class MainViewModel {
   }
 
   /// Switch Button Logic
-  circleShaderFlgMethod(BuildContext context, bool flg) {
-    circleSet(context);
+  circleShaderFlgMethod(double deviceWidth, bool flg) {
+    circleSet(deviceWidth);
 
     /// Pie chart animation direction.
     dataViewModel.circleShaderFlg = flg;
@@ -293,7 +290,7 @@ class MainViewModel {
             : CircleShader.circleNone;
   }
 
-  _resetCircle(BuildContext context) {
+  _resetCircle(double deviceWidth) {
     /// Determine the type of knob
     dataViewModel.circleData.circleShader = CircleShader.butt;
 
@@ -308,8 +305,7 @@ class MainViewModel {
     dataViewModel.circleData.circlePointerValue =
         dataViewModel.circleData.circleStrokeWidth / 2;
     dataViewModel.circleData.circleSizeValue = 0;
-    dataViewModel.circleData.circleSizeValue =
-        MediaQuery.of(context).size.width / 2;
+    dataViewModel.circleData.circleSizeValue = deviceWidth / 2;
   }
 
   _randomCircleList(int index) {
