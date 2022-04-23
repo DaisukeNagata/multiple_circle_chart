@@ -80,13 +80,13 @@ class MainViewModel {
   Column sliderSets(DesignTypeCallBack call, double deviceWidth) {
     return Column(
       children: [
-        Padding(padding: EdgeInsets.only(top: viewModel.padTopBottom)),
+        Padding(padding: EdgeInsets.only(top: viewModel.topBottom)),
         wSlider(call, RangeValues(viewModel.rValue, viewModel.fValue),
             viewModel.setColorModel.setColor.length.toDouble(),
             keyValue: viewModel.globalKey),
         sliderSet(call, viewModel.speedValue, 20000.0),
         sliderSet(call, viewModel.circleData.circleSizeValue, deviceWidth),
-        Padding(padding: EdgeInsets.only(top: viewModel.padValue))
+        Padding(padding: EdgeInsets.only(top: viewModel.pad))
       ],
     );
   }
@@ -110,7 +110,7 @@ class MainViewModel {
                         : viewModel.rValue),
               ],
             ),
-            Padding(padding: EdgeInsets.only(top: viewModel.padValue)),
+            Padding(padding: EdgeInsets.only(top: viewModel.pad)),
           ],
         ),
       ],
@@ -129,7 +129,7 @@ class MainViewModel {
                 fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold),
           ),
         ),
-        Padding(padding: EdgeInsets.only(top: viewModel.padValue)),
+        Padding(padding: EdgeInsets.only(top: viewModel.pad)),
         SizedBox(
           width: viewModel.circleData.circleSizeValue,
           height: viewModel.circleData.circleSizeValue,
@@ -162,7 +162,7 @@ class MainViewModel {
 
   Slider sliderSet(DesignTypeCallBack call, double value, max,
       {Key? keyValue}) {
-    Padding(padding: EdgeInsets.only(top: viewModel.padValue));
+    Padding(padding: EdgeInsets.only(top: viewModel.pad));
     return Slider(
       key: keyValue,
       value: value,
@@ -178,7 +178,7 @@ class MainViewModel {
 
   OutlinedButton setButton(
       bool forwardFlg, double counterValue, double circleLabelValue) {
-    Padding(padding: EdgeInsets.only(top: viewModel.padValue));
+    Padding(padding: EdgeInsets.only(top: viewModel.pad));
     return OutlinedButton(
       onPressed: () {
         viewModel.circleData.circleForwardFlg = forwardFlg;
@@ -196,8 +196,7 @@ class MainViewModel {
 
   CupertinoSwitch switchSet(DesignTypeCallBack call, Key keyValue) {
     Padding(
-        padding: EdgeInsets.only(
-            left: viewModel.padValue, right: viewModel.padValue));
+        padding: EdgeInsets.only(left: viewModel.pad, right: viewModel.pad));
     if (keyValue == viewModel.circleColorKey) {
       return CupertinoSwitch(
         key: viewModel.circleColorKey,
@@ -316,7 +315,7 @@ class MainViewModel {
     /// Determine the knob shadow color
     viewModel.circleData.circleShadowColor = Colors.black;
 
-    viewModel.padValue = 30;
+    viewModel.pad = 30;
     viewModel.circleData.circleStrokeWidth = 30;
     viewModel.circleData.circlePointerValue =
         viewModel.circleData.circleStrokeWidth / 2;

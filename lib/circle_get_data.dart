@@ -34,9 +34,10 @@ class CircleGetData extends CustomPainter {
     }
   }
 
-  // circle expansion logic when tapping
+  /// circle expansion logic when tapping
   circleTapLogic(double value) {
     for (var i = 0; i < (_data.startValue?.length ?? 0); i++) {
+      ///　Determine the value of the start point and end point and the value of the tap point for each element.
       if ((_data.startValue?[i] ?? 0) < value &&
           (_data.startValue?[i] ?? 0) + (_data.endValue?[i] ?? 0) > value) {
         if (_data.circleTapIndex == i) {
@@ -52,17 +53,17 @@ class CircleGetData extends CustomPainter {
     }
   }
 
-  var hitTestFlg = true;
+  bool _hitTestFlg = true;
 
   /// It reacts twice.
   @override
   bool hitTest(Offset position) {
-    if (hitTestFlg) {
+    if (_hitTestFlg) {
       double value = _data.circleSizeValue / 2;
       angel(Size.zero, Size(position.dx - value, position.dy - value));
-      hitTestFlg = false;
+      _hitTestFlg = false;
     } else {
-      hitTestFlg = true;
+      _hitTestFlg = true;
     }
     return true;
   }

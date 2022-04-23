@@ -36,7 +36,22 @@ class MyHomePageState extends State<MyHomePage> with CallBackLogic {
   @override
   void initState() {
     super.initState();
-    counterStream();
+    _initStream();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    mModel.circleSet(MediaQuery.of(context).size.width);
+    mModel.viewModel.circleData.circleDefalutTapValue = 1.2;
+  }
+
+  _initStream() {
+    mModel.viewModel.controller.counterStream.listen((event) {
+      setState(() {
+        mModel.viewModel.circleLabelValue = (event * 100);
+      });
+    });
     callback = (type,
             {double? max, double? value, RangeValues? values, bool? flg}) =>
         {
@@ -61,13 +76,6 @@ class MyHomePageState extends State<MyHomePage> with CallBackLogic {
             }
           })
         };
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    mModel.circleSet(MediaQuery.of(context).size.width);
-    mModel.viewModel.circleData.circleDefalutTapValue = 1.2;
   }
 
   @override
@@ -96,7 +104,7 @@ class MyHomePageState extends State<MyHomePage> with CallBackLogic {
           child: Column(
             children: [
               Padding(
-                  padding: EdgeInsets.only(top: mModel.viewModel.padTopBottom)),
+                  padding: EdgeInsets.only(top: mModel.viewModel.topBottom)),
               mModel.stack(),
               mModel.sliderSets(callback, MediaQuery.of(context).size.width),
               mModel.setRow(),
@@ -106,13 +114,5 @@ class MyHomePageState extends State<MyHomePage> with CallBackLogic {
         ),
       ),
     );
-  }
-
-  counterStream() {
-    mModel.viewModel.controller.counterStream.listen((event) {
-      setState(() {
-        mModel.viewModel.circleLabelValue = (event * 100);
-      });
-    });
   }
 }
