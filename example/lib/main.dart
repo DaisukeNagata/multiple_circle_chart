@@ -32,11 +32,39 @@ class MyHomePage extends StatefulWidget {
 
 class MyHomePageState extends State<MyHomePage> {
   MainViewModel mModel = MainViewModel();
+  late DesignTypeCallBack callback;
 
   @override
   void initState() {
     super.initState();
     counterStream();
+    callback = (type,
+            {double? max, double? value, RangeValues? values, bool? flg}) =>
+        {
+          setState(() {
+            double width = MediaQuery.of(context).size.width;
+            switch (type) {
+              case DesignType.wSliderState:
+                mModel.wSliderState(values);
+                break;
+              case DesignType.combineState:
+                mModel.combineState(width, max, value);
+                break;
+              case DesignType.knobState:
+                mModel.knobState(width, flg);
+                break;
+              case DesignType.knobRoundState:
+                mModel.knobRoundState(width, flg);
+                break;
+              case DesignType.circleDesignState:
+                mModel.circleDesignState(width, flg ?? false);
+                break;
+              case DesignType.init:
+                // TODO: Handle this case.
+                break;
+            }
+          })
+        };
   }
 
   @override
@@ -74,39 +102,15 @@ class MyHomePageState extends State<MyHomePage> {
               Padding(
                   padding: EdgeInsets.only(top: mModel.viewModel.padTopBottom)),
               mModel.stack(),
-              mModel.sliderSets(this, MediaQuery.of(context).size.width),
+              mModel.sliderSets(callback, MediaQuery.of(context).size.width),
               mModel.setRow(),
-              mModel.switchSetRow(this),
+              mModel.switchSetRow(callback),
             ],
           ),
         ),
       ),
     );
   }
-
-  /// setState
-  mModelState(DesignType type,
-          {double? max, double? value, RangeValues? values, bool? flg}) =>
-      setState(() {
-        double width = MediaQuery.of(context).size.width;
-        switch (type) {
-          case DesignType.wSliderState:
-            mModel.wSliderState(values);
-            break;
-          case DesignType.combineState:
-            mModel.combineState(width, max, value);
-            break;
-          case DesignType.knobState:
-            mModel.knobState(width, flg);
-            break;
-          case DesignType.knobRoundState:
-            mModel.knobRoundState(width, flg);
-            break;
-          case DesignType.circleDesignState:
-            mModel.circleDesignState(width, flg ?? false);
-            break;
-        }
-      });
 
   counterStream() {
     mModel.viewModel.controller.counterStream.listen((event) {

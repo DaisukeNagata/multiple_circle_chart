@@ -5,10 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:multiple_circle_chart/circle_data_item.dart';
 import 'package:multiple_circle_chart/multiple_circle_set_progress.dart';
 
-import 'main.dart';
 import 'main_circle_data_model.dart';
 
+typedef DesignTypeCallBack = Function(DesignType type,
+    {double? max, double? value, RangeValues? values, bool? flg});
+
 enum DesignType {
+  init,
   wSliderState,
   combineState,
   knobState,
@@ -20,18 +23,19 @@ class MainViewModel {
   late final MainCircleDataModel viewModel = MainCircleDataModel();
 
   wSliderState(RangeValues? values) {
-    if (viewModel.rValue != values?.start) {
-      viewModel.rValue = values?.start ?? 0;
+    RangeValues valuesSet = values ?? const RangeValues(0, 0);
+    if (viewModel.rValue != valuesSet.start) {
+      viewModel.rValue = valuesSet.start;
     } else if (viewModel.fValue != values?.end) {
-      viewModel.fValue = values?.end ?? 0;
+      viewModel.fValue = valuesSet.end;
     }
   }
 
   combineState(double deviceWidth, double? max, double? value) {
     if (max == deviceWidth) {
-      viewModel.circleData.circleSizeValue = value ?? 0;
+      viewModel.circleData.circleSizeValue = (value ?? 0);
       if (!viewModel.circleCombineFlg) {
-        viewModel.circleData.circleStrokeWidth = value ?? 0 / 3;
+        viewModel.circleData.circleStrokeWidth = (value ?? 0) / 3;
       }
     } else if (max == 20000) {
       viewModel.speedValue = value ?? 0;
@@ -57,26 +61,26 @@ class MainViewModel {
         circleKey: viewModel.circleKey, circle: viewModel.circleData);
   }
 
-  switchSetRow(MyHomePageState m) {
+  switchSetRow(DesignTypeCallBack call) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        switchSet(m, viewModel.circleColorKey),
-        switchSet(m, viewModel.circleShaderFlgKey),
-        switchSet(m, viewModel.circleCombinedKey),
+        switchSet(call, viewModel.circleColorKey),
+        switchSet(call, viewModel.circleShaderFlgKey),
+        switchSet(call, viewModel.circleCombinedKey),
       ],
     );
   }
 
-  Column sliderSets(MyHomePageState m, double deviceWidth) {
+  Column sliderSets(DesignTypeCallBack call, double deviceWidth) {
     return Column(
       children: [
         Padding(padding: EdgeInsets.only(top: viewModel.padTopBottom)),
-        wSlider(m, RangeValues(viewModel.rValue, viewModel.fValue),
+        wSlider(call, RangeValues(viewModel.rValue, viewModel.fValue),
             viewModel.setColorModel.setColor.length.toDouble(),
             keyValue: viewModel.globalKey),
-        sliderSet(m, viewModel.speedValue, 20000.0),
-        sliderSet(m, viewModel.circleData.circleSizeValue, deviceWidth),
+        sliderSet(call, viewModel.speedValue, 20000.0),
+        sliderSet(call, viewModel.circleData.circleSizeValue, deviceWidth),
         Padding(padding: EdgeInsets.only(top: viewModel.padValue))
       ],
     );
@@ -134,7 +138,7 @@ class MainViewModel {
     );
   }
 
-  RangeSlider wSlider(MyHomePageState m, RangeValues values, max,
+  RangeSlider wSlider(DesignTypeCallBack call, RangeValues values, max,
       {Key? keyValue}) {
     return RangeSlider(
       key: keyValue,
@@ -146,12 +150,13 @@ class MainViewModel {
         values.end.toString(),
       ),
       onChanged: (RangeValues values) {
-        m.mModelState(DesignType.wSliderState, values: values);
+        call(DesignType.wSliderState, values: values);
       },
     );
   }
 
-  Slider sliderSet(MyHomePageState m, double value, max, {Key? keyValue}) {
+  Slider sliderSet(DesignTypeCallBack call, double value, max,
+      {Key? keyValue}) {
     Padding(padding: EdgeInsets.only(top: viewModel.padValue));
     return Slider(
       key: keyValue,
@@ -161,7 +166,7 @@ class MainViewModel {
       label: value.toString(),
       divisions: 1000,
       onChanged: (double value) {
-        m.mModelState(DesignType.combineState, max: max, value: value);
+        call(DesignType.combineState, max: max, value: value);
       },
     );
   }
@@ -184,7 +189,7 @@ class MainViewModel {
     );
   }
 
-  CupertinoSwitch switchSet(MyHomePageState m, Key keyValue) {
+  CupertinoSwitch switchSet(DesignTypeCallBack call, Key keyValue) {
     Padding(
         padding: EdgeInsets.only(
             left: viewModel.padValue, right: viewModel.padValue));
@@ -194,7 +199,7 @@ class MainViewModel {
         value: viewModel.circleColorFlg,
         onChanged: (flg) {
           if (viewModel.circleCombineFlg) {
-            m.mModelState(DesignType.knobState, flg: flg);
+            call(DesignType.knobState, flg: flg);
           }
         },
       );
@@ -204,7 +209,7 @@ class MainViewModel {
         value: viewModel.circleShaderFlg,
         onChanged: (flg) {
           if (viewModel.circleCombineFlg) {
-            m.mModelState(DesignType.knobRoundState, flg: flg);
+            call(DesignType.knobRoundState, flg: flg);
           }
         },
       );
@@ -213,7 +218,7 @@ class MainViewModel {
         key: viewModel.circleCombinedKey,
         value: viewModel.circleCombineFlg,
         onChanged: (flg) {
-          m.mModelState(DesignType.circleDesignState, flg: flg);
+          call(DesignType.circleDesignState, flg: flg);
         },
       );
     }
