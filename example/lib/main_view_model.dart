@@ -10,8 +10,13 @@ import 'main_circle_data_model.dart';
 typedef DesignTypeCallBack = Function(DesignType type,
     {double? max, double? value, RangeValues? values, bool? flg});
 
+abstract class CallBackLogic {
+  late DesignTypeCallBack callback = (type,
+          {double? max, double? value, RangeValues? values, bool? flg}) =>
+      {};
+}
+
 enum DesignType {
-  init,
   wSliderState,
   combineState,
   knobState,

@@ -30,9 +30,8 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => MyHomePageState();
 }
 
-class MyHomePageState extends State<MyHomePage> {
+class MyHomePageState extends State<MyHomePage> with CallBackLogic {
   MainViewModel mModel = MainViewModel();
-  late DesignTypeCallBack callback;
 
   @override
   void initState() {
@@ -58,9 +57,6 @@ class MyHomePageState extends State<MyHomePage> {
                 break;
               case DesignType.circleDesignState:
                 mModel.circleDesignState(width, flg ?? false);
-                break;
-              case DesignType.init:
-                // TODO: Handle this case.
                 break;
             }
           })
