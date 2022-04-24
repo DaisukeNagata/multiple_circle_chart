@@ -40,24 +40,6 @@ class OverLappingBarState extends State<OverLappingWidget>
   OverLappingViewModel viewModel = OverLappingViewModel();
 
   @override
-  void initState() {
-    super.initState();
-    callback = (type, {RadData? radData, double? width}) => {
-          setState(() {
-            double width = MediaQuery.of(context).size.width;
-            switch (type) {
-              case OverLapType.animationControllerInit:
-                viewModel.animationInitState(context, width / 1.2);
-                break;
-              case OverLapType.buttonSet:
-                viewModel.buttonSetState(callback, this);
-                break;
-            }
-          })
-        };
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -79,5 +61,22 @@ class OverLappingBarState extends State<OverLappingWidget>
         viewModel.buttonSet(callback),
       ],
     );
+  }
+
+  @override
+  OverLapCallBack? callback(OverLapType type,
+      {RadData? radData, double? width}) {
+    setState(() {
+      double width = MediaQuery.of(context).size.width;
+      switch (type) {
+        case OverLapType.animationControllerInit:
+          viewModel.animationInitState(context, width / 1.2);
+          break;
+        case OverLapType.buttonSet:
+          viewModel.buttonSetState(callback, this);
+          break;
+      }
+    });
+    return null;
   }
 }

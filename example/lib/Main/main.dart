@@ -46,36 +46,38 @@ class MyHomePageState extends State<MyHomePage> with CallBackLogic {
     mModel.viewModel.circleData.circleDefalutTapValue = 1.2;
   }
 
+  @override
+  DesignTypeCallBack? callback(type,
+      {double? max, double? value, RangeValues? values, bool? flg}) {
+    setState(() {
+      double width = MediaQuery.of(context).size.width;
+      switch (type) {
+        case DesignType.wSliderState:
+          mModel.wSliderState(values);
+          break;
+        case DesignType.combineState:
+          mModel.combineState(width, max, value);
+          break;
+        case DesignType.knobState:
+          mModel.knobState(width, flg);
+          break;
+        case DesignType.knobRoundState:
+          mModel.knobRoundState(width, flg);
+          break;
+        case DesignType.circleDesignState:
+          mModel.circleDesignState(width, flg ?? false);
+          break;
+      }
+    });
+    return null;
+  }
+
   _initStream() {
     mModel.viewModel.controller.counterStream.listen((event) {
       setState(() {
         mModel.viewModel.circleLabelValue = (event * 100);
       });
     });
-    callback = (type,
-            {double? max, double? value, RangeValues? values, bool? flg}) =>
-        {
-          setState(() {
-            double width = MediaQuery.of(context).size.width;
-            switch (type) {
-              case DesignType.wSliderState:
-                mModel.wSliderState(values);
-                break;
-              case DesignType.combineState:
-                mModel.combineState(width, max, value);
-                break;
-              case DesignType.knobState:
-                mModel.knobState(width, flg);
-                break;
-              case DesignType.knobRoundState:
-                mModel.knobRoundState(width, flg);
-                break;
-              case DesignType.circleDesignState:
-                mModel.circleDesignState(width, flg ?? false);
-                break;
-            }
-          })
-        };
   }
 
   @override

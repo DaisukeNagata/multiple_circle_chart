@@ -12,12 +12,8 @@ typedef OverLapCallBack = Function(OverLapType type,
     {RadData? radData, double? width});
 
 abstract class OverLapCallBackLogic {
-  /// Note: Dart allows type aliases to be declared as type names in the spec,
-  /// but currently type aliases are limited to functions only.
-  /// This will be changed in the future.
-  // ignore: prefer_function_declarations_over_variables
-  OverLapCallBack callback =
-      (OverLapType type, {RadData? radData, double? width}) => {};
+  OverLapCallBack? callback(OverLapType type,
+      {RadData? radData, double? width});
 }
 
 enum OverLapType {
