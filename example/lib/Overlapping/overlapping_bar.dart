@@ -64,8 +64,7 @@ class OverLappingBarState extends State<OverLappingWidget>
   }
 
   @override
-  OverLapCallBack? callback(OverLapType type,
-      {RadData? radData, double? width}) {
+  OverLapCallBack? callback(OverLapType type) {
     setState(() {
       double width = MediaQuery.of(context).size.width;
       switch (type) {

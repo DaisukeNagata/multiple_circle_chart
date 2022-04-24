@@ -8,12 +8,10 @@ import 'package:multiple_circle_chart/OverlappingBar/overlapping_progress_indica
 import 'overLapping_model.dart';
 import 'overlapping_bar.dart';
 
-typedef OverLapCallBack = Function(OverLapType type,
-    {RadData? radData, double? width});
+typedef OverLapCallBack = Function(OverLapType type);
 
 abstract class OverLapCallBackLogic {
-  OverLapCallBack? callback(OverLapType type,
-      {RadData? radData, double? width});
+  OverLapCallBack? callback(OverLapType type);
 }
 
 enum OverLapType {
