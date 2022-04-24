@@ -1,7 +1,7 @@
-import 'package:example/main_view_model.dart';
+import 'package:example/Main/main_view_model.dart';
 import 'package:flutter/material.dart';
 
-import 'overlapping_bar.dart';
+import '../Overlapping/overlapping_bar.dart';
 
 void main() {
   runApp(const MyApp());

@@ -11,7 +11,11 @@ typedef DesignTypeCallBack = Function(DesignType type,
     {double? max, double? value, RangeValues? values, bool? flg});
 
 abstract class CallBackLogic {
-  late DesignTypeCallBack callback = (type,
+  /// Note: Dart allows type aliases to be declared as type names in the spec,
+  /// but currently type aliases are limited to functions only.
+  /// This will be changed in the future.
+  // ignore: prefer_function_declarations_over_variables
+  DesignTypeCallBack callback = (type,
           {double? max, double? value, RangeValues? values, bool? flg}) =>
       {};
 }
