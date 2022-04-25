@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
+
 import 'overlapping_data.dart';
 
 /// The OverlappingPainter class is a class that sets overlapping graphs.
