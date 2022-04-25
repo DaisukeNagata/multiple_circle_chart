@@ -27,9 +27,11 @@ class OverLappingViewModel {
   OverlappingProgressIndicator? indicator;
   OverlappingProgressIndicator? indicator2;
   OverlappingProgressIndicator? indicator3;
+  OverlappingProgressIndicator? indicator4;
   GlobalKey globalKey = GlobalKey();
   GlobalKey globalKey2 = GlobalKey();
   GlobalKey globalKey3 = GlobalKey();
+  GlobalKey globalKey4 = GlobalKey();
   RadData radData = RadData.vertical;
 
   CustomPaint setPaint(double width, int graphCount) {
@@ -75,6 +77,36 @@ class OverLappingViewModel {
                   Size(width, 400), graphCount, Colors.orange, radData),
               child: CustomPaint(
                 painter: OverlappingGraphText(textStyle, 50, 1, -25, 20,
+                    Size(width, 400), graphCount, Colors.orange, radData),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  CustomPaint setPaint4(double width, int graphCount) {
+    TextStyle textStyle = const TextStyle(
+      inherit: true,
+      color: Colors.white,
+      fontSize: 5,
+    );
+    return CustomPaint(
+      painter: indicator4?.setPainter("", -1, 0, model.colorList,
+          circleData: CircleData.allCircle, textColor: Colors.grey),
+      child: CustomPaint(
+        painter: indicator4?.setPainter("0", 0, 3, model.colorList,
+            circleData: CircleData.allCircle),
+        child: CustomPaint(
+          painter: indicator4?.setPainter("1", 1, 3, model.colorList),
+          child: CustomPaint(
+            painter: indicator4?.setPainter("2", 2, 3, model.colorList),
+            child: CustomPaint(
+              painter: OverlappingGridPainter(textStyle, 40, 1, -25, 20,
+                  Size(width, 400), graphCount, Colors.orange, radData),
+              child: CustomPaint(
+                painter: OverlappingGraphText(textStyle, 40, 1, -25, 20,
                     Size(width, 400), graphCount, Colors.orange, radData),
               ),
             ),
@@ -185,5 +217,7 @@ class OverLappingViewModel {
         indicatorSet(context, globalKey2, width, setPaint2(width, graphCount));
     indicator3 =
         indicatorSet(context, globalKey3, width, setPaint3(width, graphCount));
+    // indicator4 =
+    //     indicatorSet(context, globalKey4, width, setPaint4(width, graphCount));
   }
 }

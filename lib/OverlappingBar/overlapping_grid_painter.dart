@@ -57,15 +57,15 @@ class OverlappingGridPainter extends CustomPainter {
         path.moveTo(0, value + boxSize + 7.5);
         path.relativeLineTo(sizeSet.width, 0);
       } else {
-        path.moveTo(i == wLines ? value + wLines : value, boxSize + 7.5);
+        path.moveTo(sizeSet.width / wLines * i, boxSize + 7.5);
         path.relativeLineTo(0, -boxSize * (graphCount * 2));
       }
     } else {
       if (flg) {
-        path.moveTo(0, boxSize + value);
+        path.moveTo(0, value + boxSize + 7.5);
         path.relativeLineTo(sizeSet.width, 0);
       } else {
-        path.moveTo(i == wLines ? value + wLines : value, boxSize);
+        path.moveTo(sizeSet.width / wLines * i, boxSize + 7.5);
         path.relativeLineTo(0, -boxSize * (graphCount * 2));
       }
     }

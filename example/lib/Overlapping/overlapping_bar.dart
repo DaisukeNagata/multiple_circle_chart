@@ -41,23 +41,22 @@ class OverLappingBarState extends State<OverLappingWidget>
 
   @override
   Widget build(BuildContext context) {
+    var dta = viewModel.indicator?.radData;
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Transform.rotate(
-            angle: (viewModel.indicator?.radData == RadData.horizontal
-                    ? 360
-                    : -90) *
-                pi /
-                180,
+            angle: (dta == RadData.horizontal ? 360 : -90) * pi / 180,
             child: Column(
               children: [
                 viewModel.indicatorRowSet(viewModel.indicator,
-                    MediaQuery.of(context).size.width / 1.2),
+                    MediaQuery.of(context).size.width / 1.3),
                 viewModel.indicatorRowSet(viewModel.indicator2,
-                    MediaQuery.of(context).size.width / 1.2),
+                    MediaQuery.of(context).size.width / 1.3),
                 viewModel.indicatorRowSet(viewModel.indicator3,
-                    MediaQuery.of(context).size.width / 1.2),
+                    MediaQuery.of(context).size.width / 1.3),
+                // viewModel.indicatorRowSet(viewModel.indicator4,
+                //     MediaQuery.of(context).size.width / 1.3),
               ],
             )),
         viewModel.buttonSet(callback),
@@ -73,7 +72,7 @@ class OverLappingBarState extends State<OverLappingWidget>
         case OverLapType.animationControllerInit:
 
           /// 2 is this number.
-          viewModel.animationInitState(context, width / 1.2, 3);
+          viewModel.animationInitState(context, width / 1.3, 3);
           break;
         case OverLapType.buttonSet:
           viewModel.buttonSetState(callback, this);

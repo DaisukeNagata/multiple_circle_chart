@@ -36,17 +36,29 @@ class OverlappingGraphText extends CustomPainter {
 
     canvas.rotate(degToRad(radData == RadData.horizontal ? 360 : 90));
     for (var i = 0;
-        i <= (radData == RadData.horizontal ? graphCount * 2 : wLines);
+        i <= (radData == RadData.horizontal ? (graphCount * 2) + 1 : wLines);
         ++i) {
-      final y = -boxSize * i;
-      textSpanLogic(canvas, y, true, i, wLines);
+      double y = -boxSize * i;
+      textSpanLogic(
+          canvas,
+          y,
+          true,
+          i,
+          (radData == RadData.horizontal ? (graphCount * 2) : wLines),
+          graphCount);
     }
 
     for (var i = 0;
-        i <= (radData == RadData.vertical ? graphCount * 2 : wLines);
+        i <= (radData == RadData.vertical ? (graphCount * 2) + 1 : wLines);
         ++i) {
       final x = boxSize * i;
-      textSpanLogic(canvas, x, false, i, wLines);
+      textSpanLogic(
+          canvas,
+          x,
+          false,
+          i,
+          (radData == RadData.vertical ? (graphCount * 2) : wLines),
+          graphCount);
     }
     final paint = Paint()
       ..strokeWidth = strokeWidth
@@ -55,18 +67,18 @@ class OverlappingGraphText extends CustomPainter {
     canvas.drawPath(path, paint);
   }
 
-  textSpanLogic(Canvas canvas, double value, bool flg, int i, int wLines) {
+  textSpanLogic(Canvas canvas, double value, bool flg, int i, int wLines,
+      int graphCount) {
+    double textValue = flg ? value * -1 : value;
     if (i <= wLines) {
       final textSpan = TextSpan(
         style: textStyle,
-        children: <TextSpan>[
-          TextSpan(text: '${value >= 0 ? value : value * -1}')
-        ],
+        children: <TextSpan>[TextSpan(text: '${textValue}')],
       );
 
       final textPainter = TextPainter(
         text: textSpan,
-        textDirection: TextDirection.rtl,
+        textDirection: TextDirection.ltr,
       );
       textPainter.layout(
         minWidth: 0,
@@ -77,13 +89,14 @@ class OverlappingGraphText extends CustomPainter {
         if (flg) {
           offset = Offset(offsetX, (boxSize + value));
         } else {
-          offset = Offset(value, boxSize + offsetY);
+          offset = Offset(sizeSet.width / wLines * i, boxSize + offsetY);
         }
       } else {
         if (flg) {
-          offset = Offset(offsetX * wLines, value);
+          offset = Offset(-boxSize * (graphCount * 2) - offsetX,
+              -sizeSet.width / wLines * i - 7.5);
         } else {
-          offset = Offset(value + offsetX * (wLines - 1), offsetY);
+          offset = Offset(-(boxSize * (wLines - 1) - 7.5) + value, offsetY);
         }
       }
       textPainter.paint(canvas, offset);
