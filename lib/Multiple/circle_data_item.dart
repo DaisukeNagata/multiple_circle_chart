@@ -28,7 +28,7 @@ class CircleDataItem {
     double? circleCombinedTextSize,
     Size? graphTextSize,
     double? circleTapValue,
-    double? circleDefalutTapValue,
+    double? circleDefaultTapValue,
     int? circleTapIndex,
     List<Size>? circleTextSizeList,
     List<Size>? circleTextMarginList,
@@ -60,7 +60,7 @@ class CircleDataItem {
   CircleProgressController circleController = CircleProgressController();
   double? circleCombinedTextSize;
   double? circleTapValue;
-  double? circleDefalutTapValue;
+  double? circleDefaultTapValue;
   int? circleTapIndex;
   List<Size>? circleTextSizeList;
   List<Size>? circleTextMarginList;

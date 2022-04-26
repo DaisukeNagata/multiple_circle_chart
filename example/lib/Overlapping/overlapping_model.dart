@@ -1,8 +1,6 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
-class OveriLappingModel {
+class OverLappingModel {
   List<Color> colorList = [
     Colors.green.shade50,
     Colors.green.shade100,

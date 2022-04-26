@@ -41,9 +41,9 @@ class CircleGetData extends CustomPainter {
           (_data.startValue?[i] ?? 0) + (_data.endValue?[i] ?? 0) > value) {
         if (_data.circleTapIndex == i) {
           _data.circleTapValue =
-              _data.circleTapValue == 1.0 ? _data.circleDefalutTapValue : 1.0;
+              _data.circleTapValue == 1.0 ? _data.circleDefaultTapValue : 1.0;
         } else {
-          _data.circleTapValue = _data.circleDefalutTapValue;
+          _data.circleTapValue = _data.circleDefaultTapValue;
         }
         _data.circleTapIndex = i;
         _data.circleController.circleIndex.sink

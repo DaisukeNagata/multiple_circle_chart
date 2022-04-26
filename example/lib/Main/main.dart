@@ -43,7 +43,7 @@ class MyHomePageState extends State<MyHomePage> with CallBackLogic {
   void didChangeDependencies() {
     super.didChangeDependencies();
     mModel.circleSet(MediaQuery.of(context).size.width);
-    mModel.viewModel.circleData.circleDefalutTapValue = 1.2;
+    mModel.viewModel.circleData.circleDefaultTapValue = 1.2;
   }
 
   @override
