@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:multiple_circle_chart/OverlappingBar/overlapping_data.dart';
 
-import 'overLapping_view_model.dart';
+import 'Overlapping/overLapping_view_model.dart';
 
 class OverLappingBar extends StatelessWidget {
   const OverLappingBar({Key? key}) : super(key: key);
@@ -42,6 +42,7 @@ class OverLappingBarState extends State<OverLappingWidget>
   @override
   Widget build(BuildContext context) {
     var dta = viewModel.indicator?.radData;
+    double width = MediaQuery.of(context).size.width / 1.2;
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -49,14 +50,14 @@ class OverLappingBarState extends State<OverLappingWidget>
             angle: (dta == RadData.horizontal ? 360 : -90) * pi / 180,
             child: Column(
               children: [
-                viewModel.indicatorRowSet(viewModel.indicator2,
-                    MediaQuery.of(context).size.width / 1.2),
-                viewModel.indicatorRowSet(viewModel.indicator3,
-                    MediaQuery.of(context).size.width / 1.2),
-                viewModel.indicatorRowSet(viewModel.indicator4,
-                    MediaQuery.of(context).size.width / 1.2),
-                viewModel.indicatorRowSet(viewModel.indicator,
-                    MediaQuery.of(context).size.width / 1.2),
+                viewModel.indicatorRowSet(
+                    viewModel.indicator2, width, viewModel.globalKey2),
+                viewModel.indicatorRowSet(
+                    viewModel.indicator3, width, viewModel.globalKey3),
+                viewModel.indicatorRowSet(
+                    viewModel.indicator4, width, viewModel.globalKey4),
+                viewModel.indicatorRowSet(
+                    viewModel.indicator, width, viewModel.globalKey),
               ],
             )),
         viewModel.buttonSet(callback),
@@ -70,7 +71,7 @@ class OverLappingBarState extends State<OverLappingWidget>
       double width = MediaQuery.of(context).size.width;
       switch (type) {
         case OverLapType.animationControllerInit:
-          viewModel.grapthCount = 4;
+          viewModel.graphCount = 4;
 
           /// 2 is this number.
           viewModel.animationInitState(context, width / 1.2);

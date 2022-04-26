@@ -12,12 +12,21 @@ class OverlappingGridPainter extends CustomPainter {
   final double offsetY;
   final Size sizeSet;
   final Color colorSet;
+  final double graphValue;
   final RadData? radData;
   final path = Path();
   Offset offset = Offset.zero;
 
-  OverlappingGridPainter(this.textStyle, this.boxSize, this.strokeWidth,
-      this.offsetX, this.offsetY, this.sizeSet, this.colorSet, this.radData);
+  OverlappingGridPainter(
+      this.textStyle,
+      this.boxSize,
+      this.strokeWidth,
+      this.offsetX,
+      this.offsetY,
+      this.sizeSet,
+      this.colorSet,
+      this.graphValue,
+      this.radData);
 
   double degToRad(double deg) => deg * (pi / 180.0);
 
@@ -44,18 +53,18 @@ class OverlappingGridPainter extends CustomPainter {
   textSpanLogic(double value, bool flg, int i, int wLines) {
     if (radData == RadData.horizontal) {
       if (flg) {
-        path.moveTo(0, value + boxSize + 7.5);
+        path.moveTo(0, value + boxSize + graphValue);
         path.relativeLineTo(sizeSet.width, 0);
       } else {
-        path.moveTo(sizeSet.width / wLines * i, boxSize + 7.5);
+        path.moveTo(sizeSet.width / wLines * i, boxSize + graphValue);
         path.relativeLineTo(0, -boxSize * 2);
       }
     } else {
       if (flg) {
-        path.moveTo(0, value + boxSize + 7.5);
+        path.moveTo(0, value + boxSize + graphValue);
         path.relativeLineTo(sizeSet.width, 0);
       } else {
-        path.moveTo(sizeSet.width / wLines * i, boxSize + 7.5);
+        path.moveTo(sizeSet.width / wLines * i, boxSize + graphValue);
         path.relativeLineTo(0, -boxSize * 2);
       }
     }

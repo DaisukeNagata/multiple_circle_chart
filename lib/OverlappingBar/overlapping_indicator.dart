@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
@@ -5,7 +7,7 @@ import 'overlapping_data.dart';
 
 /// Abstract model class
 abstract class OverlappingIndicator extends StatefulWidget {
-  OverlappingIndicator(
+  const OverlappingIndicator(
       {Key? key,
       this.globalKey,
       this.dataVerticalOffset,
@@ -20,7 +22,8 @@ abstract class OverlappingIndicator extends StatefulWidget {
       this.radData,
       this.setPaint,
       required this.textSpan,
-      required this.con})
+      required this.con,
+      required this.streamController})
       : super(key: key);
   final GlobalKey? globalKey;
   final Offset? dataVerticalOffset;
@@ -36,6 +39,7 @@ abstract class OverlappingIndicator extends StatefulWidget {
   final CustomPaint? setPaint;
   final TextSpan? textSpan;
   final BuildContext con;
+  final StreamController<Offset> streamController;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

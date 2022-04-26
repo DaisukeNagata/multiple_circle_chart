@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
@@ -6,14 +7,16 @@ import 'overlapping_data.dart';
 
 /// The OverlappingPainter class is a class that sets overlapping graphs.
 class OverlappingPainter extends CustomPainter {
-  OverlappingPainter(
-      {required this.value,
-      required this.contextSize,
-      required this.offsetValue,
-      required this.circleData,
-      required this.radData,
-      required this.backgroundColor,
-      required this.textSpan});
+  OverlappingPainter({
+    required this.value,
+    required this.contextSize,
+    required this.offsetValue,
+    required this.circleData,
+    required this.radData,
+    required this.backgroundColor,
+    required this.textSpan,
+    required this.controller,
+  });
 
   final double? value;
   final Size contextSize;
@@ -22,6 +25,7 @@ class OverlappingPainter extends CustomPainter {
   final RadData? radData;
   final Color backgroundColor;
   final TextSpan? textSpan;
+  final StreamController<Offset> controller;
 
   /// Character arrangement according to height and width.
   void paintBar(Size size, Canvas canvas, TextSpan? span, Offset offsetValue) {
@@ -46,11 +50,11 @@ class OverlappingPainter extends CustomPainter {
   bool hitTest(Offset position) {
     switch (count) {
       case -1:
-        // controller.sink.add(position);
+        controller.sink.add(position);
         break;
       case 2:
         count = 0;
-        // controller.sink.add(position);
+        controller.sink.add(position);
         break;
     }
     count += 1;
