@@ -77,7 +77,7 @@ class OverLappingViewModel {
           Size(value, value), Colors.orange, 7.5, radData),
       child: CustomPaint(
         painter: OverlappingGraphText(textStyle, 40, 1, -25, 20,
-            Size(value, value), graphCount, Colors.orange, radData),
+            Size(value, value), graphCount, 7.5, Colors.orange, radData),
         child: CustomPaint(
           painter: lastIndicator?.setPainter("", -1, 0, model.colorList,
               circleData: CircleData.allCircle, textColor: Colors.grey),

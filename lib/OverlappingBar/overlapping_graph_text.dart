@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'overlapping_data.dart';
 
+///　Sets the coordinate text of the graph.
 class OverlappingGraphText extends CustomPainter {
   final TextStyle textStyle;
   final double boxSize;
@@ -12,6 +13,7 @@ class OverlappingGraphText extends CustomPainter {
   final double offsetY;
   final Size sizeSet;
   final int graphCount;
+  final double graphValue;
   final Color colorSet;
   final RadData? radData;
   final path = Path();
@@ -25,6 +27,7 @@ class OverlappingGraphText extends CustomPainter {
       this.offsetY,
       this.sizeSet,
       this.graphCount,
+      this.graphValue,
       this.colorSet,
       this.radData);
 
@@ -35,6 +38,8 @@ class OverlappingGraphText extends CustomPainter {
     final wLines = (sizeSet.width ~/ boxSize);
 
     canvas.rotate(degToRad(radData == RadData.horizontal ? 360 : 90));
+
+    ///　Have textSpanLogic logic think about the balance of the ruled text.
     for (var i = 0;
         i <= (radData == RadData.horizontal ? (graphCount * 2) + 1 : wLines);
         ++i) {
@@ -48,6 +53,7 @@ class OverlappingGraphText extends CustomPainter {
           graphCount);
     }
 
+    ///　Have textSpanLogic logic think about the balance of the ruled text.
     for (var i = 0;
         i <= (radData == RadData.vertical ? (graphCount * 2) + 1 : wLines);
         ++i) {
@@ -94,9 +100,10 @@ class OverlappingGraphText extends CustomPainter {
       } else {
         if (flg) {
           offset = Offset(-boxSize * (graphCount * 2) - offsetX,
-              -sizeSet.width / wLines * i - 7.5);
+              -sizeSet.width / wLines * i - graphValue);
         } else {
-          offset = Offset(-(boxSize * (wLines - 1) - 7.5) + value, offsetY);
+          offset =
+              Offset(-(boxSize * (wLines - 1) - graphValue) + value, offsetY);
         }
       }
       textPainter.paint(canvas, offset);

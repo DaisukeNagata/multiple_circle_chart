@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'overlapping_data.dart';
 
+///　Set the ruled line of the graph.
 class OverlappingGridPainter extends CustomPainter {
   final TextStyle textStyle;
   final double boxSize;
@@ -34,11 +35,14 @@ class OverlappingGridPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final wLines = (sizeSet.width ~/ boxSize);
 
+    ///　A value of 2 will balance the ruled lines.
+    ///　Have textSpanLogic logic think about the balance of the ruled lines.
     for (var i = 0; i <= 2; ++i) {
       final y = -boxSize * i;
       textSpanLogic(y, true, i, wLines);
     }
 
+    ///　Have textSpanLogic logic think about the balance of the ruled lines.
     for (var i = 0; i <= wLines; ++i) {
       final x = boxSize * i;
       textSpanLogic(x, false, i, wLines);
