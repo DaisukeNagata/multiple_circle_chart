@@ -33,51 +33,29 @@ class OverLappingViewModel {
   GlobalKey globalKey3 = GlobalKey();
   GlobalKey globalKey4 = GlobalKey();
   RadData radData = RadData.vertical;
+  int grapthCount = 0;
 
-  CustomPaint setPaint(double width, int graphCount) {
+  CustomPaint setPaint4(double width) {
     TextStyle textStyle = const TextStyle(
       inherit: true,
       color: Colors.white,
       fontSize: 5,
     );
     return CustomPaint(
-      painter: indicator?.setPainter("", -1, 0, model.colorList,
-          circleData: CircleData.allCircle, textColor: Colors.grey),
+      painter: OverlappingGridPainter(
+          textStyle, 40, 1, -25, 20, Size(width, 400), Colors.orange, radData),
       child: CustomPaint(
-        painter: indicator?.setPainter("0", 0, 3, model.colorList,
-            circleData: CircleData.allCircle),
+        painter: indicator4?.setPainter("", -1, 0, model.colorList,
+            circleData: CircleData.allCircle, textColor: Colors.grey),
         child: CustomPaint(
-          painter: indicator?.setPainter("1", 1, 3, model.colorList),
+          painter: indicator4?.setPainter("0", 0, 3, model.colorList,
+              circleData: CircleData.allCircle),
           child: CustomPaint(
-            painter: indicator?.setPainter("2", 2, 3, model.colorList),
-          ),
-        ),
-      ),
-    );
-  }
-
-  CustomPaint setPaint3(double width, int graphCount) {
-    TextStyle textStyle = const TextStyle(
-      inherit: true,
-      color: Colors.white,
-      fontSize: 5,
-    );
-    return CustomPaint(
-      painter: indicator3?.setPainter("", -1, 0, model.colorList,
-          circleData: CircleData.allCircle, textColor: Colors.grey),
-      child: CustomPaint(
-        painter: indicator3?.setPainter("0", 0, 3, model.colorList,
-            circleData: CircleData.allCircle),
-        child: CustomPaint(
-          painter: indicator3?.setPainter("1", 1, 3, model.colorList),
-          child: CustomPaint(
-            painter: indicator3?.setPainter("2", 2, 3, model.colorList),
+            painter: indicator4?.setPainter("1", 1, 3, model.colorList),
             child: CustomPaint(
-              painter: OverlappingGridPainter(textStyle, 50, 1, -25, 20,
-                  Size(width, 400), graphCount, Colors.orange, radData),
+              painter: indicator4?.setPainter("2", 2, 3, model.colorList),
               child: CustomPaint(
-                painter: OverlappingGraphText(textStyle, 50, 1, -25, 20,
-                    Size(width, 400), graphCount, Colors.orange, radData),
+                painter: indicator4?.setPainter("3", 3, 3, model.colorList),
               ),
             ),
           ),
@@ -86,28 +64,80 @@ class OverLappingViewModel {
     );
   }
 
-  CustomPaint setPaint4(double width, int graphCount) {
+  CustomPaint setPaint3(double width) {
     TextStyle textStyle = const TextStyle(
       inherit: true,
       color: Colors.white,
       fontSize: 5,
     );
     return CustomPaint(
-      painter: indicator4?.setPainter("", -1, 0, model.colorList,
-          circleData: CircleData.allCircle, textColor: Colors.grey),
+      painter: OverlappingGridPainter(
+          textStyle, 40, 1, -25, 20, Size(width, 400), Colors.orange, radData),
       child: CustomPaint(
-        painter: indicator4?.setPainter("0", 0, 3, model.colorList,
-            circleData: CircleData.allCircle),
+        painter: indicator3?.setPainter("", -1, 0, model.colorList,
+            circleData: CircleData.allCircle, textColor: Colors.grey),
         child: CustomPaint(
-          painter: indicator4?.setPainter("1", 1, 3, model.colorList),
+          painter: indicator3?.setPainter("0", 0, 3, model.colorList,
+              circleData: CircleData.allCircle),
           child: CustomPaint(
-            painter: indicator4?.setPainter("2", 2, 3, model.colorList),
+            painter: indicator3?.setPainter("1", 1, 3, model.colorList),
             child: CustomPaint(
-              painter: OverlappingGridPainter(textStyle, 40, 1, -25, 20,
-                  Size(width, 400), graphCount, Colors.orange, radData),
+              painter: indicator3?.setPainter("2", 2, 3, model.colorList),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  CustomPaint setPaint2(double width) {
+    TextStyle textStyle = const TextStyle(
+      inherit: true,
+      color: Colors.white,
+      fontSize: 5,
+    );
+    return CustomPaint(
+      painter: OverlappingGridPainter(
+          textStyle, 40, 1, -25, 20, Size(width, 400), Colors.orange, radData),
+      child: CustomPaint(
+        painter: indicator2?.setPainter("", -1, 0, model.colorList,
+            circleData: CircleData.allCircle, textColor: Colors.grey),
+        child: CustomPaint(
+          painter: indicator2?.setPainter("0", 0, 3, model.colorList,
+              circleData: CircleData.allCircle),
+          child: CustomPaint(
+            painter: indicator2?.setPainter("1", 1, 3, model.colorList),
+            child: CustomPaint(
+              painter: indicator2?.setPainter("2", 2, 3, model.colorList),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  CustomPaint setPaint(double width) {
+    TextStyle textStyle = const TextStyle(
+      inherit: true,
+      color: Colors.white,
+      fontSize: 5,
+    );
+    return CustomPaint(
+      painter: OverlappingGridPainter(
+          textStyle, 40, 1, -25, 20, Size(width, 400), Colors.orange, radData),
+      child: CustomPaint(
+        painter: OverlappingGraphText(textStyle, 40, 1, -25, 20,
+            Size(width, 400), grapthCount, Colors.orange, radData),
+        child: CustomPaint(
+          painter: indicator?.setPainter("", -1, 0, model.colorList,
+              circleData: CircleData.allCircle, textColor: Colors.grey),
+          child: CustomPaint(
+            painter: indicator?.setPainter("0", 0, 3, model.colorList,
+                circleData: CircleData.allCircle),
+            child: CustomPaint(
+              painter: indicator?.setPainter("1", 1, 3, model.colorList),
               child: CustomPaint(
-                painter: OverlappingGraphText(textStyle, 40, 1, -25, 20,
-                    Size(width, 400), graphCount, Colors.orange, radData),
+                painter: indicator?.setPainter("2", 2, 3, model.colorList),
               ),
             ),
           ),
@@ -116,50 +146,20 @@ class OverLappingViewModel {
     );
   }
 
-  CustomPaint setPaint2(double width, int graphCount) {
-    TextStyle textStyle = const TextStyle(
-      inherit: true,
-      color: Colors.white,
-      fontSize: 5,
-    );
-    return CustomPaint(
-      painter: indicator2?.setPainter("", -1, 0, model.colorList2,
-          circleData: CircleData.allCircle, textColor: Colors.grey),
-      child: CustomPaint(
-        painter: indicator2?.setPainter("0", 0, 2.5, model.colorList2,
-            circleData: CircleData.allCircle),
-        child: CustomPaint(
-          painter: indicator2?.setPainter("1", 1, 2.5, model.colorList2),
-          child: CustomPaint(
-            painter: indicator2?.setPainter("2", 2, 2.5, model.colorList2),
-            child: CustomPaint(
-              painter: indicator2?.setPainter("3", 3, 2.5, model.colorList2),
-              // child: CustomPaint(
-              //   painter: OverlappingGridPainter(textStyle, 50, 1, -25, 20,
-              //       Size(width, 400), graphCount, Colors.orange, radData),
-              //   child: CustomPaint(
-              //     painter: OverlappingGraphText(textStyle, 50, 1, -25, 20,
-              //         Size(width, 400), graphCount, Colors.orange, radData),
-              //   ),
-              // ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Row indicatorRowSet(OverlappingProgressIndicator? indicator, double width) {
+  List<int> cou = [];
+  Row indicatorRowSet(
+      OverlappingProgressIndicator? indicator, double width, int index) {
+    cou.add(index);
     return Row(
       children: [
-        const Padding(padding: EdgeInsets.only(top: 100, left: 30)),
+        const Padding(padding: EdgeInsets.only(top: 80, left: 30)),
         SizedBox(height: 15, width: width, child: indicator),
       ],
     );
   }
 
-  OverlappingProgressIndicator indicatorSet(
-      BuildContext context, GlobalKey key, double w, CustomPaint setPaint) {
+  OverlappingProgressIndicator indicatorSet(BuildContext context, GlobalKey key,
+      double w, CustomPaint setPaint, double index) {
     return OverlappingProgressIndicator(
         radData: radData,
         radDataRadDataVertical: const Offset(20, 20),
@@ -169,14 +169,15 @@ class OverLappingViewModel {
         globalKey: key,
         contextSize: Size(w, 15),
         con: context,
-        stream: StreamController(),
+        // stream: StreamController(),
         setPaint: setPaint,
-        animationValue: animationController?.value);
+        animationValue: (animationController?.value ?? 0) / index);
   }
 
   ElevatedButton buttonSet(OverLapCallBack call) {
     return ElevatedButton(
       onPressed: () {
+        // cou  = [];
         call(OverLapType.buttonSet);
       },
       child: const Text('click here'),
@@ -189,9 +190,8 @@ class OverLappingViewModel {
     animationControllerInit(call, vsync);
   }
 
+  var rng = new Random();
   animationControllerInit(OverLapCallBack call, OverLappingBarState vsync) {
-    var rand = Random();
-    rand.nextInt(1);
     animationController = AnimationController(
       vsync: vsync,
       upperBound: 1,
@@ -210,14 +210,14 @@ class OverLappingViewModel {
     animationController?.forward();
   }
 
-  animationInitState(BuildContext context, double width, int graphCount) {
-    indicator =
-        indicatorSet(context, globalKey, width, setPaint(width, graphCount));
+  var cc = 0;
+  var cc2 = 0;
+  animationInitState(BuildContext context, double width) {
     indicator2 =
-        indicatorSet(context, globalKey2, width, setPaint2(width, graphCount));
+        indicatorSet(context, globalKey2, width, setPaint2(width), 1.8);
     indicator3 =
-        indicatorSet(context, globalKey3, width, setPaint3(width, graphCount));
-    // indicator4 =
-    //     indicatorSet(context, globalKey4, width, setPaint4(width, graphCount));
+        indicatorSet(context, globalKey3, width, setPaint3(width), 1.1);
+    indicator4 = indicatorSet(context, globalKey4, width, setPaint4(width), 1);
+    indicator = indicatorSet(context, globalKey, width, setPaint(width), 1.2);
   }
 }

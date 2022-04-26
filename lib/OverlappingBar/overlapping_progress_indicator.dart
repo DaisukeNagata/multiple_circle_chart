@@ -9,7 +9,7 @@ import 'overlapping_painter.dart';
 
 ///　OverlappingProgressIndicator is a class that calculates UI other than graphs.
 class OverlappingProgressIndicator extends OverlappingIndicator {
-  const OverlappingProgressIndicator(
+  OverlappingProgressIndicator(
       {Key? key,
       RadData radData = RadData.horizontal,
       Offset? radDataRadDataVertical,
@@ -23,8 +23,7 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
       double? animationValue,
       TextSpan? textSpan,
       CustomPaint? setPaint,
-      required BuildContext con,
-      required StreamController<Offset> stream})
+      required BuildContext con})
       : assert(minHeight == null || minHeight > 0),
         super(
             key: key,
@@ -38,8 +37,7 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
             textSpan: textSpan,
             contextSize: contextSize,
             setPaint: setPaint,
-            con: con,
-            streamController: stream);
+            con: con);
 
   /// Calculations for painting TextSpan.
   OverlappingPainter? setPainter(
@@ -72,8 +70,7 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
           textSpan: textSpan,
           value: ((animationValue ?? 0.0)) - (value * 0.1 * scale),
           contextSize:
-              Size((w * value * 0.1) * scale, contextSize?.height ?? 0.0),
-          controller: streamController);
+              Size((w * value * 0.1) * scale, contextSize?.height ?? 0.0));
     } else {
       return OverlappingPainter(
           circleData: circleData,
@@ -82,19 +79,18 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
           offsetValue: offset,
           textSpan: textSpan,
           value: null,
-          contextSize: const Size(0, 0),
-          controller: streamController);
+          contextSize: const Size(0, 0));
     }
   }
 
   /// bind the tap location.
-  controllerStream() {
-    streamController.stream.listen((event) {
-      Offset offsetData = event;
-      Offset stDataFirst = offsetData;
-      showMyDialog(con, stDataFirst);
-    });
-  }
+  // controllerStream() {
+  //   streamController.stream.listen((event) {
+  //     Offset offsetData = event;
+  //     Offset stDataFirst = offsetData;
+  //     showMyDialog(con, stDataFirst);
+  //   });
+  // }
 
   /// Method to calculate alert.
   Future<void> showMyDialog(BuildContext context, Offset dataPosition) async {
@@ -140,7 +136,6 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
   }
 
   final double? minHeight;
-
   Widget buildSemanticsWrapper({
     required BuildContext context,
     required Widget child,
@@ -149,7 +144,7 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
     if (animationValue != null) {
       expandedSemanticsValue ??= '${(animationValue! * 100).round()}%';
     }
-    controllerStream();
+    // controllerStream();
     return Semantics(
       label: semanticsLabel,
       value: expandedSemanticsValue,

@@ -49,14 +49,14 @@ class OverLappingBarState extends State<OverLappingWidget>
             angle: (dta == RadData.horizontal ? 360 : -90) * pi / 180,
             child: Column(
               children: [
-                viewModel.indicatorRowSet(viewModel.indicator,
-                    MediaQuery.of(context).size.width / 1.3),
                 viewModel.indicatorRowSet(viewModel.indicator2,
-                    MediaQuery.of(context).size.width / 1.3),
+                    MediaQuery.of(context).size.width / 1.2, 1),
                 viewModel.indicatorRowSet(viewModel.indicator3,
-                    MediaQuery.of(context).size.width / 1.3),
-                // viewModel.indicatorRowSet(viewModel.indicator4,
-                //     MediaQuery.of(context).size.width / 1.3),
+                    MediaQuery.of(context).size.width / 1.2, 2),
+                viewModel.indicatorRowSet(viewModel.indicator4,
+                    MediaQuery.of(context).size.width / 1.2, 3),
+                viewModel.indicatorRowSet(viewModel.indicator,
+                    MediaQuery.of(context).size.width / 1.2, 4),
               ],
             )),
         viewModel.buttonSet(callback),
@@ -70,9 +70,11 @@ class OverLappingBarState extends State<OverLappingWidget>
       double width = MediaQuery.of(context).size.width;
       switch (type) {
         case OverLapType.animationControllerInit:
+          viewModel.grapthCount = 4;
 
           /// 2 is this number.
-          viewModel.animationInitState(context, width / 1.3, 3);
+          viewModel.animationInitState(context, width / 1.2);
+
           break;
         case OverLapType.buttonSet:
           viewModel.buttonSetState(callback, this);
