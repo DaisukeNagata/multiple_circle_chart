@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:multiple_circle_chart/OverlappingBar/overlapping_data.dart';
 
-import 'Overlapping/overLapping_view_model.dart';
+import 'overLapping_view_model.dart';
 
 class OverLappingBar extends StatelessWidget {
   const OverLappingBar({Key? key}) : super(key: key);

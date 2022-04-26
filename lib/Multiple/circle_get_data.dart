@@ -2,8 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-
-import 'circle_data_item.dart';
+import 'package:multiple_circle_chart/Multiple/circle_data_item.dart';
 
 /// CircleOuterFrame is a class that sets the first week of a pie chart.
 class CircleGetData extends CustomPainter {

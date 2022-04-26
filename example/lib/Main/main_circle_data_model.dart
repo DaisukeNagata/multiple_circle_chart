@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:multiple_circle_chart/circle_data_item.dart';
-import 'package:multiple_circle_chart/circle_progress_controller.dart';
-import 'package:multiple_circle_chart/multiple_circle_set_progress.dart';
+import 'package:multiple_circle_chart/Multiple/circle_data_item.dart';
+import 'package:multiple_circle_chart/Multiple/circle_progress_controller.dart';
+import 'package:multiple_circle_chart/Multiple/multiple_circle_set_progress.dart';
 
 import 'main_set_color_model.dart';
 

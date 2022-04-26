@@ -6,8 +6,8 @@ import 'package:multiple_circle_chart/OverlappingBar/overlapping_graph_text.dart
 import 'package:multiple_circle_chart/OverlappingBar/overlapping_grid_painter.dart';
 import 'package:multiple_circle_chart/OverlappingBar/overlapping_progress_indicator.dart';
 
-import '../overlapping_bar.dart';
 import 'overLapping_model.dart';
+import 'overlapping_bar.dart';
 
 typedef OverLapCallBack = Function(OverLapType type);
 
@@ -34,6 +34,7 @@ class OverLappingViewModel {
   RadData radData = RadData.vertical;
   int graphCount = 0;
 
+  /// details of animation amount.
   CustomPaint setGridPainter(
       OverlappingProgressIndicator? indicator, double value) {
     TextStyle textStyle = const TextStyle(
@@ -64,6 +65,7 @@ class OverLappingViewModel {
     );
   }
 
+  ///　details of graph characters, ruled lines, and animation amount.
   CustomPaint setGridTextPainter(double value) {
     TextStyle textStyle = const TextStyle(
       inherit: true,
@@ -97,6 +99,7 @@ class OverLappingViewModel {
     );
   }
 
+  ///　Graph coordinate construction.
   Row indicatorRowSet(
       OverlappingProgressIndicator? indicator, double width, GlobalKey key) {
     return Row(
@@ -107,6 +110,7 @@ class OverLappingViewModel {
     );
   }
 
+  ///　Building a graph.
   OverlappingProgressIndicator indicatorSet(BuildContext context, GlobalKey key,
       double w, CustomPaint setPaint, double index) {
     return OverlappingProgressIndicator(
@@ -114,7 +118,7 @@ class OverLappingViewModel {
         radDataRadDataVertical: const Offset(20, 20),
         radDataRadDataHorizontal: const Offset(1, 20),
         dataVerticalSize: const Size(120, 120),
-        dataHorizontalSize: const Size(150, 120),
+        dataHorizontalSize: const Size(120, 120),
         globalKey: key,
         contextSize: Size(w, 15),
         con: context,
@@ -132,12 +136,14 @@ class OverLappingViewModel {
     );
   }
 
+  /// button action　judgment of orientation.
   buttonSetState(OverLapCallBack call, OverLappingBarState vsync) {
     radData =
         radData == RadData.vertical ? RadData.horizontal : RadData.vertical;
     animationControllerInit(call, vsync);
   }
 
+  /// animation a graph.
   animationControllerInit(OverLapCallBack call, OverLappingBarState vsync) {
     animationController = AnimationController(
       vsync: vsync,
@@ -157,6 +163,7 @@ class OverLappingViewModel {
     animationController?.forward();
   }
 
+  ///　build graph animation.
   animationInitState(BuildContext context, double width) {
     indicator2 = indicatorSet(
         context, globalKey2, width, setGridPainter(indicator2, width), 1.8);

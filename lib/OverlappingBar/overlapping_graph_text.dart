@@ -73,7 +73,7 @@ class OverlappingGraphText extends CustomPainter {
     if (i <= wLines) {
       final textSpan = TextSpan(
         style: textStyle,
-        children: <TextSpan>[TextSpan(text: '${textValue}')],
+        children: <TextSpan>[TextSpan(text: '$textValue')],
       );
 
       final textPainter = TextPainter(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'OverlappingBar/overlapping_dialog.dart';
+import '../OverlappingBar/overlapping_dialog.dart';
 
 /// Build an alert UI for Dialog.
 class MultipleInfoDialog extends StatelessWidget {

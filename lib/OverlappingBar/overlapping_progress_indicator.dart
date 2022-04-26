@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import '../multiple_info_dialog.dart';
+import '../Multiple/multiple_info_dialog.dart';
 import 'overlapping_data.dart';
 import 'overlapping_indicator.dart';
 import 'overlapping_painter.dart';
