@@ -35,7 +35,7 @@ class OverLappingViewModel {
   RadData radData = RadData.vertical;
   int grapthCount = 0;
 
-  CustomPaint setPaint4(double width) {
+  CustomPaint setPaint2(OverlappingProgressIndicator? indi, double width) {
     TextStyle textStyle = const TextStyle(
       inherit: true,
       color: Colors.white,
@@ -45,70 +45,18 @@ class OverLappingViewModel {
       painter: OverlappingGridPainter(
           textStyle, 40, 1, -25, 20, Size(width, 400), Colors.orange, radData),
       child: CustomPaint(
-        painter: indicator4?.setPainter("", -1, 0, model.colorList,
+        painter: indi?.setPainter("", -1, 0, model.colorList,
             circleData: CircleData.allCircle, textColor: Colors.grey),
         child: CustomPaint(
-          painter: indicator4?.setPainter("0", 0, 3, model.colorList,
+          painter: indi?.setPainter("0", 0, 3, model.colorList,
               circleData: CircleData.allCircle),
           child: CustomPaint(
-            painter: indicator4?.setPainter("1", 1, 3, model.colorList),
+            painter: indi?.setPainter("1", 1, 3, model.colorList),
             child: CustomPaint(
-              painter: indicator4?.setPainter("2", 2, 3, model.colorList),
+              painter: indi?.setPainter("2", 2, 3, model.colorList),
               child: CustomPaint(
-                painter: indicator4?.setPainter("3", 3, 3, model.colorList),
+                painter: indi?.setPainter("3", 3, 3, model.colorList),
               ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  CustomPaint setPaint3(double width) {
-    TextStyle textStyle = const TextStyle(
-      inherit: true,
-      color: Colors.white,
-      fontSize: 5,
-    );
-    return CustomPaint(
-      painter: OverlappingGridPainter(
-          textStyle, 40, 1, -25, 20, Size(width, 400), Colors.orange, radData),
-      child: CustomPaint(
-        painter: indicator3?.setPainter("", -1, 0, model.colorList,
-            circleData: CircleData.allCircle, textColor: Colors.grey),
-        child: CustomPaint(
-          painter: indicator3?.setPainter("0", 0, 3, model.colorList,
-              circleData: CircleData.allCircle),
-          child: CustomPaint(
-            painter: indicator3?.setPainter("1", 1, 3, model.colorList),
-            child: CustomPaint(
-              painter: indicator3?.setPainter("2", 2, 3, model.colorList),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  CustomPaint setPaint2(double width) {
-    TextStyle textStyle = const TextStyle(
-      inherit: true,
-      color: Colors.white,
-      fontSize: 5,
-    );
-    return CustomPaint(
-      painter: OverlappingGridPainter(
-          textStyle, 40, 1, -25, 20, Size(width, 400), Colors.orange, radData),
-      child: CustomPaint(
-        painter: indicator2?.setPainter("", -1, 0, model.colorList,
-            circleData: CircleData.allCircle, textColor: Colors.grey),
-        child: CustomPaint(
-          painter: indicator2?.setPainter("0", 0, 3, model.colorList,
-              circleData: CircleData.allCircle),
-          child: CustomPaint(
-            painter: indicator2?.setPainter("1", 1, 3, model.colorList),
-            child: CustomPaint(
-              painter: indicator2?.setPainter("2", 2, 3, model.colorList),
             ),
           ),
         ),
@@ -138,6 +86,9 @@ class OverLappingViewModel {
               painter: indicator?.setPainter("1", 1, 3, model.colorList),
               child: CustomPaint(
                 painter: indicator?.setPainter("2", 2, 3, model.colorList),
+                child: CustomPaint(
+                  painter: indicator?.setPainter("3", 3, 3, model.colorList),
+                ),
               ),
             ),
           ),
@@ -146,10 +97,7 @@ class OverLappingViewModel {
     );
   }
 
-  List<int> cou = [];
-  Row indicatorRowSet(
-      OverlappingProgressIndicator? indicator, double width, int index) {
-    cou.add(index);
+  Row indicatorRowSet(OverlappingProgressIndicator? indicator, double width) {
     return Row(
       children: [
         const Padding(padding: EdgeInsets.only(top: 80, left: 30)),
@@ -210,14 +158,13 @@ class OverLappingViewModel {
     animationController?.forward();
   }
 
-  var cc = 0;
-  var cc2 = 0;
   animationInitState(BuildContext context, double width) {
-    indicator2 =
-        indicatorSet(context, globalKey2, width, setPaint2(width), 1.8);
-    indicator3 =
-        indicatorSet(context, globalKey3, width, setPaint3(width), 1.1);
-    indicator4 = indicatorSet(context, globalKey4, width, setPaint4(width), 1);
+    indicator2 = indicatorSet(
+        context, globalKey2, width, setPaint2(indicator2, width), 1.8);
+    indicator3 = indicatorSet(
+        context, globalKey3, width, setPaint2(indicator3, width), 1.6);
+    indicator4 = indicatorSet(
+        context, globalKey4, width, setPaint2(indicator4, width), 1);
     indicator = indicatorSet(context, globalKey, width, setPaint(width), 1.2);
   }
 }

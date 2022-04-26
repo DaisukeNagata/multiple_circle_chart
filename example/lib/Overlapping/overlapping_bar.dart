@@ -50,13 +50,13 @@ class OverLappingBarState extends State<OverLappingWidget>
             child: Column(
               children: [
                 viewModel.indicatorRowSet(viewModel.indicator2,
-                    MediaQuery.of(context).size.width / 1.2, 1),
+                    MediaQuery.of(context).size.width / 1.2),
                 viewModel.indicatorRowSet(viewModel.indicator3,
-                    MediaQuery.of(context).size.width / 1.2, 2),
+                    MediaQuery.of(context).size.width / 1.2),
                 viewModel.indicatorRowSet(viewModel.indicator4,
-                    MediaQuery.of(context).size.width / 1.2, 3),
+                    MediaQuery.of(context).size.width / 1.2),
                 viewModel.indicatorRowSet(viewModel.indicator,
-                    MediaQuery.of(context).size.width / 1.2, 4),
+                    MediaQuery.of(context).size.width / 1.2),
               ],
             )),
         viewModel.buttonSet(callback),
