@@ -49,7 +49,7 @@ class OverlappingGridPainter extends CustomPainter {
     }
     final paint = Paint()
       ..strokeWidth = strokeWidth
-      ..color = colorSet
+      ..color = colorSet.withOpacity(strokeWidth == 0 ? 0 : 1)
       ..style = PaintingStyle.stroke;
     canvas.drawPath(path, paint);
   }

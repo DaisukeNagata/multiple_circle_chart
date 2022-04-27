@@ -73,19 +73,17 @@ class OverLappingViewModel {
     TextStyle textStyle = const TextStyle(
       inherit: true,
       color: Colors.white,
-      fontSize: 8,
+      fontSize: 15,
     );
     return CustomPaint(
       painter: flg
           ? OverlappingGraphText(
               textStyle: textStyle,
               boxSize: _boxSize,
-              strokeWidth: 1,
               textValue: 1,
               sizeSet: Size(value, value),
               graphCount: graphCount,
               graphValue: _sizeHeight / 2,
-              colorSet: Colors.orange,
               radData: radData)
           : null,
       child: CustomPaint(

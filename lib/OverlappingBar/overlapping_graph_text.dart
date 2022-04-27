@@ -8,14 +8,12 @@ import 'overlapping_data.dart';
 class OverlappingGraphText extends CustomPainter {
   final TextStyle textStyle;
   final double boxSize;
-  final double strokeWidth;
   double? offsetX = -25;
   double? offsetY = 20;
   double? textValue;
   final Size sizeSet;
   final int graphCount;
   final double graphValue;
-  final Color colorSet;
   final RadData? radData;
   final path = Path();
   Offset offset = Offset.zero;
@@ -23,14 +21,12 @@ class OverlappingGraphText extends CustomPainter {
   OverlappingGraphText(
       {required this.textStyle,
       required this.boxSize,
-      required this.strokeWidth,
       double? offsetX,
       double? offsetY,
       required this.textValue,
       required this.sizeSet,
       required this.graphCount,
       required this.graphValue,
-      required this.colorSet,
       required this.radData});
 
   double degToRad(double deg) => deg * (pi / 180.0);
@@ -47,11 +43,12 @@ class OverlappingGraphText extends CustomPainter {
       case RadData.vertical:
         for (var i = 0; i <= wLines; ++i) {
           double y = -(textValue ?? 0) * i;
-          textSpanLogic(canvas, y, true, i, wLines, graphCount);
+          textSpanLogic(canvas, true, i, wLines, graphCount, value: y);
         }
         for (var i = 0; i <= (graphCount * 2) + 1; ++i) {
           final x = (textValue ?? 0) * i;
-          textSpanLogic(canvas, x, false, i, (graphCount * 2), graphCount);
+          textSpanLogic(canvas, false, i, (graphCount * 2), graphCount,
+              value: x);
         }
         break;
 
@@ -59,29 +56,24 @@ class OverlappingGraphText extends CustomPainter {
       case RadData.horizontal:
         for (var i = 0; i <= (graphCount * 2); ++i) {
           double y = -(textValue ?? 0) * i;
-          textSpanLogic(canvas, y, true, i, (graphCount * 2), graphCount);
+          textSpanLogic(canvas, true, i, (graphCount * 2), graphCount,
+              value: y);
         }
         for (var i = 0; i <= wLines; ++i) {
           final x = (textValue ?? 0) * i;
-          textSpanLogic(canvas, x, false, i, wLines, graphCount);
+          textSpanLogic(canvas, false, i, wLines, graphCount, value: x);
         }
         break;
     }
-
-    final paint = Paint()
-      ..strokeWidth = strokeWidth
-      ..color = colorSet
-      ..style = PaintingStyle.stroke;
-    canvas.drawPath(path, paint);
   }
 
-  textSpanLogic(Canvas canvas, double value, bool flg, int i, int wLines,
-      int graphCount) {
-    int textValue = flg ? value.toInt() * -1 : value.toInt();
+  textSpanLogic(Canvas canvas, bool flg, int i, int wLines, int graphCount,
+      {double? value}) {
+    int? textSetValue = flg ? (value?.toInt() ?? 0) * -1 : value?.toInt();
     if (i <= wLines) {
       final textSpan = TextSpan(
         style: textStyle,
-        children: <TextSpan>[TextSpan(text: '$textValue')],
+        children: <TextSpan>[TextSpan(text: '$textSetValue')],
       );
 
       final textPainter = TextPainter(
@@ -109,7 +101,12 @@ class OverlappingGraphText extends CustomPainter {
               (offsetY ?? 0));
         }
       }
-      textPainter.paint(canvas, offset);
+
+      if (i > 0 && (textSetValue ?? 0) != 0.0) {
+        textPainter.paint(canvas, offset);
+      } else if (i == 0 && (textSetValue ?? 0) == 0.0 && textValue != 0) {
+        textPainter.paint(canvas, offset);
+      }
     }
   }
 
