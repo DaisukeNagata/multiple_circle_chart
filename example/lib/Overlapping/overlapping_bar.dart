@@ -60,7 +60,7 @@ class OverLappingBarState extends State<OverLappingWidget>
                     viewModel.lastIndicator, width, viewModel.lastGlobalKey),
               ],
             )),
-        viewModel.buttonSet(callback),
+        viewModel.buttonSet(callback, this),
       ],
     );
   }
@@ -75,10 +75,6 @@ class OverLappingBarState extends State<OverLappingWidget>
 
           /// 2 is this number.
           viewModel.animationInitState(context, width / 1.2);
-
-          break;
-        case OverLapType.buttonSet:
-          viewModel.buttonSetState(callback, this);
           break;
       }
     });

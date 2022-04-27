@@ -17,7 +17,6 @@ abstract class OverLapCallBackLogic {
 
 enum OverLapType {
   animationControllerInit,
-  buttonSet,
 }
 
 class OverLappingViewModel {
@@ -34,69 +33,12 @@ class OverLappingViewModel {
   RadData radData = RadData.vertical;
   int graphCount = 0;
 
-  /// details of animation amount.
-  CustomPaint setGridPainter(
-      OverlappingProgressIndicator? indicator, double value) {
-    TextStyle textStyle = const TextStyle(
-      inherit: true,
-      color: Colors.white,
-      fontSize: 5,
-    );
-    return CustomPaint(
-      painter: OverlappingGridPainter(textStyle, 40, 1, -25, 20,
-          Size(value, value), Colors.orange, 7.5, radData),
-      child: CustomPaint(
-        painter: indicator?.setPainter("", -1, 0, model.colorList,
-            circleData: CircleData.allCircle, textColor: Colors.grey),
-        child: CustomPaint(
-          painter: indicator?.setPainter("0", 0, 3, model.colorList,
-              circleData: CircleData.allCircle),
-          child: CustomPaint(
-            painter: indicator?.setPainter("1", 1, 3, model.colorList),
-            child: CustomPaint(
-              painter: indicator?.setPainter("2", 2, 3, model.colorList),
-              child: CustomPaint(
-                painter: indicator?.setPainter("3", 3, 3, model.colorList),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  ///　details of graph characters, ruled lines, and animation amount.
-  CustomPaint setGridTextPainter(double value) {
-    TextStyle textStyle = const TextStyle(
-      inherit: true,
-      color: Colors.white,
-      fontSize: 5,
-    );
-    return CustomPaint(
-      painter: OverlappingGridPainter(textStyle, 40, 1, -25, 20,
-          Size(value, value), Colors.orange, 7.5, radData),
-      child: CustomPaint(
-        painter: OverlappingGraphText(textStyle, 40, 1, -25, 20,
-            Size(value, value), graphCount, 7.5, Colors.orange, radData),
-        child: CustomPaint(
-          painter: lastIndicator?.setPainter("", -1, 0, model.colorList,
-              circleData: CircleData.allCircle, textColor: Colors.grey),
-          child: CustomPaint(
-            painter: lastIndicator?.setPainter("0", 0, 3, model.colorList,
-                circleData: CircleData.allCircle),
-            child: CustomPaint(
-              painter: lastIndicator?.setPainter("1", 1, 3, model.colorList),
-              child: CustomPaint(
-                painter: lastIndicator?.setPainter("2", 2, 3, model.colorList),
-                child: CustomPaint(
-                  painter:
-                      lastIndicator?.setPainter("3", 3, 3, model.colorList),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
+  ElevatedButton buttonSet(OverLapCallBack call, OverLappingBarState vsync) {
+    return ElevatedButton(
+      onPressed: () {
+        _buttonSetState(call, vsync);
+      },
+      child: const Text('click here'),
     );
   }
 
@@ -111,41 +53,59 @@ class OverLappingViewModel {
     );
   }
 
-  ///　Building a graph.
-  OverlappingProgressIndicator indicatorSet(BuildContext context, GlobalKey key,
-      double w, CustomPaint setPaint, double index) {
-    return OverlappingProgressIndicator(
-        radData: radData,
-        radDataRadDataVertical: const Offset(20, 20),
-        radDataRadDataHorizontal: const Offset(1, 20),
-        dataVerticalSize: const Size(120, 120),
-        dataHorizontalSize: const Size(120, 120),
-        globalKey: key,
-        contextSize: Size(w, 15),
-        con: context,
-        streamController: StreamController(),
-        setPaint: setPaint,
-        animationValue: (animationController?.value ?? 0) * index);
+  ///　build graph animation.
+  animationInitState(BuildContext context, double width) {
+    indicator = _indicatorSet(context, globalKey, width,
+        _setGridTextPainter(indicator, width, false), 0.8);
+    indicator2 = _indicatorSet(context, globalKey2, width,
+        _setGridTextPainter(indicator2, width, false), 0.6);
+    indicator3 = _indicatorSet(context, globalKey3, width,
+        _setGridTextPainter(indicator3, width, false), 1);
+    lastIndicator = _indicatorSet(context, lastGlobalKey, width,
+        _setGridTextPainter(lastIndicator, width, true), 0.5);
   }
 
-  ElevatedButton buttonSet(OverLapCallBack call) {
-    return ElevatedButton(
-      onPressed: () {
-        call(OverLapType.buttonSet);
-      },
-      child: const Text('click here'),
+  ///　details of graph characters, ruled lines, and animation amount.
+  CustomPaint _setGridTextPainter(
+      OverlappingProgressIndicator? indicator, double value, bool flg) {
+    TextStyle textStyle = const TextStyle(
+      inherit: true,
+      color: Colors.white,
+      fontSize: 5,
+    );
+    return CustomPaint(
+      painter: flg
+          ? OverlappingGraphText(textStyle, 40, 1, -25, 20, Size(value, value),
+              graphCount, 7.5, Colors.orange, radData)
+          : null,
+      child: CustomPaint(
+        painter: OverlappingGridPainter(textStyle, 40, 1, -25, 20,
+            Size(value, value), Colors.orange, 7.5, radData),
+        child: CustomPaint(
+          painter: indicator?.setPainter("", -1, 0, model.colorList,
+              circleData: CircleData.allCircle, textColor: Colors.grey),
+          child: CustomPaint(
+            painter: indicator?.setPainter("0", 0, 3, model.colorList,
+                circleData: CircleData.allCircle),
+            child: CustomPaint(
+              painter: indicator?.setPainter("1", 1, 3, model.colorList),
+              child: CustomPaint(
+                painter: indicator?.setPainter("2", 2, 3, model.colorList),
+                child: CustomPaint(
+                  painter: indicator?.setPainter("3", 3, 3, model.colorList),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 
   /// button action　judgment of orientation.
-  buttonSetState(OverLapCallBack call, OverLappingBarState vsync) {
+  _buttonSetState(OverLapCallBack call, OverLappingBarState vsync) {
     radData =
         radData == RadData.vertical ? RadData.horizontal : RadData.vertical;
-    animationControllerInit(call, vsync);
-  }
-
-  /// animation a graph.
-  animationControllerInit(OverLapCallBack call, OverLappingBarState vsync) {
     animationController = AnimationController(
       vsync: vsync,
       upperBound: 1,
@@ -164,15 +124,20 @@ class OverLappingViewModel {
     animationController?.forward();
   }
 
-  ///　build graph animation.
-  animationInitState(BuildContext context, double width) {
-    indicator = indicatorSet(
-        context, globalKey, width, setGridPainter(indicator, width), 0.8);
-    indicator2 = indicatorSet(
-        context, globalKey2, width, setGridPainter(indicator2, width), 0.6);
-    indicator3 = indicatorSet(
-        context, globalKey3, width, setGridPainter(indicator3, width), 1);
-    lastIndicator = indicatorSet(
-        context, lastGlobalKey, width, setGridTextPainter(width), 0.5);
+  ///　Building a graph.
+  OverlappingProgressIndicator _indicatorSet(BuildContext context,
+      GlobalKey key, double w, CustomPaint setPaint, double index) {
+    return OverlappingProgressIndicator(
+        radData: radData,
+        radDataRadDataVertical: const Offset(20, 20),
+        radDataRadDataHorizontal: const Offset(1, 20),
+        dataVerticalSize: const Size(120, 120),
+        dataHorizontalSize: const Size(120, 120),
+        globalKey: key,
+        contextSize: Size(w, 15),
+        con: context,
+        streamController: StreamController(),
+        setPaint: setPaint,
+        animationValue: (animationController?.value ?? 0) * index);
   }
 }
