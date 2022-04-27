@@ -32,6 +32,8 @@ class OverLappingViewModel {
   GlobalKey globalKey3 = GlobalKey();
   RadData radData = RadData.vertical;
   int graphCount = 0;
+  final double _sizeHeight = 15;
+  final double _boxSize = 40;
 
   ElevatedButton buttonSet(OverLapCallBack call, OverLappingBarState vsync) {
     return ElevatedButton(
@@ -47,8 +49,8 @@ class OverLappingViewModel {
       OverlappingProgressIndicator? indicator, double width, GlobalKey key) {
     return Row(
       children: [
-        const Padding(padding: EdgeInsets.only(top: 80, left: 30)),
-        SizedBox(height: 15, width: width, child: indicator, key: key),
+        Padding(padding: EdgeInsets.only(top: (_boxSize * 2), left: 30)),
+        SizedBox(height: _sizeHeight, width: width, child: indicator, key: key),
       ],
     );
   }
@@ -71,16 +73,30 @@ class OverLappingViewModel {
     TextStyle textStyle = const TextStyle(
       inherit: true,
       color: Colors.white,
-      fontSize: 5,
+      fontSize: 8,
     );
     return CustomPaint(
       painter: flg
-          ? OverlappingGraphText(textStyle, 40, 1, -25, 20, Size(value, value),
-              graphCount, 7.5, Colors.orange, radData)
+          ? OverlappingGraphText(
+              textStyle: textStyle,
+              boxSize: _boxSize,
+              strokeWidth: 1,
+              textValue: 1,
+              sizeSet: Size(value, value),
+              graphCount: graphCount,
+              graphValue: _sizeHeight / 2,
+              colorSet: Colors.orange,
+              radData: radData)
           : null,
       child: CustomPaint(
-        painter: OverlappingGridPainter(textStyle, 40, 1, -25, 20,
-            Size(value, value), Colors.orange, 7.5, radData),
+        painter: OverlappingGridPainter(
+            textStyle: textStyle,
+            boxSize: _boxSize,
+            strokeWidth: 1,
+            sizeSet: Size(value, value),
+            colorSet: Colors.orange,
+            graphValue: _sizeHeight / 2,
+            radData: radData),
         child: CustomPaint(
           painter: indicator?.setPainter("", -1, 0, model.colorList,
               circleData: CircleData.allCircle, textColor: Colors.grey),
@@ -134,7 +150,7 @@ class OverLappingViewModel {
         dataVerticalSize: const Size(120, 120),
         dataHorizontalSize: const Size(120, 120),
         globalKey: key,
-        contextSize: Size(w, 15),
+        contextSize: Size(w, _sizeHeight),
         con: context,
         streamController: StreamController(),
         setPaint: setPaint,

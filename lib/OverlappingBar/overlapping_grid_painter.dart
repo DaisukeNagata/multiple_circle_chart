@@ -9,8 +9,8 @@ class OverlappingGridPainter extends CustomPainter {
   final TextStyle textStyle;
   final double boxSize;
   final double strokeWidth;
-  final double offsetX;
-  final double offsetY;
+  double? offsetX = -25;
+  double? offsetY = 20;
   final Size sizeSet;
   final Color colorSet;
   final double graphValue;
@@ -19,15 +19,15 @@ class OverlappingGridPainter extends CustomPainter {
   Offset offset = Offset.zero;
 
   OverlappingGridPainter(
-      this.textStyle,
-      this.boxSize,
-      this.strokeWidth,
-      this.offsetX,
-      this.offsetY,
-      this.sizeSet,
-      this.colorSet,
-      this.graphValue,
-      this.radData);
+      {required this.textStyle,
+      required this.boxSize,
+      required this.strokeWidth,
+      double? offsetX,
+      double? offsetY,
+      required this.sizeSet,
+      required this.colorSet,
+      required this.graphValue,
+      required this.radData});
 
   double degToRad(double deg) => deg * (pi / 180.0);
 
