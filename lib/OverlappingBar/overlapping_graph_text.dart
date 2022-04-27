@@ -39,33 +39,33 @@ class OverlappingGraphText extends CustomPainter {
 
     canvas.rotate(degToRad(radData == RadData.horizontal ? 360 : 90));
 
-    ///　Have textSpanLogic logic think about the balance of the ruled text.
-    for (var i = 0;
-        i <= (radData == RadData.horizontal ? (graphCount * 2) + 1 : wLines);
-        ++i) {
-      double y = -boxSize * i;
-      textSpanLogic(
-          canvas,
-          y,
-          true,
-          i,
-          (radData == RadData.horizontal ? (graphCount * 2) : wLines),
-          graphCount);
+    switch (radData) {
+
+      ///　Have textSpanLogic logic think about the balance of the ruled text.
+      case RadData.vertical:
+        for (var i = 0; i <= wLines; ++i) {
+          double y = -boxSize * i;
+          textSpanLogic(canvas, y, true, i, wLines, graphCount);
+        }
+        for (var i = 0; i <= (graphCount * 2) + 1; ++i) {
+          final x = boxSize * i;
+          textSpanLogic(canvas, x, false, i, (graphCount * 2), graphCount);
+        }
+        break;
+
+      ///　Have textSpanLogic logic think about the balance of the ruled text.
+      case RadData.horizontal:
+        for (var i = 0; i <= (graphCount * 2); ++i) {
+          double y = -boxSize * i;
+          textSpanLogic(canvas, y, true, i, (graphCount * 2), graphCount);
+        }
+        for (var i = 0; i <= wLines; ++i) {
+          final x = boxSize * i;
+          textSpanLogic(canvas, x, false, i, wLines, graphCount);
+        }
+        break;
     }
 
-    ///　Have textSpanLogic logic think about the balance of the ruled text.
-    for (var i = 0;
-        i <= (radData == RadData.vertical ? (graphCount * 2) + 1 : wLines);
-        ++i) {
-      final x = boxSize * i;
-      textSpanLogic(
-          canvas,
-          x,
-          false,
-          i,
-          (radData == RadData.vertical ? (graphCount * 2) : wLines),
-          graphCount);
-    }
     final paint = Paint()
       ..strokeWidth = strokeWidth
       ..color = colorSet
