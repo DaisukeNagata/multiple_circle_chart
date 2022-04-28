@@ -57,6 +57,8 @@ class OverLappingBarState extends State<OverLappingWidget>
                 viewModel.indicatorRowSet(
                     viewModel.indicator3, width, viewModel.globalKey3),
                 viewModel.indicatorRowSet(
+                    viewModel.indicator4, width, viewModel.globalKey4),
+                viewModel.indicatorRowSet(
                     viewModel.lastIndicator, width, viewModel.lastGlobalKey),
               ],
             )),
@@ -71,7 +73,7 @@ class OverLappingBarState extends State<OverLappingWidget>
       double width = MediaQuery.of(context).size.width;
       switch (type) {
         case OverLapType.animationControllerInit:
-          viewModel.graphCount = 4;
+          viewModel.graphCount = 5;
 
           /// 2 is this number.
           viewModel.animationInitState(context, width / 1.2);

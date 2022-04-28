@@ -42,8 +42,8 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
             streamController: streamController);
 
   /// Calculations for painting TextSpan.
-  OverlappingPainter? setPainter(
-      String textValue, double value, double scale, List<Color> colorList,
+  OverlappingPainter? setPainter(String textValue, double value, int index,
+      double scale, List<Color> colorList,
       {CircleData circleData = CircleData.none,
       Color? textColor = Colors.white}) {
     ///　Coordinates to display text
@@ -67,12 +67,12 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
       return OverlappingPainter(
           circleData: circleData,
           radData: radData,
-          backgroundColor: colorList[value.toInt()],
+          backgroundColor: colorList[index],
           offsetValue: offset,
           textSpan: textSpan,
           value: ((animationValue ?? 0.0)) - (value * 0.1 * scale),
           contextSize:
-              Size((w * value * 0.1) * scale, contextSize?.height ?? 0.0),
+              Size(w * (value * 0.1 * scale), contextSize?.height ?? 0.0),
           controller: streamController);
     } else {
       return OverlappingPainter(

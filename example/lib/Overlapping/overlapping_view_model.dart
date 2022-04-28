@@ -26,14 +26,18 @@ class OverLappingViewModel {
   OverlappingProgressIndicator? indicator;
   OverlappingProgressIndicator? indicator2;
   OverlappingProgressIndicator? indicator3;
+  OverlappingProgressIndicator? indicator4;
   GlobalKey lastGlobalKey = GlobalKey();
   GlobalKey globalKey = GlobalKey();
   GlobalKey globalKey2 = GlobalKey();
   GlobalKey globalKey3 = GlobalKey();
+  GlobalKey globalKey4 = GlobalKey();
   RadData radData = RadData.vertical;
   int graphCount = 0;
   final double _sizeHeight = 15;
-  final double _boxSize = 40;
+  final double _boxSize = 35;
+  final double _roundCount = 0.000001;
+  final int graph = 10;
 
   ElevatedButton buttonSet(OverLapCallBack call, OverLappingBarState vsync) {
     return ElevatedButton(
@@ -58,11 +62,13 @@ class OverLappingViewModel {
   ///　build graph animation.
   animationInitState(BuildContext context, double width) {
     indicator = _indicatorSet(context, globalKey, width,
-        _setGridTextPainter(indicator, width, false), 0.8);
+        _setGridTextPainter(indicator, width, false), 0.7);
     indicator2 = _indicatorSet(context, globalKey2, width,
-        _setGridTextPainter(indicator2, width, false), 0.6);
+        _setGridTextPainter(indicator2, width, false), 0.8);
     indicator3 = _indicatorSet(context, globalKey3, width,
         _setGridTextPainter(indicator3, width, false), 1);
+    indicator4 = _indicatorSet(context, globalKey4, width,
+        _setGridTextPainter(indicator4, width, false), 0.4);
     lastIndicator = _indicatorSet(context, lastGlobalKey, width,
         _setGridTextPainter(lastIndicator, width, true), 0.5);
   }
@@ -73,8 +79,10 @@ class OverLappingViewModel {
     TextStyle textStyle = const TextStyle(
       inherit: true,
       color: Colors.white,
-      fontSize: 15,
+      fontSize: 10,
     );
+    var graphValue = (graph / graphCount);
+    var roundValue = graphCount.toDouble() - _roundCount;
     return CustomPaint(
       painter: flg
           ? OverlappingGraphText(
@@ -96,17 +104,29 @@ class OverLappingViewModel {
             graphValue: _sizeHeight / 2,
             radData: radData),
         child: CustomPaint(
-          painter: indicator?.setPainter("", -1, 0, model.colorList,
+          painter: indicator?.setPainter("", -1, -1, 0, model.colorList,
               circleData: CircleData.allCircle, textColor: Colors.grey),
           child: CustomPaint(
-            painter: indicator?.setPainter("0", 0, 3, model.colorList,
+            painter: indicator?.setPainter(
+                "1", 0 / graphValue, 0, graphValue, model.colorList,
                 circleData: CircleData.allCircle),
             child: CustomPaint(
-              painter: indicator?.setPainter("1", 1, 3, model.colorList),
+              painter: indicator?.setPainter(
+                  "2", 1 / graphValue, 1, graphValue, model.colorList),
               child: CustomPaint(
-                painter: indicator?.setPainter("2", 2, 3, model.colorList),
+                painter: indicator?.setPainter(
+                    "3", 2 / graphValue, 2, graphValue, model.colorList),
                 child: CustomPaint(
-                  painter: indicator?.setPainter("3", 3, 3, model.colorList),
+                  painter: indicator?.setPainter(
+                      "4", 3 / graphValue, 3, graphValue, model.colorList),
+                  child: CustomPaint(
+                    painter: indicator?.setPainter(
+                        "5", 4 / graphValue, 4, graphValue, model.colorList),
+                    child: CustomPaint(
+                      painter: indicator?.setPainter(
+                          "6", roundValue, 5, graphValue, model.colorList),
+                    ),
+                  ),
                 ),
               ),
             ),
