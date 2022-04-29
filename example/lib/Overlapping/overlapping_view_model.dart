@@ -9,14 +9,10 @@ import 'package:multiple_circle_chart/OverlappingBar/overlapping_progress_indica
 import 'overlapping_bar.dart';
 import 'overlapping_model.dart';
 
-typedef OverLapCallBack = Function(OverLapType type);
+typedef OverLapCallBack = Function();
 
 abstract class OverLapCallBackLogic {
-  OverLapCallBack? callback(OverLapType type);
-}
-
-enum OverLapType {
-  animationControllerInit,
+  OverLapCallBack? callback();
 }
 
 class OverLappingViewModel {
@@ -40,7 +36,6 @@ class OverLappingViewModel {
   final double margin30 = 30;
   final int graph = 10;
   final double _sizeHeight = 10;
-  final double _roundCount = 0.000001;
 
   ElevatedButton buttonSet(OverLapCallBack call, OverLappingBarState vsync) {
     return ElevatedButton(
@@ -77,61 +72,83 @@ class OverLappingViewModel {
         _setGridTextPainter(lastIndicator, width, true), 0.5);
   }
 
-  ///　details of graph characters, ruled lines, and animation amount.
-  CustomPaint _setGridTextPainter(
-      OverlappingProgressIndicator? indicator, double value, bool flg) {
+  OverlappingGraphText _graphText(double value) {
     TextStyle textStyle = const TextStyle(
       inherit: true,
       color: Colors.white,
       fontSize: 10,
     );
-    double graphValue = (graph / graphCount);
-    double roundValue = graphCount.toDouble() - _roundCount;
+    return OverlappingGraphText(
+        textStyle: textStyle,
+        boxSize: _boxSize,
+        offsetX: -margin15,
+        offsetY: margin10,
+        valueListX: model.valueListX,
+        valueListY: model.valueListY,
+        sizeSet: Size(value, value),
+        graphCount: graphCount,
+        graphValue: _sizeHeight / 2,
+        radData: radData);
+  }
+
+  OverlappingGridPainter _gridPainter(double value) {
+    TextStyle textStyle = const TextStyle(
+      inherit: true,
+      color: Colors.white,
+      fontSize: 5,
+    );
+    return OverlappingGridPainter(
+        textStyle: textStyle,
+        boxSize: _boxSize,
+        strokeWidth: 1,
+        sizeSet: Size(value, value),
+        colorSet: Colors.orange,
+        graphValue: _sizeHeight / 2,
+        radData: radData);
+  }
+
+  _setP(OverlappingProgressIndicator? indicator, String tex, double value,
+      int index, double value2) {
+    return indicator?.setPainter(tex, value, index, value2, model.colorList);
+  }
+
+  ///　details of graph characters, ruled lines, and animation amount.
+  CustomPaint _setGridTextPainter(
+      OverlappingProgressIndicator? p, double value, bool flg) {
+    double v = (graph / graphCount);
     return CustomPaint(
-      painter: flg
-          ? OverlappingGraphText(
-              textStyle: textStyle,
-              boxSize: _boxSize,
-              offsetX: -margin15,
-              offsetY: margin10,
-              valueListX: model.valueListX,
-              valueListY: model.valueListY,
-              sizeSet: Size(value, value),
-              graphCount: graphCount,
-              graphValue: _sizeHeight / 2,
-              radData: radData)
-          : null,
+      painter: flg ? _graphText(value) : null,
       child: CustomPaint(
-        painter: OverlappingGridPainter(
-            textStyle: textStyle,
-            boxSize: _boxSize,
-            strokeWidth: 1,
-            sizeSet: Size(value, value),
-            colorSet: Colors.orange,
-            graphValue: _sizeHeight / 2,
-            radData: radData),
+        painter: _gridPainter(value),
         child: CustomPaint(
-          painter: indicator?.setPainter("", -1, -1, 0, model.colorList,
-              circleData: CircleData.allCircle, textColor: Colors.grey),
+          painter: _setP(p, "", -1, 0, 0),
           child: CustomPaint(
-            painter: indicator?.setPainter(
-                "", 0 / graphValue, 0, graphValue, model.colorList,
-                circleData: CircleData.allCircle),
+            painter: _setP(p, "", 0 / v, 0, v),
             child: CustomPaint(
-              painter: indicator?.setPainter(
-                  "1", 1 / graphValue, 1, graphValue, model.colorList),
+              painter: _setP(p, "1", 1 / v, 1, v),
               child: CustomPaint(
-                painter: indicator?.setPainter(
-                    "2", 2 / graphValue, 2, graphValue, model.colorList),
+                painter: _setP(p, "2", 2 / v, 2, v),
                 child: CustomPaint(
-                  painter: indicator?.setPainter(
-                      "3", 3 / graphValue, 3, graphValue, model.colorList),
+                  painter: _setP(p, "3", 3 / v, 3, v),
                   child: CustomPaint(
-                    painter: indicator?.setPainter(
-                        "4", 4 / graphValue, 4, graphValue, model.colorList),
+                    painter: _setP(p, "4", 4 / v, 4, v),
                     child: CustomPaint(
-                      painter: indicator?.setPainter(
-                          "", roundValue, 5, graphValue, model.colorList),
+                      painter: _setP(p, "5", 5 / v, 5, v),
+                      child: CustomPaint(
+                        painter: _setP(p, "6", 6 / v, 6, v),
+                        child: CustomPaint(
+                          painter: _setP(p, "7", 7 / v, 7, v),
+                          child: CustomPaint(
+                            painter: _setP(p, "8", 8 / v, 8, v),
+                            child: CustomPaint(
+                              painter: _setP(p, "9", 9 / v, 9, v),
+                              child: CustomPaint(
+                                painter: _setP(p, "", 10 / v, 10, v),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -151,7 +168,7 @@ class OverLappingViewModel {
       vsync: vsync,
       upperBound: 1,
     )..addListener(() {
-        call(OverLapType.animationControllerInit);
+        call();
       });
     animationController?.addStatusListener((status) {
       if (status == AnimationStatus.completed) {

@@ -4,10 +4,15 @@ class OverLappingModel {
   List<Color> colorList = [
     Colors.blue,
     Colors.red,
+    Colors.amber,
+    Colors.purple,
     Colors.white,
     Colors.yellow,
+    Colors.brown,
+    Colors.pink,
     Colors.cyan,
     Colors.green,
+    Colors.blueGrey,
   ];
 
   List<String> valueListY = [

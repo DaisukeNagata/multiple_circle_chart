@@ -68,17 +68,11 @@ class OverLappingBarState extends State<OverLappingWidget>
   }
 
   @override
-  OverLapCallBack? callback(OverLapType type) {
+  OverLapCallBack? callback() {
     setState(() {
       double width = MediaQuery.of(context).size.width;
-      switch (type) {
-        case OverLapType.animationControllerInit:
-          viewModel.graphCount = 5;
-
-          /// 2 is this number.
-          viewModel.animationInitState(context, width / 1.2);
-          break;
-      }
+      viewModel.graphCount = 5;
+      viewModel.animationInitState(context, width / 1.2);
     });
     return null;
   }
