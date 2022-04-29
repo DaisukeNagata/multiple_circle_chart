@@ -88,7 +88,8 @@ class OverLappingViewModel {
           ? OverlappingGraphText(
               textStyle: textStyle,
               boxSize: _boxSize,
-              textValue: 1,
+              valueListX: model.valueListX,
+              valueListY: model.valueListY,
               sizeSet: Size(value, value),
               graphCount: graphCount,
               graphValue: _sizeHeight / 2,
@@ -121,11 +122,7 @@ class OverLappingViewModel {
                       "4", 3 / graphValue, 3, graphValue, model.colorList),
                   child: CustomPaint(
                     painter: indicator?.setPainter(
-                        "5", 4 / graphValue, 4, graphValue, model.colorList),
-                    child: CustomPaint(
-                      painter: indicator?.setPainter(
-                          "6", roundValue, 5, graphValue, model.colorList),
-                    ),
+                        "", roundValue, 5, graphValue, model.colorList),
                   ),
                 ),
               ),

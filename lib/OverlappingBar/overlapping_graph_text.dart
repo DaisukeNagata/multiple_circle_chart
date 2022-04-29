@@ -10,7 +10,8 @@ class OverlappingGraphText extends CustomPainter {
   final double boxSize;
   double? offsetX = -25;
   double? offsetY = 20;
-  double? textValue;
+  List<String>? valueListX;
+  List<String>? valueListY;
   final Size sizeSet;
   final int graphCount;
   final double graphValue;
@@ -23,7 +24,8 @@ class OverlappingGraphText extends CustomPainter {
       required this.boxSize,
       double? offsetX,
       double? offsetY,
-      required this.textValue,
+      required this.valueListX,
+      required this.valueListY,
       required this.sizeSet,
       required this.graphCount,
       required this.graphValue,
@@ -42,38 +44,56 @@ class OverlappingGraphText extends CustomPainter {
       ///　Have textSpanLogic logic think about the balance of the ruled text.
       case RadData.vertical:
         for (var i = 0; i <= wLines; ++i) {
-          double y = -(textValue ?? 0) * i;
-          textSpanLogic(canvas, true, i, wLines, graphCount, value: y);
+          textSpanLogic(canvas, true, i, wLines, graphCount);
         }
         for (var i = 0; i <= (graphCount * 2) + 1; ++i) {
-          final x = (textValue ?? 0) * i;
-          textSpanLogic(canvas, false, i, (graphCount * 2), graphCount,
-              value: x);
+          textSpanLogic(canvas, false, i, (graphCount * 2), graphCount);
         }
         break;
 
       ///　Have textSpanLogic logic think about the balance of the ruled text.
       case RadData.horizontal:
         for (var i = 0; i <= (graphCount * 2); ++i) {
-          double y = -(textValue ?? 0) * i;
-          textSpanLogic(canvas, true, i, (graphCount * 2), graphCount,
-              value: y);
+          textSpanLogic(canvas, true, i, (graphCount * 2), graphCount);
         }
         for (var i = 0; i <= wLines; ++i) {
-          final x = (textValue ?? 0) * i;
-          textSpanLogic(canvas, false, i, wLines, graphCount, value: x);
+          textSpanLogic(canvas, false, i, wLines, graphCount);
         }
         break;
     }
   }
 
-  textSpanLogic(Canvas canvas, bool flg, int i, int wLines, int graphCount,
-      {double? value}) {
-    int? textSetValue = flg ? (value?.toInt() ?? 0) * -1 : value?.toInt();
+  textSpanLogic(Canvas canvas, bool flg, int i, int wLines, int graphCount) {
+    String textValue = "";
+    switch (flg) {
+      case true:
+        if (radData == RadData.horizontal) {
+          if ((valueListY?.length ?? 0) > i) {
+            textValue = i % 2 == 0 ? "" : (valueListY?[i] ?? "");
+          }
+        } else {
+          if ((valueListX?.length ?? 0) > i) {
+            textValue = (valueListX?[i] ?? "");
+          }
+        }
+        break;
+      case false:
+        if (radData == RadData.horizontal) {
+          if ((valueListX?.length ?? 0) > i) {
+            textValue = (valueListX?[i] ?? "");
+          }
+        } else {
+          if ((valueListY?.length ?? 0) > i) {
+            textValue = i % 2 == 0 ? "" : (valueListY?[i] ?? "");
+          }
+        }
+        break;
+    }
+
     if (i <= wLines) {
       final textSpan = TextSpan(
         style: textStyle,
-        children: <TextSpan>[TextSpan(text: '$textSetValue')],
+        children: <TextSpan>[TextSpan(text: textValue)],
       );
 
       final textPainter = TextPainter(
@@ -89,7 +109,8 @@ class OverlappingGraphText extends CustomPainter {
         if (flg) {
           offset = Offset(offsetX ?? 0, (boxSize + (-boxSize * i)));
         } else {
-          offset = Offset(sizeSet.width / wLines * i, boxSize + (offsetY ?? 0));
+          offset = Offset(sizeSet.width / wLines * i - textPainter.width / 2,
+              boxSize + (offsetY ?? 0));
         }
       } else {
         if (flg) {
@@ -97,16 +118,14 @@ class OverlappingGraphText extends CustomPainter {
               -sizeSet.width / wLines * i - graphValue);
         } else {
           offset = Offset(
-              -(boxSize * (wLines - 1) - graphValue) + (boxSize * i),
+              -(boxSize * (wLines - 1) - graphValue) +
+                  (boxSize * i) -
+                  textPainter.width / 2,
               (offsetY ?? 0));
         }
       }
 
-      if (i > 0 && (textSetValue ?? 0) != 0.0) {
-        textPainter.paint(canvas, offset);
-      } else if (i == 0 && (textSetValue ?? 0) == 0.0 && textValue != 0) {
-        textPainter.paint(canvas, offset);
-      }
+      textPainter.paint(canvas, offset);
     }
   }
 

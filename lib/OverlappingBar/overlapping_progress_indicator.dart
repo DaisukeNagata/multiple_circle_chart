@@ -70,7 +70,7 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
           backgroundColor: colorList[index],
           offsetValue: offset,
           textSpan: textSpan,
-          value: ((animationValue ?? 0.0)) - (value * 0.1 * scale),
+          value: (animationValue ?? 0.0) - (value * 0.1 * scale),
           contextSize:
               Size(w * (value * 0.1 * scale), contextSize?.height ?? 0.0),
           controller: streamController);
