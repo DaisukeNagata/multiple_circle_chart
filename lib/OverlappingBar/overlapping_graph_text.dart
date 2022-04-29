@@ -8,8 +8,8 @@ import 'overlapping_data.dart';
 class OverlappingGraphText extends CustomPainter {
   final TextStyle textStyle;
   final double boxSize;
-  double? offsetX = -25;
-  double? offsetY = 20;
+  double? offsetX;
+  double? offsetY;
   List<String>? valueListX;
   List<String>? valueListY;
   final Size sizeSet;
@@ -22,8 +22,8 @@ class OverlappingGraphText extends CustomPainter {
   OverlappingGraphText(
       {required this.textStyle,
       required this.boxSize,
-      double? offsetX,
-      double? offsetY,
+      required this.offsetX,
+      required this.offsetY,
       required this.valueListX,
       required this.valueListY,
       required this.sizeSet,
@@ -67,6 +67,8 @@ class OverlappingGraphText extends CustomPainter {
     String textValue = "";
     switch (flg) {
       case true:
+
+        ///　Even value if it overlaps with the graph.
         if (radData == RadData.horizontal) {
           if ((valueListY?.length ?? 0) > i) {
             textValue = i % 2 == 0 ? "" : (valueListY?[i] ?? "");
@@ -78,6 +80,8 @@ class OverlappingGraphText extends CustomPainter {
         }
         break;
       case false:
+
+        ///　Even value if it overlaps with the graph.
         if (radData == RadData.horizontal) {
           if ((valueListX?.length ?? 0) > i) {
             textValue = (valueListX?[i] ?? "");

@@ -34,10 +34,10 @@ class OverLappingViewModel {
   GlobalKey globalKey4 = GlobalKey();
   RadData radData = RadData.vertical;
   int graphCount = 0;
-  final double _sizeHeight = 15;
-  final double _boxSize = 35;
-  final double _roundCount = 0.000001;
+  double _boxSize = 0;
   final int graph = 10;
+  final double _sizeHeight = 15;
+  final double _roundCount = 0.000001;
 
   ElevatedButton buttonSet(OverLapCallBack call, OverLappingBarState vsync) {
     return ElevatedButton(
@@ -61,6 +61,7 @@ class OverLappingViewModel {
 
   ///　build graph animation.
   animationInitState(BuildContext context, double width) {
+    _boxSize = (MediaQuery.of(context).size.width / 10 - 7).floorToDouble();
     indicator = _indicatorSet(context, globalKey, width,
         _setGridTextPainter(indicator, width, false), 0.7);
     indicator2 = _indicatorSet(context, globalKey2, width,
@@ -81,13 +82,15 @@ class OverLappingViewModel {
       color: Colors.white,
       fontSize: 10,
     );
-    var graphValue = (graph / graphCount);
-    var roundValue = graphCount.toDouble() - _roundCount;
+    double graphValue = (graph / graphCount);
+    double roundValue = graphCount.toDouble() - _roundCount;
     return CustomPaint(
       painter: flg
           ? OverlappingGraphText(
               textStyle: textStyle,
               boxSize: _boxSize,
+              offsetX: -15,
+              offsetY: 10,
               valueListX: model.valueListX,
               valueListY: model.valueListY,
               sizeSet: Size(value, value),
