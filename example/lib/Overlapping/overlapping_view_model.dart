@@ -112,20 +112,24 @@ class OverLappingViewModel {
               circleData: CircleData.allCircle, textColor: Colors.grey),
           child: CustomPaint(
             painter: indicator?.setPainter(
-                "1", 0 / graphValue, 0, graphValue, model.colorList,
+                "", 0 / graphValue, 0, graphValue, model.colorList,
                 circleData: CircleData.allCircle),
             child: CustomPaint(
               painter: indicator?.setPainter(
-                  "2", 1 / graphValue, 1, graphValue, model.colorList),
+                  "1", 1 / graphValue, 1, graphValue, model.colorList),
               child: CustomPaint(
                 painter: indicator?.setPainter(
-                    "3", 2 / graphValue, 2, graphValue, model.colorList),
+                    "2", 2 / graphValue, 2, graphValue, model.colorList),
                 child: CustomPaint(
                   painter: indicator?.setPainter(
-                      "4", 3 / graphValue, 3, graphValue, model.colorList),
+                      "3", 3 / graphValue, 3, graphValue, model.colorList),
                   child: CustomPaint(
                     painter: indicator?.setPainter(
-                        "", roundValue, 5, graphValue, model.colorList),
+                        "4", 4 / graphValue, 4, graphValue, model.colorList),
+                    child: CustomPaint(
+                      painter: indicator?.setPainter(
+                          "", roundValue, 5, graphValue, model.colorList),
+                    ),
                   ),
                 ),
               ),
