@@ -35,7 +35,7 @@ class MainCircleDataModel {
       circleShader: CircleShader.circleNone,
 
       /// ComplementCircle is the tuning when the circle is changed to large or small.
-      complementCircle: 0.05,
+      complementCircle: 0.039,
 
       /// circleSizeValue.
       circleSizeValue: circleSize,

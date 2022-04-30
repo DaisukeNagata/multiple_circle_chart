@@ -216,8 +216,8 @@ class OverLappingViewModel {
       GlobalKey key, double w, CustomPaint setPaint, double index) {
     return OverlappingProgressIndicator(
         radData: radData,
-        radDataRadDataVertical: const Offset(20, 20),
-        radDataRadDataHorizontal: const Offset(1, 20),
+        radDataRadDataVertical: const Offset(10, 10),
+        radDataRadDataHorizontal: const Offset(1, 10),
         dataVerticalSize: const Size(120, 120),
         dataHorizontalSize: const Size(120, 120),
         globalKey: key,

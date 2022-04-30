@@ -64,7 +64,6 @@ class OverlappingGridPainter extends CustomPainter {
     var h2 = -boxSize * 2;
     var c = checkLine && baseLine && i == 0;
     var c2 = checkLine && !baseLine && i == 2;
-    // // var c = checkLine && !baseLine && i == 2 || checkLine && baseLine && i == 0;
     if (radData == RadData.horizontal) {
       if (flg) {
         if (c || c2) {
