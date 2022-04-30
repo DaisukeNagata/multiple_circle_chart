@@ -62,17 +62,29 @@ class OverLappingBarState extends State<OverLappingWidget>
                     viewModel.lastIndicator, width, viewModel.lastGlobalKey),
               ],
             )),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [viewModel.sliderSet(callback, this, viewModel.scale)],
+        ),
         viewModel.buttonSet(callback, this),
       ],
     );
   }
 
   @override
-  OverLapCallBack? callback() {
+  OverLapCallBack? callback(type, {OverLappingBarState? vsync, double? value}) {
     setState(() {
-      double width = MediaQuery.of(context).size.width;
-      viewModel.graphCount = 5;
-      viewModel.animationInitState(context, width / 1.2);
+      switch (type) {
+        case OverLapType.graph:
+          double width = MediaQuery.of(context).size.width;
+          viewModel.graphCount = 5;
+          viewModel.animationInitState(context, width / 1.2);
+          break;
+        case OverLapType.slider:
+          viewModel.scale = value ?? 0;
+          viewModel.animationController?.forward();
+          break;
+      }
     });
     return null;
   }

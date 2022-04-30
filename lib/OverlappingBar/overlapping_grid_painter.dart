@@ -11,6 +11,8 @@ class OverlappingGridPainter extends CustomPainter {
   final double strokeWidth;
   double? offsetX = -25;
   double? offsetY = 20;
+  final bool checkLine;
+  final bool baseLine;
   final Size sizeSet;
   final Color colorSet;
   final double graphValue;
@@ -24,16 +26,23 @@ class OverlappingGridPainter extends CustomPainter {
       required this.strokeWidth,
       double? offsetX,
       double? offsetY,
+      required this.checkLine,
+      required this.baseLine,
       required this.sizeSet,
       required this.colorSet,
       required this.graphValue,
       required this.radData});
 
+  Paint paintSet = Paint();
   double degToRad(double deg) => deg * (pi / 180.0);
 
   @override
   void paint(Canvas canvas, Size size) {
     final wLines = (sizeSet.width ~/ boxSize);
+    paintSet = Paint()
+      ..strokeWidth = strokeWidth
+      ..color = colorSet.withOpacity(strokeWidth == 0 ? 0 : 1)
+      ..style = PaintingStyle.stroke;
 
     ///　A value of 2 will balance the ruled lines.
     ///　Have textSpanLogic logic think about the balance of the ruled lines.
@@ -47,26 +56,37 @@ class OverlappingGridPainter extends CustomPainter {
       final x = boxSize * i;
       textSpanLogic(x, false, i, wLines);
     }
-    final paint = Paint()
-      ..strokeWidth = strokeWidth
-      ..color = colorSet.withOpacity(strokeWidth == 0 ? 0 : 1)
-      ..style = PaintingStyle.stroke;
-    canvas.drawPath(path, paint);
+    canvas.drawPath(path, paintSet);
   }
 
   textSpanLogic(double value, bool flg, int i, int wLines) {
+    var h = boxSize + graphValue;
+    var h2 = -boxSize * 2;
+    var c = checkLine && baseLine && i == 0;
+    var c2 = checkLine && !baseLine && i == 2;
+    // // var c = checkLine && !baseLine && i == 2 || checkLine && baseLine && i == 0;
     if (radData == RadData.horizontal) {
       if (flg) {
-        path.moveTo(0, value + boxSize + graphValue);
-        path.relativeLineTo(sizeSet.width, 0);
+        if (c || c2) {
+          path.moveTo(0, value + boxSize + graphValue);
+          path.relativeLineTo(sizeSet.width, 0);
+        } else {
+          path.moveTo(0, 0);
+          path.relativeLineTo(0, 0);
+        }
       } else {
-        path.moveTo(sizeSet.width / wLines * i, boxSize + graphValue);
-        path.relativeLineTo(0, -boxSize * 2);
+        path.moveTo(sizeSet.width / wLines * i, h);
+        path.relativeLineTo(0, h2);
       }
     } else {
       if (flg) {
-        path.moveTo(0, value + boxSize + graphValue);
-        path.relativeLineTo(sizeSet.width, 0);
+        if (c || c2) {
+          path.moveTo(0, value + boxSize + graphValue);
+          path.relativeLineTo(sizeSet.width, 0);
+        } else {
+          path.moveTo(0, 0);
+          path.relativeLineTo(0, 0);
+        }
       } else {
         path.moveTo(sizeSet.width / wLines * i, boxSize + graphValue);
         path.relativeLineTo(0, -boxSize * 2);

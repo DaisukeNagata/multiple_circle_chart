@@ -9,11 +9,14 @@ import 'package:multiple_circle_chart/OverlappingBar/overlapping_progress_indica
 import 'overlapping_bar.dart';
 import 'overlapping_model.dart';
 
-typedef OverLapCallBack = Function();
+typedef OverLapCallBack = Function(OverLapType,
+    {OverLappingBarState? vsync, double? value});
 
 abstract class OverLapCallBackLogic {
-  OverLapCallBack? callback();
+  OverLapCallBack? callback(type, {OverLappingBarState? vsync, double? value});
 }
+
+enum OverLapType { slider, graph }
 
 class OverLappingViewModel {
   OverLappingModel model = OverLappingModel();
@@ -31,6 +34,7 @@ class OverLappingViewModel {
   RadData radData = RadData.vertical;
   int graphCount = 0;
   double _boxSize = 0;
+  double scale = 1.26;
   final double margin10 = 10;
   final double margin15 = 15;
   final double margin30 = 30;
@@ -46,12 +50,33 @@ class OverLappingViewModel {
     );
   }
 
+  Slider sliderSet(
+      OverLapCallBack call, OverLappingBarState vsync, double value,
+      {Key? keyValue}) {
+    // Padding(padding: EdgeInsets.only(top: viewModel.pad));
+    return Slider(
+      key: keyValue,
+      value: scale,
+      min: 0,
+      max: 2,
+      label: value.toString(),
+      divisions: 1000,
+      onChanged: (double value) {
+        call(OverLapType.slider, value: value);
+      },
+      onChangeEnd: (_) {
+        call(OverLapType.graph, vsync: vsync);
+      },
+    );
+  }
+
   ///　Graph coordinate construction.
   Row indicatorRowSet(
       OverlappingProgressIndicator? indicator, double width, GlobalKey key) {
     return Row(
       children: [
-        Padding(padding: EdgeInsets.only(top: (_boxSize * 2), left: margin30)),
+        Padding(
+            padding: EdgeInsets.only(top: (_boxSize * scale), left: margin30)),
         SizedBox(height: _sizeHeight, width: width, child: indicator, key: key),
       ],
     );
@@ -61,15 +86,15 @@ class OverLappingViewModel {
   animationInitState(BuildContext context, double width) {
     _boxSize = ((width - margin10) / 10).floorToDouble();
     indicator = _indicatorSet(context, globalKey, width,
-        _setGridTextPainter(indicator, width, false), 0.7);
+        _setGridTextPainter(indicator, width, false, true), 0.7);
     indicator2 = _indicatorSet(context, globalKey2, width,
-        _setGridTextPainter(indicator2, width, false), 0.8);
+        _setGridTextPainter(indicator2, width, false, false), 0.8);
     indicator3 = _indicatorSet(context, globalKey3, width,
-        _setGridTextPainter(indicator3, width, false), 1);
+        _setGridTextPainter(indicator3, width, false, false), 1);
     indicator4 = _indicatorSet(context, globalKey4, width,
-        _setGridTextPainter(indicator4, width, false), 0.4);
+        _setGridTextPainter(indicator4, width, false, false), 0.4);
     lastIndicator = _indicatorSet(context, lastGlobalKey, width,
-        _setGridTextPainter(lastIndicator, width, true), 0.5);
+        _setGridTextPainter(lastIndicator, width, true, true), 0.5);
   }
 
   OverlappingGraphText _graphText(double value) {
@@ -88,10 +113,12 @@ class OverLappingViewModel {
         sizeSet: Size(value, value),
         graphCount: graphCount,
         graphValue: _sizeHeight / 2,
-        radData: radData);
+        radData: radData,
+        scale: scale);
   }
 
-  OverlappingGridPainter _gridPainter(double value) {
+  OverlappingGridPainter _gridPainter(
+      double value, bool baseLine, bool checkLine) {
     TextStyle textStyle = const TextStyle(
       inherit: true,
       color: Colors.white,
@@ -104,7 +131,9 @@ class OverLappingViewModel {
         sizeSet: Size(value, value),
         colorSet: Colors.orange,
         graphValue: _sizeHeight / 2,
-        radData: radData);
+        radData: radData,
+        checkLine: checkLine,
+        baseLine: baseLine);
   }
 
   _setP(OverlappingProgressIndicator? indicator, String tex, double value,
@@ -113,13 +142,13 @@ class OverLappingViewModel {
   }
 
   ///　details of graph characters, ruled lines, and animation amount.
-  CustomPaint _setGridTextPainter(
-      OverlappingProgressIndicator? p, double value, bool flg) {
+  CustomPaint _setGridTextPainter(OverlappingProgressIndicator? p, double value,
+      bool baseLine, bool checkLine) {
     double v = (graph / graphCount);
     return CustomPaint(
-      painter: flg ? _graphText(value) : null,
+      painter: baseLine ? _graphText(value) : null,
       child: CustomPaint(
-        painter: _gridPainter(value),
+        painter: _gridPainter(value, baseLine, checkLine),
         child: CustomPaint(
           painter: _setP(p, "", -1, 0, 0),
           child: CustomPaint(
@@ -168,7 +197,7 @@ class OverLappingViewModel {
       vsync: vsync,
       upperBound: 1,
     )..addListener(() {
-        call();
+        call(OverLapType.graph);
       });
     animationController?.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
