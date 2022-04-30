@@ -10,6 +10,7 @@ class OverlappingGraphText extends CustomPainter {
   final double boxSize;
   double? offsetX;
   double? offsetY;
+  double scale;
   List<String>? valueListX;
   List<String>? valueListY;
   final Size sizeSet;
@@ -24,6 +25,7 @@ class OverlappingGraphText extends CustomPainter {
       required this.boxSize,
       required this.offsetX,
       required this.offsetY,
+      required this.scale,
       required this.valueListX,
       required this.valueListY,
       required this.sizeSet,
@@ -71,7 +73,7 @@ class OverlappingGraphText extends CustomPainter {
         ///　Even value if it overlaps with the graph.
         if (radData == RadData.horizontal) {
           if ((valueListY?.length ?? 0) > i) {
-            textValue = i % 2 == 0 ? "" : (valueListY?[i] ?? "");
+            textValue = (valueListY?[i] ?? "");
           }
         } else {
           if ((valueListX?.length ?? 0) > i) {
@@ -88,7 +90,7 @@ class OverlappingGraphText extends CustomPainter {
           }
         } else {
           if ((valueListY?.length ?? 0) > i) {
-            textValue = i % 2 == 0 ? "" : (valueListY?[i] ?? "");
+            textValue = (valueListY?[i] ?? "");
           }
         }
         break;
@@ -111,20 +113,24 @@ class OverlappingGraphText extends CustomPainter {
 
       if (radData == RadData.horizontal) {
         if (flg) {
-          offset = Offset(offsetX ?? 0, (boxSize + (-boxSize * i)));
+          offset = Offset(
+              offsetX ?? 0, ((boxSize * scale) + (-(boxSize * scale) * i)));
         } else {
           offset = Offset(sizeSet.width / wLines * i - textPainter.width / 2,
               boxSize + (offsetY ?? 0));
         }
       } else {
         if (flg) {
-          offset = Offset(-boxSize * (graphCount * 2) - (offsetX ?? 0),
+          offset = Offset(
+              -((boxSize * scale) * graphCount - textPainter.width / 4) +
+                  (boxSize * scale) -
+                  boxSize -
+                  (offsetY ?? 0),
               -sizeSet.width / wLines * i - graphValue);
         } else {
           offset = Offset(
-              -(boxSize * (wLines - 1) - graphValue) +
-                  (boxSize * i) -
-                  textPainter.width / 2,
+              -((boxSize * scale) * i - textPainter.width / 4) +
+                  (boxSize * scale),
               (offsetY ?? 0));
         }
       }
