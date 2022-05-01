@@ -66,6 +66,8 @@ class OverlappingGridPainter extends CustomPainter {
     var c2 = checkLine && !baseLine && i == 2;
     if (radData == RadData.horizontal) {
       if (flg) {
+        ///　Confirmation from top to bottom.
+        ///　In that case, draw a line.
         if (c || c2) {
           path.moveTo(0, value + boxSize + graphValue);
           path.relativeLineTo(sizeSet.width, 0);
@@ -74,11 +76,14 @@ class OverlappingGridPainter extends CustomPainter {
           path.relativeLineTo(0, 0);
         }
       } else {
+        /// Draw the X-axis sideways.
         path.moveTo(sizeSet.width / wLines * i, h);
         path.relativeLineTo(0, h2);
       }
     } else {
       if (flg) {
+        ///　Confirmation from top to bottom.
+        ///　In that case, draw a line.
         if (c || c2) {
           path.moveTo(0, value + boxSize + graphValue);
           path.relativeLineTo(sizeSet.width, 0);
@@ -87,6 +92,7 @@ class OverlappingGridPainter extends CustomPainter {
           path.relativeLineTo(0, 0);
         }
       } else {
+        /// Draw the X-axis sideways.
         path.moveTo(sizeSet.width / wLines * i, boxSize + graphValue);
         path.relativeLineTo(0, -boxSize * 2);
       }

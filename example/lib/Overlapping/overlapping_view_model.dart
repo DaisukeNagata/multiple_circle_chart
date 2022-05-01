@@ -26,11 +26,23 @@ class OverLappingViewModel {
   OverlappingProgressIndicator? indicator2;
   OverlappingProgressIndicator? indicator3;
   OverlappingProgressIndicator? indicator4;
+  OverlappingProgressIndicator? indicator5;
+  OverlappingProgressIndicator? indicator6;
+
+  OverlappingProgressIndicator? indicator7;
+  OverlappingProgressIndicator? indicator8;
+  OverlappingProgressIndicator? indicator9;
   GlobalKey lastGlobalKey = GlobalKey();
   GlobalKey globalKey = GlobalKey();
   GlobalKey globalKey2 = GlobalKey();
   GlobalKey globalKey3 = GlobalKey();
   GlobalKey globalKey4 = GlobalKey();
+  GlobalKey globalKey5 = GlobalKey();
+  GlobalKey globalKey6 = GlobalKey();
+
+  GlobalKey globalKey7 = GlobalKey();
+  GlobalKey globalKey8 = GlobalKey();
+  GlobalKey globalKey9 = GlobalKey();
   RadData radData = RadData.vertical;
   int graphCount = 0;
   double _boxSize = 0;
@@ -53,7 +65,6 @@ class OverLappingViewModel {
   Slider sliderSet(
       OverLapCallBack call, OverLappingBarState vsync, double value,
       {Key? keyValue}) {
-    // Padding(padding: EdgeInsets.only(top: viewModel.pad));
     return Slider(
       key: keyValue,
       value: scale,
@@ -83,18 +94,32 @@ class OverLappingViewModel {
   }
 
   ///　build graph animation.
-  animationInitState(BuildContext context, double width) {
+  animationInitState(BuildContext c, double width) {
     _boxSize = ((width - margin10) / 10).floorToDouble();
-    indicator = _indicatorSet(context, globalKey, width,
-        _setGridTextPainter(indicator, width, false, true), 0.7);
-    indicator2 = _indicatorSet(context, globalKey2, width,
-        _setGridTextPainter(indicator2, width, false, false), 0.8);
-    indicator3 = _indicatorSet(context, globalKey3, width,
-        _setGridTextPainter(indicator3, width, false, false), 1);
-    indicator4 = _indicatorSet(context, globalKey4, width,
-        _setGridTextPainter(indicator4, width, false, false), 0.4);
-    lastIndicator = _indicatorSet(context, lastGlobalKey, width,
-        _setGridTextPainter(lastIndicator, width, true, true), 0.5);
+    indicator = _indicatorSet(
+        c, globalKey, width, _sePainter(indicator, width, false, true), 0.7);
+    indicator2 = _indicatorSet(
+        c, globalKey2, width, _sePainter(indicator2, width, false, false), 0.8);
+    indicator3 = _indicatorSet(
+        c, globalKey3, width, _sePainter(indicator3, width, false, false), 1);
+    indicator4 = _indicatorSet(
+        c, globalKey4, width, _sePainter(indicator4, width, false, false), 0.4);
+
+    indicator5 = _indicatorSet(
+        c, globalKey5, width, _sePainter(indicator5, width, false, false), 0.7);
+    indicator6 = _indicatorSet(
+        c, globalKey6, width, _sePainter(indicator6, width, false, false), 0.8);
+
+    indicator7 = _indicatorSet(
+        c, globalKey7, width, _sePainter(indicator7, width, false, false), 0.4);
+
+    indicator8 = _indicatorSet(
+        c, globalKey8, width, _sePainter(indicator8, width, false, false), 0.7);
+    indicator9 = _indicatorSet(
+        c, globalKey9, width, _sePainter(indicator9, width, false, false), 0.8);
+
+    lastIndicator = _indicatorSet(c, lastGlobalKey, width,
+        _sePainter(lastIndicator, width, true, true), 0.5);
   }
 
   OverlappingGraphText _graphText(double value) {
@@ -142,7 +167,7 @@ class OverLappingViewModel {
   }
 
   ///　details of graph characters, ruled lines, and animation amount.
-  CustomPaint _setGridTextPainter(OverlappingProgressIndicator? p, double value,
+  CustomPaint _sePainter(OverlappingProgressIndicator? p, double value,
       bool baseLine, bool checkLine) {
     double v = (graph / graphCount);
     return CustomPaint(

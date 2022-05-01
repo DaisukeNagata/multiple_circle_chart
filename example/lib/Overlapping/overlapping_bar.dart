@@ -43,30 +43,55 @@ class OverLappingBarState extends State<OverLappingWidget>
   Widget build(BuildContext context) {
     var dta = viewModel.lastIndicator?.radData;
     double width = MediaQuery.of(context).size.width / 1.2;
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return Stack(
       children: [
-        Transform.rotate(
-            angle: (dta == RadData.horizontal ? 360 : -90) * pi / 180,
-            child: Column(
-              children: [
-                viewModel.indicatorRowSet(
-                    viewModel.indicator, width, viewModel.globalKey),
-                viewModel.indicatorRowSet(
-                    viewModel.indicator2, width, viewModel.globalKey2),
-                viewModel.indicatorRowSet(
-                    viewModel.indicator3, width, viewModel.globalKey3),
-                viewModel.indicatorRowSet(
-                    viewModel.indicator4, width, viewModel.globalKey4),
-                viewModel.indicatorRowSet(
-                    viewModel.lastIndicator, width, viewModel.lastGlobalKey),
-              ],
-            )),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [viewModel.sliderSet(callback, this, viewModel.scale)],
+        SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  const Padding(padding: EdgeInsets.only(right: 50, top: 50)),
+                  Transform.rotate(
+                      angle: (dta == RadData.horizontal ? 360 : -90) * pi / 180,
+                      child: Column(
+                        children: [
+                          const Padding(padding: EdgeInsets.only(top: 70)),
+                          viewModel.indicatorRowSet(
+                              viewModel.indicator, width, viewModel.globalKey),
+                          viewModel.indicatorRowSet(viewModel.indicator2, width,
+                              viewModel.globalKey2),
+                          viewModel.indicatorRowSet(viewModel.indicator3, width,
+                              viewModel.globalKey3),
+                          viewModel.indicatorRowSet(viewModel.indicator4, width,
+                              viewModel.globalKey4),
+                          viewModel.indicatorRowSet(viewModel.indicator5, width,
+                              viewModel.globalKey5),
+                          viewModel.indicatorRowSet(viewModel.indicator6, width,
+                              viewModel.globalKey6),
+                          viewModel.indicatorRowSet(viewModel.indicator7, width,
+                              viewModel.globalKey7),
+                          viewModel.indicatorRowSet(viewModel.indicator8, width,
+                              viewModel.globalKey8),
+                          viewModel.indicatorRowSet(viewModel.indicator9, width,
+                              viewModel.globalKey9),
+                          viewModel.indicatorRowSet(viewModel.lastIndicator,
+                              width, viewModel.lastGlobalKey),
+                          const Padding(padding: EdgeInsets.only(bottom: 70)),
+                        ],
+                      )),
+                  const Padding(padding: EdgeInsets.only(left: 50, bottom: 50)),
+                ],
+              )),
         ),
-        viewModel.buttonSet(callback, this),
+        const Padding(padding: EdgeInsets.only(top: 10)),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            viewModel.sliderSet(callback, this, viewModel.scale),
+            viewModel.buttonSet(callback, this),
+          ],
+        ),
       ],
     );
   }
@@ -77,7 +102,7 @@ class OverLappingBarState extends State<OverLappingWidget>
       switch (type) {
         case OverLapType.graph:
           double width = MediaQuery.of(context).size.width;
-          viewModel.graphCount = 5;
+          viewModel.graphCount = 10;
           viewModel.animationInitState(context, width / 1.2);
           break;
         case OverLapType.slider:
