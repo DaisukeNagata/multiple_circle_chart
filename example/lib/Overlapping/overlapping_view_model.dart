@@ -45,8 +45,9 @@ class OverLappingViewModel {
   GlobalKey globalKey9 = GlobalKey();
   RadData radData = RadData.vertical;
   int graphCount = 0;
-  double _boxSize = 0;
-  double scale = 1.26;
+  double boxSize = 0;
+  double scale = 1;
+  Scaffold fold = const Scaffold();
   final double margin10 = 10;
   final double margin15 = 15;
   final double margin30 = 30;
@@ -62,15 +63,14 @@ class OverLappingViewModel {
     );
   }
 
-  Slider sliderSet(
-      OverLapCallBack call, OverLappingBarState vsync, double value,
+  Slider sliderSet(OverLapCallBack call, OverLappingBarState vsync,
       {Key? keyValue}) {
     return Slider(
       key: keyValue,
       value: scale,
       min: 0,
       max: 2,
-      label: value.toString(),
+      label: scale.toString(),
       divisions: 1000,
       onChanged: (double value) {
         call(OverLapType.slider, value: value);
@@ -85,17 +85,17 @@ class OverLappingViewModel {
   Row indicatorRowSet(
       OverlappingProgressIndicator? indicator, double width, GlobalKey key) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Padding(
-            padding: EdgeInsets.only(top: (_boxSize * scale), left: margin30)),
         SizedBox(height: _sizeHeight, width: width, child: indicator, key: key),
+        Padding(padding: EdgeInsets.only(top: boxSize * scale)),
       ],
     );
   }
 
   ///　build graph animation.
   animationInitState(BuildContext c, double width) {
-    _boxSize = ((width - margin10) / 10).floorToDouble();
+    boxSize = ((width - margin10) / 10).floorToDouble();
     indicator = _indicatorSet(
         c, globalKey, width, _sePainter(indicator, width, false, true), 0.7);
     indicator2 = _indicatorSet(
@@ -130,7 +130,7 @@ class OverLappingViewModel {
     );
     return OverlappingGraphText(
         textStyle: textStyle,
-        boxSize: _boxSize,
+        boxSize: boxSize,
         offsetX: -margin15,
         offsetY: margin10,
         valueListX: model.valueListX,
@@ -151,8 +151,9 @@ class OverLappingViewModel {
     );
     return OverlappingGridPainter(
         textStyle: textStyle,
-        boxSize: _boxSize,
+        boxSize: boxSize,
         strokeWidth: 1,
+        scale: scale,
         sizeSet: Size(value, value),
         colorSet: Colors.orange,
         graphValue: _sizeHeight / 2,
@@ -250,6 +251,9 @@ class OverLappingViewModel {
         con: context,
         streamController: StreamController(),
         setPaint: setPaint,
+        scale: scale,
+        boxSize: boxSize,
+        foldHeight: (fold.appBar?.preferredSize.height ?? 0),
         animationValue: (animationController?.value ?? 0) * index);
   }
 }

@@ -9,6 +9,7 @@ class OverlappingGridPainter extends CustomPainter {
   final TextStyle textStyle;
   final double boxSize;
   final double strokeWidth;
+  final double scale;
   double? offsetX = -25;
   double? offsetY = 20;
   final bool checkLine;
@@ -24,6 +25,7 @@ class OverlappingGridPainter extends CustomPainter {
       {required this.textStyle,
       required this.boxSize,
       required this.strokeWidth,
+      required this.scale,
       double? offsetX,
       double? offsetY,
       required this.checkLine,
@@ -34,6 +36,7 @@ class OverlappingGridPainter extends CustomPainter {
       required this.radData});
 
   Paint paintSet = Paint();
+
   double degToRad(double deg) => deg * (pi / 180.0);
 
   @override
@@ -47,60 +50,61 @@ class OverlappingGridPainter extends CustomPainter {
     ///　A value of 2 will balance the ruled lines.
     ///　Have textSpanLogic logic think about the balance of the ruled lines.
     for (var i = 0; i <= 2; ++i) {
-      final y = -boxSize * i;
+      final y = -boxSize * scale * i;
       textSpanLogic(y, true, i, wLines);
     }
 
     ///　Have textSpanLogic logic think about the balance of the ruled lines.
     for (var i = 0; i <= wLines; ++i) {
-      final x = boxSize * i;
+      final x = boxSize * scale * i;
       textSpanLogic(x, false, i, wLines);
     }
     canvas.drawPath(path, paintSet);
   }
 
   textSpanLogic(double value, bool flg, int i, int wLines) {
-    var h = boxSize + graphValue;
-    var h2 = -boxSize * 2;
+    var h = (boxSize * scale) + graphValue;
+    var h2 = -(boxSize * scale) * 2 + graphValue;
     var c = checkLine && baseLine && i == 0;
     var c2 = checkLine && !baseLine && i == 2;
     if (radData == RadData.horizontal) {
-      if (flg) {
-        ///　Confirmation from top to bottom.
-        ///　In that case, draw a line.
-        if (c || c2) {
-          path.moveTo(0, value + boxSize + graphValue);
-          path.relativeLineTo(sizeSet.width, 0);
-        } else {
-          path.moveTo(0, 0);
-          path.relativeLineTo(0, 0);
-        }
-      } else {
-        /// Draw the X-axis sideways.
-        path.moveTo(sizeSet.width / wLines * i, h);
-        path.relativeLineTo(0, h2);
-      }
+      ///　Confirmation from top to bottom.
+      ///　In that case, draw a line.
+      pathSet(value, flg, i, wLines);
     } else {
-      if (flg) {
-        ///　Confirmation from top to bottom.
-        ///　In that case, draw a line.
-        if (c || c2) {
-          path.moveTo(0, value + boxSize + graphValue);
-          path.relativeLineTo(sizeSet.width, 0);
-        } else {
-          path.moveTo(0, 0);
-          path.relativeLineTo(0, 0);
-        }
-      } else {
-        /// Draw the X-axis sideways.
-        path.moveTo(sizeSet.width / wLines * i, boxSize + graphValue);
-        path.relativeLineTo(0, -boxSize * 2);
-      }
+      ///　Confirmation from top to bottom.
+      ///　In that case, draw a line.
+      pathSet(value, flg, i, wLines);
     }
   }
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return false;
+  }
+
+  pathSet(double value, bool flg, int i, int wLines) {
+    var h = (boxSize * scale) + graphValue;
+    var h2 = -(boxSize * scale) * 2 + graphValue;
+    var c = checkLine && baseLine && i == 0;
+    var c2 = checkLine && !baseLine && i == 2;
+    if (flg) {
+      ///　Confirmation from top to bottom.
+      ///　In that case, draw a line.
+      if (c) {
+        path.moveTo(0, value + (boxSize * scale) + graphValue);
+        path.relativeLineTo(sizeSet.width, 0);
+      } else if (c2) {
+        path.moveTo(0, value + (boxSize * scale) + graphValue * 2);
+        path.relativeLineTo(sizeSet.width, 0);
+      } else {
+        path.moveTo(0, 0);
+        path.relativeLineTo(0, 0);
+      }
+    } else {
+      /// Draw the X-axis sideways.
+      path.moveTo(sizeSet.width / wLines * i, h);
+      path.relativeLineTo(0, h2);
+    }
   }
 }

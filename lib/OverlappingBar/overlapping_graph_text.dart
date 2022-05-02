@@ -108,7 +108,7 @@ class OverlappingGraphText extends CustomPainter {
       );
       textPainter.layout(
         minWidth: 0,
-        maxWidth: boxSize,
+        maxWidth: (boxSize * scale),
       );
 
       if (radData == RadData.horizontal) {
@@ -117,14 +117,14 @@ class OverlappingGraphText extends CustomPainter {
               offsetX ?? 0, ((boxSize * scale) + (-(boxSize * scale) * i)));
         } else {
           offset = Offset(sizeSet.width / wLines * i - textPainter.width / 2,
-              boxSize + (offsetY ?? 0));
+              (boxSize * scale) + (offsetY ?? 0));
         }
       } else {
         if (flg) {
           offset = Offset(
               -((boxSize * scale) * graphCount - textPainter.width / 4) +
                   (boxSize * scale) -
-                  boxSize -
+                  (boxSize * scale) -
                   (offsetY ?? 0),
               -sizeSet.width / wLines * i - graphValue);
         } else {
