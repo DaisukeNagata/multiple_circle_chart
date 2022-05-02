@@ -25,7 +25,7 @@ class OverlappingPainter extends CustomPainter {
   final RadData? radData;
   final Color backgroundColor;
   final TextSpan? textSpan;
-  final StreamController<Offset> controller;
+  final StreamController<List<dynamic>> controller;
 
   /// Character arrangement according to height and width.
   void paintBar(Size size, Canvas canvas, TextSpan? span, Offset offsetValue) {
@@ -50,11 +50,17 @@ class OverlappingPainter extends CustomPainter {
   bool hitTest(Offset position) {
     switch (count) {
       case -1:
-        controller.sink.add(position);
+        List<dynamic> list = [];
+        list.add(position);
+        list.add(textSpan?.text ?? "");
+        controller.sink.add(list);
         break;
       case 2:
         count = 0;
-        controller.sink.add(position);
+        List<dynamic> list = [];
+        list.add(position);
+        list.add(textSpan?.text ?? "");
+        controller.sink.add(list);
         break;
     }
     count += 1;

@@ -27,7 +27,7 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
       required double foldHeight,
       required double scale,
       required BuildContext con,
-      required StreamController<Offset> streamController})
+      required StreamController<List<dynamic>> streamController})
       : assert(minHeight == null || minHeight > 0),
         super(
             key: key,
@@ -43,7 +43,7 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
             setPaint: setPaint,
             scale: scale,
             boxSize: boxSize,
-            foloHeight: foldHeight,
+            navigationHeight: foldHeight,
             con: con,
             streamController: streamController);
 
@@ -96,14 +96,15 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
   /// bind the tap location.
   controllerStream() {
     streamController.stream.listen((event) {
-      Offset offsetData = event;
+      Offset offsetData = event.first as Offset;
       Offset stDataFirst = offsetData;
-      showMyDialog(con, stDataFirst);
+      showMyDialog(con, stDataFirst, dialogText: event.last as String);
     });
   }
 
   /// Method to calculate alert.
-  Future<void> showMyDialog(BuildContext context, Offset dataPosition) async {
+  Future<void> showMyDialog(BuildContext context, Offset dataPosition,
+      {String? dialogText}) async {
     RenderBox box = globalKey?.currentContext?.findRenderObject() as RenderBox;
     double value = dataVerticalSize?.height ?? 0;
     double dx = dataPosition.dx;
@@ -123,10 +124,8 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
               ? Rect.fromLTWH(offset.dx, offset.dy, box.size.width, value)
               : Rect.fromLTWH(
                   offset.dx,
-                  contextSize!.width.floorToDouble() +
-                      (foloHeight ?? 0) +
-                      (boxSize! * scale!) -
-                      dx.ceilToDouble(),
+                  offset.dy.ceilToDouble() -
+                      ((navigationHeight ?? 0) + dx.floorToDouble() - 2.5),
                   value,
                   hSize.height),
           content: SingleChildScrollView(
@@ -135,7 +134,7 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
               const Padding(padding: EdgeInsets.only(top: 20)),
 
               /// Characters to be changed
-              Text("size:${dx.toStringAsFixed(1)}"),
+              Text(dialogText == "" ? dx.toStringAsFixed(1) : dialogText ?? ""),
               OutlinedButton(
                   onPressed: () {
                     Navigator.of(context).pop();

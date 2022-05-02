@@ -52,7 +52,7 @@ class OverLappingViewModel {
   final double margin15 = 15;
   final double margin30 = 30;
   final int graph = 10;
-  final double _sizeHeight = 10;
+  final double _sizeHeight = 20;
 
   ElevatedButton buttonSet(OverLapCallBack call, OverLappingBarState vsync) {
     return ElevatedButton(
@@ -94,7 +94,7 @@ class OverLappingViewModel {
 
   ///　build graph animation.
   animationInitState(BuildContext c, double width) {
-    boxSize = ((width - margin10) / 10).floorToDouble();
+    boxSize = ((width) / graphCount).floorToDouble();
     indicator = _indicatorSet(
         c, globalKey, width, _sePainter(indicator, width, false, true), 0.7);
     indicator2 = _indicatorSet(
@@ -103,20 +103,16 @@ class OverLappingViewModel {
         c, globalKey3, width, _sePainter(indicator3, width, false, false), 1);
     indicator4 = _indicatorSet(
         c, globalKey4, width, _sePainter(indicator4, width, false, false), 0.4);
-
     indicator5 = _indicatorSet(
         c, globalKey5, width, _sePainter(indicator5, width, false, false), 0.7);
     indicator6 = _indicatorSet(
         c, globalKey6, width, _sePainter(indicator6, width, false, false), 0.8);
-
     indicator7 = _indicatorSet(
         c, globalKey7, width, _sePainter(indicator7, width, false, false), 0.4);
-
     indicator8 = _indicatorSet(
         c, globalKey8, width, _sePainter(indicator8, width, false, false), 0.7);
     indicator9 = _indicatorSet(
         c, globalKey9, width, _sePainter(indicator9, width, false, false), 0.8);
-
     lastIndicator = _indicatorSet(c, lastGlobalKey, width,
         _sePainter(lastIndicator, width, true, true), 0.5);
   }
