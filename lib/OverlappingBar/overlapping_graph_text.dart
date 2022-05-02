@@ -114,18 +114,18 @@ class OverlappingGraphText extends CustomPainter {
 
       if (radData == RadData.horizontal) {
         if (flg) {
-          offset = Offset(offsetX ?? 0, (s + (-s * i + textPainter.width / 2)));
+          offset = Offset(offsetX ?? 0, (s + (-s * i) - textPainter.width / 4));
         } else {
           offset = Offset(sizeSet.width / wLines * i - textPainter.width / 2,
               s + (offsetY ?? 0));
         }
       } else {
         if (flg) {
-          offset = Offset(
-              -(s * graphCount) + s - textPainter.width - s + (offsetY ?? 0),
+          offset = Offset(-(s * graphCount) - (s / graphValue) / 2,
               -sizeSet.width / wLines * i - (offsetY ?? 0) / 2);
         } else {
-          offset = Offset(-(s * i) + s + graphValue / 2, (offsetY ?? 0) / 2);
+          offset = Offset(-(s * i) + s + graphValue / 2 - textPainter.width / 2,
+              (offsetY ?? 0) / 2);
         }
       }
 

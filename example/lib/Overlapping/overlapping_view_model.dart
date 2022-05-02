@@ -52,7 +52,7 @@ class OverLappingViewModel {
   final double margin15 = 15;
   final double margin30 = 30;
   final int graph = 10;
-  final double _sizeHeight = 20;
+  final double _sizeHeight = 30;
 
   ElevatedButton buttonSet(OverLapCallBack call, OverLappingBarState vsync) {
     return ElevatedButton(
@@ -131,7 +131,7 @@ class OverLappingViewModel {
         valueListY: model.valueListY,
         sizeSet: Size(value, value),
         graphCount: graphCount,
-        graphValue: _sizeHeight / 2,
+        graphValue: _sizeHeight,
         radData: radData,
         scale: scale);
   }
@@ -236,8 +236,8 @@ class OverLappingViewModel {
       GlobalKey key, double w, CustomPaint setPaint, double index) {
     return OverlappingProgressIndicator(
         radData: radData,
-        radDataRadDataVertical: Offset(_sizeHeight / 4, 15),
-        radDataRadDataHorizontal: Offset(0, 1),
+        radDataRadDataVertical: const Offset(10, 15),
+        radDataRadDataHorizontal: const Offset(0, 1),
         dataVerticalSize: const Size(120, 120),
         dataHorizontalSize: const Size(120, 120),
         globalKey: key,
