@@ -23,6 +23,9 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
       double? animationValue,
       TextSpan? textSpan,
       CustomPaint? setPaint,
+      required double boxSize,
+      required double foldHeight,
+      required double scale,
       required BuildContext con,
       required StreamController<Offset> streamController})
       : assert(minHeight == null || minHeight > 0),
@@ -38,6 +41,9 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
             textSpan: textSpan,
             contextSize: contextSize,
             setPaint: setPaint,
+            scale: scale,
+            boxSize: boxSize,
+            foloHeight: foldHeight,
             con: con,
             streamController: streamController);
 
@@ -45,7 +51,7 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
   OverlappingPainter? setPainter(String textValue, double value, int index,
       double scale, List<Color> colorList,
       {CircleData circleData = CircleData.none,
-      Color? textColor = Colors.white}) {
+      Color? textColor = Colors.black}) {
     ///　Coordinates to display text
     Offset rV = dataVerticalOffset ?? const Offset(0, 0);
     Offset rH = dataHorizontalOffset ?? const Offset(0, 0);
@@ -103,9 +109,6 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
     double dx = dataPosition.dx;
     Size hSize = dataHorizontalSize ?? const Size(0, 0);
     Offset offset = box.localToGlobal(Offset.zero);
-    Offset horizontalOffset =
-        box.localToGlobal(dataVerticalOffset ?? const Offset(0, 0));
-
     return showDialog<void>(
       barrierColor: Colors.white.withOpacity(0),
       context: context,
@@ -119,7 +122,13 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
           rect: RadData.horizontal == radData
               ? Rect.fromLTWH(offset.dx, offset.dy, box.size.width, value)
               : Rect.fromLTWH(
-                  offset.dx, horizontalOffset.dy - dx, value, hSize.height),
+                  offset.dx,
+                  contextSize!.width.floorToDouble() +
+                      (foloHeight ?? 0) +
+                      (boxSize! * scale!) -
+                      dx.ceilToDouble(),
+                  value,
+                  hSize.height),
           content: SingleChildScrollView(
               child: Column(
             children: [
@@ -140,6 +149,7 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
   }
 
   final double? minHeight;
+
   Widget buildSemanticsWrapper({
     required BuildContext context,
     required Widget child,

@@ -21,6 +21,9 @@ abstract class OverlappingIndicator extends StatefulWidget {
       this.animationValue,
       this.radData,
       this.setPaint,
+      this.scale,
+      this.boxSize,
+      this.foloHeight,
       required this.textSpan,
       required this.con,
       required this.streamController})
@@ -37,6 +40,9 @@ abstract class OverlappingIndicator extends StatefulWidget {
   final CircleData? circleData;
   final RadData? radData;
   final CustomPaint? setPaint;
+  final double? scale;
+  final double? boxSize;
+  final double? foloHeight;
   final TextSpan? textSpan;
   final BuildContext con;
   final StreamController<Offset> streamController;

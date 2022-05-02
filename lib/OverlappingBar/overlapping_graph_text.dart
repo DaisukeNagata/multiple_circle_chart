@@ -129,8 +129,10 @@ class OverlappingGraphText extends CustomPainter {
               -sizeSet.width / wLines * i - graphValue);
         } else {
           offset = Offset(
-              -((boxSize * scale) * i - textPainter.width / 4) +
-                  (boxSize * scale),
+              -((boxSize * scale) * i) +
+                  (boxSize * scale) +
+                  graphValue -
+                  textPainter.width / 2,
               (offsetY ?? 0));
         }
       }

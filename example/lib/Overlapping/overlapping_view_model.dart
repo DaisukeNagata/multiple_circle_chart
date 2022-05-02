@@ -85,7 +85,6 @@ class OverLappingViewModel {
   Row indicatorRowSet(
       OverlappingProgressIndicator? indicator, double width, GlobalKey key) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         SizedBox(height: _sizeHeight, width: width, child: indicator, key: key),
         Padding(padding: EdgeInsets.only(top: boxSize * scale)),
@@ -132,7 +131,7 @@ class OverLappingViewModel {
         textStyle: textStyle,
         boxSize: boxSize,
         offsetX: -margin15,
-        offsetY: margin10,
+        offsetY: margin15,
         valueListX: model.valueListX,
         valueListY: model.valueListY,
         sizeSet: Size(value, value),
@@ -146,7 +145,6 @@ class OverLappingViewModel {
       double value, bool baseLine, bool checkLine) {
     TextStyle textStyle = const TextStyle(
       inherit: true,
-      color: Colors.white,
       fontSize: 5,
     );
     return OverlappingGridPainter(
@@ -164,7 +162,8 @@ class OverLappingViewModel {
 
   _setP(OverlappingProgressIndicator? indicator, String tex, double value,
       int index, double value2) {
-    return indicator?.setPainter(tex, value, index, value2, model.colorList);
+    return indicator?.setPainter(tex, value, index, value2, model.colorList,
+        textColor: Colors.black);
   }
 
   ///　details of graph characters, ruled lines, and animation amount.
@@ -242,8 +241,8 @@ class OverLappingViewModel {
       GlobalKey key, double w, CustomPaint setPaint, double index) {
     return OverlappingProgressIndicator(
         radData: radData,
-        radDataRadDataVertical: const Offset(10, 10),
-        radDataRadDataHorizontal: const Offset(1, 10),
+        radDataRadDataVertical: Offset(_sizeHeight / 6, 0),
+        radDataRadDataHorizontal: Offset(_sizeHeight / 2, 0),
         dataVerticalSize: const Size(120, 120),
         dataHorizontalSize: const Size(120, 120),
         globalKey: key,

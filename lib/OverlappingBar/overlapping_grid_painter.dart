@@ -63,10 +63,6 @@ class OverlappingGridPainter extends CustomPainter {
   }
 
   textSpanLogic(double value, bool flg, int i, int wLines) {
-    var h = (boxSize * scale) + graphValue;
-    var h2 = -(boxSize * scale) * 2 + graphValue;
-    var c = checkLine && baseLine && i == 0;
-    var c2 = checkLine && !baseLine && i == 2;
     if (radData == RadData.horizontal) {
       ///　Confirmation from top to bottom.
       ///　In that case, draw a line.
