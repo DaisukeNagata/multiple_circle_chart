@@ -120,7 +120,6 @@ class OverLappingViewModel {
   OverlappingGraphText _graphText(double value) {
     TextStyle textStyle = const TextStyle(
       inherit: true,
-      color: Colors.white,
       fontSize: 10,
     );
     return OverlappingGraphText(
@@ -159,7 +158,7 @@ class OverLappingViewModel {
   _setP(OverlappingProgressIndicator? indicator, String tex, double value,
       int index, double value2) {
     return indicator?.setPainter(tex, value, index, value2, model.colorList,
-        textColor: Colors.black);
+        textColor: Colors.white);
   }
 
   ///　details of graph characters, ruled lines, and animation amount.
@@ -237,8 +236,8 @@ class OverLappingViewModel {
       GlobalKey key, double w, CustomPaint setPaint, double index) {
     return OverlappingProgressIndicator(
         radData: radData,
-        radDataRadDataVertical: Offset(_sizeHeight / 6, 25),
-        radDataRadDataHorizontal: Offset(_sizeHeight / 2, 0),
+        radDataRadDataVertical: Offset(_sizeHeight / 4, 15),
+        radDataRadDataHorizontal: Offset(0, 1),
         dataVerticalSize: const Size(120, 120),
         dataHorizontalSize: const Size(120, 120),
         globalKey: key,
