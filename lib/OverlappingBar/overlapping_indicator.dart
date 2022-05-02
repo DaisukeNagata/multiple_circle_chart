@@ -17,6 +17,7 @@ abstract class OverlappingIndicator extends StatefulWidget {
       this.semanticsLabel,
       this.semanticsValue,
       this.contextSize,
+      this.graphCount,
       this.circleData,
       this.animationValue,
       this.radData,
@@ -26,6 +27,7 @@ abstract class OverlappingIndicator extends StatefulWidget {
       this.navigationHeight,
       required this.textSpan,
       required this.con,
+      required this.dialogData,
       required this.streamController})
       : super(key: key);
   final GlobalKey? globalKey;
@@ -36,6 +38,7 @@ abstract class OverlappingIndicator extends StatefulWidget {
   final String? semanticsLabel;
   final String? semanticsValue;
   final Size? contextSize;
+  final int? graphCount;
   final double? animationValue;
   final CircleData? circleData;
   final RadData? radData;
@@ -45,6 +48,7 @@ abstract class OverlappingIndicator extends StatefulWidget {
   final double? navigationHeight;
   final TextSpan? textSpan;
   final BuildContext con;
+  final List<String> dialogData;
   final StreamController<List<dynamic>> streamController;
 
   @override

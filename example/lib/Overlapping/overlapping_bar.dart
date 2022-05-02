@@ -7,7 +7,7 @@ import 'overlapping_view_model.dart';
 
 class OverLappingBar extends StatelessWidget {
   OverLappingBar({Key? key}) : super(key: key);
-  OverLappingViewModel viewModel = OverLappingViewModel();
+  final OverLappingViewModel viewModel = OverLappingViewModel();
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +30,9 @@ class OverLappingBar extends StatelessWidget {
 }
 
 class OverLappingWidget extends StatefulWidget {
-  OverLappingWidget({Key? key, required this.viewModel}) : super(key: key);
-  OverLappingViewModel viewModel;
+  const OverLappingWidget({Key? key, required this.viewModel})
+      : super(key: key);
+  final OverLappingViewModel viewModel;
 
   @override
   OverLappingBarState createState() => OverLappingBarState();

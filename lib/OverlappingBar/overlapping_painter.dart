@@ -8,23 +8,29 @@ import 'overlapping_data.dart';
 /// The OverlappingPainter class is a class that sets overlapping graphs.
 class OverlappingPainter extends CustomPainter {
   OverlappingPainter({
+    required this.widgetSize,
     required this.value,
+    required this.graphCount,
     required this.contextSize,
     required this.offsetValue,
     required this.circleData,
     required this.radData,
     required this.backgroundColor,
     required this.textSpan,
+    required this.dialogData,
     required this.controller,
   });
 
+  final double? widgetSize;
   final double? value;
+  final int? graphCount;
   final Size contextSize;
   final Offset offsetValue;
   final CircleData? circleData;
   final RadData? radData;
   final Color backgroundColor;
   final TextSpan? textSpan;
+  final List<String>? dialogData;
   final StreamController<List<dynamic>> controller;
 
   /// Character arrangement according to height and width.
@@ -52,14 +58,18 @@ class OverlappingPainter extends CustomPainter {
       case -1:
         List<dynamic> list = [];
         list.add(position);
-        list.add(textSpan?.text ?? "");
+        double answer =
+            position.dx / (widgetSize ?? 0) / (graphCount ?? 0) * 100;
+        list.add(dialogData?[answer.floor()]);
         controller.sink.add(list);
         break;
       case 2:
         count = 0;
         List<dynamic> list = [];
         list.add(position);
-        list.add(textSpan?.text ?? "");
+        double answer =
+            position.dx / (widgetSize ?? 0) / (graphCount ?? 0) * 100;
+        list.add(dialogData?[answer.floor()]);
         controller.sink.add(list);
         break;
     }

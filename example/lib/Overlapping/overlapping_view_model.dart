@@ -243,12 +243,14 @@ class OverLappingViewModel {
         dataHorizontalSize: const Size(120, 120),
         globalKey: key,
         contextSize: Size(w, _sizeHeight),
+        graphCount: graphCount,
         con: context,
         streamController: StreamController(),
         setPaint: setPaint,
         scale: scale,
         boxSize: boxSize,
         foldHeight: (fold.appBar?.preferredSize.height ?? 0),
-        animationValue: (animationController?.value ?? 0) * index);
+        animationValue: (animationController?.value ?? 0) * index,
+        dialogData: model.diaLogData);
   }
 }

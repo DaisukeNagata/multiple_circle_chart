@@ -17,6 +17,7 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
       Size? dataVerticalSize,
       Size? dataHorizontalSize,
       Size? contextSize,
+      int? graphCount,
       this.minHeight,
       GlobalKey? globalKey,
       String? textValue,
@@ -27,6 +28,7 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
       required double foldHeight,
       required double scale,
       required BuildContext con,
+      required List<String> dialogData,
       required StreamController<List<dynamic>> streamController})
       : assert(minHeight == null || minHeight > 0),
         super(
@@ -40,11 +42,13 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
             animationValue: animationValue,
             textSpan: textSpan,
             contextSize: contextSize,
+            graphCount: graphCount,
             setPaint: setPaint,
             scale: scale,
             boxSize: boxSize,
             navigationHeight: foldHeight,
             con: con,
+            dialogData: dialogData,
             streamController: streamController);
 
   /// Calculations for painting TextSpan.
@@ -67,28 +71,34 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
           text: textValue.substring(0, textValue.length),
           style: TextStyle(color: textColor)),
     ]);
-
+    RenderBox box = globalKey?.currentContext?.findRenderObject() as RenderBox;
     if (value >= 0) {
       /// Calling overlapping graphs.
       return OverlappingPainter(
+          widgetSize: box.size.width,
           circleData: circleData,
           radData: radData,
           backgroundColor: colorList[index],
           offsetValue: offset,
           textSpan: textSpan,
           value: (animationValue ?? 0.0) - (value * 0.1 * scale),
+          graphCount: graphCount,
           contextSize:
               Size(w * (value * 0.1 * scale), contextSize?.height ?? 0.0),
+          dialogData: dialogData,
           controller: streamController);
     } else {
       return OverlappingPainter(
+          widgetSize: box.size.width,
           circleData: circleData,
           radData: radData,
           backgroundColor: Colors.grey,
           offsetValue: offset,
           textSpan: textSpan,
           value: null,
+          graphCount: null,
           contextSize: const Size(0, 0),
+          dialogData: dialogData,
           controller: streamController);
     }
   }
