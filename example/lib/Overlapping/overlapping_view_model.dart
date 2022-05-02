@@ -173,25 +173,25 @@ class OverLappingViewModel {
         child: CustomPaint(
           painter: _setP(p, "", -1, 0, 0),
           child: CustomPaint(
-            painter: _setP(p, "", 0 / v, 0, v),
+            painter: _setP(p, "1", 0 / v, 0, v),
             child: CustomPaint(
-              painter: _setP(p, "1", 1 / v, 1, v),
+              painter: _setP(p, "2", 1 / v, 1, v),
               child: CustomPaint(
-                painter: _setP(p, "2", 2 / v, 2, v),
+                painter: _setP(p, "3", 2 / v, 2, v),
                 child: CustomPaint(
-                  painter: _setP(p, "3", 3 / v, 3, v),
+                  painter: _setP(p, "4", 3 / v, 3, v),
                   child: CustomPaint(
-                    painter: _setP(p, "4", 4 / v, 4, v),
+                    painter: _setP(p, "5", 4 / v, 4, v),
                     child: CustomPaint(
-                      painter: _setP(p, "5", 5 / v, 5, v),
+                      painter: _setP(p, "6", 5 / v, 5, v),
                       child: CustomPaint(
-                        painter: _setP(p, "6", 6 / v, 6, v),
+                        painter: _setP(p, "7", 6 / v, 6, v),
                         child: CustomPaint(
-                          painter: _setP(p, "7", 7 / v, 7, v),
+                          painter: _setP(p, "8", 7 / v, 7, v),
                           child: CustomPaint(
-                            painter: _setP(p, "8", 8 / v, 8, v),
+                            painter: _setP(p, "9", 8 / v, 8, v),
                             child: CustomPaint(
-                              painter: _setP(p, "9", 9 / v, 9, v),
+                              painter: _setP(p, "10", 9 / v, 9, v),
                               child: CustomPaint(
                                 painter: _setP(p, "", 10 / v, 10, v),
                               ),
@@ -237,7 +237,7 @@ class OverLappingViewModel {
       GlobalKey key, double w, CustomPaint setPaint, double index) {
     return OverlappingProgressIndicator(
         radData: radData,
-        radDataRadDataVertical: Offset(_sizeHeight / 6, 0),
+        radDataRadDataVertical: Offset(_sizeHeight / 6, 25),
         radDataRadDataHorizontal: Offset(_sizeHeight / 2, 0),
         dataVerticalSize: const Size(120, 120),
         dataHorizontalSize: const Size(120, 120),
