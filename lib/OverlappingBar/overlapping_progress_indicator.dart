@@ -120,7 +120,6 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
     double dx = dataPosition.dx;
     Size hSize = dataHorizontalSize ?? const Size(0, 0);
     Offset offset = box.localToGlobal(Offset.zero);
-    double iPhoneXSeriesValue = 2.5;
     return showDialog<void>(
       barrierColor: Colors.white.withOpacity(0),
       context: context,
@@ -136,18 +135,17 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
               : Rect.fromLTWH(
                   offset.dx,
                   offset.dy.ceilToDouble() -
-                      ((navigationHeight ?? 0) +
-                          dx.floorToDouble() -
-                          iPhoneXSeriesValue),
+                      ((navigationHeight ?? 0) + dx.floorToDouble()),
                   value,
                   hSize.height),
           content: SingleChildScrollView(
               child: Column(
             children: [
-              const Padding(padding: EdgeInsets.only(top: 20)),
+              Padding(padding: EdgeInsets.only(top: hSize.height / 6)),
 
               /// Characters to be changed
               Text(dialogText == "" ? dx.toStringAsFixed(1) : dialogText ?? ""),
+              Padding(padding: EdgeInsets.only(bottom: hSize.height / 8)),
               OutlinedButton(
                   onPressed: () {
                     Navigator.of(context).pop();
