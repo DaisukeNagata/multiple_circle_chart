@@ -53,8 +53,8 @@ class OverLappingBarState extends State<OverLappingWidget>
               child: Row(
                 children: [
                   Padding(
-                      padding:
-                          EdgeInsets.only(right: 100 * widget.viewModel.scale)),
+                      padding: EdgeInsets.only(
+                          right: 50 * widget.viewModel.scale * 3)),
                   Transform.rotate(
                       angle: (dta == RadData.horizontal ? 360 : -90) * pi / 180,
                       child: Column(
@@ -104,12 +104,11 @@ class OverLappingBarState extends State<OverLappingWidget>
                         ],
                       )),
                   Padding(
-                      padding:
-                          EdgeInsets.only(left: 100 * widget.viewModel.scale)),
+                      padding: EdgeInsets.only(
+                          left: 50 * widget.viewModel.scale * 3)),
                 ],
               )),
         ),
-        const Padding(padding: EdgeInsets.only(top: 10)),
         Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [

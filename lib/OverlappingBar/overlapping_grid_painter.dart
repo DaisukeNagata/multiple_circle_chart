@@ -88,9 +88,11 @@ class OverlappingGridPainter extends CustomPainter {
       ///　Confirmation from top to bottom.
       ///　In that case, draw a line.
       if (c) {
+        ///　most bottom area point.
         path.moveTo(0, value + (boxSize * scale) + graphValue);
         path.relativeLineTo(sizeSet.width, 0);
       } else if (c2) {
+        ///　most top area point.
         path.moveTo(0, value + (boxSize * scale) + graphValue * 2);
         path.relativeLineTo(sizeSet.width, 0);
       } else {

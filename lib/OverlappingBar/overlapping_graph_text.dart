@@ -10,6 +10,8 @@ class OverlappingGraphText extends CustomPainter {
   final double boxSize;
   double? offsetX;
   double? offsetY;
+  double? horizontalTextY;
+  double? verticalTextY;
   double scale;
   List<String>? valueListX;
   List<String>? valueListY;
@@ -25,6 +27,8 @@ class OverlappingGraphText extends CustomPainter {
       required this.boxSize,
       required this.offsetX,
       required this.offsetY,
+      required this.horizontalTextY,
+      required this.verticalTextY,
       required this.scale,
       required this.valueListX,
       required this.valueListY,
@@ -48,15 +52,15 @@ class OverlappingGraphText extends CustomPainter {
         for (var i = 0; i <= wLines; ++i) {
           textSpanLogic(canvas, true, i, wLines, graphCount);
         }
-        for (var i = 0; i <= (graphCount * 2) + 1; ++i) {
-          textSpanLogic(canvas, false, i, (graphCount * 2), graphCount);
+        for (var i = 0; i <= (graphCount); ++i) {
+          textSpanLogic(canvas, false, i, (graphCount), graphCount);
         }
         break;
 
       ///　Have textSpanLogic logic think about the balance of the ruled text.
       case RadData.horizontal:
-        for (var i = 0; i <= (graphCount * 2); ++i) {
-          textSpanLogic(canvas, true, i, (graphCount * 2), graphCount);
+        for (var i = 0; i <= (graphCount); ++i) {
+          textSpanLogic(canvas, true, i, (graphCount), graphCount);
         }
         for (var i = 0; i <= wLines; ++i) {
           textSpanLogic(canvas, false, i, wLines, graphCount);
@@ -68,6 +72,7 @@ class OverlappingGraphText extends CustomPainter {
   textSpanLogic(Canvas canvas, bool flg, int i, int wLines, int graphCount) {
     String textValue = "";
     double s = (boxSize * scale);
+    double sizeWidth = sizeSet.width / wLines * i;
     switch (flg) {
       case true:
 
@@ -113,16 +118,18 @@ class OverlappingGraphText extends CustomPainter {
       );
 
       if (radData == RadData.horizontal) {
+        /// If true, vertical line.
         if (flg) {
-          offset = Offset(offsetX ?? 0, (s + (-s * i) - textPainter.width / 4));
+          offset =
+              Offset(offsetX ?? 0, ((-s * i) + s + (horizontalTextY ?? 0)));
         } else {
-          offset = Offset(sizeSet.width / wLines * i - textPainter.width / 2,
-              s + (offsetY ?? 0));
+          offset = Offset(sizeWidth - textPainter.width / 2, s + s / 2);
         }
       } else {
+        /// If true, vertical line.
         if (flg) {
-          offset = Offset(-(s * graphCount) - (s / graphValue) / 2,
-              -sizeSet.width / wLines * i - (offsetY ?? 0) / 2);
+          offset = Offset(-(s * graphCount) - ((verticalTextY ?? 0)),
+              -sizeWidth - (offsetY ?? 0) / 2);
         } else {
           offset = Offset(-(s * i) + s + graphValue / 2 - textPainter.width / 2,
               (offsetY ?? 0) / 2);

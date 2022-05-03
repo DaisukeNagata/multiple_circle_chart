@@ -28,7 +28,6 @@ class OverLappingViewModel {
   OverlappingProgressIndicator? indicator4;
   OverlappingProgressIndicator? indicator5;
   OverlappingProgressIndicator? indicator6;
-
   OverlappingProgressIndicator? indicator7;
   OverlappingProgressIndicator? indicator8;
   OverlappingProgressIndicator? indicator9;
@@ -39,7 +38,6 @@ class OverLappingViewModel {
   GlobalKey globalKey4 = GlobalKey();
   GlobalKey globalKey5 = GlobalKey();
   GlobalKey globalKey6 = GlobalKey();
-
   GlobalKey globalKey7 = GlobalKey();
   GlobalKey globalKey8 = GlobalKey();
   GlobalKey globalKey9 = GlobalKey();
@@ -52,7 +50,7 @@ class OverLappingViewModel {
   final double margin15 = 15;
   final double margin30 = 30;
   final int graph = 10;
-  final double _sizeHeight = 30;
+  final double _sizeHeight = 15;
 
   ElevatedButton buttonSet(OverLapCallBack call, OverLappingBarState vsync) {
     return ElevatedButton(
@@ -127,6 +125,16 @@ class OverLappingViewModel {
         boxSize: boxSize,
         offsetX: -margin15,
         offsetY: margin15,
+
+        /// If the thickness of the line drawing 30 margin10
+        /// If the thickness of the line drawing 20 margin10 / 2
+        /// If the thickness of the line drawing 10 0
+        horizontalTextY: 0,
+
+        /// If the thickness of the line drawing 30 -margin15
+        /// If the thickness of the line drawing 20 -margin15 / 2
+        /// If the thickness of the line drawing 10 margin15 / 2
+        verticalTextY: margin15 / 8,
         valueListX: model.valueListX,
         valueListY: model.valueListY,
         sizeSet: Size(value, value),
@@ -236,7 +244,7 @@ class OverLappingViewModel {
       GlobalKey key, double w, CustomPaint setPaint, double index) {
     return OverlappingProgressIndicator(
         radData: radData,
-        radDataRadDataVertical: const Offset(10, 15),
+        radDataRadDataVertical: const Offset(5, 15),
         radDataRadDataHorizontal: const Offset(0, 1),
         dataVerticalSize: const Size(120, 120),
         dataHorizontalSize: const Size(120, 120),
