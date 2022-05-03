@@ -131,7 +131,11 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
 
           /// The orientation determines the dialog coordinates.
           rect: RadData.horizontal == radData
-              ? Rect.fromLTWH(offset.dx, offset.dy, box.size.width, value)
+              ? Rect.fromLTWH(
+                  offset.dx,
+                  offset.dy - (boxSize ?? 0) * (scale ?? 0),
+                  box.size.width,
+                  value)
               : Rect.fromLTWH(
                   offset.dx,
                   offset.dy.ceilToDouble() -
