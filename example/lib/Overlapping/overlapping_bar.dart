@@ -12,7 +12,7 @@ class OverLappingBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: viewModel.fold = Scaffold(
+      home: viewModel.model.fold = Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
           title: const Text('EveryDaySoft_Example'),
@@ -42,7 +42,7 @@ class OverLappingBarState extends State<OverLappingWidget>
     with TickerProviderStateMixin, OverLapCallBackLogic {
   @override
   Widget build(BuildContext context) {
-    var dta = widget.viewModel.lastIndicator?.radData;
+    var dta = widget.viewModel.model.lastIndicator?.radData;
     double width = MediaQuery.of(context).size.width / 1.2;
     return Stack(
       children: [
@@ -54,58 +54,58 @@ class OverLappingBarState extends State<OverLappingWidget>
                 children: [
                   Padding(
                       padding: EdgeInsets.only(
-                          right: 50 * widget.viewModel.scale * 3)),
+                          right: 50 * widget.viewModel.model.scale * 3)),
                   Transform.rotate(
                       angle: (dta == RadData.horizontal ? 360 : -90) * pi / 180,
                       child: Column(
                         children: [
                           const Padding(padding: EdgeInsets.only(top: 70)),
                           widget.viewModel.indicatorRowSet(
-                              widget.viewModel.indicator,
+                              widget.viewModel.model.indicator,
                               width,
-                              widget.viewModel.globalKey),
+                              widget.viewModel.model.globalKey),
                           widget.viewModel.indicatorRowSet(
-                              widget.viewModel.indicator2,
+                              widget.viewModel.model.indicator2,
                               width,
-                              widget.viewModel.globalKey2),
+                              widget.viewModel.model.globalKey2),
                           widget.viewModel.indicatorRowSet(
-                              widget.viewModel.indicator3,
+                              widget.viewModel.model.indicator3,
                               width,
-                              widget.viewModel.globalKey3),
+                              widget.viewModel.model.globalKey3),
                           widget.viewModel.indicatorRowSet(
-                              widget.viewModel.indicator4,
+                              widget.viewModel.model.indicator4,
                               width,
-                              widget.viewModel.globalKey4),
+                              widget.viewModel.model.globalKey4),
                           widget.viewModel.indicatorRowSet(
-                              widget.viewModel.indicator5,
+                              widget.viewModel.model.indicator5,
                               width,
-                              widget.viewModel.globalKey5),
+                              widget.viewModel.model.globalKey5),
                           widget.viewModel.indicatorRowSet(
-                              widget.viewModel.indicator6,
+                              widget.viewModel.model.indicator6,
                               width,
-                              widget.viewModel.globalKey6),
+                              widget.viewModel.model.globalKey6),
                           widget.viewModel.indicatorRowSet(
-                              widget.viewModel.indicator7,
+                              widget.viewModel.model.indicator7,
                               width,
-                              widget.viewModel.globalKey7),
+                              widget.viewModel.model.globalKey7),
                           widget.viewModel.indicatorRowSet(
-                              widget.viewModel.indicator8,
+                              widget.viewModel.model.indicator8,
                               width,
-                              widget.viewModel.globalKey8),
+                              widget.viewModel.model.globalKey8),
                           widget.viewModel.indicatorRowSet(
-                              widget.viewModel.indicator9,
+                              widget.viewModel.model.indicator9,
                               width,
-                              widget.viewModel.globalKey9),
+                              widget.viewModel.model.globalKey9),
                           widget.viewModel.indicatorRowSet(
-                              widget.viewModel.lastIndicator,
+                              widget.viewModel.model.lastIndicator,
                               width,
-                              widget.viewModel.lastGlobalKey),
+                              widget.viewModel.model.lastGlobalKey),
                           const Padding(padding: EdgeInsets.only(bottom: 70)),
                         ],
                       )),
                   Padding(
                       padding: EdgeInsets.only(
-                          left: 50 * widget.viewModel.scale * 3)),
+                          left: 50 * widget.viewModel.model.scale * 3)),
                 ],
               )),
         ),
@@ -126,12 +126,12 @@ class OverLappingBarState extends State<OverLappingWidget>
       switch (type) {
         case OverLapType.graph:
           double width = MediaQuery.of(context).size.width;
-          widget.viewModel.graphCount = 10;
+          widget.viewModel.model.graphCount = 10;
           widget.viewModel.animationInitState(context, width / 1.2);
           break;
         case OverLapType.slider:
-          widget.viewModel.scale = value ?? 0;
-          widget.viewModel.animationController?.forward();
+          widget.viewModel.model.scale = value ?? 0;
+          widget.viewModel.model.animationController?.forward();
           break;
       }
     });

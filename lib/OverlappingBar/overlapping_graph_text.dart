@@ -121,14 +121,14 @@ class OverlappingGraphText extends CustomPainter {
         /// If true, vertical line.
         if (flg) {
           offset =
-              Offset(offsetX ?? 0, ((-s * i) + s + (horizontalTextY ?? 0)));
+              Offset(offsetX ?? 0, (-(s * i) + s + (horizontalTextY ?? 0)));
         } else {
           offset = Offset(sizeWidth - textPainter.width / 2, s + s / 2);
         }
       } else {
         /// If true, vertical line.
         if (flg) {
-          offset = Offset(-(s * graphCount) - ((verticalTextY ?? 0)),
+          offset = Offset(-(s * graphCount) - (verticalTextY ?? 0),
               -sizeWidth - (offsetY ?? 0) / 2);
         } else {
           offset = Offset(-(s * i) + s + graphValue / 2 - textPainter.width / 2,
