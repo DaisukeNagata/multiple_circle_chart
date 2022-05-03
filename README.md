@@ -33,13 +33,9 @@ The bar graph is a graph that overlaps at the specified position.
 
 <img width="800" src="https://user-images.githubusercontent.com/16457165/161848973-8c81e05c-a0e0-4551-90f9-452ee149579c.gif">
 
-
-<img width="800" src="https://user-images.githubusercontent.com/16457165/161572895-26321ef3-f66b-4a5a-a78d-eda4bb26e044.gif">
-
-
-<img width="800" src="https://user-images.githubusercontent.com/16457165/162620263-1ad5cb6d-64fb-4eea-aada-14b231bcaeda.png">
-
-
+| | |
+|---|---|
+|<img width="375" src="https://user-images.githubusercontent.com/16457165/166452386-42d2b30c-61f7-4ac7-b750-99f229e474ad.gif">|<img width="375" src="https://user-images.githubusercontent.com/16457165/166452373-5823b8ed-2f48-46b9-b264-8242f92a68ae.gif">|
 
 ## Memory usage
 
