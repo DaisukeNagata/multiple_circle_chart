@@ -69,7 +69,7 @@ class OverlappingGraphText extends CustomPainter {
     String textValue = "";
     double s = (boxSize * scale);
     double sizeWidth = sizeSet.width / wLines * i;
-    double horizonalLineX = (graphValue > 10 ? s : 35 * scale);
+    double horizonalLineX = (graphValue > 20 ? 1 : 1.25);
     double horizonalLineY = 2.5;
     switch (flg) {
       case true:
@@ -131,8 +131,7 @@ class OverlappingGraphText extends CustomPainter {
         /// If true, vertical line.
         if (flg) {
           offset = Offset(
-              -(s * graphCount) -
-                  horizonalLineX +
+              -(s * (graphCount + horizonalLineX)) +
                   s +
                   graphValue / 2 -
                   textPainter.width / 2,
