@@ -112,8 +112,12 @@ class OverLappingBarState extends State<OverLappingWidget>
         Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            widget.viewModel.sliderSet(callback, this),
+            widget.viewModel.sliderSet(OverLapType.slider, callback, 2,
+                widget.viewModel.model.scale, this),
+            widget.viewModel.sliderSet(OverLapType.graphWidth, callback, 30,
+                widget.viewModel.model.sizeHeight, this),
             widget.viewModel.buttonSet(callback, this),
+            const Padding(padding: EdgeInsets.only(bottom: 20)),
           ],
         ),
       ],
@@ -131,6 +135,10 @@ class OverLappingBarState extends State<OverLappingWidget>
           break;
         case OverLapType.slider:
           widget.viewModel.model.scale = value ?? 0;
+          widget.viewModel.model.animationController?.forward();
+          break;
+        case OverLapType.graphWidth:
+          widget.viewModel.model.sizeHeight = value ?? 0;
           widget.viewModel.model.animationController?.forward();
           break;
       }

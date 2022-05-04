@@ -28,12 +28,12 @@ class OverLappingModel {
   int graphCount = 0;
   double boxSize = 0;
   double scale = 1;
+  double sizeHeight = 1;
   Scaffold fold = const Scaffold();
   final double margin10 = 10;
   final double margin15 = 15;
   final double margin30 = 30;
   final int graph = 10;
-  final double sizeHeight = 15;
 
   List<Color> colorList = [
     Colors.blue,

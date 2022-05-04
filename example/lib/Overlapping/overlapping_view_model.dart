@@ -16,7 +16,7 @@ abstract class OverLapCallBackLogic {
   OverLapCallBack? callback(type, {OverLappingBarState? vsync, double? value});
 }
 
-enum OverLapType { slider, graph }
+enum OverLapType { graphWidth, slider, graph }
 
 class OverLappingViewModel {
   OverLappingModel model = OverLappingModel();
@@ -30,20 +30,29 @@ class OverLappingViewModel {
     );
   }
 
-  Slider sliderSet(OverLapCallBack call, OverLappingBarState vsync,
+  Slider sliderSet(OverLapType type, OverLapCallBack call, double max,
+      double value, OverLappingBarState vsync,
       {Key? keyValue}) {
     return Slider(
       key: keyValue,
-      value: model.scale,
+      value: value,
       min: 0,
-      max: 2,
-      label: model.scale.toString(),
+      max: max,
+      label: value.toString(),
       divisions: 1000,
       onChanged: (double value) {
-        call(OverLapType.slider, value: value);
+        if (type == OverLapType.slider) {
+          call(OverLapType.slider, value: value);
+        } else if (type == OverLapType.graphWidth) {
+          call(OverLapType.graphWidth, value: value);
+        }
       },
       onChangeEnd: (_) {
-        call(OverLapType.graph, vsync: vsync);
+        if (type == OverLapType.slider) {
+          call(OverLapType.graph, vsync: vsync);
+        } else if (type == OverLapType.graphWidth) {
+          call(OverLapType.graphWidth, value: value);
+        }
       },
     );
   }
