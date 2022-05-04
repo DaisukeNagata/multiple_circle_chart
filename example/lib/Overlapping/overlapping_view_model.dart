@@ -93,8 +93,6 @@ class OverLappingViewModel {
     return OverlappingGraphText(
         textStyle: textStyle,
         boxSize: model.boxSize,
-        offsetX: -model.margin15,
-        offsetY: model.margin15,
         valueListX: model.valueListX,
         valueListY: model.valueListY,
         sizeSet: Size(value, value),

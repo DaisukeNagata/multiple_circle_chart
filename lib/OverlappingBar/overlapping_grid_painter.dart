@@ -89,7 +89,7 @@ class OverlappingGridPainter extends CustomPainter {
       ///　In that case, draw a line.
       if (c) {
         ///　most bottom area point.
-        path.moveTo(0, value + (boxSize * scale) + graphValue);
+        path.moveTo(0, value + (boxSize * scale));
         path.relativeLineTo(sizeSet.width, 0);
       } else if (c2) {
         ///　most top area point.
@@ -101,8 +101,8 @@ class OverlappingGridPainter extends CustomPainter {
       }
     } else {
       /// Draw the X-axis sideways.
-      path.moveTo(sizeSet.width / wLines * i, h);
-      path.relativeLineTo(0, h2);
+      path.moveTo(sizeSet.width / wLines * i, h - graphValue);
+      path.relativeLineTo(0, h2 + graphValue);
     }
   }
 }
