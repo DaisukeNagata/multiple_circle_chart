@@ -10,8 +10,6 @@ class OverlappingGraphText extends CustomPainter {
   final double boxSize;
   double? offsetX;
   double? offsetY;
-  double? horizontalTextY;
-  double? verticalTextY;
   double scale;
   List<String>? valueListX;
   List<String>? valueListY;
@@ -27,8 +25,6 @@ class OverlappingGraphText extends CustomPainter {
       required this.boxSize,
       required this.offsetX,
       required this.offsetY,
-      required this.horizontalTextY,
-      required this.verticalTextY,
       required this.scale,
       required this.valueListX,
       required this.valueListY,
@@ -73,6 +69,8 @@ class OverlappingGraphText extends CustomPainter {
     String textValue = "";
     double s = (boxSize * scale);
     double sizeWidth = sizeSet.width / wLines * i;
+    double horizonalLineX = (graphValue > 10 ? s : 35 * scale);
+    double horizonalLineY = 2.5;
     switch (flg) {
       case true:
 
@@ -120,15 +118,24 @@ class OverlappingGraphText extends CustomPainter {
       if (radData == RadData.horizontal) {
         /// If true, vertical line.
         if (flg) {
-          offset =
-              Offset(offsetX ?? 0, (-(s * i) + s + (horizontalTextY ?? 0)));
+          offset = Offset(
+              offsetX ?? 0,
+              (-(s * i) +
+                  s +
+                  graphValue / 2 -
+                  textPainter.height / horizonalLineY));
         } else {
           offset = Offset(sizeWidth - textPainter.width / 2, s + s / 2);
         }
       } else {
         /// If true, vertical line.
         if (flg) {
-          offset = Offset(-(s * graphCount) - (verticalTextY ?? 0),
+          offset = Offset(
+              -(s * graphCount) -
+                  horizonalLineX +
+                  s +
+                  graphValue / 2 -
+                  textPainter.width / 2,
               -sizeWidth - (offsetY ?? 0) / 2);
         } else {
           offset = Offset(-(s * i) + s + graphValue / 2 - textPainter.width / 2,

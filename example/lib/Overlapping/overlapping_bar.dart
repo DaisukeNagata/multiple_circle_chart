@@ -125,9 +125,9 @@ class OverLappingBarState extends State<OverLappingWidget>
     setState(() {
       switch (type) {
         case OverLapType.graph:
-          double width = MediaQuery.of(context).size.width;
+          double width = MediaQuery.of(context).size.width / 1.2;
           widget.viewModel.model.graphCount = 10;
-          widget.viewModel.animationInitState(context, width / 1.2);
+          widget.viewModel.animationInitState(context, width);
           break;
         case OverLapType.slider:
           widget.viewModel.model.scale = value ?? 0;

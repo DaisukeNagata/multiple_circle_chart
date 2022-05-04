@@ -95,16 +95,6 @@ class OverLappingViewModel {
         boxSize: model.boxSize,
         offsetX: -model.margin15,
         offsetY: model.margin15,
-
-        /// If the thickness of the line drawing 30 margin10
-        /// If the thickness of the line drawing 20 margin10 / 2
-        /// If the thickness of the line drawing 10 0
-        horizontalTextY: 0,
-
-        /// If the thickness of the line drawing 30 -margin15
-        /// If the thickness of the line drawing 20 -margin15 / 2
-        /// If the thickness of the line drawing 10 margin15 / 2
-        verticalTextY: model.margin15 / 8,
         valueListX: model.valueListX,
         valueListY: model.valueListY,
         sizeSet: Size(value, value),

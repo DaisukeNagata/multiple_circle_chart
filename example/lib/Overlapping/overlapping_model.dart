@@ -33,7 +33,7 @@ class OverLappingModel {
   final double margin15 = 15;
   final double margin30 = 30;
   final int graph = 10;
-  final double sizeHeight = 15;
+  final double sizeHeight = 20;
 
   List<Color> colorList = [
     Colors.blue,
