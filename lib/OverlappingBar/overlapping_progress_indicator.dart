@@ -22,7 +22,6 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
       CustomPaint? setPaint,
       required double boxSize,
       required double foldHeight,
-      required double scale,
       required BuildContext con,
       required List<String> dialogData,
       required StreamController<List<dynamic>> streamController})
@@ -36,7 +35,6 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
             contextSize: contextSize,
             graphCount: graphCount,
             setPaint: setPaint,
-            scale: scale,
             boxSize: boxSize,
             navigationHeight: foldHeight,
             con: con,
@@ -114,11 +112,8 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
 
           /// The orientation determines the dialog coordinates.
           rect: RadData.horizontal == radData
-              ? Rect.fromLTWH(
-                  offset.dx,
-                  offset.dy - (boxSize ?? 0) * (scale ?? 0),
-                  box.size.width,
-                  (contextSize?.width ?? 0) / 3)
+              ? Rect.fromLTWH(offset.dx, offset.dy - (boxSize ?? 0),
+                  box.size.width, (contextSize?.width ?? 0) / 3)
               : Rect.fromLTWH(
                   offset.dx,
                   offset.dy.ceilToDouble() -
@@ -128,11 +123,11 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
           content: SingleChildScrollView(
               child: Column(
             children: [
-              Padding(padding: EdgeInsets.only(top: 8)),
+              const Padding(padding: EdgeInsets.only(top: 8)),
 
               /// Characters to be changed
               Text(dialogText == "" ? dx.toStringAsFixed(1) : dialogText ?? ""),
-              Padding(padding: EdgeInsets.only(bottom: 16)),
+              const Padding(padding: EdgeInsets.only(bottom: 16)),
               OutlinedButton(
                   onPressed: () {
                     Navigator.of(context).pop();

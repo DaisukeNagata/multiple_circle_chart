@@ -34,7 +34,7 @@ class OverlappingPainter extends CustomPainter {
   final StreamController<List<dynamic>> controller;
 
   /// Character arrangement according to height and width.
-  void paintBar(Size size, Canvas canvas, TextSpan? span, Offset offsetValue) {
+  void paintBar(Size size, Canvas canvas, TextSpan? span) {
     double degToRad(double deg) => deg * (pi / 180.0);
     final textSpan = span;
     final textPainter = TextPainter(
@@ -144,7 +144,7 @@ class OverlappingPainter extends CustomPainter {
               paint);
           break;
       }
-      paintBar(size, canvas, textSpan, offsetValue);
+      paintBar(size, canvas, textSpan);
     }
 
     /// 0.0 ~ 1.0 * size.width　Range specification.

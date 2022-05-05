@@ -222,8 +222,7 @@ class OverLappingViewModel {
         con: context,
         streamController: StreamController(),
         setPaint: setPaint,
-        scale: model.scale,
-        boxSize: model.boxSize,
+        boxSize: model.boxSize * model.scale,
         foldHeight: (model.fold.appBar?.preferredSize.height ?? 0),
         animationValue: (model.animationController?.value ?? 0) * index,
         dialogData: model.diaLogData);
