@@ -56,7 +56,7 @@ class OverLappingBarState extends State<OverLappingWidget>
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  Padding(padding: EdgeInsets.only(right: 10 * scale * 3)),
+                  Padding(padding: EdgeInsets.only(right: 40 * scale * 3)),
                   Transform.rotate(
                       angle: (dta == RadData.horizontal ? 0 : -90) * pi / 180,
                       child: Column(
@@ -67,7 +67,7 @@ class OverLappingBarState extends State<OverLappingWidget>
                           const Padding(padding: EdgeInsets.only(bottom: 70)),
                         ],
                       )),
-                  Padding(padding: EdgeInsets.only(left: 50 * scale * 3)),
+                  Padding(padding: EdgeInsets.only(left: 40 * scale * 3)),
                 ],
               )),
         ),
