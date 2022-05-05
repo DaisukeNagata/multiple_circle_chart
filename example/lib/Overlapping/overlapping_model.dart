@@ -14,6 +14,18 @@ class OverLappingModel {
   OverlappingProgressIndicator? indicator7;
   OverlappingProgressIndicator? indicator8;
   OverlappingProgressIndicator? indicator9;
+  late List<OverlappingProgressIndicator?> indicatorList = [
+    indicator,
+    indicator2,
+    indicator3,
+    indicator4,
+    indicator5,
+    indicator6,
+    indicator7,
+    indicator8,
+    indicator9,
+    lastIndicator
+  ];
   GlobalKey lastGlobalKey = GlobalKey();
   GlobalKey globalKey = GlobalKey();
   GlobalKey globalKey2 = GlobalKey();
@@ -24,6 +36,18 @@ class OverLappingModel {
   GlobalKey globalKey7 = GlobalKey();
   GlobalKey globalKey8 = GlobalKey();
   GlobalKey globalKey9 = GlobalKey();
+  late List<GlobalKey> globalKeyList = [
+    globalKey,
+    globalKey2,
+    globalKey3,
+    globalKey4,
+    globalKey5,
+    globalKey6,
+    globalKey7,
+    globalKey8,
+    globalKey9,
+    lastGlobalKey
+  ];
   RadData radData = RadData.vertical;
   int graphCount = 0;
   double boxSize = 0;

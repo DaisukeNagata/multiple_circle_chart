@@ -58,7 +58,7 @@ class OverLappingViewModel {
   }
 
   ///　Graph coordinate construction.
-  Row indicatorRowSet(
+  Row rowSet(
       OverlappingProgressIndicator? indicator, double width, GlobalKey key) {
     return Row(
       children: [
@@ -72,26 +72,18 @@ class OverLappingViewModel {
   ///　build graph animation.
   animationInitState(BuildContext c, double width) {
     model.boxSize = ((width) / model.graphCount).floorToDouble();
-    model.indicator = _indicatorSet(c, model.globalKey, width,
-        _sePainter(model.indicator, width, false, true), 0.7);
-    model.indicator2 = _indicatorSet(c, model.globalKey2, width,
-        _sePainter(model.indicator2, width, false, false), 0.8);
-    model.indicator3 = _indicatorSet(c, model.globalKey3, width,
-        _sePainter(model.indicator3, width, false, false), 1);
-    model.indicator4 = _indicatorSet(c, model.globalKey4, width,
-        _sePainter(model.indicator4, width, false, false), 0.4);
-    model.indicator5 = _indicatorSet(c, model.globalKey5, width,
-        _sePainter(model.indicator5, width, false, false), 0.7);
-    model.indicator6 = _indicatorSet(c, model.globalKey6, width,
-        _sePainter(model.indicator6, width, false, false), 0.8);
-    model.indicator7 = _indicatorSet(c, model.globalKey7, width,
-        _sePainter(model.indicator7, width, false, false), 0.4);
-    model.indicator8 = _indicatorSet(c, model.globalKey8, width,
-        _sePainter(model.indicator8, width, false, false), 0.7);
-    model.indicator9 = _indicatorSet(c, model.globalKey9, width,
-        _sePainter(model.indicator9, width, false, false), 0.8);
-    model.lastIndicator = _indicatorSet(c, model.lastGlobalKey, width,
-        _sePainter(model.lastIndicator, width, true, true), 0.5);
+    for (var i = 0; i <= model.globalKeyList.length - 1; i++) {
+      if (i == 0) {
+        model.indicatorList[i] = _indicatorSet(c, model.globalKeyList[i], width,
+            _sePainter(model.indicatorList[i], width, false, true), i * 0.1);
+      } else if (i == model.globalKeyList.length - 1) {
+        model.indicatorList[i] = _indicatorSet(c, model.globalKeyList[i], width,
+            _sePainter(model.indicatorList[i], width, true, true), 1);
+      } else {
+        model.indicatorList[i] = _indicatorSet(c, model.globalKeyList[i], width,
+            _sePainter(model.indicatorList[i], width, false, false), i * 0.1);
+      }
+    }
   }
 
   OverlappingGraphText _graphText(double value) {

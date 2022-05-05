@@ -42,8 +42,12 @@ class OverLappingBarState extends State<OverLappingWidget>
     with TickerProviderStateMixin, OverLapCallBackLogic {
   @override
   Widget build(BuildContext context) {
-    var dta = widget.viewModel.model.lastIndicator?.radData;
     double width = MediaQuery.of(context).size.width / 1.2;
+    var dta = widget.viewModel.model.radData;
+    var length = widget.viewModel.model.globalKeyList.length - 1;
+    var iList = widget.viewModel.model.indicatorList;
+    var gList = widget.viewModel.model.globalKeyList;
+    var scale = widget.viewModel.model.scale;
     return Stack(
       children: [
         SingleChildScrollView(
@@ -52,60 +56,18 @@ class OverLappingBarState extends State<OverLappingWidget>
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  Padding(
-                      padding: EdgeInsets.only(
-                          right: 50 * widget.viewModel.model.scale * 3)),
+                  Padding(padding: EdgeInsets.only(right: 10 * scale * 3)),
                   Transform.rotate(
-                      angle: (dta == RadData.horizontal ? 360 : -90) * pi / 180,
+                      angle: (dta == RadData.horizontal ? 0 : -90) * pi / 180,
                       child: Column(
                         children: [
                           const Padding(padding: EdgeInsets.only(top: 70)),
-                          widget.viewModel.indicatorRowSet(
-                              widget.viewModel.model.indicator,
-                              width,
-                              widget.viewModel.model.globalKey),
-                          widget.viewModel.indicatorRowSet(
-                              widget.viewModel.model.indicator2,
-                              width,
-                              widget.viewModel.model.globalKey2),
-                          widget.viewModel.indicatorRowSet(
-                              widget.viewModel.model.indicator3,
-                              width,
-                              widget.viewModel.model.globalKey3),
-                          widget.viewModel.indicatorRowSet(
-                              widget.viewModel.model.indicator4,
-                              width,
-                              widget.viewModel.model.globalKey4),
-                          widget.viewModel.indicatorRowSet(
-                              widget.viewModel.model.indicator5,
-                              width,
-                              widget.viewModel.model.globalKey5),
-                          widget.viewModel.indicatorRowSet(
-                              widget.viewModel.model.indicator6,
-                              width,
-                              widget.viewModel.model.globalKey6),
-                          widget.viewModel.indicatorRowSet(
-                              widget.viewModel.model.indicator7,
-                              width,
-                              widget.viewModel.model.globalKey7),
-                          widget.viewModel.indicatorRowSet(
-                              widget.viewModel.model.indicator8,
-                              width,
-                              widget.viewModel.model.globalKey8),
-                          widget.viewModel.indicatorRowSet(
-                              widget.viewModel.model.indicator9,
-                              width,
-                              widget.viewModel.model.globalKey9),
-                          widget.viewModel.indicatorRowSet(
-                              widget.viewModel.model.lastIndicator,
-                              width,
-                              widget.viewModel.model.lastGlobalKey),
+                          for (var i = 0; i <= length; i++)
+                            widget.viewModel.rowSet(iList[i], width, gList[i]),
                           const Padding(padding: EdgeInsets.only(bottom: 70)),
                         ],
                       )),
-                  Padding(
-                      padding: EdgeInsets.only(
-                          left: 50 * widget.viewModel.model.scale * 3)),
+                  Padding(padding: EdgeInsets.only(left: 50 * scale * 3)),
                 ],
               )),
         ),
