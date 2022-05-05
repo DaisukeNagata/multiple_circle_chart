@@ -63,10 +63,6 @@ class OverlappingGraphText extends CustomPainter {
 
   textSpanLogic(Canvas canvas, bool flg, int i, int wLines, int graphCount) {
     String textValue = "";
-    double s = (boxSize * scale);
-    double s2 = sizeSet.width / wLines * i;
-    double v = -(s * i) + s + graphValue / 2;
-    double v2 = -(s * graphCount) + graphValue / 2;
     switch (flg) {
       case true:
 
@@ -97,6 +93,8 @@ class OverlappingGraphText extends CustomPainter {
     }
 
     if (i <= wLines) {
+      double s = (boxSize * scale);
+      double s2 = sizeSet.width / wLines * i;
       final textSpan = TextSpan(
         style: textStyle,
         children: <TextSpan>[TextSpan(text: textValue)],
@@ -110,20 +108,23 @@ class OverlappingGraphText extends CustomPainter {
         minWidth: 0,
         maxWidth: s,
       );
-
+      double h = (textPainter.height);
+      double w = (textPainter.width);
+      double v = -(s * i) + s + graphValue / 2;
+      double v2 = -(s * graphCount) + graphValue / 2;
       if (radData == RadData.horizontal) {
         /// If true, vertical line.
         if (flg) {
-          offset = Offset(-boxSize / 2, (v - textPainter.height / 2));
+          offset = Offset(-boxSize / 2, (v - h / 2));
         } else {
-          offset = Offset(s2 - textPainter.width / 2, s + 4);
+          offset = Offset(s2 - w / 2, s + h / 2);
         }
       } else {
         /// If true, vertical line.
         if (flg) {
-          offset = Offset(v2 - textPainter.width, -s2 - textPainter.height / 2);
+          offset = Offset(v2 - w, -s2 - h / 2);
         } else {
-          offset = Offset(v - textPainter.width / 2, textPainter.height / 2);
+          offset = Offset(v - w / 2, h / 2);
         }
       }
 
