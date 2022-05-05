@@ -132,7 +132,11 @@ class OverLappingViewModel {
 
   _setP(OverlappingProgressIndicator? indicator, String tex, double value,
       int index, double value2) {
-    return indicator?.setPainter(tex, value, index, value2, model.colorList,
+    Offset offset = model.radData == RadData.horizontal
+        ? const Offset(0, 0)
+        : const Offset(0, -15);
+    return indicator?.setPainter(
+        offset, tex, value, value2, model.colorList[index],
         textColor: Colors.white);
   }
 
@@ -212,10 +216,6 @@ class OverLappingViewModel {
       GlobalKey key, double w, CustomPaint setPaint, double index) {
     return OverlappingProgressIndicator(
         radData: model.radData,
-        radDataRadDataVertical: const Offset(5, 15),
-        radDataRadDataHorizontal: const Offset(0, 1),
-        dataVerticalSize: const Size(120, 120),
-        dataHorizontalSize: const Size(120, 120),
         globalKey: key,
         contextSize: Size(w, model.sizeHeight),
         graphCount: model.graphCount,

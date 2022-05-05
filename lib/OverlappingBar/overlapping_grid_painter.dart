@@ -10,8 +10,6 @@ class OverlappingGridPainter extends CustomPainter {
   final double boxSize;
   final double strokeWidth;
   final double scale;
-  double? offsetX = -25;
-  double? offsetY = 20;
   final bool checkLine;
   final bool baseLine;
   final Size sizeSet;
@@ -26,8 +24,6 @@ class OverlappingGridPainter extends CustomPainter {
       required this.boxSize,
       required this.strokeWidth,
       required this.scale,
-      double? offsetX,
-      double? offsetY,
       required this.checkLine,
       required this.baseLine,
       required this.sizeSet,

@@ -12,10 +12,6 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
   const OverlappingProgressIndicator(
       {Key? key,
       RadData radData = RadData.horizontal,
-      Offset? radDataRadDataVertical,
-      Offset? radDataRadDataHorizontal,
-      Size? dataVerticalSize,
-      Size? dataHorizontalSize,
       Size? contextSize,
       int? graphCount,
       this.minHeight,
@@ -35,10 +31,6 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
             key: key,
             radData: radData,
             globalKey: globalKey,
-            dataVerticalOffset: radDataRadDataVertical,
-            dataHorizontalOffset: radDataRadDataHorizontal,
-            dataVerticalSize: dataVerticalSize,
-            dataHorizontalSize: dataHorizontalSize,
             animationValue: animationValue,
             textSpan: textSpan,
             contextSize: contextSize,
@@ -52,17 +44,10 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
             streamController: streamController);
 
   /// Calculations for painting TextSpan.
-  OverlappingPainter? setPainter(String textValue, double value, int index,
-      double scale, List<Color> colorList,
+  OverlappingPainter? setPainter(Offset offset, String textValue, double value,
+      double scale, Color painterColor,
       {CircleData circleData = CircleData.none,
       Color? textColor = Colors.black}) {
-    ///　Coordinates to display text
-    Offset rV = dataVerticalOffset ?? const Offset(0, 0);
-    Offset rH = dataHorizontalOffset ?? const Offset(0, 0);
-    Offset offset = radData == RadData.vertical
-        ? Offset(rV.dx, -rV.dy)
-        : Offset(rH.dx, rH.dy);
-
     double w = contextSize?.width.roundToDouble() ?? 0.0;
 
     /// Show graph values
@@ -78,7 +63,7 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
           widgetSize: box.size.width,
           circleData: circleData,
           radData: radData,
-          backgroundColor: colorList[index],
+          backgroundColor: painterColor,
           offsetValue: offset,
           textSpan: textSpan,
           value: (animationValue ?? 0.0) - (value * 0.1 * scale),
@@ -116,9 +101,7 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
   Future<void> showMyDialog(BuildContext context, Offset dataPosition,
       {String? dialogText}) async {
     RenderBox box = globalKey?.currentContext?.findRenderObject() as RenderBox;
-    double value = dataVerticalSize?.height ?? 0;
     double dx = dataPosition.dx;
-    Size hSize = dataHorizontalSize ?? const Size(0, 0);
     Offset offset = box.localToGlobal(Offset.zero);
     return showDialog<void>(
       barrierColor: Colors.white.withOpacity(0),
@@ -135,26 +118,26 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
                   offset.dx,
                   offset.dy - (boxSize ?? 0) * (scale ?? 0),
                   box.size.width,
-                  value)
+                  (contextSize?.width ?? 0) / 3)
               : Rect.fromLTWH(
                   offset.dx,
                   offset.dy.ceilToDouble() -
                       ((navigationHeight ?? 0) + dx.floorToDouble()),
-                  value,
-                  hSize.height),
+                  (contextSize?.width ?? 0) / 3,
+                  (contextSize?.width ?? 0) / 3),
           content: SingleChildScrollView(
               child: Column(
             children: [
-              Padding(padding: EdgeInsets.only(top: hSize.height / 6)),
+              Padding(padding: EdgeInsets.only(top: 8)),
 
               /// Characters to be changed
               Text(dialogText == "" ? dx.toStringAsFixed(1) : dialogText ?? ""),
-              Padding(padding: EdgeInsets.only(bottom: hSize.height / 8)),
+              Padding(padding: EdgeInsets.only(bottom: 16)),
               OutlinedButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: const Text('OK')),
+                  child: const Text('OK', style: TextStyle(fontSize: 10))),
             ],
           )),
         );

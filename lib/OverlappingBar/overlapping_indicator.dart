@@ -10,10 +10,6 @@ abstract class OverlappingIndicator extends StatefulWidget {
   const OverlappingIndicator(
       {Key? key,
       this.globalKey,
-      this.dataVerticalOffset,
-      this.dataHorizontalOffset,
-      this.dataVerticalSize,
-      this.dataHorizontalSize,
       this.semanticsLabel,
       this.semanticsValue,
       this.contextSize,
@@ -31,10 +27,6 @@ abstract class OverlappingIndicator extends StatefulWidget {
       required this.streamController})
       : super(key: key);
   final GlobalKey? globalKey;
-  final Offset? dataVerticalOffset;
-  final Offset? dataHorizontalOffset;
-  final Size? dataVerticalSize;
-  final Size? dataHorizontalSize;
   final String? semanticsLabel;
   final String? semanticsValue;
   final Size? contextSize;

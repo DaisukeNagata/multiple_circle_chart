@@ -8,8 +8,6 @@ import 'overlapping_data.dart';
 class OverlappingGraphText extends CustomPainter {
   final TextStyle textStyle;
   final double boxSize;
-  double? offsetX;
-  double? offsetY;
   double scale;
   List<String>? valueListX;
   List<String>? valueListY;
