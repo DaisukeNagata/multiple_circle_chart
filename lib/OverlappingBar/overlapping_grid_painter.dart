@@ -8,8 +8,8 @@ import 'overlapping_data.dart';
 class OverlappingGridPainter extends CustomPainter {
   final TextStyle textStyle;
   final double boxSize;
+  final int wLines;
   final double strokeWidth;
-  final double scale;
   final bool checkLine;
   final bool baseLine;
   final Size sizeSet;
@@ -22,8 +22,8 @@ class OverlappingGridPainter extends CustomPainter {
   OverlappingGridPainter(
       {required this.textStyle,
       required this.boxSize,
+      required this.wLines,
       required this.strokeWidth,
-      required this.scale,
       required this.checkLine,
       required this.baseLine,
       required this.sizeSet,
@@ -37,7 +37,6 @@ class OverlappingGridPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final wLines = (sizeSet.width ~/ boxSize);
     paintSet = Paint()
       ..strokeWidth = strokeWidth
       ..color = colorSet.withOpacity(strokeWidth == 0 ? 0 : 1)
@@ -46,19 +45,19 @@ class OverlappingGridPainter extends CustomPainter {
     ///　A value of 2 will balance the ruled lines.
     ///　Have textSpanLogic logic think about the balance of the ruled lines.
     for (var i = 0; i <= 2; ++i) {
-      final y = -boxSize * scale * i;
-      textSpanLogic(y, true, i, wLines);
+      final y = -boxSize * i;
+      textSpanLogic(y, true, i);
     }
 
     ///　Have textSpanLogic logic think about the balance of the ruled lines.
     for (var i = 0; i <= wLines; ++i) {
-      final x = boxSize * scale * i;
-      textSpanLogic(x, false, i, wLines);
+      final x = boxSize * i;
+      textSpanLogic(x, false, i);
     }
     canvas.drawPath(path, paintSet);
   }
 
-  textSpanLogic(double value, bool flg, int i, int wLines) {
+  textSpanLogic(double value, bool flg, int i) {
     if (radData == RadData.horizontal) {
       ///　Confirmation from top to bottom.
       ///　In that case, draw a line.
@@ -76,8 +75,8 @@ class OverlappingGridPainter extends CustomPainter {
   }
 
   pathSet(double value, bool flg, int i, int wLines) {
-    var h = (boxSize * scale) + graphValue;
-    var h2 = -(boxSize * scale) * 2 + graphValue;
+    var h = boxSize + graphValue;
+    var h2 = -boxSize * 2 + graphValue;
     var c = checkLine && baseLine && i == 0;
     var c2 = checkLine && !baseLine && i == 2;
     if (flg) {
@@ -85,11 +84,11 @@ class OverlappingGridPainter extends CustomPainter {
       ///　In that case, draw a line.
       if (c) {
         ///　most bottom area point.
-        path.moveTo(0, value + (boxSize * scale));
+        path.moveTo(0, value + boxSize);
         path.relativeLineTo(sizeSet.width, 0);
       } else if (c2) {
         ///　most top area point.
-        path.moveTo(0, value + (boxSize * scale) + graphValue * 2);
+        path.moveTo(0, value + boxSize + graphValue * 2);
         path.relativeLineTo(sizeSet.width, 0);
       } else {
         path.moveTo(0, 0);

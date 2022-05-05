@@ -101,14 +101,14 @@ class OverLappingViewModel {
     );
     return OverlappingGraphText(
         textStyle: textStyle,
-        boxSize: model.boxSize,
+        boxSize: (model.boxSize * model.scale),
+        wLines: (value ~/ model.boxSize),
         valueListX: model.valueListX,
         valueListY: model.valueListY,
         sizeSet: Size(value, value),
         graphCount: model.graphCount,
-        graphValue: model.sizeHeight,
-        radData: model.radData,
-        scale: model.scale);
+        graphValue: model.sizeHeight / 2,
+        radData: model.radData);
   }
 
   OverlappingGridPainter _gridPainter(
@@ -119,9 +119,9 @@ class OverLappingViewModel {
     );
     return OverlappingGridPainter(
         textStyle: textStyle,
-        boxSize: model.boxSize,
+        boxSize: (model.boxSize * model.scale),
+        wLines: (value ~/ model.boxSize),
         strokeWidth: 1,
-        scale: model.scale,
         sizeSet: Size(value, value),
         colorSet: Colors.orange,
         graphValue: model.sizeHeight / 2,

@@ -8,7 +8,7 @@ import 'overlapping_data.dart';
 class OverlappingGraphText extends CustomPainter {
   final TextStyle textStyle;
   final double boxSize;
-  double scale;
+  final int wLines;
   List<String>? valueListX;
   List<String>? valueListY;
   final Size sizeSet;
@@ -21,7 +21,7 @@ class OverlappingGraphText extends CustomPainter {
   OverlappingGraphText(
       {required this.textStyle,
       required this.boxSize,
-      required this.scale,
+      required this.wLines,
       required this.valueListX,
       required this.valueListY,
       required this.sizeSet,
@@ -33,8 +33,6 @@ class OverlappingGraphText extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final wLines = (sizeSet.width ~/ boxSize);
-
     canvas.rotate(degToRad(radData == RadData.horizontal ? 360 : 90));
 
     switch (radData ?? RadData.vertical) {
@@ -42,26 +40,26 @@ class OverlappingGraphText extends CustomPainter {
       ///　Have textSpanLogic logic think about the balance of the ruled text.
       case RadData.vertical:
         for (var i = 0; i <= wLines; ++i) {
-          textSpanLogic(canvas, true, i, wLines, graphCount);
+          textSpanLogic(canvas, true, i, graphCount);
         }
         for (var i = 0; i <= (graphCount); ++i) {
-          textSpanLogic(canvas, false, i, (graphCount), graphCount);
+          textSpanLogic(canvas, false, i, graphCount);
         }
         break;
 
       ///　Have textSpanLogic logic think about the balance of the ruled text.
       case RadData.horizontal:
         for (var i = 0; i <= (graphCount); ++i) {
-          textSpanLogic(canvas, true, i, (graphCount), graphCount);
+          textSpanLogic(canvas, true, i, graphCount);
         }
         for (var i = 0; i <= wLines; ++i) {
-          textSpanLogic(canvas, false, i, wLines, graphCount);
+          textSpanLogic(canvas, false, i, graphCount);
         }
         break;
     }
   }
 
-  textSpanLogic(Canvas canvas, bool flg, int i, int wLines, int graphCount) {
+  textSpanLogic(Canvas canvas, bool flg, int i, int graphCount) {
     String textValue = "";
     switch (flg) {
       case true:
@@ -93,7 +91,7 @@ class OverlappingGraphText extends CustomPainter {
     }
 
     if (i <= wLines) {
-      double s = (boxSize * scale);
+      double s = (boxSize);
       double s2 = sizeSet.width / wLines * i;
       final textSpan = TextSpan(
         style: textStyle,
@@ -110,8 +108,8 @@ class OverlappingGraphText extends CustomPainter {
       );
       double h = (textPainter.height);
       double w = (textPainter.width);
-      double v = -(s * i) + s + graphValue / 2;
-      double v2 = -(s * graphCount) + graphValue / 2;
+      double v = -(s * i) + s + graphValue;
+      double v2 = -(s * graphCount) + graphValue;
       if (radData == RadData.horizontal) {
         /// If true, vertical line.
         if (flg) {
