@@ -48,41 +48,35 @@ class OverLappingBarState extends State<OverLappingWidget>
     var iList = widget.viewModel.model.indicatorList;
     var gList = widget.viewModel.model.globalKeyList;
     var scale = widget.viewModel.model.scale;
-    return Stack(
-      children: [
-        SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  Padding(padding: EdgeInsets.only(right: 40 * scale * 3)),
-                  Transform.rotate(
-                      angle: (dta == RadData.horizontal ? 0 : -90) * pi / 180,
-                      child: Column(
-                        children: [
-                          const Padding(padding: EdgeInsets.only(top: 70)),
-                          for (var i = 0; i <= length; i++)
-                            widget.viewModel.rowSet(iList[i], width, gList[i]),
-                          const Padding(padding: EdgeInsets.only(bottom: 70)),
-                        ],
-                      )),
-                  Padding(padding: EdgeInsets.only(left: 40 * scale * 3)),
-                ],
-              )),
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            widget.viewModel.sliderSet(OverLapType.slider, callback, 2,
-                widget.viewModel.model.scale, this),
-            widget.viewModel.sliderSet(OverLapType.graphWidth, callback, 30,
-                widget.viewModel.model.sizeHeight, this),
-            widget.viewModel.buttonSet(callback, this),
-            const Padding(padding: EdgeInsets.only(bottom: 20)),
-          ],
-        ),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    Padding(padding: EdgeInsets.only(right: 40 * scale * 3)),
+                    Transform.rotate(
+                        angle: (dta == RadData.horizontal ? 0 : -90) * pi / 180,
+                        child: Column(
+                          children: [
+                            const Padding(padding: EdgeInsets.only(top: 70)),
+                            for (var i = 0; i <= length; i++)
+                              widget.viewModel
+                                  .rowSet(iList[i], width, gList[i]),
+                            const Padding(padding: EdgeInsets.only(bottom: 70)),
+                          ],
+                        )),
+                    Padding(padding: EdgeInsets.only(left: 40 * scale * 3)),
+                  ],
+                )),
+          ),
+          Padding(padding: EdgeInsets.only(bottom: 30 * scale)),
+          widget.viewModel.buttonColumn(callback, this),
+        ],
+      ),
     );
   }
 

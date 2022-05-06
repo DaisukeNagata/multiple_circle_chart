@@ -21,6 +21,17 @@ enum OverLapType { graphWidth, slider, graph }
 class OverLappingViewModel {
   OverLappingModel model = OverLappingModel();
 
+  Column buttonColumn(OverLapCallBack call, OverLappingBarState vsync) {
+    return Column(
+      children: [
+        sliderSet(OverLapType.slider, call, 2, model.scale, vsync),
+        sliderSet(OverLapType.graphWidth, call, 30, model.sizeHeight, vsync),
+        buttonSet(call, vsync),
+        const Padding(padding: EdgeInsets.only(bottom: 20)),
+      ],
+    );
+  }
+
   ElevatedButton buttonSet(OverLapCallBack call, OverLappingBarState vsync) {
     return ElevatedButton(
       onPressed: () {
