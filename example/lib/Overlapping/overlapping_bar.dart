@@ -94,7 +94,7 @@ class OverLappingBarState extends State<OverLappingWidget>
           widget.viewModel.model.animationController?.forward();
           break;
         case OverLapType.graphWidth:
-          widget.viewModel.model.sizeHeight = value ?? 0;
+          widget.viewModel.model.graphWidth = value ?? 0;
           widget.viewModel.model.animationController?.forward();
           break;
       }

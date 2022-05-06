@@ -25,7 +25,7 @@ class OverLappingViewModel {
     return Column(
       children: [
         sliderSet(OverLapType.slider, call, 2, model.scale, vsync),
-        sliderSet(OverLapType.graphWidth, call, 30, model.sizeHeight, vsync),
+        sliderSet(OverLapType.graphWidth, call, 30, model.graphWidth, vsync),
         buttonSet(call, vsync),
         const Padding(padding: EdgeInsets.only(bottom: 20)),
       ],
@@ -74,7 +74,7 @@ class OverLappingViewModel {
     return Row(
       children: [
         SizedBox(
-            height: model.sizeHeight, width: width, child: indicator, key: key),
+            height: model.graphWidth, width: width, child: indicator, key: key),
         Padding(padding: EdgeInsets.only(top: model.boxSize * model.scale)),
       ],
     );
@@ -110,7 +110,7 @@ class OverLappingViewModel {
         valueListY: model.valueListY,
         sizeSet: Size(value, value),
         graphCount: model.graphCount,
-        graphValue: model.sizeHeight / 2,
+        graphValue: model.graphWidth / 2,
         radData: model.radData);
   }
 
@@ -127,7 +127,7 @@ class OverLappingViewModel {
         strokeWidth: 1,
         sizeSet: Size(value, value),
         colorSet: Colors.orange,
-        graphValue: model.sizeHeight / 2,
+        graphValue: model.graphWidth / 2,
         radData: model.radData,
         checkLine: checkLine,
         baseLine: baseLine);
@@ -220,7 +220,7 @@ class OverLappingViewModel {
     return OverlappingProgressIndicator(
         radData: model.radData,
         globalKey: key,
-        contextSize: Size(w, model.sizeHeight),
+        contextSize: Size(w, model.graphWidth),
         graphCount: model.graphCount,
         con: context,
         streamController: StreamController(),
