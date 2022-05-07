@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:multiple_circle_chart/OverlappingBar/overlapping_data.dart';
 
+import 'OverlapLine/overlap_line_bar.dart';
 import 'overlapping_view_model.dart';
 
 class OverLappingBar extends StatelessWidget {
@@ -16,6 +17,16 @@ class OverLappingBar extends StatelessWidget {
         backgroundColor: Colors.black,
         appBar: AppBar(
           title: const Text('EveryDaySoft_Example'),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const OverLapLineBar();
+                }));
+              },
+              icon: const Icon(Icons.arrow_forward_ios),
+            )
+          ],
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
