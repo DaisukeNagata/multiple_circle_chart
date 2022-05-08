@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:multiple_circle_chart/OverlappingLine/overlapping_tripaint.dart';
 
 class OverLapLineBar extends StatelessWidget {
   const OverLapLineBar({Key? key}) : super(key: key);
@@ -33,7 +34,9 @@ class OverLappingWidget extends StatefulWidget {
 class OverLappingState extends State<OverLappingWidget> {
   @override
   Widget build(BuildContext context) {
-    return const Text("OverLappingState",
-        style: TextStyle(color: Colors.white));
+    return CustomPaint(
+      size: const Size(100, 100),
+      painter: OverlappingTriPaint(),
+    );
   }
 }

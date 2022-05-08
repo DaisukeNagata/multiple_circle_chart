@@ -91,7 +91,7 @@ class OverlappingGraphText extends CustomPainter {
     }
 
     if (i <= wLines) {
-      double s = (boxSize);
+      double s = boxSize;
       double s2 = sizeSet.width / wLines * i;
       final textSpan = TextSpan(
         style: textStyle,
@@ -113,7 +113,7 @@ class OverlappingGraphText extends CustomPainter {
       if (radData == RadData.horizontal) {
         /// If true, vertical line.
         if (flg) {
-          offset = Offset(-boxSize / 2, (v - h / 2));
+          offset = Offset(-s / 2, (v - h / 2));
         } else {
           offset = Offset(s2 - w / 2, s + h / 2);
         }
