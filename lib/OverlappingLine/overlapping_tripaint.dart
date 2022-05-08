@@ -4,12 +4,12 @@ class OverlappingTriPaint extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final path = Path();
-    for (var i = 0; i <= 4; i++) {
+    for (var i = 0; i <= 7; i++) {
       path
-        ..moveTo(0, size.width * 4)
+        ..moveTo(0, size.width * 7)
         ..lineTo(
-          size.width * (i == 0 ? 0 : i),
-          (i == 0 ? size.width * 4 : size.width * 4 - size.width * i),
+          size.width * i,
+          (i == 0 ? size.width * 7 : size.width * 7 - size.width * i),
         );
     }
     final paint = Paint()
