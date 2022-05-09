@@ -45,7 +45,8 @@ class OverLappingState extends State<OverLappingWidget> {
     return Stack(
       children: [
         CustomPaint(
-          painter: OverlappingTriPaint(moveToCount: 7, strokeWidth: 2),
+          painter: OverlappingTriPaint(
+              moveToCountList: [3, 2, 5, 3, 2, 1, 2, 0], strokeWidth: 2),
           size: Size(MediaQuery.of(context).size.width / 7,
               MediaQuery.of(context).size.width / 7),
         ),

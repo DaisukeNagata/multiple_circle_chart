@@ -1,29 +1,23 @@
 import 'package:flutter/material.dart';
 
 class OverlappingTriPaint extends CustomPainter {
-  int moveToCount;
+  List<int> moveToCountList;
   double strokeWidth;
-
-  OverlappingTriPaint({required this.moveToCount, required this.strokeWidth});
+  OverlappingTriPaint(
+      {required this.moveToCountList, required this.strokeWidth});
 
   @override
   void paint(Canvas canvas, Size size) {
-    final path = Path();
-    for (var i = 0; i <= moveToCount; i++) {
-      path
-        ..moveTo(0, size.width * moveToCount)
-        ..lineTo(
-          size.width * i,
-          (i == 0
-              ? size.width * moveToCount
-              : size.width * moveToCount - size.width * i),
-        );
-    }
     final paint = Paint()
-      ..color = Colors.blue
+      ..color = Colors.red
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth;
 
+    final path = Path();
+    path..moveTo(0, size.width * moveToCountList[0]);
+    for (var i = 0; i <= moveToCountList.length - 1; i++) {
+      path..lineTo(i * size.width, moveToCountList[i] * size.width);
+    }
     canvas.drawPath(path, paint);
   }
 
