@@ -61,9 +61,14 @@ class OverLappingState extends State<OverLappingWidget> {
     );
   }
 
-  Stack stackLineLogic(double w2) {
+  Stack stackLineLogic(double w) {
     return Stack(
       children: [
+        CustomPaint(
+          child: CustomPaint(
+            painter: _gridPainter(w),
+          ),
+        ),
         CustomPaint(
           painter: OverlappingLinePaint(moveToCountList: [
             wLines - 3,
@@ -74,14 +79,9 @@ class OverLappingState extends State<OverLappingWidget> {
             wLines - 1,
             wLines - 2,
             wLines - 7
-          ], strokeWidth: 4, paintColor: Colors.red),
-          size: Size(MediaQuery.of(context).size.width / count,
+          ], strokeWidth: 3, paintColor: Colors.red),
+          size: Size((MediaQuery.of(context).size.width / count),
               MediaQuery.of(context).size.width / count),
-        ),
-        CustomPaint(
-          child: CustomPaint(
-            painter: _gridPainter(w2),
-          ),
         ),
       ],
     );
@@ -116,7 +116,7 @@ class OverLappingState extends State<OverLappingWidget> {
     );
     return OverlappingGraphText(
         textStyle: textStyle,
-        boxSize: value / wLines,
+        boxSize: (value / wLines),
         wLines: wLines,
         valueListX: valueListX,
         valueListY: valueListY,
@@ -133,7 +133,7 @@ class OverLappingState extends State<OverLappingWidget> {
     );
     return OverlappingLineGridPainter(
         textStyle: textStyle,
-        boxSize: value / wLines,
+        boxSize: (value / wLines),
         wLines: wLines,
         strokeWidth: 1,
         sizeSet: Size(value, value),
