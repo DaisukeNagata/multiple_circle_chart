@@ -49,7 +49,7 @@ class OverlappingGraphText extends CustomPainter {
 
       ///　Have textSpanLogic logic think about the balance of the ruled text.
       case RadData.horizontal:
-        for (var i = 0; i <= (graphCount); ++i) {
+        for (var i = 0; i <= graphCount; ++i) {
           textSpanLogic(canvas, true, i, graphCount);
         }
         for (var i = 0; i <= wLines; ++i) {

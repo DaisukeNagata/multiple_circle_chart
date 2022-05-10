@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 
-class OverlappingTriPaint extends CustomPainter {
+class OverlappingLinePaint extends CustomPainter {
   List<int> moveToCountList;
   double strokeWidth;
-  OverlappingTriPaint(
-      {required this.moveToCountList, required this.strokeWidth});
+  Color paintColor;
+  OverlappingLinePaint(
+      {required this.moveToCountList,
+      required this.strokeWidth,
+      required this.paintColor});
 
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.red
+      ..color = paintColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth;
 
