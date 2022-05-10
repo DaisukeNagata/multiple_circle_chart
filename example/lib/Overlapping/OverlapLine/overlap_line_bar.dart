@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:multiple_circle_chart/OverlappingBar/overlapping_data.dart';
 import 'package:multiple_circle_chart/OverlappingBar/overlapping_graph_text.dart';
 import 'package:multiple_circle_chart/OverlappingLine/overlapping_line_grid_painter.dart';
-import 'package:multiple_circle_chart/OverlappingLine/overlapping_tripaint.dart';
+import 'package:multiple_circle_chart/OverlappingLine/overlapping_line_paint.dart';
 
 class OverLapLineBar extends StatelessWidget {
   const OverLapLineBar({Key? key}) : super(key: key);
@@ -54,14 +54,14 @@ class OverLappingState extends State<OverLappingWidget> {
         Row(
           children: [
             Padding(padding: EdgeInsets.only(top: w2 / 2, left: w / 2)),
-            LineLogic(w2),
+            stackLineLogic(w2),
           ],
         ),
       ],
     );
   }
 
-  Stack LineLogic(double w2) {
+  Stack stackLineLogic(double w2) {
     return Stack(
       children: [
         CustomPaint(
@@ -100,13 +100,13 @@ class OverLappingState extends State<OverLappingWidget> {
 
   List<String> valueListX = [
     "",
-    "月",
-    "火",
-    "水",
-    "木",
-    "金",
-    "土",
-    "日",
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
   ];
 
   OverlappingGraphText _graphText(double value) {

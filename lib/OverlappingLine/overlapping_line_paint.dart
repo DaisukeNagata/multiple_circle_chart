@@ -17,9 +17,9 @@ class OverlappingLinePaint extends CustomPainter {
       ..strokeWidth = strokeWidth;
 
     final path = Path();
-    path..moveTo(0, size.width * moveToCountList[0]);
+    path.moveTo(0, size.width * moveToCountList[0]);
     for (var i = 0; i <= moveToCountList.length - 1; i++) {
-      path..lineTo(i * size.width, moveToCountList[i] * size.width);
+      path.lineTo(i * size.width, moveToCountList[i] * size.width);
     }
     canvas.drawPath(path, paint);
   }
