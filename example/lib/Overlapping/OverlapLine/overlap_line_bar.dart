@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:multiple_circle_chart/OverlappingBar/overlapping_data.dart';
 import 'package:multiple_circle_chart/OverlappingBar/overlapping_graph_text.dart';
@@ -43,25 +45,50 @@ class OverLappingState extends State<OverLappingWidget> {
     double w = MediaQuery.of(context).size.width -
         (MediaQuery.of(context).size.width / count) * wLines;
     double w2 = (MediaQuery.of(context).size.width / count) * wLines;
-    return Stack(
+    List<int> indexList = [
+      wLines - Random().nextInt(7),
+      wLines - Random().nextInt(7),
+      wLines - Random().nextInt(7),
+      wLines - Random().nextInt(7),
+      wLines - Random().nextInt(7),
+      wLines - Random().nextInt(7),
+      wLines - Random().nextInt(7),
+      wLines - Random().nextInt(7)
+    ];
+    return Column(
       children: [
-        Container(
-          padding: EdgeInsets.only(top: w2 + 10, left: w / 2),
-          child: CustomPaint(
-            painter: _graphText(w2),
-          ),
-        ),
-        Row(
+        Stack(
           children: [
-            Padding(padding: EdgeInsets.only(top: w2 / 2, left: w / 2)),
-            stackLineLogic(w2),
+            Container(
+              padding: EdgeInsets.only(top: w2, left: w / 2),
+              child: CustomPaint(
+                painter: _graphText(w2),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(
+                  top: (MediaQuery.of(context).size.width / count),
+                  left: w / 2),
+              child: stackLineLogic(w2, indexList),
+            ),
           ],
         ),
+        const SizedBox(
+          height: 100,
+        ),
+        TextButton(
+          onPressed: () {
+            setState(() {
+              indexList = indexList;
+            });
+          },
+          child: const Text('click here'),
+        )
       ],
     );
   }
 
-  Stack stackLineLogic(double w) {
+  Stack stackLineLogic(double w, List<int> indexList) {
     return Stack(
       children: [
         CustomPaint(
@@ -70,16 +97,10 @@ class OverLappingState extends State<OverLappingWidget> {
           ),
         ),
         CustomPaint(
-          painter: OverlappingLinePaint(moveToCountList: [
-            wLines - 3,
-            wLines - 2,
-            wLines - 5,
-            wLines - 3,
-            wLines - 2,
-            wLines - 1,
-            wLines - 2,
-            wLines - 7
-          ], strokeWidth: 3, paintColor: Colors.red),
+          painter: OverlappingLinePaint(
+              moveToCountList: indexList,
+              strokeWidth: 3,
+              paintColor: Colors.red),
           size: Size((MediaQuery.of(context).size.width / count),
               MediaQuery.of(context).size.width / count),
         ),
@@ -101,7 +122,7 @@ class OverLappingState extends State<OverLappingWidget> {
   List<String> valueListX = [
     "",
     "A",
-    "B",
+    "I",
     "C",
     "D",
     "E",
