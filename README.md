@@ -17,7 +17,9 @@ and the Flutter guide for
 ## Environment
 
 ```
-Flutter 2.10.4  Dart >=2.16.2 <3.0.0
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+  flutter: ">=3.0.0"
 ```
 
 
