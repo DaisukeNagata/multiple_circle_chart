@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:multiple_circle_chart/Multiple/circle_data_item.dart';
-import 'package:multiple_circle_chart/Multiple/circle_progress_controller.dart';
-import 'package:multiple_circle_chart/Multiple/multiple_circle_set_progress.dart';
+
+import '../lib/Multiple/circle_data_item.dart';
+import '../lib/Multiple/circle_progress_controller.dart';
+import '../lib/Multiple/multiple_circle_set_progress.dart';
 
 void main() {
   late CircleDataItem c = CircleDataItem(
