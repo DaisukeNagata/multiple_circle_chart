@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:multiple_circle_chart/OverlappingBar/overlapping_data.dart';
 import 'package:multiple_circle_chart/OverlappingBar/overlapping_graph_text.dart';
+import 'package:multiple_circle_chart/OverlappingLine/overlapping_goal_model.dart';
+import 'package:multiple_circle_chart/OverlappingLine/overlapping_line_goal_paint.dart';
 import 'package:multiple_circle_chart/OverlappingLine/overlapping_line_grid_painter.dart';
 import 'package:multiple_circle_chart/OverlappingLine/overlapping_line_paint.dart';
 
@@ -46,14 +48,14 @@ class OverLappingState extends State<OverLappingWidget> {
         (MediaQuery.of(context).size.width / count) * wLines;
     double w2 = (MediaQuery.of(context).size.width / count) * wLines;
     List<int> indexList = [
-      wLines - Random().nextInt(7),
-      wLines - Random().nextInt(7),
-      wLines - Random().nextInt(7),
-      wLines - Random().nextInt(7),
-      wLines - Random().nextInt(7),
-      wLines - Random().nextInt(7),
-      wLines - Random().nextInt(7),
-      wLines - Random().nextInt(7)
+      wLines - Random().nextInt(8),
+      wLines - Random().nextInt(8),
+      wLines - Random().nextInt(8),
+      wLines - Random().nextInt(8),
+      wLines - Random().nextInt(8),
+      wLines - Random().nextInt(8),
+      wLines - Random().nextInt(8),
+      wLines - Random().nextInt(8)
     ];
     return Column(
       children: [
@@ -70,6 +72,14 @@ class OverLappingState extends State<OverLappingWidget> {
                   top: (MediaQuery.of(context).size.width / count),
                   left: w / 2),
               child: stackLineLogic(w2, indexList),
+            ),
+            Container(
+              padding: EdgeInsets.only(
+                  top: (MediaQuery.of(context).size.width / count),
+                  left: w / 2),
+              child: CustomPaint(
+                painter: _goalPainter(w2),
+              ),
             ),
           ],
         ),
@@ -147,11 +157,26 @@ class OverLappingState extends State<OverLappingWidget> {
         radData: RadData.horizontal);
   }
 
+  OverlapinrLineGoalPaint _goalPainter(double value) {
+    return OverlapinrLineGoalPaint(
+        boxSize: (value / wLines),
+        wLines: wLines,
+        sizeSet: Size(value, value),
+        goalModel: OverlappingGoalModel(
+          goalDashWidth: 5,
+          goalDashSpace: 10,
+          goalLineWidth: 2,
+          goalLineValue: (wLines - Random().nextDouble() * 7),
+          goalLineColor: Colors.white,
+        ));
+  }
+
   OverlappingLineGridPainter _gridPainter(double value) {
     TextStyle textStyle = const TextStyle(
       inherit: true,
       fontSize: 5,
     );
+
     return OverlappingLineGridPainter(
         textStyle: textStyle,
         boxSize: (value / wLines),
