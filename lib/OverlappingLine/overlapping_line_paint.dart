@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
+/// Logic to represent the graph
 class OverlappingLinePaint extends CustomPainter {
   List<int> moveToCountList;
-  double strokeWidth;
+  double strokeWidth, scale = 1;
   Color paintColor;
+  bool circlePaintFlg;
   OverlappingLinePaint(
       {required this.moveToCountList,
+      required this.scale,
       required this.strokeWidth,
-      required this.paintColor});
+      required this.paintColor,
+      required this.circlePaintFlg});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -15,12 +19,6 @@ class OverlappingLinePaint extends CustomPainter {
       ..color = paintColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth;
-
-    /// TODO: Make it data logic.
-    final circlePaint = Paint()
-      ..color = paintColor
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = strokeWidth * 2;
 
     final path = Path();
     path.moveTo(0, size.width * moveToCountList[0]);
@@ -32,8 +30,19 @@ class OverlappingLinePaint extends CustomPainter {
           moveToCountList[i] * size.width - strokeWidth / 2,
           strokeWidth,
           strokeWidth);
-      canvas.drawRect(rect, circlePaint);
-      canvas.drawCircle(rect.center, strokeWidth, circlePaint);
+      if (circlePaintFlg) {
+        ///　Representing a circle of graph points.
+        final circlePaint = Paint()
+          ..color = paintColor
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = strokeWidth * scale;
+
+        ///　Construction of coordinate position.
+        canvas.drawRect(rect, circlePaint);
+
+        ///　Building a circle position
+        canvas.drawCircle(rect.center, strokeWidth, circlePaint);
+      }
     }
     canvas.drawPath(path, paint);
   }

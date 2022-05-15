@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:multiple_circle_chart/OverlappingLine/overlapping_goal_model.dart';
 
+/// Logic to set a target line.
 class OverlapinrLineGoalPaint extends CustomPainter {
   final double boxSize;
   final int wLines;
@@ -19,6 +20,8 @@ class OverlapinrLineGoalPaint extends CustomPainter {
     final paint = Paint()
       ..color = goalModel.goalLineColor
       ..strokeWidth = goalModel.goalLineWidth;
+
+    ///　Loop that assigns and judges values ​​up to the specified value.
     while (goalStartX < sizeSet.width) {
       canvas.drawLine(
           Offset(goalStartX, boxSize * (wLines - goalModel.goalLineValue)),

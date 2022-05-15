@@ -110,7 +110,9 @@ class OverLappingState extends State<OverLappingWidget> {
           painter: OverlappingLinePaint(
               moveToCountList: indexList,
               strokeWidth: 3,
-              paintColor: Colors.red),
+              scale: 1,
+              paintColor: Colors.red,
+              circlePaintFlg: true),
           size: Size((MediaQuery.of(context).size.width / count),
               MediaQuery.of(context).size.width / count),
         ),
