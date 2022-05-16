@@ -47,6 +47,7 @@ class OverLappingState extends State<OverLappingWidget> {
     double w = MediaQuery.of(context).size.width -
         (MediaQuery.of(context).size.width / count) * wLines;
     double w2 = (MediaQuery.of(context).size.width / count) * wLines;
+    double w3 = (MediaQuery.of(context).size.width / count);
     List<int> indexList = [
       wLines - Random().nextInt(8),
       wLines - Random().nextInt(8),
@@ -68,15 +69,11 @@ class OverLappingState extends State<OverLappingWidget> {
               ),
             ),
             Container(
-              padding: EdgeInsets.only(
-                  top: (MediaQuery.of(context).size.width / count),
-                  left: w / 2),
-              child: stackLineLogic(w2, indexList),
+              padding: EdgeInsets.only(top: w3, left: w / 2),
+              child: stackLineLogic(w3, w2, indexList),
             ),
             Container(
-              padding: EdgeInsets.only(
-                  top: (MediaQuery.of(context).size.width / count),
-                  left: w / 2),
+              padding: EdgeInsets.only(top: w3, left: w / 2),
               child: CustomPaint(
                 painter: _goalPainter(w2),
               ),
@@ -98,12 +95,12 @@ class OverLappingState extends State<OverLappingWidget> {
     );
   }
 
-  Stack stackLineLogic(double w, List<int> indexList) {
+  Stack stackLineLogic(double w, double w2, List<int> indexList) {
     return Stack(
       children: [
         CustomPaint(
           child: CustomPaint(
-            painter: _gridPainter(w),
+            painter: _gridPainter(w2),
           ),
         ),
         CustomPaint(
@@ -113,8 +110,7 @@ class OverLappingState extends State<OverLappingWidget> {
               scale: 1,
               paintColor: Colors.red,
               circlePaintFlg: true),
-          size: Size((MediaQuery.of(context).size.width / count),
-              MediaQuery.of(context).size.width / count),
+          size: Size(w, w),
         ),
       ],
     );
