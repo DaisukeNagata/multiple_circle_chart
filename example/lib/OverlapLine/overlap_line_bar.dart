@@ -58,6 +58,16 @@ class OverLappingState extends State<OverLappingWidget> {
       wLines - Random().nextInt(8),
       wLines - Random().nextInt(8)
     ];
+    List<int> indexList2 = [
+      wLines - Random().nextInt(8),
+      wLines - Random().nextInt(8),
+      wLines - Random().nextInt(8),
+      wLines - Random().nextInt(8),
+      wLines - Random().nextInt(8),
+      wLines - Random().nextInt(8),
+      wLines - Random().nextInt(8),
+      wLines - Random().nextInt(8)
+    ];
     return Column(
       children: [
         Stack(
@@ -70,7 +80,11 @@ class OverLappingState extends State<OverLappingWidget> {
             ),
             Container(
               padding: EdgeInsets.only(top: w3, left: w / 2),
-              child: stackLineLogic(w3, w2, indexList),
+              child: stackLineLogic(w3, w2, Colors.red, indexList2),
+            ),
+            Container(
+              padding: EdgeInsets.only(top: w3, left: w / 2),
+              child: stackLineLogic(w3, w2, Colors.blue, indexList),
             ),
             Container(
               padding: EdgeInsets.only(top: w3, left: w / 2),
@@ -95,7 +109,8 @@ class OverLappingState extends State<OverLappingWidget> {
     );
   }
 
-  Stack stackLineLogic(double w, double w2, List<int> indexList) {
+  Stack stackLineLogic(
+      double w, double w2, Color paintColor, List<int> indexList) {
     return Stack(
       children: [
         CustomPaint(
@@ -108,7 +123,7 @@ class OverLappingState extends State<OverLappingWidget> {
               moveToCountList: indexList,
               strokeWidth: 3,
               scale: 1,
-              paintColor: Colors.red,
+              paintColor: paintColor,
               circlePaintFlg: true),
           size: Size(w, w),
         ),
