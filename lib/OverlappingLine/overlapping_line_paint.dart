@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 
 /// Logic to represent the graph
 class OverlappingLinePaint extends CustomPainter {
-  List<int> moveToCountList;
-  double strokeWidth, scale = 1;
-  Color paintColor;
-  bool circlePaintFlg, fillPaintFlg;
+  final List<int> moveToCountList;
+  final double strokeWidth, scale, alphaPaint;
+  final Color paintColor;
+  final bool circlePaintFlg, fillPaintFlg;
 
-  OverlappingLinePaint({
+  const OverlappingLinePaint({
     required this.moveToCountList,
     required this.scale,
+    required this.alphaPaint,
     required this.strokeWidth,
     required this.paintColor,
     required this.circlePaintFlg,
@@ -21,7 +22,7 @@ class OverlappingLinePaint extends CustomPainter {
     Paint paint = Paint();
     final path = Path();
     if (fillPaintFlg) {
-      paint.color = paintColor;
+      paint.color = paintColor.withOpacity(alphaPaint);
       path.moveTo(
         0,
         size.width * (moveToCountList.length - 1),

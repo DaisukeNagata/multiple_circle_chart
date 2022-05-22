@@ -49,6 +49,7 @@ class OverlapViewModel {
             moveToCountList: indexList,
             strokeWidth: 3,
             scale: 1,
+            alphaPaint: 0.5,
             paintColor: paintColor,
             circlePaintFlg: model.lineOrFillFlg,
             fillPaintFlg: !model.lineOrFillFlg,

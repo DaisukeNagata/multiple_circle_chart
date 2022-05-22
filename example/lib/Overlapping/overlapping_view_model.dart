@@ -9,11 +9,18 @@ import 'package:multiple_circle_chart/OverlappingBar/overlapping_progress_indica
 import 'overlapping_bar.dart';
 import 'overlapping_model.dart';
 
-typedef OverLapCallBack = Function(OverLapType,
-    {OverLappingBarState? vsync, double? value});
+typedef OverLapCallBack = Function(
+  OverLapType, {
+  OverLappingBarState? vsync,
+  double? value,
+});
 
 abstract class OverLapCallBackLogic {
-  OverLapCallBack? callback(type, {OverLappingBarState? vsync, double? value});
+  OverLapCallBack? callback(
+    type, {
+    OverLappingBarState? vsync,
+    double? value,
+  });
 }
 
 enum OverLapType { graphWidth, slider, graph }

@@ -42,7 +42,9 @@ class MyHomePageState extends State<MyHomePage> with CallBackLogic {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    mModel.circleSet(MediaQuery.of(context).size.width);
+    mModel.circleSet(
+      MediaQuery.of(context).size.width,
+    );
     mModel.viewModel.circleData.circleDefaultTapValue = 1.2;
   }
 
@@ -106,9 +108,14 @@ class MyHomePageState extends State<MyHomePage> with CallBackLogic {
           child: Column(
             children: [
               Padding(
-                  padding: EdgeInsets.only(top: mModel.viewModel.topBottom)),
+                  padding: EdgeInsets.only(
+                top: mModel.viewModel.topBottom,
+              )),
               mModel.stack(),
-              mModel.sliderSets(callback, MediaQuery.of(context).size.width),
+              mModel.sliderSets(
+                callback,
+                MediaQuery.of(context).size.width,
+              ),
               mModel.setRow(),
               mModel.switchSetRow(callback),
             ],
