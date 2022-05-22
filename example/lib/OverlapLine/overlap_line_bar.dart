@@ -90,7 +90,7 @@ class OverLappingState extends State<OverLappingWidget> {
               viewModel.model.lineOrFillFlg = !viewModel.model.lineOrFillFlg;
             });
           },
-          child: const Text('click here line or fil'),
+          child: const Text('click here line or fill'),
         )
       ],
     );
