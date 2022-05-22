@@ -83,6 +83,14 @@ class OverLappingState extends State<OverLappingWidget> {
             });
           },
           child: const Text('click here'),
+        ),
+        TextButton(
+          onPressed: () {
+            setState(() {
+              viewModel.model.lineOrFillFlg = !viewModel.model.lineOrFillFlg;
+            });
+          },
+          child: const Text('click here line or fil'),
         )
       ],
     );

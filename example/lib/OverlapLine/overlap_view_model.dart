@@ -46,11 +46,13 @@ class OverlapViewModel {
         ),
         CustomPaint(
           painter: OverlappingLinePaint(
-              moveToCountList: indexList,
-              strokeWidth: 3,
-              scale: 1,
-              paintColor: paintColor,
-              circlePaintFlg: true),
+            moveToCountList: indexList,
+            strokeWidth: 3,
+            scale: 1,
+            paintColor: paintColor,
+            circlePaintFlg: model.lineOrFillFlg,
+            fillPaintFlg: !model.lineOrFillFlg,
+          ),
           size: Size(w, w),
         ),
       ],

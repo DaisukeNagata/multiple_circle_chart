@@ -42,4 +42,6 @@ class OverlapLineModel {
     "F",
     "G",
   ];
+
+  bool lineOrFillFlg = false;
 }
