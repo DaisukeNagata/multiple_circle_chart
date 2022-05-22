@@ -42,7 +42,7 @@ class OverLappingViewModel {
   ElevatedButton buttonSet(OverLapCallBack call, OverLappingBarState vsync) {
     return ElevatedButton(
       onPressed: () {
-        _buttonSetState(call, vsync);
+        buttonSetState(call, vsync);
       },
       child: const Text('click here'),
     );
@@ -199,7 +199,7 @@ class OverLappingViewModel {
   }
 
   /// button action　judgment of orientation.
-  _buttonSetState(OverLapCallBack call, OverLappingBarState vsync) {
+  buttonSetState(OverLapCallBack call, OverLappingBarState vsync) {
     model.radData = model.radData == RadData.vertical
         ? RadData.horizontal
         : RadData.vertical;

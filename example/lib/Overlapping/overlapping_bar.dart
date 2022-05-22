@@ -52,6 +52,12 @@ class OverLappingWidget extends StatefulWidget {
 class OverLappingBarState extends State<OverLappingWidget>
     with TickerProviderStateMixin, OverLapCallBackLogic {
   @override
+  void initState() {
+    super.initState();
+    widget.viewModel.buttonSetState(callback, this);
+  }
+
+  @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width / 1.2;
     var dta = widget.viewModel.model.radData;
