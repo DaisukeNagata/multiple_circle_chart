@@ -70,6 +70,7 @@ class OverlappingLinePaint extends CustomPainter {
     var value = (moveToCountList.length - 1);
     if (fillPaintFlg) path.lineTo(value * size.width, value * size.width);
     canvas.drawPath(path, paint);
+    path.close();
   }
 
   @override
