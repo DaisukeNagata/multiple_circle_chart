@@ -27,43 +27,43 @@ class MainCircleDataModel {
   final CircleProgressController controller = CircleProgressController();
 
   late CircleDataItem circleData = CircleDataItem(
+    /// circleForwardFlg is forward or reverse.
+    circleForwardFlg: true,
 
-      /// circleForwardFlg is forward or reverse.
-      circleForwardFlg: true,
+    /// CircleShader is an end type circle None has no knob.
+    circleShader: CircleShader.circleNone,
 
-      /// CircleShader is an end type circle None has no knob.
-      circleShader: CircleShader.circleNone,
+    /// ComplementCircle is the tuning when the circle is changed to large or small.
+    complementCircle: 0.039,
 
-      /// ComplementCircle is the tuning when the circle is changed to large or small.
-      complementCircle: 0.039,
+    /// circleSizeValue.
+    circleSizeValue: circleSize,
 
-      /// circleSizeValue.
-      circleSizeValue: circleSize,
+    /// circleStrokeWidth is the thickness of the circle.
+    circleStrokeWidth: 30.0,
 
-      /// circleStrokeWidth is the thickness of the circle.
-      circleStrokeWidth: 30.0,
+    /// circleShadowValue is The shadow range value
+    circleShadowValue: 0.01,
 
-      /// circleShadowValue is The shadow range value
-      circleShadowValue: 0.01,
+    /// circleDuration is circle animation speed
+    circleDuration: speedValue.toInt(),
 
-      /// circleDuration is circle animation speed
-      circleDuration: speedValue.toInt(),
+    /// circleColor is the color of the knob.
+    circleColor: Colors.green,
 
-      /// circleColor is the color of the knob.
-      circleColor: Colors.green,
+    /// circleColor is the shadow color of the knob.
+    circleShadowColor: Colors.black,
 
-      /// circleColor is the shadow color of the knob.
-      circleShadowColor: Colors.black,
+    /// circleRoundColor is The base color of circleRoundColor.
+    circleRoundColor: Colors.grey,
 
-      /// circleRoundColor is The base color of circleRoundColor.
-      circleRoundColor: Colors.grey,
+    /// circleController is CircleProgressController.
+    circleController: controller,
 
-      /// circleController is CircleProgressController.
-      circleController: controller,
+    /// circleColorList is Determines the gradient color.
+    circleColorList: setColorModel.setColor,
 
-      /// circleColorList is Determines the gradient color.
-      circleColorList: setColorModel.setColor,
-
-      /// circleTextSizeList is get character coordinates.
-      circleTextSizeList: []);
+    /// circleTextSizeList is get character coordinates.
+    circleTextSizeList: [],
+  );
 }

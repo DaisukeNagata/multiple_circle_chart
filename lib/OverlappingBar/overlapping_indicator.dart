@@ -7,24 +7,24 @@ import 'overlapping_data.dart';
 
 /// Abstract model class
 abstract class OverlappingIndicator extends StatefulWidget {
-  const OverlappingIndicator(
-      {Key? key,
-      this.globalKey,
-      this.semanticsLabel,
-      this.semanticsValue,
-      this.contextSize,
-      this.graphCount,
-      this.circleData,
-      this.animationValue,
-      this.radData,
-      this.setPaint,
-      this.boxSize,
-      this.navigationHeight,
-      required this.textSpan,
-      required this.con,
-      required this.dialogData,
-      required this.streamController})
-      : super(key: key);
+  const OverlappingIndicator({
+    Key? key,
+    this.globalKey,
+    this.semanticsLabel,
+    this.semanticsValue,
+    this.contextSize,
+    this.graphCount,
+    this.circleData,
+    this.animationValue,
+    this.radData,
+    this.setPaint,
+    this.boxSize,
+    this.navigationHeight,
+    required this.textSpan,
+    required this.con,
+    required this.dialogData,
+    required this.streamController,
+  }) : super(key: key);
   final GlobalKey? globalKey;
   final String? semanticsLabel;
   final String? semanticsValue;
@@ -44,7 +44,13 @@ abstract class OverlappingIndicator extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(PercentProperty('value', animationValue,
-        showName: false, ifNull: '<indeterminate>'));
+    properties.add(
+      PercentProperty(
+        'value',
+        animationValue,
+        showName: false,
+        ifNull: '<indeterminate>',
+      ),
+    );
   }
 }

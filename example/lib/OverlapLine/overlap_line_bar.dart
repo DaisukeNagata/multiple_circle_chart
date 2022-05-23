@@ -39,10 +39,8 @@ class OverLappingState extends State<OverLappingWidget> {
 
   @override
   Widget build(BuildContext context) {
-    double w = MediaQuery.of(context).size.width -
-        (MediaQuery.of(context).size.width / count) * OverlapLineModel.wLines;
-    double w2 =
-        (MediaQuery.of(context).size.width / count) * OverlapLineModel.wLines;
+    double w = MediaQuery.of(context).size.width - (MediaQuery.of(context).size.width / count) * OverlapLineModel.wLines;
+    double w2 = (MediaQuery.of(context).size.width / count) * OverlapLineModel.wLines;
     double w3 = (MediaQuery.of(context).size.width / count);
 
     return Column(
@@ -58,12 +56,20 @@ class OverLappingState extends State<OverLappingWidget> {
             Container(
               padding: EdgeInsets.only(top: w3, left: w / 2),
               child: viewModel.stackLineLogic(
-                  w3, w2, Colors.red, viewModel.model.indexList2),
+                w3,
+                w2,
+                Colors.red,
+                viewModel.model.indexList2,
+              ),
             ),
             Container(
               padding: EdgeInsets.only(top: w3, left: w / 2),
               child: viewModel.stackLineLogic(
-                  w3, w2, Colors.blue, viewModel.model.indexList),
+                w3,
+                w2,
+                Colors.blue,
+                viewModel.model.indexList,
+              ),
             ),
             Container(
               padding: EdgeInsets.only(top: w3, left: w / 2),

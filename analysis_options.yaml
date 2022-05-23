@@ -8,5 +8,4 @@ analyzer:
 
 linter:
   rules:
-    - cancel_subscriptions
-    - empty_statements
+    require_trailing_commas: true

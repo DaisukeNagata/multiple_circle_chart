@@ -15,14 +15,15 @@ class OverlappingLineGridPainter extends CustomPainter {
   final path = Path();
   Offset offset = Offset.zero;
 
-  OverlappingLineGridPainter(
-      {required this.textStyle,
-      required this.boxSize,
-      required this.wLines,
-      required this.strokeWidth,
-      required this.sizeSet,
-      required this.colorSet,
-      required this.radData});
+  OverlappingLineGridPainter({
+    required this.textStyle,
+    required this.boxSize,
+    required this.wLines,
+    required this.strokeWidth,
+    required this.sizeSet,
+    required this.colorSet,
+    required this.radData,
+  });
 
   Paint paintSet = Paint();
 
@@ -39,13 +40,21 @@ class OverlappingLineGridPainter extends CustomPainter {
     ///　Have textSpanLogic logic think about the balance of the ruled lines.
     for (var i = 0; i <= 1; ++i) {
       final y = -boxSize * i;
-      textSpanLogic(y, true, i);
+      textSpanLogic(
+        y,
+        true,
+        i,
+      );
     }
 
     ///　Have textSpanLogic logic think about the balance of the ruled lines.
     for (var i = 0; i <= wLines; ++i) {
       final x = boxSize * i;
-      textSpanLogic(x, false, i);
+      textSpanLogic(
+        x,
+        false,
+        i,
+      );
     }
     canvas.drawPath(path, paintSet);
   }
@@ -55,13 +64,21 @@ class OverlappingLineGridPainter extends CustomPainter {
       ///　Confirmation from top to bottom.
       ///　In that case, draw a line.
       for (var i = 0; i <= wLines; ++i) {
-        pathSet(value, flg, i);
+        pathSet(
+          value,
+          flg,
+          i,
+        );
       }
     } else {
       ///　Confirmation from top to bottom.
       ///　In that case, draw a line.
       for (var i = 0; i <= wLines; ++i) {
-        pathSet(value, flg, i);
+        pathSet(
+          value,
+          flg,
+          i,
+        );
       }
     }
   }
@@ -78,11 +95,20 @@ class OverlappingLineGridPainter extends CustomPainter {
       ///　Confirmation from top to bottom.
       ///　In that case, draw a line.
       path.moveTo(0, boxSize * i);
-      path.relativeLineTo(sizeSet.width, 0);
+      path.relativeLineTo(
+        sizeSet.width,
+        0,
+      );
     } else {
       /// Draw the X-axis sideways.
-      path.moveTo(sizeSet.width / wLines * i, h);
-      path.relativeLineTo(0, h2);
+      path.moveTo(
+        sizeSet.width / wLines * i,
+        h,
+      );
+      path.relativeLineTo(
+        0,
+        h2,
+      );
     }
   }
 }

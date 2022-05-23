@@ -35,8 +35,7 @@ class OverlapViewModel {
     ];
   }
 
-  Stack stackLineLogic(
-      double w, double w2, Color paintColor, List<int> indexList) {
+  Stack stackLineLogic(double w, double w2, Color paintColor, List<int> indexList) {
     return Stack(
       children: [
         CustomPaint(
@@ -66,29 +65,31 @@ class OverlapViewModel {
       fontSize: 10,
     );
     return OverlappingGraphText(
-        textStyle: textStyle,
-        boxSize: (value / OverlapLineModel.wLines),
-        wLines: OverlapLineModel.wLines,
-        valueListX: model.valueListX,
-        valueListY: model.valueListY,
-        sizeSet: Size(value, value),
-        graphCount: OverlapLineModel.wLines,
-        graphValue: 10 / 2,
-        radData: RadData.horizontal);
+      textStyle: textStyle,
+      boxSize: (value / OverlapLineModel.wLines),
+      wLines: OverlapLineModel.wLines,
+      valueListX: model.valueListX,
+      valueListY: model.valueListY,
+      sizeSet: Size(value, value),
+      graphCount: OverlapLineModel.wLines,
+      graphValue: 10 / 2,
+      radData: RadData.horizontal,
+    );
   }
 
-  OverlapinrLineGoalPaint goalPainter(double value) {
-    return OverlapinrLineGoalPaint(
-        boxSize: (value / OverlapLineModel.wLines),
-        wLines: OverlapLineModel.wLines,
-        sizeSet: Size(value, value),
-        goalModel: OverlappingGoalModel(
-          goalDashWidth: 5,
-          goalDashSpace: 10,
-          goalLineWidth: 2,
-          goalLineValue: (OverlapLineModel.wLines - Random().nextDouble() * 7),
-          goalLineColor: Colors.white,
-        ));
+  OverlappingLineGoalPaint goalPainter(double value) {
+    return OverlappingLineGoalPaint(
+      boxSize: (value / OverlapLineModel.wLines),
+      wLines: OverlapLineModel.wLines,
+      sizeSet: Size(value, value),
+      goalModel: OverlappingGoalModel(
+        goalDashWidth: 5,
+        goalDashSpace: 10,
+        goalLineWidth: 2,
+        goalLineValue: (OverlapLineModel.wLines - Random().nextDouble() * 7),
+        goalLineColor: Colors.white,
+      ),
+    );
   }
 
   OverlappingLineGridPainter gridPainter(double value) {
@@ -98,12 +99,13 @@ class OverlapViewModel {
     );
 
     return OverlappingLineGridPainter(
-        textStyle: textStyle,
-        boxSize: (value / OverlapLineModel.wLines),
-        wLines: OverlapLineModel.wLines,
-        strokeWidth: 1,
-        sizeSet: Size(value, value),
-        colorSet: Colors.greenAccent,
-        radData: RadData.vertical);
+      textStyle: textStyle,
+      boxSize: (value / OverlapLineModel.wLines),
+      wLines: OverlapLineModel.wLines,
+      strokeWidth: 1,
+      sizeSet: Size(value, value),
+      colorSet: Colors.greenAccent,
+      radData: RadData.vertical,
+    );
   }
 }

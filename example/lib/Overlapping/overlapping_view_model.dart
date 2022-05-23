@@ -48,9 +48,14 @@ class OverLappingViewModel {
     );
   }
 
-  Slider sliderSet(OverLapType type, OverLapCallBack call, double max,
-      double value, OverLappingBarState vsync,
-      {Key? keyValue}) {
+  Slider sliderSet(
+    OverLapType type,
+    OverLapCallBack call,
+    double max,
+    double value,
+    OverLappingBarState vsync, {
+    Key? keyValue,
+  }) {
     return Slider(
       key: keyValue,
       value: value,
@@ -77,11 +82,18 @@ class OverLappingViewModel {
 
   ///　Graph coordinate construction.
   Row rowSet(
-      OverlappingProgressIndicator? indicator, double width, GlobalKey key) {
+    OverlappingProgressIndicator? indicator,
+    double width,
+    GlobalKey key,
+  ) {
     return Row(
       children: [
         SizedBox(
-            height: model.graphWidth, width: width, child: indicator, key: key),
+          height: model.graphWidth,
+          width: width,
+          child: indicator,
+          key: key,
+        ),
         Padding(padding: EdgeInsets.only(top: model.boxSize * model.scale)),
       ],
     );
@@ -92,18 +104,29 @@ class OverLappingViewModel {
     model.boxSize = ((width) / model.graphCount).floorToDouble();
     for (var i = 0; i <= model.globalKeyList.length - 1; i++) {
       if (i == 0) {
-        model.indicatorList[i] = _indicatorSet(c, model.globalKeyList[i], width,
-            _sePainter(model.indicatorList[i], width, false, true), 0.1);
+        model.indicatorList[i] = _indicatorSet(
+          c,
+          model.globalKeyList[i],
+          width,
+          _sePainter(model.indicatorList[i], width, false, true),
+          0.1,
+        );
       } else if (i == model.globalKeyList.length - 1) {
-        model.indicatorList[i] = _indicatorSet(c, model.globalKeyList[i], width,
-            _sePainter(model.indicatorList[i], width, true, true), 1);
+        model.indicatorList[i] = _indicatorSet(
+          c,
+          model.globalKeyList[i],
+          width,
+          _sePainter(model.indicatorList[i], width, true, true),
+          1,
+        );
       } else {
         model.indicatorList[i] = _indicatorSet(
-            c,
-            model.globalKeyList[i],
-            width,
-            _sePainter(model.indicatorList[i], width, false, false),
-            (i + 1) * 0.1);
+          c,
+          model.globalKeyList[i],
+          width,
+          _sePainter(model.indicatorList[i], width, false, false),
+          (i + 1) * 0.1,
+        );
       }
     }
   }
@@ -114,49 +137,69 @@ class OverLappingViewModel {
       fontSize: 10,
     );
     return OverlappingGraphText(
-        textStyle: textStyle,
-        boxSize: (model.boxSize * model.scale),
-        wLines: (value ~/ model.boxSize),
-        valueListX: model.valueListX,
-        valueListY: model.valueListY,
-        sizeSet: Size(value, value),
-        graphCount: model.graphCount,
-        graphValue: model.graphWidth / 2,
-        radData: model.radData);
+      textStyle: textStyle,
+      boxSize: (model.boxSize * model.scale),
+      wLines: (value ~/ model.boxSize),
+      valueListX: model.valueListX,
+      valueListY: model.valueListY,
+      sizeSet: Size(value, value),
+      graphCount: model.graphCount,
+      graphValue: model.graphWidth / 2,
+      radData: model.radData,
+    );
   }
 
   OverlappingGridPainter _gridPainter(
-      double value, bool baseLine, bool checkLine) {
+    double value,
+    bool baseLine,
+    bool checkLine,
+  ) {
     TextStyle textStyle = const TextStyle(
       inherit: true,
       fontSize: 5,
     );
     return OverlappingGridPainter(
-        textStyle: textStyle,
-        boxSize: (model.boxSize * model.scale),
-        wLines: (value ~/ model.boxSize),
-        strokeWidth: 1,
-        sizeSet: Size(value, value),
-        colorSet: Colors.orange,
-        graphValue: model.graphWidth / 2,
-        radData: model.radData,
-        checkLine: checkLine,
-        baseLine: baseLine);
+      textStyle: textStyle,
+      boxSize: (model.boxSize * model.scale),
+      wLines: (value ~/ model.boxSize),
+      strokeWidth: 1,
+      sizeSet: Size(value, value),
+      colorSet: Colors.orange,
+      graphValue: model.graphWidth / 2,
+      radData: model.radData,
+      checkLine: checkLine,
+      baseLine: baseLine,
+    );
   }
 
-  _setP(OverlappingProgressIndicator? indicator, String tex, double value,
-      int index, double value2) {
+  _setP(
+    OverlappingProgressIndicator? indicator,
+    String tex,
+    double value,
+    int index,
+    double value2,
+  ) {
     Offset offset = model.radData == RadData.horizontal
         ? const Offset(0, 0)
         : const Offset(0, -15);
     return indicator?.setPainter(
-        offset, tex, value, value2, model.colorList[index],
-        textColor: Colors.white, backColor: Colors.yellowAccent);
+      offset,
+      tex,
+      value,
+      value2,
+      model.colorList[index],
+      textColor: Colors.white,
+      backColor: Colors.yellowAccent,
+    );
   }
 
   ///　details of graph characters, ruled lines, and animation amount.
-  CustomPaint _sePainter(OverlappingProgressIndicator? p, double value,
-      bool baseLine, bool checkLine) {
+  CustomPaint _sePainter(
+    OverlappingProgressIndicator? p,
+    double value,
+    bool baseLine,
+    bool checkLine,
+  ) {
     double v = (model.graph / model.graphCount);
     return CustomPaint(
       painter: baseLine ? _graphText(value) : null,
@@ -223,19 +266,25 @@ class OverLappingViewModel {
   }
 
   ///　Building a graph.
-  OverlappingProgressIndicator _indicatorSet(BuildContext context,
-      GlobalKey key, double w, CustomPaint setPaint, double index) {
+  OverlappingProgressIndicator _indicatorSet(
+    BuildContext context,
+    GlobalKey key,
+    double w,
+    CustomPaint setPaint,
+    double index,
+  ) {
     return OverlappingProgressIndicator(
-        radData: model.radData,
-        globalKey: key,
-        contextSize: Size(w, model.graphWidth),
-        graphCount: model.graphCount,
-        con: context,
-        streamController: StreamController(),
-        setPaint: setPaint,
-        boxSize: model.boxSize * model.scale,
-        foldHeight: (model.fold.appBar?.preferredSize.height ?? 0),
-        animationValue: (model.animationController?.value ?? 0) * index,
-        dialogData: model.diaLogData);
+      radData: model.radData,
+      globalKey: key,
+      contextSize: Size(w, model.graphWidth),
+      graphCount: model.graphCount,
+      con: context,
+      streamController: StreamController(),
+      setPaint: setPaint,
+      boxSize: model.boxSize * model.scale,
+      foldHeight: (model.fold.appBar?.preferredSize.height ?? 0),
+      animationValue: (model.animationController?.value ?? 0) * index,
+      dialogData: model.diaLogData,
+    );
   }
 }

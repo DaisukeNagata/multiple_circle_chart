@@ -19,17 +19,18 @@ class OverlappingGridPainter extends CustomPainter {
   final path = Path();
   Offset offset = Offset.zero;
 
-  OverlappingGridPainter(
-      {required this.textStyle,
-      required this.boxSize,
-      required this.wLines,
-      required this.strokeWidth,
-      required this.checkLine,
-      required this.baseLine,
-      required this.sizeSet,
-      required this.colorSet,
-      required this.graphValue,
-      required this.radData});
+  OverlappingGridPainter({
+    required this.textStyle,
+    required this.boxSize,
+    required this.wLines,
+    required this.strokeWidth,
+    required this.checkLine,
+    required this.baseLine,
+    required this.sizeSet,
+    required this.colorSet,
+    required this.graphValue,
+    required this.radData,
+  });
 
   Paint paintSet = Paint();
 

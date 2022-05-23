@@ -7,21 +7,25 @@ import 'package:multiple_circle_chart/Multiple/multiple_circle_set_progress.dart
 
 import 'main_circle_data_model.dart';
 
-typedef DesignTypeCallBack = Function(DesignType type,
-    {double? max, double? value, RangeValues? values, bool? flg});
+typedef DesignTypeCallBack = Function(
+  DesignType type, {
+  double? max,
+  double? value,
+  RangeValues? values,
+  bool? flg,
+});
 
 abstract class CallBackLogic {
-  DesignTypeCallBack? callback(type,
-      {double? max, double? value, RangeValues? values, bool? flg});
+  DesignTypeCallBack? callback(
+    type, {
+    double? max,
+    double? value,
+    RangeValues? values,
+    bool? flg,
+  });
 }
 
-enum DesignType {
-  wSliderState,
-  combineState,
-  knobState,
-  knobRoundState,
-  circleDesignState
-}
+enum DesignType { wSliderState, combineState, knobState, knobRoundState, circleDesignState }
 
 class MainViewModel {
   late final MainCircleDataModel viewModel = MainCircleDataModel();
@@ -49,9 +53,7 @@ class MainViewModel {
 
   scrollAnimation() {
     viewModel.scrollController.animateTo(
-      viewModel.scrollController.offset == 0
-          ? viewModel.scrollController.position.maxScrollExtent
-          : 0,
+      viewModel.scrollController.offset == 0 ? viewModel.scrollController.position.maxScrollExtent : 0,
       duration: const Duration(milliseconds: 100),
       curve: Curves.linear,
     );
@@ -59,10 +61,11 @@ class MainViewModel {
 
   circleSet(double deviceWidth) {
     /// Determine the size of the circle.
-    viewModel.circleSize =
-        viewModel.circleSize == 0.0 ? deviceWidth / 2 : viewModel.circleSize;
+    viewModel.circleSize = viewModel.circleSize == 0.0 ? deviceWidth / 2 : viewModel.circleSize;
     viewModel.circleSetProgress = MultipleCircleSetProgress(
-        circleKey: viewModel.circleKey, circle: viewModel.circleData);
+      circleKey: viewModel.circleKey,
+      circle: viewModel.circleData,
+    );
   }
 
   switchSetRow(DesignTypeCallBack call) {
@@ -80,9 +83,12 @@ class MainViewModel {
     return Column(
       children: [
         Padding(padding: EdgeInsets.only(top: viewModel.topBottom)),
-        wSlider(call, RangeValues(viewModel.rValue, viewModel.fValue),
-            viewModel.setColorModel.setColor.length.toDouble(),
-            keyValue: viewModel.globalKey),
+        wSlider(
+          call,
+          RangeValues(viewModel.rValue, viewModel.fValue),
+          viewModel.setColorModel.setColor.length.toDouble(),
+          keyValue: viewModel.globalKey,
+        ),
         sliderSet(call, viewModel.speedValue, 20000.0),
         sliderSet(call, viewModel.circleData.circleSizeValue, deviceWidth),
         Padding(padding: EdgeInsets.only(top: viewModel.pad))
@@ -99,14 +105,16 @@ class MainViewModel {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                setButton(true, viewModel.fValue,
-                    viewModel.circleData.circleLabelValue ?? 0),
                 setButton(
-                    false,
-                    viewModel.circleData.circleCounterValue ?? 0,
-                    viewModel.circleData.circleCounterValue == 0
-                        ? 0
-                        : viewModel.rValue),
+                  true,
+                  viewModel.fValue,
+                  viewModel.circleData.circleLabelValue ?? 0,
+                ),
+                setButton(
+                  false,
+                  viewModel.circleData.circleCounterValue ?? 0,
+                  viewModel.circleData.circleCounterValue == 0 ? 0 : viewModel.rValue,
+                ),
               ],
             ),
             Padding(padding: EdgeInsets.only(top: viewModel.pad)),
@@ -125,7 +133,10 @@ class MainViewModel {
           child: Text(
             viewModel.circleLabelValue.toStringAsFixed(1),
             style: const TextStyle(
-                fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold),
+              fontSize: 18,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         Padding(padding: EdgeInsets.only(top: viewModel.pad)),
@@ -142,8 +153,12 @@ class MainViewModel {
     );
   }
 
-  RangeSlider wSlider(DesignTypeCallBack call, RangeValues values, max,
-      {Key? keyValue}) {
+  RangeSlider wSlider(
+    DesignTypeCallBack call,
+    RangeValues values,
+    max, {
+    Key? keyValue,
+  }) {
     return RangeSlider(
       key: keyValue,
       values: values,
@@ -159,8 +174,12 @@ class MainViewModel {
     );
   }
 
-  Slider sliderSet(DesignTypeCallBack call, double value, max,
-      {Key? keyValue}) {
+  Slider sliderSet(
+    DesignTypeCallBack call,
+    double value,
+    max, {
+    Key? keyValue,
+  }) {
     Padding(padding: EdgeInsets.only(top: viewModel.pad));
     return Slider(
       key: keyValue,
@@ -176,7 +195,10 @@ class MainViewModel {
   }
 
   OutlinedButton setButton(
-      bool forwardFlg, double counterValue, double circleLabelValue) {
+    bool forwardFlg,
+    double counterValue,
+    double circleLabelValue,
+  ) {
     Padding(padding: EdgeInsets.only(top: viewModel.pad));
     return OutlinedButton(
       onPressed: () {
@@ -184,10 +206,7 @@ class MainViewModel {
         viewModel.circleData.circleCounterValue = counterValue;
         viewModel.circleData.circleLabelSpeedValue = circleLabelValue;
         viewModel.circleData.circleLabelValue = circleLabelValue;
-        viewModel.controller.setProgress([
-          viewModel.circleData.circleCounterValue ?? 0,
-          viewModel.circleData.circleLabelValue ?? 0
-        ]);
+        viewModel.controller.setProgress([viewModel.circleData.circleCounterValue ?? 0, viewModel.circleData.circleLabelValue ?? 0]);
       },
       child: const Icon(Icons.play_circle),
     );
@@ -195,7 +214,8 @@ class MainViewModel {
 
   CupertinoSwitch switchSet(DesignTypeCallBack call, Key keyValue) {
     Padding(
-        padding: EdgeInsets.only(left: viewModel.pad, right: viewModel.pad));
+      padding: EdgeInsets.only(left: viewModel.pad, right: viewModel.pad),
+    );
     if (keyValue == viewModel.circleColorKey) {
       return CupertinoSwitch(
         key: viewModel.circleColorKey,
@@ -234,8 +254,7 @@ class MainViewModel {
     viewModel.circleShaderFlg = flg;
     circleSet(deviceWidth);
     viewModel.circleData.circleTapValue = 1.0;
-    viewModel.circleData.circleStrokeWidth =
-        viewModel.circleData.circleSizeValue / 3;
+    viewModel.circleData.circleStrokeWidth = viewModel.circleData.circleSizeValue / 3;
     viewModel.circleData.circleTextMarginList = [const Size(15, 15)];
 
     viewModel.circleData.circleCombinedTextSize = 12;
@@ -261,9 +280,7 @@ class MainViewModel {
 
     /// Determine the type of knob
     viewModel.circleData.circleShader =
-        viewModel.circleData.circleShader == CircleShader.circleNone
-            ? CircleShader.round
-            : CircleShader.circleNone;
+        viewModel.circleData.circleShader == CircleShader.circleNone ? CircleShader.round : CircleShader.circleNone;
   }
 
   /// Switch Button Logic
@@ -273,21 +290,14 @@ class MainViewModel {
 
     /// Determine the type of knob
     viewModel.circleData.circleShader =
-        viewModel.circleData.circleShader == CircleShader.circleNone
-            ? CircleShader.butt
-            : CircleShader.circleNone;
+        viewModel.circleData.circleShader == CircleShader.circleNone ? CircleShader.butt : CircleShader.circleNone;
 
     /// Determine the knob color
-    viewModel.circleData.circleColor =
-        viewModel.circleData.circleColor == Colors.green
-            ? Colors.green.withOpacity(0)
-            : Colors.green;
+    viewModel.circleData.circleColor = viewModel.circleData.circleColor == Colors.green ? Colors.green.withOpacity(0) : Colors.green;
 
     /// Determine the knob shadow color
     viewModel.circleData.circleShadowColor =
-        viewModel.circleData.circleShadowColor == Colors.black
-            ? Colors.black.withOpacity(0)
-            : Colors.black;
+        viewModel.circleData.circleShadowColor == Colors.black ? Colors.black.withOpacity(0) : Colors.black;
   }
 
   /// Switch Button Logic
@@ -299,9 +309,7 @@ class MainViewModel {
 
     /// Determine the type of knob
     viewModel.circleData.circleShader =
-        viewModel.circleData.circleShader == CircleShader.circleNone
-            ? CircleShader.round
-            : CircleShader.circleNone;
+        viewModel.circleData.circleShader == CircleShader.circleNone ? CircleShader.round : CircleShader.circleNone;
   }
 
   _resetCircle(double deviceWidth) {
@@ -316,8 +324,7 @@ class MainViewModel {
 
     viewModel.pad = 30;
     viewModel.circleData.circleStrokeWidth = 30;
-    viewModel.circleData.circlePointerValue =
-        viewModel.circleData.circleStrokeWidth / 2;
+    viewModel.circleData.circlePointerValue = viewModel.circleData.circleStrokeWidth / 2;
     viewModel.circleData.circleSizeValue = 0;
     viewModel.circleData.circleSizeValue = deviceWidth / 2;
   }
@@ -356,8 +363,7 @@ class MainViewModel {
     }
 
     /// unwrap compatible
-    viewModel.circleData.circleTextMarginList =
-        viewModel.circleData.circleTextMarginList ?? [const Size(15, 15)];
+    viewModel.circleData.circleTextMarginList = viewModel.circleData.circleTextMarginList ?? [const Size(15, 15)];
     for (var i = 0; i <= (viewModel.circleData.startValue?.length ?? 0); i++) {
       viewModel.circleData.circleTextMarginList!.insert(i, const Size(15, 15));
     }
@@ -370,21 +376,9 @@ class MainViewModel {
       "${viewModel.circleData.startValue?[4] ?? ""}${"%"}\n${viewModel.circleData.endValue?[4] ?? ""}${"%"}\nExample\nExample\nExample\nExample\nExample\nExample",
     ];
 
-    viewModel.circleData.circleCombinedColor = [
-      Colors.white,
-      Colors.white,
-      Colors.white,
-      Colors.white,
-      Colors.white
-    ];
+    viewModel.circleData.circleCombinedColor = [Colors.white, Colors.white, Colors.white, Colors.white, Colors.white];
 
     /// Select your favorite element
-    viewModel.circleData.circleCombinedColorList = [
-      Colors.blue,
-      Colors.black,
-      Colors.green,
-      Colors.grey,
-      Colors.orange
-    ];
+    viewModel.circleData.circleCombinedColorList = [Colors.blue, Colors.black, Colors.green, Colors.grey, Colors.orange];
   }
 }

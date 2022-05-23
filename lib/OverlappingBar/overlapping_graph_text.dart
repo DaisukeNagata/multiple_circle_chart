@@ -18,16 +18,17 @@ class OverlappingGraphText extends CustomPainter {
   final path = Path();
   Offset offset = Offset.zero;
 
-  OverlappingGraphText(
-      {required this.textStyle,
-      required this.boxSize,
-      required this.wLines,
-      required this.valueListX,
-      required this.valueListY,
-      required this.sizeSet,
-      required this.graphCount,
-      required this.graphValue,
-      required this.radData});
+  OverlappingGraphText({
+    required this.textStyle,
+    required this.boxSize,
+    required this.wLines,
+    required this.valueListX,
+    required this.valueListY,
+    required this.sizeSet,
+    required this.graphCount,
+    required this.graphValue,
+    required this.radData,
+  });
 
   double degToRad(double deg) => deg * (pi / 180.0);
 
