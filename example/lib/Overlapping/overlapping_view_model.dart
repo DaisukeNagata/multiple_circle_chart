@@ -93,13 +93,17 @@ class OverLappingViewModel {
     for (var i = 0; i <= model.globalKeyList.length - 1; i++) {
       if (i == 0) {
         model.indicatorList[i] = _indicatorSet(c, model.globalKeyList[i], width,
-            _sePainter(model.indicatorList[i], width, false, true), i * 0.1);
+            _sePainter(model.indicatorList[i], width, false, true), 0.1);
       } else if (i == model.globalKeyList.length - 1) {
         model.indicatorList[i] = _indicatorSet(c, model.globalKeyList[i], width,
             _sePainter(model.indicatorList[i], width, true, true), 1);
       } else {
-        model.indicatorList[i] = _indicatorSet(c, model.globalKeyList[i], width,
-            _sePainter(model.indicatorList[i], width, false, false), i * 0.1);
+        model.indicatorList[i] = _indicatorSet(
+            c,
+            model.globalKeyList[i],
+            width,
+            _sePainter(model.indicatorList[i], width, false, false),
+            (i + 1) * 0.1);
       }
     }
   }
@@ -159,9 +163,9 @@ class OverLappingViewModel {
       child: CustomPaint(
         painter: _gridPainter(value, baseLine, checkLine),
         child: CustomPaint(
-          painter: _setP(p, "", -1, 0, 0),
+          painter: _setP(p, "", -1, 0, v),
           child: CustomPaint(
-            painter: _setP(p, "1", 0 / v, 0, v),
+            painter: _setP(p, "1", 0, 0, v),
             child: CustomPaint(
               painter: _setP(p, "2", 1 / v, 1, v),
               child: CustomPaint(
@@ -180,9 +184,6 @@ class OverLappingViewModel {
                             painter: _setP(p, "9", 8 / v, 8, v),
                             child: CustomPaint(
                               painter: _setP(p, "10", 9 / v, 9, v),
-                              child: CustomPaint(
-                                painter: _setP(p, "", 10 / v, 10, v),
-                              ),
                             ),
                           ),
                         ),

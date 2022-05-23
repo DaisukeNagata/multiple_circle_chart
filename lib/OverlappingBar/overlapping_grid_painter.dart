@@ -90,9 +90,6 @@ class OverlappingGridPainter extends CustomPainter {
         ///　most top area point.
         path.moveTo(0, value + boxSize + graphValue * 2);
         path.relativeLineTo(sizeSet.width, 0);
-      } else {
-        path.moveTo(0, 0);
-        path.relativeLineTo(0, 0);
       }
     } else {
       /// Draw the X-axis sideways.
