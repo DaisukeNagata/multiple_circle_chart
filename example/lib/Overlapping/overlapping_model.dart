@@ -88,7 +88,6 @@ class OverLappingModel {
   ];
 
   List<String> valueListX = [
-    "0",
     "1",
     "2",
     "3",

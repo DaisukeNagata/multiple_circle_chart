@@ -45,6 +45,7 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
   OverlappingPainter? setPainter(Offset offset, String textValue, double value,
       double scale, Color painterColor,
       {CircleData circleData = CircleData.none,
+      Color backColor = Colors.grey,
       Color? textColor = Colors.black}) {
     double w = contextSize?.width.roundToDouble() ?? 0.0;
 
@@ -75,7 +76,7 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
           widgetSize: box.size.width,
           circleData: circleData,
           radData: radData,
-          backgroundColor: Colors.grey,
+          backgroundColor: backColor,
           offsetValue: offset,
           textSpan: textSpan,
           value: null,

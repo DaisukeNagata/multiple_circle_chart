@@ -151,7 +151,7 @@ class OverLappingViewModel {
         : const Offset(0, -15);
     return indicator?.setPainter(
         offset, tex, value, value2, model.colorList[index],
-        textColor: Colors.white);
+        textColor: Colors.white, backColor: Colors.yellowAccent);
   }
 
   ///　details of graph characters, ruled lines, and animation amount.
