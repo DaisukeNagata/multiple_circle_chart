@@ -8,11 +8,12 @@ class OverlappingLineGoalPaint extends CustomPainter {
   final Size sizeSet;
   final OverlappingGoalModel goalModel;
 
-  OverlappingLineGoalPaint(
-      {required this.boxSize,
-      required this.wLines,
-      required this.sizeSet,
-      required this.goalModel,});
+  OverlappingLineGoalPaint({
+    required this.boxSize,
+    required this.wLines,
+    required this.sizeSet,
+    required this.goalModel,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -24,15 +25,16 @@ class OverlappingLineGoalPaint extends CustomPainter {
     ///　Loop that assigns and judges values up to the specified value.
     while (goalStartX < sizeSet.width) {
       canvas.drawLine(
-          Offset(
-            goalStartX,
-            boxSize * (wLines - goalModel.goalLineValue),
-          ),
-          Offset(
-            goalStartX + goalModel.goalDashWidth,
-            boxSize * (wLines - goalModel.goalLineValue),
-          ),
-          paint,);
+        Offset(
+          goalStartX,
+          boxSize * (wLines - goalModel.goalLineValue),
+        ),
+        Offset(
+          goalStartX + goalModel.goalDashWidth,
+          boxSize * (wLines - goalModel.goalLineValue),
+        ),
+        paint,
+      );
       goalStartX += goalModel.goalLineWidth + goalModel.goalDashSpace;
     }
   }

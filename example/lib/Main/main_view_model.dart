@@ -25,7 +25,13 @@ abstract class CallBackLogic {
   });
 }
 
-enum DesignType { wSliderState, combineState, knobState, knobRoundState, circleDesignState }
+enum DesignType {
+  wSliderState,
+  combineState,
+  knobState,
+  knobRoundState,
+  circleDesignState
+}
 
 class MainViewModel {
   late final MainCircleDataModel viewModel = MainCircleDataModel();
@@ -53,7 +59,9 @@ class MainViewModel {
 
   scrollAnimation() {
     viewModel.scrollController.animateTo(
-      viewModel.scrollController.offset == 0 ? viewModel.scrollController.position.maxScrollExtent : 0,
+      viewModel.scrollController.offset == 0
+          ? viewModel.scrollController.position.maxScrollExtent
+          : 0,
       duration: const Duration(milliseconds: 100),
       curve: Curves.linear,
     );
@@ -61,7 +69,8 @@ class MainViewModel {
 
   circleSet(double deviceWidth) {
     /// Determine the size of the circle.
-    viewModel.circleSize = viewModel.circleSize == 0.0 ? deviceWidth / 2 : viewModel.circleSize;
+    viewModel.circleSize =
+        viewModel.circleSize == 0.0 ? deviceWidth / 2 : viewModel.circleSize;
     viewModel.circleSetProgress = MultipleCircleSetProgress(
       circleKey: viewModel.circleKey,
       circle: viewModel.circleData,
@@ -113,7 +122,9 @@ class MainViewModel {
                 setButton(
                   false,
                   viewModel.circleData.circleCounterValue ?? 0,
-                  viewModel.circleData.circleCounterValue == 0 ? 0 : viewModel.rValue,
+                  viewModel.circleData.circleCounterValue == 0
+                      ? 0
+                      : viewModel.rValue,
                 ),
               ],
             ),
@@ -206,7 +217,10 @@ class MainViewModel {
         viewModel.circleData.circleCounterValue = counterValue;
         viewModel.circleData.circleLabelSpeedValue = circleLabelValue;
         viewModel.circleData.circleLabelValue = circleLabelValue;
-        viewModel.controller.setProgress([viewModel.circleData.circleCounterValue ?? 0, viewModel.circleData.circleLabelValue ?? 0]);
+        viewModel.controller.setProgress([
+          viewModel.circleData.circleCounterValue ?? 0,
+          viewModel.circleData.circleLabelValue ?? 0
+        ]);
       },
       child: const Icon(Icons.play_circle),
     );
@@ -254,7 +268,8 @@ class MainViewModel {
     viewModel.circleShaderFlg = flg;
     circleSet(deviceWidth);
     viewModel.circleData.circleTapValue = 1.0;
-    viewModel.circleData.circleStrokeWidth = viewModel.circleData.circleSizeValue / 3;
+    viewModel.circleData.circleStrokeWidth =
+        viewModel.circleData.circleSizeValue / 3;
     viewModel.circleData.circleTextMarginList = [const Size(15, 15)];
 
     viewModel.circleData.circleCombinedTextSize = 12;
@@ -280,7 +295,9 @@ class MainViewModel {
 
     /// Determine the type of knob
     viewModel.circleData.circleShader =
-        viewModel.circleData.circleShader == CircleShader.circleNone ? CircleShader.round : CircleShader.circleNone;
+        viewModel.circleData.circleShader == CircleShader.circleNone
+            ? CircleShader.round
+            : CircleShader.circleNone;
   }
 
   /// Switch Button Logic
@@ -290,14 +307,21 @@ class MainViewModel {
 
     /// Determine the type of knob
     viewModel.circleData.circleShader =
-        viewModel.circleData.circleShader == CircleShader.circleNone ? CircleShader.butt : CircleShader.circleNone;
+        viewModel.circleData.circleShader == CircleShader.circleNone
+            ? CircleShader.butt
+            : CircleShader.circleNone;
 
     /// Determine the knob color
-    viewModel.circleData.circleColor = viewModel.circleData.circleColor == Colors.green ? Colors.green.withOpacity(0) : Colors.green;
+    viewModel.circleData.circleColor =
+        viewModel.circleData.circleColor == Colors.green
+            ? Colors.green.withOpacity(0)
+            : Colors.green;
 
     /// Determine the knob shadow color
     viewModel.circleData.circleShadowColor =
-        viewModel.circleData.circleShadowColor == Colors.black ? Colors.black.withOpacity(0) : Colors.black;
+        viewModel.circleData.circleShadowColor == Colors.black
+            ? Colors.black.withOpacity(0)
+            : Colors.black;
   }
 
   /// Switch Button Logic
@@ -309,7 +333,9 @@ class MainViewModel {
 
     /// Determine the type of knob
     viewModel.circleData.circleShader =
-        viewModel.circleData.circleShader == CircleShader.circleNone ? CircleShader.round : CircleShader.circleNone;
+        viewModel.circleData.circleShader == CircleShader.circleNone
+            ? CircleShader.round
+            : CircleShader.circleNone;
   }
 
   _resetCircle(double deviceWidth) {
@@ -324,7 +350,8 @@ class MainViewModel {
 
     viewModel.pad = 30;
     viewModel.circleData.circleStrokeWidth = 30;
-    viewModel.circleData.circlePointerValue = viewModel.circleData.circleStrokeWidth / 2;
+    viewModel.circleData.circlePointerValue =
+        viewModel.circleData.circleStrokeWidth / 2;
     viewModel.circleData.circleSizeValue = 0;
     viewModel.circleData.circleSizeValue = deviceWidth / 2;
   }
@@ -363,7 +390,8 @@ class MainViewModel {
     }
 
     /// unwrap compatible
-    viewModel.circleData.circleTextMarginList = viewModel.circleData.circleTextMarginList ?? [const Size(15, 15)];
+    viewModel.circleData.circleTextMarginList =
+        viewModel.circleData.circleTextMarginList ?? [const Size(15, 15)];
     for (var i = 0; i <= (viewModel.circleData.startValue?.length ?? 0); i++) {
       viewModel.circleData.circleTextMarginList!.insert(i, const Size(15, 15));
     }
@@ -376,9 +404,21 @@ class MainViewModel {
       "${viewModel.circleData.startValue?[4] ?? ""}${"%"}\n${viewModel.circleData.endValue?[4] ?? ""}${"%"}\nExample\nExample\nExample\nExample\nExample\nExample",
     ];
 
-    viewModel.circleData.circleCombinedColor = [Colors.white, Colors.white, Colors.white, Colors.white, Colors.white];
+    viewModel.circleData.circleCombinedColor = [
+      Colors.white,
+      Colors.white,
+      Colors.white,
+      Colors.white,
+      Colors.white
+    ];
 
     /// Select your favorite element
-    viewModel.circleData.circleCombinedColorList = [Colors.blue, Colors.black, Colors.green, Colors.grey, Colors.orange];
+    viewModel.circleData.circleCombinedColorList = [
+      Colors.blue,
+      Colors.black,
+      Colors.green,
+      Colors.grey,
+      Colors.orange
+    ];
   }
 }

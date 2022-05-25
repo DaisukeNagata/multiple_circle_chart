@@ -58,7 +58,8 @@ class OverlappingPainter extends CustomPainter {
       case -1:
         List<dynamic> list = [];
         list.add(position);
-        double answer = position.dx / (widgetSize ?? 0) / (graphCount ?? 0) * 100;
+        double answer =
+            position.dx / (widgetSize ?? 0) / (graphCount ?? 0) * 100;
         list.add(dialogData?[answer.floor()]);
         controller.sink.add(list);
         break;
@@ -66,7 +67,8 @@ class OverlappingPainter extends CustomPainter {
         count = 0;
         List<dynamic> list = [];
         list.add(position);
-        double answer = position.dx / (widgetSize ?? 0) / (graphCount ?? 0) * 100;
+        double answer =
+            position.dx / (widgetSize ?? 0) / (graphCount ?? 0) * 100;
         list.add(dialogData?[answer.floor()]);
         controller.sink.add(list);
         break;
@@ -160,6 +162,7 @@ class OverlappingPainter extends CustomPainter {
   /// Update the value as the color changes
   @override
   bool shouldRepaint(OverlappingPainter oldDelegate) {
-    return oldDelegate.backgroundColor != backgroundColor || oldDelegate.value != value;
+    return oldDelegate.backgroundColor != backgroundColor ||
+        oldDelegate.value != value;
   }
 }

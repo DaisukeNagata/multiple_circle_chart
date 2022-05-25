@@ -23,7 +23,8 @@ class OverlappingDialog extends StatelessWidget {
   final Widget? child;
 
   ///　default function of shape.
-  static const RoundedRectangleBorder _defaultDialogShape = RoundedRectangleBorder(
+  static const RoundedRectangleBorder _defaultDialogShape =
+      RoundedRectangleBorder(
     borderRadius: BorderRadius.all(Radius.circular(0)),
   );
   static const double _defaultElevation = 0;
@@ -54,8 +55,11 @@ class OverlappingDialog extends StatelessWidget {
 
               /// Class Material extends StatefulWidget Create a material.
               child: Material(
-                color: backgroundColor ?? dialogTheme.backgroundColor ?? Theme.of(context).dialogBackgroundColor,
-                elevation: elevation ?? dialogTheme.elevation ?? _defaultElevation,
+                color: backgroundColor ??
+                    dialogTheme.backgroundColor ??
+                    Theme.of(context).dialogBackgroundColor,
+                elevation:
+                    elevation ?? dialogTheme.elevation ?? _defaultElevation,
                 shape: shape ?? dialogTheme.shape ?? _defaultDialogShape,
                 type: MaterialType.card,
                 clipBehavior: clipBehavior,

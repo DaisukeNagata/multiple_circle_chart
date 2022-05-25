@@ -39,8 +39,10 @@ class OverLappingState extends State<OverLappingWidget> {
 
   @override
   Widget build(BuildContext context) {
-    double w = MediaQuery.of(context).size.width - (MediaQuery.of(context).size.width / count) * OverlapLineModel.wLines;
-    double w2 = (MediaQuery.of(context).size.width / count) * OverlapLineModel.wLines;
+    double w = MediaQuery.of(context).size.width -
+        (MediaQuery.of(context).size.width / count) * OverlapLineModel.wLines;
+    double w2 =
+        (MediaQuery.of(context).size.width / count) * OverlapLineModel.wLines;
     double w3 = (MediaQuery.of(context).size.width / count);
 
     return Column(

@@ -78,7 +78,8 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
         textSpan: textSpan,
         value: (animationValue ?? 0.0) - (value * 0.1 * scale),
         graphCount: graphCount,
-        contextSize: Size(w * (value * 0.1 * scale), contextSize?.height ?? 0.0),
+        contextSize:
+            Size(w * (value * 0.1 * scale), contextSize?.height ?? 0.0),
         dialogData: dialogData,
         controller: streamController,
       );
@@ -109,7 +110,8 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
   }
 
   /// Method to calculate alert.
-  Future<void> showMyDialog(BuildContext context, Offset dataPosition, {String? dialogText}) async {
+  Future<void> showMyDialog(BuildContext context, Offset dataPosition,
+      {String? dialogText}) async {
     RenderBox box = globalKey?.currentContext?.findRenderObject() as RenderBox;
     double dx = dataPosition.dx;
     Offset offset = box.localToGlobal(Offset.zero);
@@ -124,10 +126,12 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
 
           /// The orientation determines the dialog coordinates.
           rect: RadData.horizontal == radData
-              ? Rect.fromLTWH(offset.dx, offset.dy - (boxSize ?? 0), box.size.width, (contextSize?.width ?? 0) / 3)
+              ? Rect.fromLTWH(offset.dx, offset.dy - (boxSize ?? 0),
+                  box.size.width, (contextSize?.width ?? 0) / 3)
               : Rect.fromLTWH(
                   offset.dx,
-                  offset.dy.ceilToDouble() - ((navigationHeight ?? 0) + dx.floorToDouble()),
+                  offset.dy.ceilToDouble() -
+                      ((navigationHeight ?? 0) + dx.floorToDouble()),
                   (contextSize?.width ?? 0) / 3,
                   (contextSize?.width ?? 0) / 3,
                 ),
@@ -137,7 +141,9 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
                 const Padding(padding: EdgeInsets.only(top: 8)),
 
                 /// Characters to be changed
-                Text(dialogText == "" ? dx.toStringAsFixed(1) : dialogText ?? ""),
+                Text(dialogText == ""
+                    ? dx.toStringAsFixed(1)
+                    : dialogText ?? ""),
                 const Padding(padding: EdgeInsets.only(bottom: 16)),
                 OutlinedButton(
                   onPressed: () {
@@ -172,10 +178,12 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
   }
 
   @override
-  State<OverlappingProgressIndicator> createState() => _OverlappingProgressState();
+  State<OverlappingProgressIndicator> createState() =>
+      _OverlappingProgressState();
 }
 
-class _OverlappingProgressState extends State<OverlappingProgressIndicator> with SingleTickerProviderStateMixin {
+class _OverlappingProgressState extends State<OverlappingProgressIndicator>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
@@ -196,9 +204,12 @@ class _OverlappingProgressState extends State<OverlappingProgressIndicator> with
     super.dispose();
   }
 
-  Widget _buildIndicator(BuildContext context, double animationValue, TextDirection textDirection) {
-    final ProgressIndicatorThemeData indicatorTheme = ProgressIndicatorTheme.of(context);
-    final double minHeight = widget.minHeight ?? indicatorTheme.linearMinHeight ?? 4.0;
+  Widget _buildIndicator(BuildContext context, double animationValue,
+      TextDirection textDirection) {
+    final ProgressIndicatorThemeData indicatorTheme =
+        ProgressIndicatorTheme.of(context);
+    final double minHeight =
+        widget.minHeight ?? indicatorTheme.linearMinHeight ?? 4.0;
 
     return widget.buildSemanticsWrapper(
       context: context,
