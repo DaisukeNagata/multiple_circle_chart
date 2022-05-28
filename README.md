@@ -18,8 +18,7 @@ and the Flutter guide for
 
 ```
 environment:
-  sdk: ">=2.16.2 <3.0.0"
-  flutter: ">=2.10.5"
+  sdk: ">=2.17.1 <3.0.0"
 ```
 
 
