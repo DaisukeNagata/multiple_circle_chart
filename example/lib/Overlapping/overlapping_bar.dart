@@ -68,34 +68,36 @@ class OverLappingBarState extends State<OverLappingWidget>
     final pad = Padding(padding: EdgeInsets.only(right: 40 * scale * 3));
     const pad2 = Padding(padding: EdgeInsets.only(top: 70));
     final pad3 = Padding(padding: EdgeInsets.only(bottom: 30 * scale));
-    return Column(
-      children: [
-        SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                pad,
-                Transform.rotate(
-                  angle: (dta == RadData.horizontal ? 0 : -90) * pi / 180,
-                  child: Column(
-                    children: [
-                      pad2,
-                      for (var i = 0; i <= length; i++)
-                        widget.viewModel.rowSet(iList[i], width, gList[i]),
-                      pad2,
-                    ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  pad,
+                  Transform.rotate(
+                    angle: (dta == RadData.horizontal ? 0 : -90) * pi / 180,
+                    child: Column(
+                      children: [
+                        pad2,
+                        for (var i = 0; i <= length; i++)
+                          widget.viewModel.rowSet(iList[i], width, gList[i]),
+                        pad2,
+                      ],
+                    ),
                   ),
-                ),
-                pad,
-              ],
+                  pad,
+                ],
+              ),
             ),
           ),
-        ),
-        pad3,
-        widget.viewModel.buttonColumn(callback, this),
-      ],
+          pad3,
+          widget.viewModel.buttonColumn(callback, this),
+        ],
+      ),
     );
   }
 
