@@ -36,7 +36,11 @@ class OverlapViewModel {
   }
 
   Stack stackLineLogic(
-      double w, double w2, Color paintColor, List<int> indexList) {
+    double w,
+    double w2,
+    Color paintColor,
+    List<int> indexList,
+  ) {
     return Stack(
       children: [
         CustomPaint(
