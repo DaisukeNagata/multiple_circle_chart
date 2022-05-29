@@ -112,17 +112,21 @@ class OverlappingGraphText extends CustomPainter {
       double v = -(s * i) + s + graphValue;
       double v2 = -(s * graphCount) + graphValue;
       if (radData == RadData.horizontal) {
-        /// If true, vertical line.
+        /// If true, horizonal line.
         if (flg) {
+          /// Vertical graph text
           offset = Offset(-s / 2, (v - h / 2));
         } else {
+          /// Horizonal graph text
           offset = Offset(s2 - w / 2, s + h / 2);
         }
       } else {
         /// If true, vertical line.
         if (flg) {
-          offset = Offset(v2 - w, -s2 - h / 2);
+          /// Vertical graph text
+          offset = Offset(v2 - s / 2, -s2 - h / 2);
         } else {
+          /// Horizonal graph text
           offset = Offset(v - w / 2, h / 2);
         }
       }
