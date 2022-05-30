@@ -17,15 +17,15 @@ class OverlappingLineGoalPaint extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    double goalStartX = 0;
-    double sizeSetWidthSpace = 2;
-    double sizeSetWidthMargin = 1.5;
+    double goalStartX = 1;
+    double sizeSetWidthMargin = 0;
     final paint = Paint()
       ..color = goalModel.goalLineColor
       ..strokeWidth = goalModel.goalLineWidth;
+    sizeSetWidthMargin == 0 ? goalStartX : sizeSetWidthMargin;
 
     ///　Loop that assigns and judges values up to the specified value.
-    while (goalStartX < sizeSet.width - sizeSetWidthSpace) {
+    while (goalStartX < sizeSet.width) {
       canvas.drawLine(
         Offset(
           goalStartX,
