@@ -41,42 +41,58 @@ class OverLappingState extends State<OverLappingWidget> {
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width -
         (MediaQuery.of(context).size.width / count) * OverlapLineModel.wLines;
-    double w2 =
+    double gridValue =
         (MediaQuery.of(context).size.width / count) * OverlapLineModel.wLines;
-    double w3 = (MediaQuery.of(context).size.width / count);
+    double sizeValue = (MediaQuery.of(context).size.width / count);
 
+    Shader shader = LinearGradient(
+      begin: Alignment.bottomCenter,
+      end: Alignment.topCenter,
+      stops: const [0.1, 0.3, 0.6],
+      colors: [
+        Colors.blue,
+        Colors.blue.withOpacity(0.6),
+        Colors.blue.withOpacity(0.3),
+      ],
+    ).createShader(
+      Rect.fromLTWH(0.0, 0.0, sizeValue, gridValue),
+    );
     return Column(
       children: [
         Stack(
           children: [
             Container(
-              padding: EdgeInsets.only(top: w2, left: w / 2),
+              padding: EdgeInsets.only(top: gridValue, left: w / 2),
               child: CustomPaint(
-                painter: viewModel.graphText(w2),
+                painter: viewModel.graphText(gridValue),
               ),
             ),
             Container(
-              padding: EdgeInsets.only(top: w3, left: w / 2),
+              padding: EdgeInsets.only(top: sizeValue, left: w / 2),
               child: viewModel.stackLineLogic(
-                w3,
-                w2,
+                sizeValue,
+                gridValue,
+                1,
                 Colors.red,
                 viewModel.model.indexList2,
+                index: 0,
               ),
             ),
             Container(
-              padding: EdgeInsets.only(top: w3, left: w / 2),
+              padding: EdgeInsets.only(top: sizeValue, left: w / 2),
               child: viewModel.stackLineLogic(
-                w3,
-                w2,
+                sizeValue,
+                gridValue,
+                1,
                 Colors.blue,
                 viewModel.model.indexList,
+                gradient: viewModel.model.lineOrFillFlg ? null : shader,
               ),
             ),
             Container(
-              padding: EdgeInsets.only(top: w3, left: w / 2),
+              padding: EdgeInsets.only(top: sizeValue, left: w / 2),
               child: CustomPaint(
-                painter: viewModel.goalPainter(w2),
+                painter: viewModel.goalPainter(gridValue),
               ),
             ),
           ],

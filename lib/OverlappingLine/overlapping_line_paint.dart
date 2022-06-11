@@ -5,6 +5,7 @@ class OverlappingLinePaint extends CustomPainter {
   final List<int> moveToCountList;
   final double strokeWidth, scale, alphaPaint;
   final Color paintColor;
+  final Shader? gradient;
   final bool circlePaintFlg, fillPaintFlg;
 
   const OverlappingLinePaint({
@@ -13,6 +14,7 @@ class OverlappingLinePaint extends CustomPainter {
     required this.alphaPaint,
     required this.strokeWidth,
     required this.paintColor,
+    required this.gradient,
     required this.circlePaintFlg,
     required this.fillPaintFlg,
   });
@@ -22,16 +24,19 @@ class OverlappingLinePaint extends CustomPainter {
     Paint paint = Paint();
     final path = Path();
     if (fillPaintFlg) {
-      paint.color = paintColor.withOpacity(alphaPaint);
+      if (gradient == null) paint.color = paintColor.withOpacity(alphaPaint);
+      paint.shader = gradient;
       path.moveTo(
         0,
         size.width * (moveToCountList.length - 1),
       );
     } else {
+      if (gradient == null) paint.color = paintColor.withOpacity(alphaPaint);
       paint
-        ..color = paintColor
+        ..shader = gradient
         ..style = PaintingStyle.stroke
-        ..strokeWidth = strokeWidth;
+        ..strokeWidth = strokeWidth
+        ..shader = gradient;
       path.moveTo(
         0,
         size.width * moveToCountList[0],

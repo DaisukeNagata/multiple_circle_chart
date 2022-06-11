@@ -35,30 +35,30 @@ class OverlapViewModel {
     ];
   }
 
-  Stack stackLineLogic(
-    double w,
-    double w2,
-    Color paintColor,
-    List<int> indexList,
-  ) {
+  Stack stackLineLogic(double sizeValue, double gridValue, double alphaPaint,
+      Color paintColor, List<int> indexList,
+      {Shader? gradient, int? index}) {
     return Stack(
       children: [
-        CustomPaint(
-          child: CustomPaint(
-            painter: gridPainter(w2),
+        if (index == 0) ...[
+          CustomPaint(
+            child: CustomPaint(
+              painter: gridPainter(gridValue),
+            ),
           ),
-        ),
+        ],
         CustomPaint(
           painter: OverlappingLinePaint(
             moveToCountList: indexList,
             strokeWidth: 3,
             scale: 1,
-            alphaPaint: 0.5,
+            alphaPaint: alphaPaint,
             paintColor: paintColor,
             circlePaintFlg: model.lineOrFillFlg,
             fillPaintFlg: !model.lineOrFillFlg,
+            gradient: gradient,
           ),
-          size: Size(w, w),
+          size: Size(sizeValue, sizeValue),
         ),
       ],
     );
