@@ -23,6 +23,8 @@ class OverlappingLinePaint extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint();
     final path = Path();
+
+    ///　select the paint option.
     if (fillPaintFlg) {
       if (gradient == null) paint.color = paintColor.withOpacity(alphaPaint);
       paint.shader = gradient;
@@ -43,6 +45,7 @@ class OverlappingLinePaint extends CustomPainter {
       );
     }
 
+    ///　Set the size from the element and array data.
     for (var i = 0; i <= moveToCountList.length - 1; i++) {
       path.lineTo(
         i * size.width,
@@ -54,6 +57,8 @@ class OverlappingLinePaint extends CustomPainter {
         strokeWidth,
         strokeWidth,
       );
+
+      ///　Shows the pointer only when the flag is selected.
       if (circlePaintFlg) {
         ///　Representing a circle of graph points.
         final circlePaint = Paint()

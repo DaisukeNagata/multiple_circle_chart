@@ -17,6 +17,7 @@ class OverlappingLineGoalPaint extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    ///　This is because it does not overlap with the ruled line.
     double goalStartX = 1;
     final paint = Paint()
       ..color = goalModel.goalLineColor
