@@ -20,9 +20,14 @@ class OverLappingBar extends StatelessWidget {
           actions: [
             IconButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const OverLapLineBar();
-                }));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const OverLapLineBar();
+                    },
+                  ),
+                );
               },
               icon: const Icon(Icons.arrow_forward_ios),
             )

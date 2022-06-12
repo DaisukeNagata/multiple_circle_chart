@@ -49,8 +49,13 @@ class MyHomePageState extends State<MyHomePage> with CallBackLogic {
   }
 
   @override
-  DesignTypeCallBack? callback(type,
-      {double? max, double? value, RangeValues? values, bool? flg}) {
+  DesignTypeCallBack? callback(
+    type, {
+    double? max,
+    double? value,
+    RangeValues? values,
+    bool? flg,
+  }) {
     setState(() {
       double width = MediaQuery.of(context).size.width;
       switch (type) {
@@ -91,9 +96,14 @@ class MyHomePageState extends State<MyHomePage> with CallBackLogic {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return OverLappingBar();
-              }));
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return OverLappingBar();
+                  },
+                ),
+              );
             },
             icon: const Icon(Icons.arrow_forward_ios),
           )
@@ -108,9 +118,10 @@ class MyHomePageState extends State<MyHomePage> with CallBackLogic {
           child: Column(
             children: [
               Padding(
-                  padding: EdgeInsets.only(
-                top: mModel.viewModel.topBottom,
-              )),
+                padding: EdgeInsets.only(
+                  top: mModel.viewModel.topBottom,
+                ),
+              ),
               mModel.stack(),
               mModel.sliderSets(
                 callback,

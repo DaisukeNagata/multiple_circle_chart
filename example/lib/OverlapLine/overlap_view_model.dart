@@ -35,9 +35,15 @@ class OverlapViewModel {
     ];
   }
 
-  Stack stackLineLogic(double sizeValue, double gridValue, double alphaPaint,
-      Color paintColor, List<int> indexList,
-      {Shader? gradient, int? index}) {
+  Stack stackLineLogic(
+    double sizeValue,
+    double gridValue,
+    double alphaPaint,
+    Color paintColor,
+    List<int> indexList, {
+    Shader? gradient,
+    int? index,
+  }) {
     return Stack(
       children: [
         if (index == 0) ...[
