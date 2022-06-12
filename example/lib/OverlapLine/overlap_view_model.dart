@@ -36,6 +36,7 @@ class OverlapViewModel {
   }
 
   Stack stackLineLogic(
+    Animation<double> animation,
     double sizeValue,
     double gridValue,
     double alphaPaint,
@@ -63,6 +64,7 @@ class OverlapViewModel {
             circlePaintFlg: model.lineOrFillFlg,
             fillPaintFlg: !model.lineOrFillFlg,
             gradient: gradient,
+            animation: animation,
           ),
           size: Size(sizeValue, sizeValue),
         ),

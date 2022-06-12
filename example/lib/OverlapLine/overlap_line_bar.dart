@@ -33,19 +33,46 @@ class OverLappingWidget extends StatefulWidget {
   OverLappingState createState() => OverLappingState();
 }
 
-class OverLappingState extends State<OverLappingWidget> {
+class OverLappingState extends State<OverLappingWidget>
+    with TickerProviderStateMixin {
   final int count = 10;
   OverlapViewModel viewModel = OverlapViewModel();
+  late AnimationController controller;
+  late Animation<double> animation;
+  late Shader shader;
+  late double w;
+  late double gridValue;
+  late double sizeValue;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 3),
+    )..addListener(() {
+        setState(() {
+          animation =
+              Tween(begin: 0.0, end: controller.value).animate(controller);
+
+          if (controller.value == 1.0) {
+            animation = Tween(begin: 0.0, end: 1.0).animate(controller);
+          }
+        });
+      });
+    animation = Tween(begin: 0.0, end: 1.0).animate(controller);
+    controller.forward();
+  }
 
   @override
   Widget build(BuildContext context) {
-    double w = MediaQuery.of(context).size.width -
+    w = MediaQuery.of(context).size.width -
         (MediaQuery.of(context).size.width / count) * OverlapLineModel.wLines;
-    double gridValue =
+    gridValue =
         (MediaQuery.of(context).size.width / count) * OverlapLineModel.wLines;
-    double sizeValue = (MediaQuery.of(context).size.width / count);
+    sizeValue = (MediaQuery.of(context).size.width / count);
 
-    Shader shader = LinearGradient(
+    shader = LinearGradient(
       begin: Alignment.bottomCenter,
       end: Alignment.topCenter,
       stops: const [0.1, 0.3, 0.6],
@@ -70,6 +97,7 @@ class OverLappingState extends State<OverLappingWidget> {
             Container(
               padding: EdgeInsets.only(top: sizeValue, left: w / 2),
               child: viewModel.stackLineLogic(
+                animation,
                 sizeValue,
                 gridValue,
                 1,
@@ -81,6 +109,7 @@ class OverLappingState extends State<OverLappingWidget> {
             Container(
               padding: EdgeInsets.only(top: sizeValue, left: w / 2),
               child: viewModel.stackLineLogic(
+                animation,
                 sizeValue,
                 gridValue,
                 1,
@@ -89,12 +118,14 @@ class OverLappingState extends State<OverLappingWidget> {
                 gradient: viewModel.model.lineOrFillFlg ? null : shader,
               ),
             ),
-            Container(
-              padding: EdgeInsets.only(top: sizeValue, left: w / 2),
-              child: CustomPaint(
-                painter: viewModel.goalPainter(gridValue),
+            if (animation.isCompleted) ...[
+              Container(
+                padding: EdgeInsets.only(top: sizeValue, left: w / 2),
+                child: CustomPaint(
+                  painter: viewModel.goalPainter(gridValue),
+                ),
               ),
-            ),
+            ],
           ],
         ),
         const SizedBox(
@@ -103,7 +134,10 @@ class OverLappingState extends State<OverLappingWidget> {
         TextButton(
           onPressed: () {
             setState(() {
+              controller.reset();
+              controller.stop();
               viewModel.indexListLogic();
+              controller.forward();
             });
           },
           child: const Text('click here'),

@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:flutter/material.dart';
+
 class OverlapLineModel {
   static int wLines = 7;
   List<int> indexList = [
@@ -44,4 +46,7 @@ class OverlapLineModel {
   ];
 
   bool lineOrFillFlg = false;
+
+  late final AnimationController controller;
+  late final Animation<double> animation;
 }

@@ -7,6 +7,7 @@ class OverlappingLinePaint extends CustomPainter {
   final Color paintColor;
   final Shader? gradient;
   final bool circlePaintFlg, fillPaintFlg;
+  final Animation<double> animation;
 
   const OverlappingLinePaint({
     required this.moveToCountList,
@@ -17,12 +18,14 @@ class OverlappingLinePaint extends CustomPainter {
     required this.gradient,
     required this.circlePaintFlg,
     required this.fillPaintFlg,
+    required this.animation,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint();
     final path = Path();
+    var count = moveToCountList.length - 1;
 
     ///　select the paint option.
     if (fillPaintFlg) {
@@ -47,10 +50,18 @@ class OverlappingLinePaint extends CustomPainter {
 
     ///　Set the size from the element and array data.
     for (var i = 0; i <= moveToCountList.length - 1; i++) {
-      path.lineTo(
-        i * size.width,
-        moveToCountList[i] * size.width,
-      );
+      if (fillPaintFlg) {
+        path.lineTo(
+          i * size.width,
+          size.width * count -
+              (size.width * (moveToCountList[i] * animation.value)),
+        );
+      } else {
+        path.lineTo(
+          i * size.width,
+          moveToCountList[i] * size.width,
+        );
+      }
       var rect = Rect.fromLTWH(
         i * size.width - strokeWidth / 2,
         moveToCountList[i] * size.width - strokeWidth / 2,
