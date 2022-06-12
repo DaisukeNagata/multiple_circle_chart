@@ -30,12 +30,15 @@ class CircleCombinedChart extends CustomPainter {
           : _data.circleStrokeWidth;
       paint.color = _data.circleCombinedColorList?[i] ?? Colors.white;
       canvas.drawArc(
-          Rect.fromCircle(
-              center: size.center(Offset.zero), radius: size.width / 2),
-          (pi * 2 * (_data.startValue?[i] ?? 0.0)),
-          (pi * 2 * (_data.endValue?[i] ?? 0.0)),
-          false,
-          paint);
+        Rect.fromCircle(
+          center: size.center(Offset.zero),
+          radius: size.width / 2,
+        ),
+        (pi * 2 * (_data.startValue?[i] ?? 0.0)),
+        (pi * 2 * (_data.endValue?[i] ?? 0.0)),
+        false,
+        paint,
+      );
     }
     canvas.save();
   }

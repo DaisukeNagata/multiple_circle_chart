@@ -14,7 +14,11 @@ class CircleInnermostFrame extends CustomPainter {
   final double _rotate = 270;
 
   CircleInnermostFrame(
-      this._controller, this._animation, this._baseAnimationValue, this._data);
+    this._controller,
+    this._animation,
+    this._baseAnimationValue,
+    this._data,
+  );
 
   double degToRad(double deg) => deg * (pi / 180.0);
 
@@ -78,28 +82,30 @@ class CircleInnermostFrame extends CustomPainter {
     if (_data.circleShader == CircleShader.round) {
       if (_data.circleDuration == 0 || !_controller.isAnimating) {
         circlePainter.shader = SweepGradient(
-                colors: circleValue == 0
-                    ? [
-                        shaderColor.first.withOpacity(0),
-                        shaderColor.last.withOpacity(0)
-                      ]
-                    : circleValue > _data.complementCircle
-                        ? [shaderColor.first, shaderColor.last]
-                        : [shaderColor.first, shaderColor.last.withOpacity(0)])
-            .createShader(
-                Rect.fromCircle(center: size.center(Offset.zero), radius: 0));
+          colors: circleValue == 0
+              ? [
+                  shaderColor.first.withOpacity(0),
+                  shaderColor.last.withOpacity(0)
+                ]
+              : circleValue > _data.complementCircle
+                  ? [shaderColor.first, shaderColor.last]
+                  : [shaderColor.first, shaderColor.last.withOpacity(0)],
+        ).createShader(
+          Rect.fromCircle(center: size.center(Offset.zero), radius: 0),
+        );
       } else {
         circlePainter.shader = SweepGradient(
-                colors: animationValue > _data.complementCircle
-                    ? [shaderColor.first, shaderColor.last]
-                    : circleValue == 0
-                        ? [
-                            shaderColor.first.withOpacity(0),
-                            shaderColor.last.withOpacity(0)
-                          ]
-                        : [shaderColor.first, shaderColor.last.withOpacity(0)])
-            .createShader(
-                Rect.fromCircle(center: size.center(Offset.zero), radius: 0));
+          colors: animationValue > _data.complementCircle
+              ? [shaderColor.first, shaderColor.last]
+              : circleValue == 0
+                  ? [
+                      shaderColor.first.withOpacity(0),
+                      shaderColor.last.withOpacity(0)
+                    ]
+                  : [shaderColor.first, shaderColor.last.withOpacity(0)],
+        ).createShader(
+          Rect.fromCircle(center: size.center(Offset.zero), radius: 0),
+        );
       }
     }
 
@@ -133,12 +139,18 @@ class CircleInnermostFrame extends CustomPainter {
     /// The presence or absence of shadows in the knob type.
     if (_data.circleShader == CircleShader.circleNone) {
       canvas.drawCircle(
-          shadowOffset, _data.circlePointerValue ?? 0, shadowPainter);
+        shadowOffset,
+        _data.circlePointerValue ?? 0,
+        shadowPainter,
+      );
     }
 
     /// Minimum size when using round
     canvas.drawCircle(
-        circleOffset, _data.circlePointerValue ?? 0, circlePainter);
+      circleOffset,
+      _data.circlePointerValue ?? 0,
+      circlePainter,
+    );
 
     canvas.save();
   }

@@ -78,20 +78,25 @@ class CircleOuterFrame extends CustomPainter {
       ..strokeWidth = _data.circleStrokeWidth
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.butt
-      ..shader = SweepGradient(colors: colorSet).createShader(Rect.fromCircle(
-          center: size.center(Offset.zero), radius: size.width / 2));
+      ..shader = SweepGradient(colors: colorSet).createShader(
+        Rect.fromCircle(
+          center: size.center(Offset.zero),
+          radius: size.width / 2,
+        ),
+      );
 
     /// Answer substitution and animation amount are set by animation speed.
     canvas.drawArc(
-        Rect.fromCircle(center: size.center(Offset.zero), radius: sizeSet),
-        _startAngle,
-        time <= (_data.circleLabelValue ?? 0)
-            ? _data.circleLabelValue == 0
-                ? 0
-                : (pi * 2 * (_data.circleLabelValue ?? 0))
-            : progressSet,
-        false,
-        paint);
+      Rect.fromCircle(center: size.center(Offset.zero), radius: sizeSet),
+      _startAngle,
+      time <= (_data.circleLabelValue ?? 0)
+          ? _data.circleLabelValue == 0
+              ? 0
+              : (pi * 2 * (_data.circleLabelValue ?? 0))
+          : progressSet,
+      false,
+      paint,
+    );
 
     canvas.save();
   }

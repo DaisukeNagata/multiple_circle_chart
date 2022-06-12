@@ -15,9 +15,11 @@ class MultipleCircleSetProgress extends StatefulWidget {
   /// Returns [value] plus 1.
   int addOne(int value) => value + 1;
 
-  const MultipleCircleSetProgress(
-      {Key? key, required this.circleKey, required this.circle})
-      : super(key: key);
+  const MultipleCircleSetProgress({
+    Key? key,
+    required this.circleKey,
+    required this.circle,
+  }) : super(key: key);
 
   final GlobalKey circleKey;
   final CircleDataItem circle;
@@ -110,9 +112,11 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      final constraintsSize = Size(constraints.maxWidth, constraints.maxHeight);
-      return AnimatedBuilder(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final constraintsSize =
+            Size(constraints.maxWidth, constraints.maxHeight);
+        return AnimatedBuilder(
           animation: _animation,
           builder: (BuildContext ctx, Widget? child) {
             return Stack(
@@ -121,10 +125,13 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
                 RepaintBoundary(
                   child: CustomPaint(
                     size: constraintsSize,
-                    painter: CircleBaseCircumference([
-                      widget.circle.circleRoundColor,
-                      widget.circle.circleRoundColor
-                    ], widget.circle.circleStrokeWidth),
+                    painter: CircleBaseCircumference(
+                      [
+                        widget.circle.circleRoundColor,
+                        widget.circle.circleRoundColor
+                      ],
+                      widget.circle.circleStrokeWidth,
+                    ),
 
                     /// 1st week yen.
                     child: RepaintBoundary(
@@ -132,18 +139,22 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
                         size: constraintsSize,
                         painter: (widget.circle.startValue?.length ?? 0) > 0
                             ? CircleCombinedChart(widget.circle)
-                            : CircleOuterFrame(_innerController,
-                                _baseAnimation.value, widget.circle),
+                            : CircleOuterFrame(
+                                _innerController,
+                                _baseAnimation.value,
+                                widget.circle,
+                              ),
 
                         /// Yen after the first week
                         child: RepaintBoundary(
                           child: CustomPaint(
                             size: constraintsSize,
                             painter: CircleInnerFrame(
-                                _innerController,
-                                _animation,
-                                _baseAnimation.value,
-                                widget.circle),
+                              _innerController,
+                              _animation,
+                              _baseAnimation.value,
+                              widget.circle,
+                            ),
                             child: widget.circle.circleShader ==
                                         CircleShader.round ||
                                     widget.circle.circleShader ==
@@ -153,10 +164,11 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
                                     child: CustomPaint(
                                       size: constraintsSize,
                                       painter: CircleInnermostFrame(
-                                          _controller,
-                                          _animation,
-                                          _baseAnimation.value,
-                                          widget.circle),
+                                        _controller,
+                                        _animation,
+                                        _baseAnimation.value,
+                                        widget.circle,
+                                      ),
                                       child: RepaintBoundary(
                                         child: CustomPaint(
                                           size: constraintsSize,
@@ -180,13 +192,20 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
                 ),
               ],
             );
-          });
-    });
+          },
+        );
+      },
+    );
   }
 
   /// Initialization registration as a method
   void durationAnimation(
-      int duration1, double begin, double end, double begin2, double end2) {
+    int duration1,
+    double begin,
+    double end,
+    double begin2,
+    double end2,
+  ) {
     widget.circle.circlePointerValue = widget.circle.circleStrokeWidth / 2;
     _innerController = AnimationController(
       vsync: this,
@@ -205,7 +224,10 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
 
   /// Method to calculate alert.
   Future<void> showMyDialog(
-      BuildContext context, String text, int index) async {
+    BuildContext context,
+    String text,
+    int index,
+  ) async {
     double regulationsSize = 100;
     RenderBox box =
         widget.circleKey.currentContext?.findRenderObject() as RenderBox;
@@ -226,30 +248,33 @@ class _MultipleCircleSetProgressState extends State<MultipleCircleSetProgress>
 
           /// The orientation determines the dialog coordinates.
           rect: Rect.fromLTWH(
-              widget.circle.circleSizeValue <= regulationsSize
-                  ? regulationsDx
-                  : offset.dx,
-              offset.dy,
-              widget.circle.circleSizeValue <= regulationsSize
-                  ? regulationsSize
-                  : widget.circle.circleSizeValue,
-              regulationsHeight),
+            widget.circle.circleSizeValue <= regulationsSize
+                ? regulationsDx
+                : offset.dx,
+            offset.dy,
+            widget.circle.circleSizeValue <= regulationsSize
+                ? regulationsSize
+                : widget.circle.circleSizeValue,
+            regulationsHeight,
+          ),
           content: SingleChildScrollView(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              const Padding(padding: EdgeInsets.only(top: 20)),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                const Padding(padding: EdgeInsets.only(top: 20)),
 
-              /// Characters to be changed
-              Text(text),
-              const Padding(padding: EdgeInsets.only(top: 20)),
-              OutlinedButton(
+                /// Characters to be changed
+                Text(text),
+                const Padding(padding: EdgeInsets.only(top: 20)),
+                OutlinedButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: const Text('OK')),
-            ],
-          )),
+                  child: const Text('OK'),
+                ),
+              ],
+            ),
+          ),
         );
       },
     );

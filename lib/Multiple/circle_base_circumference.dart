@@ -19,7 +19,8 @@ class CircleBaseCircumference extends CustomPainter {
       ..strokeWidth = strokeWidth
       ..strokeCap = StrokeCap.round
       ..shader = SweepGradient(colors: colors).createShader(
-          Rect.fromCircle(center: size.center(Offset.zero), radius: 0));
+        Rect.fromCircle(center: size.center(Offset.zero), radius: 0),
+      );
     canvas.drawCircle(size.center(Offset.zero), size.width / 2, paint);
     canvas.save();
     canvas.restore();

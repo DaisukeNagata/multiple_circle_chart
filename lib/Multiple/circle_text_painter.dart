@@ -32,14 +32,18 @@ class CircleTextPainter extends CustomPainter {
       int lenIndex = i;
 
       /// Show graph values
-      TextSpan textSpan = TextSpan(children: <TextSpan>[
-        TextSpan(
+      TextSpan textSpan = TextSpan(
+        children: <TextSpan>[
+          TextSpan(
             text: tex,
             style: TextStyle(
-                color: combinedColor,
-                fontSize: textSize,
-                fontWeight: FontWeight.bold)),
-      ]);
+              color: combinedColor,
+              fontSize: textSize,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      );
       TextPainter textPainter = TextPainter(
         text: textSpan,
         textDirection: TextDirection.ltr,
@@ -71,14 +75,18 @@ class CircleTextPainter extends CustomPainter {
         }
       }
       for (var tex in circleTextList) {
-        TextSpan textSpan = TextSpan(children: <TextSpan>[
-          TextSpan(
+        TextSpan textSpan = TextSpan(
+          children: <TextSpan>[
+            TextSpan(
               text: tex,
               style: TextStyle(
-                  color: combinedColor,
-                  fontSize: textSize,
-                  fontWeight: FontWeight.bold)),
-        ]);
+                color: combinedColor,
+                fontSize: textSize,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        );
 
         TextPainter innerTextPainter = TextPainter(
           text: textSpan,
@@ -95,11 +103,14 @@ class CircleTextPainter extends CustomPainter {
         }
       }
 
-      textSpan = TextSpan(children: <TextSpan>[
-        TextSpan(
+      textSpan = TextSpan(
+        children: <TextSpan>[
+          TextSpan(
             text: ansTex,
-            style: TextStyle(color: combinedColor, fontSize: textSize)),
-      ]);
+            style: TextStyle(color: combinedColor, fontSize: textSize),
+          ),
+        ],
+      );
       textPainter = TextPainter(
         text: textSpan,
         textDirection: TextDirection.ltr,
@@ -111,9 +122,12 @@ class CircleTextPainter extends CustomPainter {
       );
 
       textPainter.paint(
-          canvas,
-          Offset(circleOffset.dx - (_data.circleTextMarginList?[i].width ?? 0),
-              circleOffset.dy - (_data.circleTextMarginList?[i].height ?? 0)));
+        canvas,
+        Offset(
+          circleOffset.dx - (_data.circleTextMarginList?[i].width ?? 0),
+          circleOffset.dy - (_data.circleTextMarginList?[i].height ?? 0),
+        ),
+      );
     }
     canvas.save();
   }

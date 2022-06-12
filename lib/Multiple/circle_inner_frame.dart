@@ -15,7 +15,11 @@ class CircleInnerFrame extends CustomPainter {
   final double _rotate = 270;
 
   CircleInnerFrame(
-      this._controller, this._animation, this._baseAnimationValue, this._data);
+    this._controller,
+    this._animation,
+    this._baseAnimationValue,
+    this._data,
+  );
 
   double degToRad(double deg) => deg * (pi / 180.0);
 
@@ -46,9 +50,9 @@ class CircleInnerFrame extends CustomPainter {
 
     /// Redefined to change animation speed.
     _animation = Tween(
-            begin: -_baseAnimationValue.floor().toDouble(),
-            end: (_data.circleCounterValue ?? 0) - _baseAnimationValue.floor())
-        .animate(_controller);
+      begin: -_baseAnimationValue.floor().toDouble(),
+      end: (_data.circleCounterValue ?? 0) - _baseAnimationValue.floor(),
+    ).animate(_controller);
     if (_controller.status == AnimationStatus.dismissed ||
         time != 0.0 && time <= (_data.circleLabelValue ?? 0)) {
       _controller.stop();
@@ -68,29 +72,36 @@ class CircleInnerFrame extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.butt
       ..shader = SweepGradient(colors: colorSet).createShader(
-          Rect.fromCircle(center: size.center(Offset.zero), radius: 0));
+        Rect.fromCircle(center: size.center(Offset.zero), radius: 0),
+      );
     canvas.rotate(degToRad(_rotate));
     canvas.translate(-size.width, 0);
 
     /// Set the answer value and the value in the animation in the animated state.
     if (_controller.status == AnimationStatus.completed) {
       canvas.drawArc(
-          Rect.fromCircle(
-              center: size.center(Offset.zero), radius: size.width / 2),
-          _startAngle,
-          (pi * 2 * value),
-          false,
-          paint);
+        Rect.fromCircle(
+          center: size.center(Offset.zero),
+          radius: size.width / 2,
+        ),
+        _startAngle,
+        (pi * 2 * value),
+        false,
+        paint,
+      );
     } else {
       canvas.drawArc(
-          Rect.fromCircle(
-              center: size.center(Offset.zero), radius: size.width / 2),
-          _startAngle,
-          _controller.isAnimating
-              ? (pi * 2) * _animation.value
-              : ((pi * 2) * reverseValue),
-          false,
-          paint);
+        Rect.fromCircle(
+          center: size.center(Offset.zero),
+          radius: size.width / 2,
+        ),
+        _startAngle,
+        _controller.isAnimating
+            ? (pi * 2) * _animation.value
+            : ((pi * 2) * reverseValue),
+        false,
+        paint,
+      );
     }
     canvas.save();
   }
