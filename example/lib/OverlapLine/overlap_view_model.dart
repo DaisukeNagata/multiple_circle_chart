@@ -49,9 +49,7 @@ class OverlapViewModel {
       children: [
         if (index == 0) ...[
           CustomPaint(
-            child: CustomPaint(
-              painter: gridPainter(gridValue),
-            ),
+            painter: gridPainter(gridValue),
           ),
         ],
         CustomPaint(

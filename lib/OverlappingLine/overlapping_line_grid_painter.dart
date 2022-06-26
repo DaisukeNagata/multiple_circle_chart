@@ -65,7 +65,6 @@ class OverlappingLineGridPainter extends CustomPainter {
       ///　In that case, draw a line.
       for (var i = 0; i <= wLines; ++i) {
         pathSet(
-          value,
           flg,
           i,
         );
@@ -75,7 +74,6 @@ class OverlappingLineGridPainter extends CustomPainter {
       ///　In that case, draw a line.
       for (var i = 0; i <= wLines; ++i) {
         pathSet(
-          value,
           flg,
           i,
         );
@@ -88,7 +86,7 @@ class OverlappingLineGridPainter extends CustomPainter {
     return false;
   }
 
-  pathSet(double value, bool flg, int i) {
+  pathSet(bool flg, int i) {
     var h = boxSize * wLines;
     var h2 = -boxSize * wLines;
     if (flg) {
