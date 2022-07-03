@@ -75,7 +75,7 @@ class OverLappingLineSmoothPainter extends CustomPainter {
           data[nowValue] == data[beforeValue]
               ? data[nowValue]
 
-              /// V
+              /// v
               : data[nowValue] > data[beforeValue] &&
                       data[nowValue] > data[afterValue]
                   ? data[nowValue] + originX / value
