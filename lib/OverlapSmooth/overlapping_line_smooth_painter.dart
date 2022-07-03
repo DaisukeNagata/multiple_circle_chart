@@ -49,23 +49,23 @@ class OverLappingLineSmoothPainter extends CustomPainter {
           data[nowValue] == data[beforeValue]
               ? data[beforeValue]
 
-              ///v
+              /// v
               : data[nowValue] > data[beforeValue] &&
                       data[nowValue] > data[afterValue]
                   ? data[beforeValue] + originX / value
 
-                  ///^
+                  /// ^
                   : data[nowValue] < data[beforeValue] &&
                           data[nowValue] < data[afterValue]
                       ? data[beforeValue] - originX / value
                       : data[beforeValue],
 
-          ///v
+          /// v
           data[nowValue] > data[beforeValue] &&
                   data[nowValue] > data[afterValue]
               ? w2 + originX / value
 
-              ///^
+              /// ^
               : data[nowValue] < data[beforeValue] &&
                       data[nowValue] < data[afterValue]
                   ? w2 + originX / value
@@ -75,12 +75,12 @@ class OverLappingLineSmoothPainter extends CustomPainter {
           data[nowValue] == data[beforeValue]
               ? data[nowValue]
 
-              ///V
+              /// V
               : data[nowValue] > data[beforeValue] &&
                       data[nowValue] > data[afterValue]
                   ? data[nowValue] + originX / value
 
-                  ///^
+                  /// ^
                   : data[nowValue] < data[beforeValue] &&
                           data[nowValue] < data[afterValue]
                       ? data[nowValue] - originX / value
