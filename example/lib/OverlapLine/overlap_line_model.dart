@@ -46,7 +46,6 @@ class OverlapLineModel {
   ];
 
   bool lineOrFillFlg = false;
-
   late final AnimationController controller;
   late final Animation<double> animation;
 }

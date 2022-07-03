@@ -1,3 +1,4 @@
+import 'package:example/Main/OverlapSmooth/OverLapSmoothBar.dart';
 import 'package:flutter/material.dart';
 
 import 'overlap_line_model.dart';
@@ -15,10 +16,25 @@ class OverLapLineBar extends StatelessWidget {
           title: const Text('EveryDaySoft_Example'),
           leading: IconButton(
             onPressed: () {
-              Navigator.of(context).popUntil((route) => route.isFirst);
+              Navigator.pop(context);
             },
             icon: const Icon(Icons.arrow_back_ios),
           ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const OverLapSmoothBar();
+                    },
+                  ),
+                );
+              },
+              icon: const Icon(Icons.arrow_forward_ios),
+            )
+          ],
         ),
         body: const OverLappingWidget(),
       ),
@@ -71,7 +87,6 @@ class OverLappingState extends State<OverLappingWidget>
     gridValue =
         (MediaQuery.of(context).size.width / count) * OverlapLineModel.wLines;
     sizeValue = (MediaQuery.of(context).size.width / count);
-
     shader = LinearGradient(
       begin: Alignment.bottomCenter,
       end: Alignment.topCenter,
@@ -149,7 +164,7 @@ class OverLappingState extends State<OverLappingWidget>
             });
           },
           child: const Text('click here line or fill'),
-        )
+        ),
       ],
     );
   }
