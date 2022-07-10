@@ -42,7 +42,7 @@ class _OverLapSmoothState extends State<OverLapSmoothPage>
   final _listCount = 16.0;
   final _originX = 10.0;
   final _height = 200.0;
-  late List<double> data;
+  late List<double> data = [];
 
   @override
   void initState() {
@@ -53,25 +53,11 @@ class _OverLapSmoothState extends State<OverLapSmoothPage>
         setState(() {});
       })
       ..forward();
-    data = [
-      (_height + _originX - ((_height / _listCount) * Random().nextInt(16))),
-      (_height + _originX - ((_height / _listCount) * Random().nextInt(16))),
-      (_height + _originX - ((_height / _listCount) * Random().nextInt(16))),
-      (_height + _originX - ((_height / _listCount) * Random().nextInt(16))),
-      (_height + _originX - ((_height / _listCount) * Random().nextInt(16))),
-      (_height + _originX - ((_height / _listCount) * Random().nextInt(16))),
-      (_height + _originX - ((_height / _listCount) * Random().nextInt(16))),
-      (_height + _originX - ((_height / _listCount) * Random().nextInt(16))),
-      (_height + _originX - ((_height / _listCount) * Random().nextInt(16))),
-      (_height + _originX - ((_height / _listCount) * Random().nextInt(16))),
-      (_height + _originX - ((_height / _listCount) * Random().nextInt(16))),
-      (_height + _originX - ((_height / _listCount) * Random().nextInt(16))),
-      (_height + _originX - ((_height / _listCount) * Random().nextInt(16))),
-      (_height + _originX - ((_height / _listCount) * Random().nextInt(16))),
-      (_height + _originX - ((_height / _listCount) * Random().nextInt(16))),
-      (_height + _originX - ((_height / _listCount) * Random().nextInt(16))),
-      (_height + _originX - ((_height / _listCount) * Random().nextInt(16))),
-    ];
+    for (var i = 0; i <= _listCount; i++) {
+      data.add(
+        _height + _originX - ((_height / _listCount) * Random().nextInt(16)),
+      );
+    }
   }
 
   @override
