@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class OverLappingLineSmoothPainter extends CustomPainter {
@@ -7,6 +8,7 @@ class OverLappingLineSmoothPainter extends CustomPainter {
     required this.originX,
     required this.height,
     required this.width,
+    required this.circleValue,
     required this.paintSet,
     required this.data,
     required this.controller,
@@ -16,6 +18,7 @@ class OverLappingLineSmoothPainter extends CustomPainter {
   final double originX;
   final double height;
   final double width;
+  final double circleValue;
   final Paint paintSet;
   final List<double> data;
   final AnimationController controller;
@@ -24,9 +27,11 @@ class OverLappingLineSmoothPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = paintSet;
-    Path path = Path();
-    path.moveTo(originX, data[0]);
+    Path path = Path()..moveTo(originX, data[0]);
     var value = data.length;
+    var paintCircle = Paint()
+      ..color = paint.color
+      ..style = PaintingStyle.fill;
     for (var i = 0; i < data.length; i++) {
       var beforeValue = (i <= 1 ? 0 : i - 1);
       var x = originX + width * beforeValue;
@@ -53,7 +58,7 @@ class OverLappingLineSmoothPainter extends CustomPainter {
                 ///^
                 : data[nowValue] < data[beforeValue] &&
                         data[nowValue] < data[afterValue]
-                    ? y - originX / value
+                    ? y + originX / value
                     : y,
 
         ///v
@@ -71,13 +76,16 @@ class OverLappingLineSmoothPainter extends CustomPainter {
                 ///^
                 : data[nowValue] < data[beforeValue] &&
                         data[nowValue] < data[afterValue]
-                    ? y2 - originX / value
+                    ? y2 + originX / value
                     : y2,
         x2,
         y2,
       );
+      if (controller.value == 1) {
+        canvas.drawCircle(Offset(x2, y2), 6, paintCircle);
+      }
     }
-    canvas.drawCircle(_calculate(controller.value, path), 2, paint);
+    canvas.drawCircle(_calculate(controller.value, path), 6, paintCircle);
 
     var metricsIterator = path.computeMetrics().iterator;
     if (metricsIterator.moveNext()) {

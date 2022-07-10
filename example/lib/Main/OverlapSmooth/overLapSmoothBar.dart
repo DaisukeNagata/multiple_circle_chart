@@ -99,6 +99,7 @@ class _OverLapSmoothState extends State<OverLapSmoothPage>
                   width: (MediaQuery.of(context).size.width - _originX * 2) /
                       _listCount,
                   data: data,
+                  circleValue: 5,
                   paintSet: Paint()
                     ..color = Colors.red
                     ..style = PaintingStyle.stroke
