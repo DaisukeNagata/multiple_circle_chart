@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/widgets.dart';
 
 class OverLappingLineSmoothPainter extends CustomPainter {
@@ -8,7 +10,7 @@ class OverLappingLineSmoothPainter extends CustomPainter {
     required this.paintSet,
     required this.data,
     required this.controller,
-    required this.count,
+    required this.arcFlg,
   });
 
   final double originX;
@@ -17,84 +19,83 @@ class OverLappingLineSmoothPainter extends CustomPainter {
   final Paint paintSet;
   final List<double> data;
   final AnimationController controller;
-  final int count;
+  final bool arcFlg;
 
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = paintSet;
     Path path = Path();
     path.moveTo(originX, data[0]);
-    var c = count == 0 ? 1 : count - 1;
-    var value = 16;
-    for (var i = 0; i <= c; i++) {
-      var beforeValue = (i == 0 ? 0 : i - 1);
+    var value = data.length;
+    for (var i = 0; i < data.length; i++) {
+      var beforeValue = (i <= 1 ? 0 : i - 1);
+      var x = originX + width * beforeValue;
+      var y = data[beforeValue];
+      var x2 = arcFlg
+          ? originX + width * (i % 2 == 0 ? i : beforeValue)
+          : originX + width * i;
+      var y2 = arcFlg ? data[(i % 2 == 0 ? i : beforeValue)] : data[i];
       var nowValue = i;
       var afterValue =
           (nowValue >= data.length - 1 ? data.length - 1 : nowValue + 1);
-      var w = (width * beforeValue + originX);
-      var w2 = (width * nowValue + originX);
       path.cubicTo(
-        w,
+        x,
 
         /// same
         data[nowValue] == data[beforeValue]
-            ? data[beforeValue]
+            ? y
 
             ///v
             : data[nowValue] > data[beforeValue] &&
                     data[nowValue] > data[afterValue]
-                ? data[beforeValue] + originX / value
+                ? y + originX / value
 
                 ///^
                 : data[nowValue] < data[beforeValue] &&
                         data[nowValue] < data[afterValue]
-                    ? data[beforeValue] - originX / value
-                    : data[beforeValue],
+                    ? y - originX / value
+                    : y,
 
         ///v
-        w2,
+        x2,
 
         /// same
         data[nowValue] == data[beforeValue]
-            ? data[nowValue]
+            ? y2
 
             ///V
             : data[nowValue] > data[beforeValue] &&
                     data[nowValue] > data[afterValue]
-                ? data[nowValue] + originX / value
+                ? y2 + originX / value
 
                 ///^
                 : data[nowValue] < data[beforeValue] &&
                         data[nowValue] < data[afterValue]
-                    ? data[nowValue] - originX / value
-                    : data[nowValue],
-        w2,
-        data[nowValue],
+                    ? y2 - originX / value
+                    : y2,
+        x2,
+        y2,
       );
     }
-    canvas.drawPath(path, paint);
+    canvas.drawCircle(_calculate(controller.value, path), 2, paint);
 
-    var x = originX + width * c;
-    var y = data[count == 0 ? 1 : count - 1];
-    var x2 = originX + width * count;
-    var y2 = data[count];
-    var drawLineX = 0.0;
-    var drawLineY = 0.0;
-
-    if (x >= x2) {
-      drawLineX = x + ((x - x2) * controller.value);
-    } else {
-      drawLineX = x + ((x2 - x) * controller.value);
+    var metricsIterator = path.computeMetrics().iterator;
+    if (metricsIterator.moveNext()) {
+      Path pathArc = Path();
+      var metric = metricsIterator.current;
+      final pathSegment =
+          metric.extractPath(0.0, metric.length * controller.value);
+      pathArc.addPath(pathSegment, Offset.zero);
+      canvas.drawPath(pathArc, paint);
     }
+  }
 
-    if (y == y2) {
-      drawLineY = y2;
-    } else if (y >= y2) {
-      drawLineY = y - ((y - y2) * controller.value);
-    } else {
-      drawLineY = y + ((y2 - y) * controller.value);
-    }
-    canvas.drawLine(Offset(x, y), Offset(drawLineX, drawLineY), paint);
+  Offset _calculate(double value, Path path) {
+    PathMetrics pathMetrics = path.computeMetrics();
+    PathMetric pathMetric = pathMetrics.elementAt(0);
+    value = pathMetric.length * value;
+    Tangent? pos = pathMetric.getTangentForOffset(value);
+    return pos?.position ?? const Offset(0, 0);
   }
 
   @override
