@@ -82,10 +82,10 @@ class OverLappingLineSmoothPainter extends CustomPainter {
         y2,
       );
       if (controller.value == 1) {
-        canvas.drawCircle(Offset(x2, y2), 6, paintCircle);
+        canvas.drawCircle(Offset(x2, y2), circleValue, paintCircle);
       }
     }
-    canvas.drawCircle(_calculate(controller.value, path), 6, paintCircle);
+    canvas.drawCircle(_calculate(controller.value, path), 5, paintCircle);
 
     var metricsIterator = path.computeMetrics().iterator;
     if (metricsIterator.moveNext()) {
