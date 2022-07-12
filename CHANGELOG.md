@@ -1,4 +1,4 @@
-## 0.9.84
+## 0.9.85
 
 * It is a graph that can change the speed and overlap the graph 100% or more.
 * Shows the percentage of the pie chart.

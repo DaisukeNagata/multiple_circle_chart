@@ -1,4 +1,4 @@
-import 'package:example/Main/OverlapSmooth/overLapSmoothBar.dart';
+import 'package:example/OverlapSmooth/overLapSmoothBar.dart';
 import 'package:flutter/material.dart';
 
 import 'overlap_line_model.dart';
