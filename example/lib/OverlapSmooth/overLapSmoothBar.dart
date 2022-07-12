@@ -45,6 +45,12 @@ class _OverLapSmoothState extends State<OverLapSmoothPage>
   late List<double> data = [];
 
   @override
+  void dispose() {
+    con.dispose();
+    super.dispose();
+  }
+
+  @override
   void initState() {
     super.initState();
     con = AnimationController(vsync: this)
