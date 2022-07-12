@@ -28,18 +28,24 @@ class OverLappingLineSmoothPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     Paint paint = paintSet;
     Path path = Path()..moveTo(originX, data[0]);
-    var value = data.length;
     var paintCircle = Paint()
       ..color = paint.color
       ..style = PaintingStyle.fill;
-    for (var i = 0; i < data.length; i++) {
+    var i = 0;
+    data.where((double? value) => value != null).toList().forEach((value) {
       var beforeValue = (i <= 1 ? 0 : i - 1);
       var x = originX + width * beforeValue;
       var y = data[beforeValue];
       var x2 = arcFlg
-          ? originX + width * (i % 2 == 0 ? i : beforeValue)
+          ? originX + width * (i.isEven ? i : beforeValue)
           : originX + width * i;
-      var y2 = arcFlg ? data[(i % 2 == 0 ? i : beforeValue)] : data[i];
+      var y2 = arcFlg ? data[(i.isEven ? i : beforeValue)] : value;
+      var x3 = originX + width * i;
+      var y3 = i.isOdd
+          ? arcFlg
+              ? value / 2
+              : value
+          : value;
       var nowValue = i;
       var afterValue =
           (nowValue >= data.length - 1 ? data.length - 1 : nowValue + 1);
@@ -47,17 +53,15 @@ class OverLappingLineSmoothPainter extends CustomPainter {
         x,
 
         /// same
-        data[nowValue] == data[beforeValue]
+        value == data[beforeValue]
             ? y
 
             ///v
-            : data[nowValue] > data[beforeValue] &&
-                    data[nowValue] > data[afterValue]
+            : value > data[beforeValue] && value > data[afterValue]
                 ? y + originX / value
 
                 ///^
-                : data[nowValue] < data[beforeValue] &&
-                        data[nowValue] < data[afterValue]
+                : value < data[beforeValue] && value < data[afterValue]
                     ? y + originX / value
                     : y,
 
@@ -65,28 +69,45 @@ class OverLappingLineSmoothPainter extends CustomPainter {
         x2,
 
         /// same
-        data[nowValue] == data[beforeValue]
+        value == data[beforeValue]
             ? y2
 
             ///V
-            : data[nowValue] > data[beforeValue] &&
-                    data[nowValue] > data[afterValue]
+            : value > data[beforeValue] && value > data[afterValue]
                 ? y2 + originX / value
 
                 ///^
-                : data[nowValue] < data[beforeValue] &&
-                        data[nowValue] < data[afterValue]
+                : value < data[beforeValue] && value < data[afterValue]
                     ? y2 + originX / value
                     : y2,
         x2,
         y2,
       );
       if (controller.value == 1) {
-        canvas.drawCircle(Offset(x2, y2), circleValue, paintCircle);
+        canvas.drawCircle(
+          Offset(
+            arcFlg
+                ? i.isEven
+                    ? x2
+                    : x3
+                : x2,
+            arcFlg
+                ? i.isEven
+                    ? y2
+                    : y3
+                : y2,
+          ),
+          circleValue,
+          paintCircle,
+        );
       }
-    }
+      i++;
+    });
     canvas.drawCircle(
-        _calculate(controller.value, path), circleValue, paintCircle);
+      _calculate(controller.value, path),
+      circleValue,
+      paintCircle,
+    );
 
     var metricsIterator = path.computeMetrics().iterator;
     if (metricsIterator.moveNext()) {
