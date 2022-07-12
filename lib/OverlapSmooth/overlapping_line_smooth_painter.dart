@@ -40,12 +40,6 @@ class OverLappingLineSmoothPainter extends CustomPainter {
           ? originX + width * (i.isEven ? i : beforeValue)
           : originX + width * i;
       var y2 = arcFlg ? data[(i.isEven ? i : beforeValue)] : value;
-      var x3 = originX + width * i;
-      var y3 = i.isOdd
-          ? arcFlg
-              ? value / 2
-              : value
-          : value;
       var nowValue = i;
       var afterValue =
           (nowValue >= data.length - 1 ? data.length - 1 : nowValue + 1);
@@ -84,22 +78,7 @@ class OverLappingLineSmoothPainter extends CustomPainter {
         y2,
       );
       if (controller.value == 1) {
-        canvas.drawCircle(
-          Offset(
-            arcFlg
-                ? i.isEven
-                    ? x2
-                    : x3
-                : x2,
-            arcFlg
-                ? i.isEven
-                    ? y2
-                    : y3
-                : y2,
-          ),
-          circleValue,
-          paintCircle,
-        );
+        canvas.drawCircle(Offset(x2, y2), circleValue, paintCircle);
       }
       i++;
     });
