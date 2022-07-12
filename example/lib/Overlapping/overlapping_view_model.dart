@@ -208,7 +208,7 @@ class OverLappingViewModel {
         child: CustomPaint(
           painter: _setP(p, "", -1, 0, v),
           child: CustomPaint(
-            painter: _setP(p, "1", 0, 0, v),
+            painter: _setP(p, "1", -0, 0, v),
             child: CustomPaint(
               painter: _setP(p, "2", 1 / v, 1, v),
               child: CustomPaint(

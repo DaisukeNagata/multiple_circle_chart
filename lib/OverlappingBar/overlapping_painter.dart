@@ -153,7 +153,7 @@ class OverlappingPainter extends CustomPainter {
 
     /// 0.0 ~ 1.0 * size.width　Range specification.
     if (value != null) {
-      drawBar(3.0, (value?.clamp(0.0, 1.0) ?? 0.0) * size.width);
+      drawBar(0.0, (value?.clamp(0.0, 1.0) ?? 0.0) * size.width);
     } else {
       drawBar(0.0, size.width);
     }

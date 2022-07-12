@@ -116,7 +116,7 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
     double dx = dataPosition.dx;
     Offset offset = box.localToGlobal(Offset.zero);
     return showDialog<void>(
-      barrierColor: Colors.white.withOpacity(0),
+      barrierColor: Colors.transparent,
       context: context,
       barrierDismissible: true, // user must tap button!
       builder: (BuildContext context) {
