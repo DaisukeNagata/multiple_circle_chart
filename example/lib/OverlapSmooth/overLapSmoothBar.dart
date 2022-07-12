@@ -105,6 +105,25 @@ class _OverLapSmoothState extends State<OverLapSmoothPage>
               onPressed: () {
                 setState(() {
                   _arcFlg = !_arcFlg;
+                  data.clear();
+                  if (_arcFlg) {
+                    for (var i = 0; i <= _listCount; i++) {
+                      data.add(
+                        _height +
+                            _originX -
+                            ((_height / _listCount) *
+                                (i.isEven ? 0 : Random().nextInt(16))),
+                      );
+                    }
+                  } else {
+                    for (var i = 0; i <= _listCount; i++) {
+                      data.add(
+                        _height +
+                            _originX -
+                            ((_height / _listCount) * Random().nextInt(16)),
+                      );
+                    }
+                  }
                   con
                     ..reset()
                     ..forward();
