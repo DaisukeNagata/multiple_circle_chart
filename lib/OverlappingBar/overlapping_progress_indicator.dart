@@ -10,7 +10,7 @@ import 'overlapping_painter.dart';
 ///　OverlappingProgressIndicator is a class that calculates UI other than graphs.
 class OverlappingProgressIndicator extends OverlappingIndicator {
   const OverlappingProgressIndicator({
-    Key? key,
+    super.key,
     RadData radData = RadData.horizontal,
     Size? contextSize,
     int? graphCount,
@@ -27,7 +27,6 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
     required StreamController<List<dynamic>> streamController,
   })  : assert(minHeight == null || minHeight > 0),
         super(
-          key: key,
           radData: radData,
           globalKey: globalKey,
           animationValue: animationValue,
@@ -126,8 +125,12 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
 
           /// The orientation determines the dialog coordinates.
           rect: RadData.horizontal == radData
-              ? Rect.fromLTWH(offset.dx, offset.dy - (boxSize ?? 0),
-                  box.size.width, (contextSize?.width ?? 0) / 3,)
+              ? Rect.fromLTWH(
+                  offset.dx,
+                  offset.dy - (boxSize ?? 0),
+                  box.size.width,
+                  (contextSize?.width ?? 0) / 3,
+                )
               : Rect.fromLTWH(
                   offset.dx,
                   offset.dy.ceilToDouble() -
@@ -141,9 +144,9 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
                 const Padding(padding: EdgeInsets.only(top: 8)),
 
                 /// Characters to be changed
-                Text(dialogText == ""
-                    ? dx.toStringAsFixed(1)
-                    : dialogText ?? "",),
+                Text(
+                  dialogText == "" ? dx.toStringAsFixed(1) : dialogText ?? "",
+                ),
                 const Padding(padding: EdgeInsets.only(bottom: 16)),
                 OutlinedButton(
                   onPressed: () {

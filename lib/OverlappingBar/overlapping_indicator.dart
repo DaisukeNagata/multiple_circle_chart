@@ -8,7 +8,7 @@ import 'overlapping_data.dart';
 /// Abstract model class
 abstract class OverlappingIndicator extends StatefulWidget {
   const OverlappingIndicator({
-    Key? key,
+    super.key,
     this.globalKey,
     this.semanticsLabel,
     this.semanticsValue,
@@ -24,7 +24,7 @@ abstract class OverlappingIndicator extends StatefulWidget {
     required this.con,
     required this.dialogData,
     required this.streamController,
-  }) : super(key: key);
+  });
   final GlobalKey? globalKey;
   final String? semanticsLabel;
   final String? semanticsValue;

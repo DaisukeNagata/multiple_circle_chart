@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /// Alert function to display on the graph.
 class OverlappingDialog extends StatelessWidget {
   const OverlappingDialog({
-    Key? key,
+    super.key,
     this.backgroundColor,
     this.elevation,
     this.insetAnimationDuration = const Duration(milliseconds: 100),
@@ -12,7 +12,7 @@ class OverlappingDialog extends StatelessWidget {
     this.shape,
     this.rect,
     this.child,
-  }) : super(key: key);
+  });
   final Color? backgroundColor;
   final double? elevation;
   final Duration insetAnimationDuration;
