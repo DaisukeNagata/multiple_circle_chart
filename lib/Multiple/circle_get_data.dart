@@ -16,6 +16,7 @@ class CircleGetData extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {}
 
+  /// I am calculating the angle, the purpose is to expand when tapping.
   angel(Size a, Size b) {
     var r = math.atan2(b.height - a.height, b.width - a.width);
     if (r < 0) {

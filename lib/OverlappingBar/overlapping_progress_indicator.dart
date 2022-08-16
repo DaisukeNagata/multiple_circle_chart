@@ -109,8 +109,11 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
   }
 
   /// Method to calculate alert.
-  Future<void> showMyDialog(BuildContext context, Offset dataPosition,
-      {String? dialogText}) async {
+  Future<void> showMyDialog(
+    BuildContext context,
+    Offset dataPosition, {
+    String? dialogText,
+  }) async {
     RenderBox box = globalKey?.currentContext?.findRenderObject() as RenderBox;
     double dx = dataPosition.dx;
     Offset offset = box.localToGlobal(Offset.zero);
@@ -207,8 +210,11 @@ class _OverlappingProgressState extends State<OverlappingProgressIndicator>
     super.dispose();
   }
 
-  Widget _buildIndicator(BuildContext context, double animationValue,
-      TextDirection textDirection) {
+  Widget _buildIndicator(
+    BuildContext context,
+    double animationValue,
+    TextDirection textDirection,
+  ) {
     final ProgressIndicatorThemeData indicatorTheme =
         ProgressIndicatorTheme.of(context);
     final double minHeight =

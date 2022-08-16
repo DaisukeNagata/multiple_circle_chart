@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+///　parabola graph design
 class OverLappingLineSmoothPainter extends CustomPainter {
   OverLappingLineSmoothPainter({
     required this.originX,
@@ -27,11 +28,15 @@ class OverLappingLineSmoothPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = paintSet;
+
+    ///　The value of the graph position is set in data.
     Path path = Path()..moveTo(originX, data[0]);
     var paintCircle = Paint()
       ..color = paint.color
       ..style = PaintingStyle.fill;
     var i = 0;
+
+    /// I'm trying to set a non-null value in where.
     data.where((double? value) => value != null).toList().forEach((value) {
       var beforeValue = (i <= 1 ? 0 : i - 1);
       var x = originX + width * beforeValue;
@@ -89,6 +94,8 @@ class OverLappingLineSmoothPainter extends CustomPainter {
     );
 
     var metricsIterator = path.computeMetrics().iterator;
+
+    ///　Draw path dynamically.
     if (metricsIterator.moveNext()) {
       Path pathArc = Path();
       var metric = metricsIterator.current;
@@ -99,6 +106,7 @@ class OverLappingLineSmoothPainter extends CustomPainter {
     }
   }
 
+  ///　Get the value of path.
   Offset _calculate(double value, Path path) {
     PathMetrics pathMetrics = path.computeMetrics();
     PathMetric pathMetric = pathMetrics.elementAt(0);

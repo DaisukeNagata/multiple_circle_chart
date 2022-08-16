@@ -21,8 +21,9 @@ class CircleCombinedChart extends CustomPainter {
     Paint paint = Paint()
       ..strokeWidth = _data.circleStrokeWidth
       ..style = PaintingStyle.stroke;
-    canvas.rotate(degToRad(_rotate));
-    canvas.translate(-size.width, 0);
+    canvas
+      ..rotate(degToRad(_rotate))
+      ..translate(-size.width, 0);
     for (var i = 0; i < len; i++) {
       /// Enlarge when tapped.
       paint.strokeWidth = i == _data.circleTapIndex

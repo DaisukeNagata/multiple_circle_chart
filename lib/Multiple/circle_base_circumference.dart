@@ -13,6 +13,7 @@ class CircleBaseCircumference extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    ///　The part you are using is a circular design.
     Paint paint = Paint()
       ..isAntiAlias = true
       ..style = PaintingStyle.stroke
@@ -21,9 +22,10 @@ class CircleBaseCircumference extends CustomPainter {
       ..shader = SweepGradient(colors: colors).createShader(
         Rect.fromCircle(center: size.center(Offset.zero), radius: 0),
       );
-    canvas.drawCircle(size.center(Offset.zero), size.width / 2, paint);
-    canvas.save();
-    canvas.restore();
+    canvas
+      ..drawCircle(size.center(Offset.zero), size.width / 2, paint)
+      ..save()
+      ..restore();
   }
 
   @override
