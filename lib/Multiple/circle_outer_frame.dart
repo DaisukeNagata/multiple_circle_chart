@@ -74,6 +74,7 @@ class CircleOuterFrame extends CustomPainter {
           : circleLabelValue];
     }
 
+    ///　A graph with a flat tip
     Paint paint = Paint()
       ..strokeWidth = _data.circleStrokeWidth
       ..style = PaintingStyle.stroke

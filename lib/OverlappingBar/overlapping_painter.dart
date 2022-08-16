@@ -95,6 +95,7 @@ class OverlappingPainter extends CustomPainter {
       switch (circleData ?? CircleData.none) {
         case CircleData.none:
           canvas.drawRRect(
+            ///　rounded right corner
             RRect.fromLTRBAndCorners(
               rect.right,
               rect.top,
@@ -108,6 +109,7 @@ class OverlappingPainter extends CustomPainter {
           break;
         case CircleData.leftCircle:
           canvas.drawRRect(
+            ///　rounded left corner
             RRect.fromLTRBAndCorners(
               rect.right,
               rect.top,
@@ -121,6 +123,7 @@ class OverlappingPainter extends CustomPainter {
           break;
         case CircleData.rightCircle:
           canvas.drawRRect(
+            ///　rounded right corner
             RRect.fromLTRBAndCorners(
               rect.right,
               rect.top,
@@ -134,6 +137,7 @@ class OverlappingPainter extends CustomPainter {
           break;
         case CircleData.allCircle:
           canvas.drawRRect(
+            ///　rounded all corner
             RRect.fromLTRBAndCorners(
               rect.right,
               rect.top,

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-
-import '../OverlappingBar/overlapping_dialog.dart';
+import 'package:multiple_circle_chart/OverlappingBar/overlapping_dialog.dart';
 
 /// Build an alert UI for Dialog.
 class MultipleInfoDialog extends StatelessWidget {
   const MultipleInfoDialog({
-    Key? key,
+    super.key,
     this.content,
     this.titleWidget,
     this.elevation,
@@ -26,8 +25,7 @@ class MultipleInfoDialog extends StatelessWidget {
     this.alignment,
     this.rect,
     this.scrollable = false,
-  })  : assert(contentPadding != null),
-        super(key: key);
+  }) : assert(contentPadding != null);
 
   final Widget? content;
   final Widget? titleWidget;

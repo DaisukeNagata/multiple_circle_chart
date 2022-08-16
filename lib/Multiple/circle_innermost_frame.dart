@@ -109,6 +109,7 @@ class CircleInnermostFrame extends CustomPainter {
       }
     }
 
+    ///　A graph with a circle tip
     Paint shadowPainter = Paint()
       ..strokeWidth = _data.circleStrokeWidth
       ..style = PaintingStyle.fill

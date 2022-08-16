@@ -68,6 +68,8 @@ class OverLappingState extends State<OverLappingWidget>
       duration: const Duration(seconds: 3),
     )..addListener(() {
         setState(() {
+          ///　Avoid crashes.
+          controller.reset();
           animation =
               Tween(begin: 0.0, end: controller.value).animate(controller);
 

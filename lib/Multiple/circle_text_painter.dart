@@ -67,6 +67,7 @@ class CircleTextPainter extends CustomPainter {
         sizeSet * math.sin(pi * 2 * offsetValue) + center.dy,
       );
 
+      ///　Sets character data.
       for (var i = 1; i <= circleTextList.length; i++) {
         double checkOffset = graphHeight * i;
         if (checkOffset + (_data.circleTextMarginList?[lenIndex].height ?? 0) <
@@ -74,6 +75,7 @@ class CircleTextPainter extends CustomPainter {
           ansTex += '${circleTextList[i - 1]} \n';
         }
       }
+
       for (var tex in circleTextList) {
         TextSpan textSpan = TextSpan(
           children: <TextSpan>[
@@ -92,11 +94,15 @@ class CircleTextPainter extends CustomPainter {
           text: textSpan,
           textDirection: TextDirection.ltr,
         );
+
+        /// The character position is within the width of the circle.
         innerTextPainter.layout(
           minWidth: 0,
           maxWidth: _data.circleStrokeWidth,
         );
 
+        /// I'm doing a character-by-character calculation.
+        /// Suppose that beyond the realm...
         if (innerTextPainter.width >=
             ((size.width * math.pi)) * ((_data.endValue?[i] ?? 0))) {
           ansTex = ansTex.replaceFirst(tex, '${(tex).substring(0, 2)}${'...'}');
