@@ -127,7 +127,7 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
           /// The orientation determines the dialog coordinates.
           rect: RadData.horizontal == radData
               ? Rect.fromLTWH(offset.dx, offset.dy - (boxSize ?? 0),
-                  box.size.width, (contextSize?.width ?? 0) / 3)
+                  box.size.width, (contextSize?.width ?? 0) / 3,)
               : Rect.fromLTWH(
                   offset.dx,
                   offset.dy.ceilToDouble() -
@@ -143,7 +143,7 @@ class OverlappingProgressIndicator extends OverlappingIndicator {
                 /// Characters to be changed
                 Text(dialogText == ""
                     ? dx.toStringAsFixed(1)
-                    : dialogText ?? ""),
+                    : dialogText ?? "",),
                 const Padding(padding: EdgeInsets.only(bottom: 16)),
                 OutlinedButton(
                   onPressed: () {

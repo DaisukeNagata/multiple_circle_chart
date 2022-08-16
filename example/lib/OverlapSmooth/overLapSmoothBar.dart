@@ -44,11 +44,6 @@ class _OverLapSmoothState extends State<OverLapSmoothPage>
   final _height = 200.0;
   late List<double> data = [];
 
-  @override
-  void dispose() {
-    con.dispose();
-    super.dispose();
-  }
 
   @override
   void initState() {

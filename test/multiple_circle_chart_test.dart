@@ -58,7 +58,7 @@ void main() {
 
       /// circleColorList is Determines the gradient color.
       circleColorList: [[]],
-      circleTextSizeList: []);
+      circleTextSizeList: [],);
   test('adds one to input values', () {
     final circleSetProgress =
         MultipleCircleSetProgress(circleKey: GlobalKey(), circle: c);
