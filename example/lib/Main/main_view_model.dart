@@ -156,8 +156,8 @@ class MainViewModel {
           height: viewModel.circleData.circleSizeValue,
           child: RotationTransition(
             turns: const AlwaysStoppedAnimation(360 / 360),
-            child: viewModel.circleSetProgress,
             key: viewModel.circleKey,
+            child: viewModel.circleSetProgress,
           ),
         ),
       ],
