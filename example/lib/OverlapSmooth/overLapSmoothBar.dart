@@ -29,7 +29,7 @@ class OverLapSmoothBar extends StatelessWidget {
 }
 
 class OverLapSmoothPage extends StatefulWidget {
-  const OverLapSmoothPage({Key? key}) : super(key: key);
+  const OverLapSmoothPage({super.key});
 
   @override
   State<OverLapSmoothPage> createState() => _OverLapSmoothState();
@@ -43,7 +43,6 @@ class _OverLapSmoothState extends State<OverLapSmoothPage>
   final _originX = 10.0;
   final _height = 200.0;
   late List<double> data = [];
-
 
   @override
   void initState() {

@@ -7,7 +7,7 @@ import 'package:multiple_circle_chart/OverlappingBar/overlapping_data.dart';
 import 'overlapping_view_model.dart';
 
 class OverLappingBar extends StatelessWidget {
-  OverLappingBar({Key? key}) : super(key: key);
+  OverLappingBar({super.key});
   final OverLappingViewModel viewModel = OverLappingViewModel();
 
   @override
@@ -46,8 +46,7 @@ class OverLappingBar extends StatelessWidget {
 }
 
 class OverLappingWidget extends StatefulWidget {
-  const OverLappingWidget({Key? key, required this.viewModel})
-      : super(key: key);
+  const OverLappingWidget({super.key, required this.viewModel});
   final OverLappingViewModel viewModel;
 
   @override

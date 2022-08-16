@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 ///　parabola graph design
+///　Calculate the area of ​​path.
+///  Stores the region of path in an array with X and Y axes.
 class OverLappingLineSmoothPainter extends CustomPainter {
   OverLappingLineSmoothPainter({
     required this.originX,
@@ -46,8 +48,12 @@ class OverLappingLineSmoothPainter extends CustomPainter {
           : originX + width * i;
       var y2 = arcFlg ? data[(i.isEven ? i : beforeValue)] : value;
       var nowValue = i;
+
+      ///　Calculate future values.
       var afterValue =
           (nowValue >= data.length - 1 ? data.length - 1 : nowValue + 1);
+
+      /// Calculate the curve values.
       path.cubicTo(
         x,
 
@@ -82,7 +88,9 @@ class OverLappingLineSmoothPainter extends CustomPainter {
         x2,
         y2,
       );
-      if (controller.value == 1) {
+
+      ///　A calculated value is given after the animation is completed.
+      if (controller.isCompleted) {
         canvas.drawCircle(Offset(x2, y2), circleValue, paintCircle);
       }
       i++;

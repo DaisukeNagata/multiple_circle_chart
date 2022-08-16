@@ -5,7 +5,7 @@ import 'overlap_line_model.dart';
 import 'overlap_view_model.dart';
 
 class OverLapLineBar extends StatelessWidget {
-  const OverLapLineBar({Key? key}) : super(key: key);
+  const OverLapLineBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class OverLapLineBar extends StatelessWidget {
 }
 
 class OverLappingWidget extends StatefulWidget {
-  const OverLappingWidget({Key? key}) : super(key: key);
+  const OverLappingWidget({super.key});
 
   @override
   OverLappingState createState() => OverLappingState();

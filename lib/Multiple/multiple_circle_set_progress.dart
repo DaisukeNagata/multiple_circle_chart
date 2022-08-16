@@ -16,10 +16,10 @@ class MultipleCircleSetProgress extends StatefulWidget {
   int addOne(int value) => value + 1;
 
   const MultipleCircleSetProgress({
-    Key? key,
+    super.key,
     required this.circleKey,
     required this.circle,
-  }) : super(key: key);
+  });
 
   final GlobalKey circleKey;
   final CircleDataItem circle;

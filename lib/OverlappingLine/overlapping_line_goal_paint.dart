@@ -26,16 +26,21 @@ class OverlappingLineGoalPaint extends CustomPainter {
     ///　Loop that assigns and judges values up to the specified value.
     while (goalStartX + goalModel.goalDashWidth < sizeSet.width) {
       canvas.drawLine(
+        /// wLines is the highest value in the chart area.
         Offset(
           goalStartX,
           boxSize * (wLines - goalModel.goalLineValue),
         ),
+
+        /// Move to the X axis.
         Offset(
           goalStartX + goalModel.goalDashWidth,
           boxSize * (wLines - goalModel.goalLineValue),
         ),
         paint,
       );
+
+      ///　Each element increments the x-axis value.
       goalStartX += goalModel.goalLineWidth + goalModel.goalDashSpace;
     }
   }

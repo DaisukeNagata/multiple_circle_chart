@@ -55,30 +55,29 @@ class OverLappingViewModel {
     double value,
     OverLappingBarState vsync, {
     Key? keyValue,
-  }) {
-    return Slider(
-      key: keyValue,
-      value: value,
-      min: 0,
-      max: max,
-      label: value.toString(),
-      divisions: 1000,
-      onChanged: (double value) {
-        if (type == OverLapType.slider) {
-          call(OverLapType.slider, value: value);
-        } else if (type == OverLapType.graphWidth) {
-          call(OverLapType.graphWidth, value: value);
-        }
-      },
-      onChangeEnd: (_) {
-        if (type == OverLapType.slider) {
-          call(OverLapType.graph, vsync: vsync);
-        } else if (type == OverLapType.graphWidth) {
-          call(OverLapType.graphWidth, value: value);
-        }
-      },
-    );
-  }
+  }) =>
+      Slider(
+        key: keyValue,
+        value: value,
+        min: 0,
+        max: max,
+        label: value.toString(),
+        divisions: 1000,
+        onChanged: (double value) {
+          if (type == OverLapType.slider) {
+            call(OverLapType.slider, value: value);
+          } else if (type == OverLapType.graphWidth) {
+            call(OverLapType.graphWidth, value: value);
+          }
+        },
+        onChangeEnd: (_) {
+          if (type == OverLapType.slider) {
+            call(OverLapType.graph, vsync: vsync);
+          } else if (type == OverLapType.graphWidth) {
+            call(OverLapType.graphWidth, value: value);
+          }
+        },
+      );
 
   ///　Graph coordinate construction.
   Row rowSet(
@@ -91,8 +90,8 @@ class OverLappingViewModel {
         SizedBox(
           height: model.graphWidth,
           width: width,
-          child: indicator,
           key: key,
+          child: indicator,
         ),
         Padding(padding: EdgeInsets.only(top: model.boxSize * model.scale)),
       ],
