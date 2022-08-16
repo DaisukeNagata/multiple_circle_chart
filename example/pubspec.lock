@@ -108,7 +108,7 @@ packages:
       path: "/Users/nagatadaisuke/multiple_circle_chart/"
       relative: false
     source: path
-    version: "0.9.93"
+    version: "0.9.95"
   path:
     dependency: transitive
     description:
