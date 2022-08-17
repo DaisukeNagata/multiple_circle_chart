@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'circle_progress_controller.dart';
 
 /// Define pie chart Type.
+/// butt == Circle
+/// round == Line
 enum CircleShader { butt, round, circleNone }
 
 /// Pie chart Model class.

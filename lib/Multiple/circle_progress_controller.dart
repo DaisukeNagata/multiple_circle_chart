@@ -6,11 +6,11 @@ class CircleProgressController {
   StreamController<List<dynamic>> circleIndex =
       StreamController<List<dynamic>>();
 
+  /// Set the start and end positions.
   Stream<List<double>> get stream => controller.stream;
 
+  /// Display value in circle
   Stream<double> get counterStream => counter.stream;
-
-  Stream<List<dynamic>> get circleIndexStream => circleIndex.stream;
 
   void setProgress(List<double> progress) {
     controller.sink.add(progress);

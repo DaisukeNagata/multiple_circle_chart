@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:multiple_circle_chart/Multiple/circle_data_item.dart';
 
 /// CircleOuterFrame is a class that sets the first week of a pie chart.
+/// The default is 0 degrees and 90 degrees is set.
 class CircleCombinedChart extends CustomPainter {
   final CircleDataItem _data;
   final double _rotate = 270;

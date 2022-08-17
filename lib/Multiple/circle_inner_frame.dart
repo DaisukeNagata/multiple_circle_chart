@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'circle_data_item.dart';
 
 /// Build more than the first week of a pie chart.
+/// The default is 0 degrees and 90 degrees is set.
 class CircleInnerFrame extends CustomPainter {
   final AnimationController _controller;
   Animation<double> _animation;
@@ -53,6 +54,8 @@ class CircleInnerFrame extends CustomPainter {
       begin: -_baseAnimationValue.floor().toDouble(),
       end: (_data.circleCounterValue ?? 0) - _baseAnimationValue.floor(),
     ).animate(_controller);
+
+    /// Controls shaky motion.
     if (_controller.status == AnimationStatus.dismissed ||
         time != 0.0 && time <= (_data.circleLabelValue ?? 0)) {
       _controller.stop();
@@ -67,6 +70,7 @@ class CircleInnerFrame extends CustomPainter {
             ? baseAnimationValueIndex
             : circleLabelValue];
 
+    /// Works well when the tip is circular.
     Paint paint = Paint()
       ..strokeWidth = _data.circleStrokeWidth
       ..style = PaintingStyle.stroke
@@ -78,6 +82,7 @@ class CircleInnerFrame extends CustomPainter {
     canvas.translate(-size.width, 0);
 
     /// Set the answer value and the value in the animation in the animated state.
+    /// If the animation speed is fast, it is effective as an operation if there is a setting value in advance.
     if (_controller.status == AnimationStatus.completed) {
       canvas.drawArc(
         Rect.fromCircle(
