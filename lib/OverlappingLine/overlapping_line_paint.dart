@@ -51,17 +51,21 @@ class OverlappingLinePaint extends CustomPainter {
     ///　Set the size from the element and array data.
     for (var i = 0; i <= moveToCountList.length - 1; i++) {
       if (fillPaintFlg) {
+        /// Draw a line with lineTo.
         path.lineTo(
           i * size.width,
           size.width * count -
               (size.width * (moveToCountList[i] * animation.value)),
         );
       } else {
+        /// Draw a line with lineTo.
         path.lineTo(
           i * size.width,
           moveToCountList[i] * size.width,
         );
       }
+
+      /// Calculate the Z-axis and Y-axis of the graph.
       var rect = Rect.fromLTWH(
         i * size.width - strokeWidth / 2,
         moveToCountList[i] * size.width - strokeWidth / 2,
@@ -88,6 +92,9 @@ class OverlappingLinePaint extends CustomPainter {
         );
       }
     }
+
+    ///　Calculate line length.
+    ///　-1 is an element starting from 0, so it matches the consistency.
     var value = (moveToCountList.length - 1);
     if (fillPaintFlg) path.lineTo(value * size.width, value * size.width);
     canvas.drawPath(path, paint);
