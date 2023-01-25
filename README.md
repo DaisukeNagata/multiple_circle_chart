@@ -18,7 +18,7 @@ and the Flutter guide for
 
 ```
 environment:
-  sdk: ">=2.17.6 <3.0.0"
+  sdk: ">=2.19.0 <3.0.0"
 ```
 
 
@@ -137,9 +137,9 @@ final CircleProgressController controller = CircleProgressController();
 
 ## Additional information
 
-https://twitter.com/dbank0208
+https://everydaysoft.co.jp
 
-dbank0208@gmail.com
+daisuke.nagata@everydaysoft.co.jp
 
 
 
