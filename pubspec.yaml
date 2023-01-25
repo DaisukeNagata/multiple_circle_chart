@@ -1,6 +1,6 @@
 name: multiple_circle_chart
 description: It is a graph that can change the speed and overlap the graph 100% or more.
-version: 0.9.3
+version: 0.9.4
 homepage: https://github.com/daisukenagata/multiple_circle_chart
 
 environment:
@@ -9,7 +9,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  uptodate: ^0.7.1
 
 dev_dependencies:
   flutter_test:
