@@ -38,6 +38,13 @@ The bar graph is a graph that overlaps at the specified position.
 |---|---|
 |<img width="375" src="https://user-images.githubusercontent.com/16457165/166452386-42d2b30c-61f7-4ac7-b750-99f229e474ad.gif">|<img width="375" src="https://user-images.githubusercontent.com/16457165/166452373-5823b8ed-2f48-46b9-b264-8242f92a68ae.gif">|
 
+
+
+| | | |
+|---|---|---|
+|<img width="300" src="https://user-images.githubusercontent.com/16457165/214596746-10e128aa-1c86-48b6-858f-4afdc1233adf.png">|<img width="300" src="https://user-images.githubusercontent.com/16457165/214593111-101dbb1b-4f01-4402-a99f-011160b2f6f1.png">|<img width="300" src="https://user-images.githubusercontent.com/16457165/214593182-d5ea3da6-d4aa-490f-850c-ae0fd860a9f9.png">| 
+
+
 ## Memory usage
 
 
